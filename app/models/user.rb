@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   # user info
   field :id, :as => :email
@@ -10,8 +11,8 @@ class User
 
   # admin
   field :password_hash
-  field :salt
+  field :password_salt
 
   # indexes
-  # _id/email index not required as it must be unique
+  # _id/email index defaultly unique and indexed
 end

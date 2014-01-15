@@ -4,9 +4,6 @@ class Photo
 
   CATEGORIES = [ :flora, :fauna, :landscape ]
 
-  # entry fields
-  has_one :contestant
-
   # photo details fields
   field :title
   field :category,            :type => Symbol
@@ -20,15 +17,16 @@ class Photo
   # photo logistics fields
   field :thumbnail_path
   field :original_path
-  field :votes,               :type => Integer
-  field :likes,               :type => Integer
+  field :votes,               :type => Integer, :default => 0
+  field :likes,               :type => Integer, :default => 0
+  field :favourites,          :type => Integer, :default => 0
 
   # may be deprecated...
   field :approved_date,       :type => DateTime
   field :approved_by
 
-  belongs_to :entry_photos,     :class_name => 'Contestant', :inverse_of => :entries
-  belongs_to :favourite_photos, :class_name => 'Contestant', :inverse_of => :favourites
+  belongs_to :entry_photos, :class_name => 'Contestant', :inverse_of => :entries
+  has_and_belongs_to_many :contestants, :inverse_of => :favourites
 
   # indexes
   # index "tags",     :unique => true, :sparse => true
