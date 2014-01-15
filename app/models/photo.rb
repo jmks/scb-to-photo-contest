@@ -31,4 +31,5 @@ class Photo
   # indexes
   # index "tags",     :unique => true, :sparse => true
   # index "category", :unique => true, :sparse => true
+  # index "created_at"
 end

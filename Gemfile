@@ -44,3 +44,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'mongoid', '~> 4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'bson'
 gem 'bson_ext'
+
+gem 'haml'
+gem 'twitter-bootstrap-rails'
+#gem 'bootstrap_form'
