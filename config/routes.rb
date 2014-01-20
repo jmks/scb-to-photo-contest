@@ -1,9 +1,12 @@
 PhotoContest::Application.routes.draw do
   root 'root#index'
   
-  get '/signup',  :to => 'contestants#new',    :as => 'signup'
+  get  '/signup',  :to => 'contestants#new',    :as => 'signup'
+  post '/signup',  :to => 'contestants#create'
+  
   get '/signin',  :to => 'contestants#signin', :as => 'signin'
 
+  get '/photos',            :to => 'photos#index',      :as => 'photos'
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
   get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'

@@ -6,34 +6,33 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
 
-%body
-  %header
-    %nav#navbar.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
-      #nav-header-row.row
-        .col-xs-12
-          .navbar-header
-            %button.navbar-toggle{'data-target' => '#navbar-links', 'data-toggle' => 'collapse', :type => 'button'}
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
+  %body
+    %header
+      %nav#navbar.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+        #nav-header-row.row
+          .col-xs-12
+            .navbar-header
+              %button.navbar-toggle{'data-target' => '#navbar-links', 'data-toggle' => 'collapse', :type => 'button'}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
 
-            %a{href: 'http://scbtoronto.com'}
-              %img{src: 'SCB_TO_Chap_white_clear_small.png'}
+              %a{href: 'http://scbtoronto.com'}
+                = image_tag 'SCB_TO_Chap_white_clear_small.png', :alt => 'SCB-TO'
 
-      .row
-        .col-xs-12
-          #navbar-links.collapse.navbar-collapse
-            %ul.nav.navbar-nav
-              %li.active
-                = link_to 'Home', root_path
-              %li.dropdown
-                = link_to 'Photos', 'data-toggle' => 'dropdown', :href => '#'
-                  
-                %ul.dropdown-menu
-                  %li= link_to 'Fauna', fauna_path
-                  %li= link_to 'Flora', flora_path
-                  %li= link_to 'Landscapes', landscapes_path
-              %li= link_to 'Sign Up', signup_path
-              %li= link_to 'Sign In', signin_path
+        .row
+          .col-xs-12
+            #navbar-links.collapse.navbar-collapse
+              %ul.nav.navbar-nav
+                %li.active
+                  = link_to 'Home', root_path
+                %li.dropdown
+                  = link_to 'Photos', photos_path, {'data-toggle' => 'dropdown', :href => '#', :class => 'dropdown-toggle'}
+                  %ul.dropdown-menu
+                    %li= link_to 'Fauna', fauna_path
+                    %li= link_to 'Flora', flora_path
+                    %li= link_to 'Landscapes', landscapes_path
+                %li= link_to 'Sign Up', signup_path
+                %li= link_to 'Sign In', signin_path
 
-  = yield
+    = yield
