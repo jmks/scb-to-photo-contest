@@ -47,4 +47,5 @@ gem 'bson_ext'
 
 gem 'haml'
 gem 'twitter-bootstrap-rails'
+gem 'formtastic-bootstrap'
 #gem 'bootstrap_form'
