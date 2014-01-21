@@ -12,4 +12,10 @@ class ContestantsController < ApplicationController
       render "new"
     end
   end
+
+  def signin_form
+  end
+
+  def signin
+  end
 end

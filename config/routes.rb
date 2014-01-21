@@ -4,7 +4,8 @@ PhotoContest::Application.routes.draw do
   get  '/signup',  :to => 'contestants#new',    :as => 'signup'
   post '/signup',  :to => 'contestants#create'
   
-  get '/signin',  :to => 'contestants#signin', :as => 'signin'
+  get  '/signin',  :to => 'contestants#signin_form', :as => 'signin'
+  post '/signin',  :to => 'contestants#signin'
 
   get '/photos',            :to => 'photos#index',      :as => 'photos'
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
