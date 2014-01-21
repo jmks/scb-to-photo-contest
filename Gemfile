@@ -41,12 +41,27 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Use MongoDB as database
 gem 'mongoid', '~> 4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'bson'
 gem 'bson_ext'
 
+# Use HAML templating
 gem 'haml'
-#gem 'twitter-bootstrap-rails'
+
+# Use Twitter Bootstrap
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'formtastic-bootstrap'
-#gem 'bootstrap_form'
+
+# Use RSpec and Cucumber for TDD
+group :development, :test do
+  gem 'capybara'
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'factory_girl_rails'
+end
+
+group :test  do 
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+end
