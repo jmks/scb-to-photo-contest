@@ -1,6 +1,13 @@
 class Comment
   include Mongoid::Document
-  embedded_in :photo
+
+  embedded_in :photo, inverse_of: :comments
+
+  # TODO field :user_id
+
   field :name
-  field :comment
+  validates :name, presence: true
+  
+  field :text
+  validates :text, presence: true
 end

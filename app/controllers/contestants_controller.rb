@@ -13,6 +13,7 @@ class ContestantsController < ApplicationController
     end
   end
 
+  # user authentication
   def signin_form
   end
 
