@@ -5,6 +5,7 @@ class ContestantsController < ApplicationController
 
   def create
     raise UnimplementedError
+
     @contestant = Contestant.new params[:user]
     if @contestant.save
       redirect_to root_url, :notice => "You have successfully signed up. You may now log in."
@@ -18,5 +19,6 @@ class ContestantsController < ApplicationController
   end
 
   def signin
+    raise UnimplementedError
   end
 end
