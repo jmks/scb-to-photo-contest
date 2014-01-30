@@ -5,6 +5,7 @@ class ContestantsController < ApplicationController
 
   def create
     # TODO: should have model solution
+    # TODo: email verification? => Devise
     contestant = params[:contestant]
 
     salt = contestant[:password_salt] = User.get_salt
@@ -22,7 +23,6 @@ class ContestantsController < ApplicationController
     end
   end
 
-  # user authentication
   def signin_form
   end
 
@@ -33,7 +33,7 @@ class ContestantsController < ApplicationController
       password_hash = User.encrypt_password(params[:password], @user.password_salt)
 
       if password_hash == @user.password_hash
-        flash[:notice] = "Successfully logged in"
+        flash[:notice] = "Successfully logged in. Welcome #{@user.first_name}"
         redirect_to :root
       else
         flash[:alert] = "The entered password was not correct"
