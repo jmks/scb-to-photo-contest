@@ -18,29 +18,21 @@ class Photo
   field :camera_stats
   field :photo_date, :type => Date
   field :photo_location
+  
   embeds_many :comments
   field :tags, :type => Array
 
-  # photo logistics fields
+  # photo logistics fields -- will change
   field :thumbnail_path
   field :original_path
 
-  # custom validation method for votes, likes, favourites
-
   field :votes, :type => Integer, :default => 0
-  validates :votes, absence: true
-
   field :likes, :type => Integer, :default => 0
-  validates :likes, absence: true
-
   field :favourites, :type => Integer, :default => 0
-  validates :favourites, absence: true
-
-  # may be deprecated...
-  field :approved_date,       :type => DateTime
-  field :approved_by
 
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
+  validates :owner, presence: true
+  
   has_and_belongs_to_many :contestants, :inverse_of => :favourites
 
   # indexes

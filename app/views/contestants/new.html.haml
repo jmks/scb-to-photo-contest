@@ -1,5 +1,11 @@
 %h1.text-center Sign Up
 
+#submit-errors
+  - if @contestant.errors.any?
+    %ul
+      - @contestant.errors.messages.each_key do |field|
+        %li= "#{field} #{@contestant.errors.messages[field]}"
+
 = form_for @contestant, :url => signup_path, :html => {:class => 'form-horizontal'} do |f|
   -# Name
   .form-group

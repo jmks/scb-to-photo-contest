@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Photo do 
   before :each do
-    @contestant = Contestant.create :id         => 'valid@email.com',
+    @contestant = Contestant.create :email      => 'valid@email.com',
                                     :first_name => 'Jenny',
                                     :last_name  => 'Smith'
 
@@ -22,38 +22,25 @@ describe Photo do
       expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
     end
 
-    it 'can not set votes' do 
-      @photo.votes = 1_000_000
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
-    end
-
-    it 'can not set likes' do 
-      @photo.likes = 1_000_000
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
-    end
-
-    it 'can not set favourites' do 
-      @photo.favourites = 1_000_000
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
-    end
-
     it 'must be owned by a contestant' do 
+      @photo.save
       @photo.unset :owner
       expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
     end
   end
 
   context "pass validations" do
-    xit 'has optional description' do 
+    it 'has optional description' do 
+      expect { @photo.save! }.to_not raise_error
       @photo.description = "So a clown walks into a bar..."
-      expect(@photo.save!).to_not raise_error
+      expect { @photo.save! }.to_not raise_error
     end
 
     it 'creates a photo' do 
       expect(Photo.new).to be_an_instance_of Photo
     end
 
-    xit 'creates a valid photo' do 
+    it 'creates a valid photo' do 
       expect { @photo.save! }.to_not raise_error
     end
   end
@@ -73,12 +60,12 @@ describe Photo do
   end
 
   context '#comments' do 
-    xit "creates comments" do 
+    it "creates comments" do 
       @photo.save
       expect(@photo.comments.create name: "Quagmire", text: "Giggity!").to be_an_instance_of Comment
     end
 
-    xit "has many comments" do 
+    it "has many comments" do 
       @photo.save
       @photo.comments.create name: "Quagmire", text: "Gigigity, gigitity!"
       @photo.comments.create name: "Pea tear griffin", text: "Do you know the word?"

@@ -46,6 +46,8 @@ gem 'mongoid', '~> 4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'bson'
 gem 'bson_ext'
 
+gem 'pry'
+
 # Use HAML templating
 gem 'haml'
 

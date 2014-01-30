@@ -6,8 +6,9 @@ class User
   include BCrypt
   
   # user info
-  field :id, :as => :email
-  validates :id, presence: true, uniqueness: true,
+  field :email
+  validates_confirmation_of :email
+  validates :email, presence: true, uniqueness: true,
                  format: { with: /\A.+@(.+\.)+\w{2,4}\Z/, message: "%{value} is not a valid email" }
 
   field :first_name
@@ -21,19 +22,23 @@ class User
 
   # admin
   field :password_hash
-  #validates :password_hash, presence: false
+  #validates :password_hash, presence: true
 
   field :password_salt
-  #validates :password_salt, presence: false
+  #validates :password_salt, presence: true
 
   #before_save :encrypt_password
   
   #validates :password, confirmation: true, 
-  #                     format: {with: /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/, message: "minimum 6 characters with atleast 1 number"}
+  #                     format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, message: "minimum 6 characters with atleast 1 number"}
 
   private
 
-  def encrypt_password
-    raise NotImplementedError
+  def self.get_salt
+    BCrypt::Engine.generate_salt
+  end
+
+  def self.encrypt_password password, salt
+    BCrypt::Engine.hash_secret(password, salt)
   end
 end

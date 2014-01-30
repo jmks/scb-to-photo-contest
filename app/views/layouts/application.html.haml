@@ -37,4 +37,14 @@
                 %li{:class => "#{'active' if current_page?(signin_path)}"}
                   = link_to 'Sign In', signin_path
 
+    #alerts
+      - if flash[:notice]
+        .alert.alert-success.alert-dismissable= flash[:notice]
+      - if flash[:info]
+        .alert.alert-info.alert-dismissable= flash[:info]
+      - if flash[:alert]
+        .alert.alert-warning.alert-dismissable= flash[:alert]
+      - if flash[:danger]
+        .alert.alert-danger.alert-dismissable= flash[:danger]
+
     = yield
