@@ -40,17 +40,42 @@ describe User do
       expect {@user.save! }.to raise_error Mongoid::Errors::Validations
     end
 
-    it "has optional phone number" do
-      expect { @user }.to_not raise_error
-      @user.unset :phone
-      expect { @user }.to_not raise_error
+    it 'has phone number in format ddd-ddd-dddd[xd+]?' do 
+      @user.phone = '234-567-91011'
+      expect(@user).to_not be_valid
+    end
+  end
+
+  describe '#has_phone?' do 
+    it 'is true if data is given' do 
+      expect(@user).to be_has_phone
     end
 
-    xit "must have password_hash"
-    xit "must have password_salt"
+    it 'is false for nil or empty' do 
+      @user.phone = ''
+      expect(@user).to_not be_has_phone
+
+      @user.unset :phone
+      expect(@user).to_not be_has_phone
+    end
+  end
+
+  context 'before_validation' do 
+    describe '#normalize_phone' do 
+      it 'reformats phone numbers to \d{3}-\d{3}-\d{4}(?:x\d+)?' do 
+        @user.phone = "1-(555)-867-5309ext.123"
+        expect(@user).to be_valid
+        @user.phone = "555.867.5309"
+        expect(@user).to be_valid
+      end
+    end
   end
 
   describe '#encrypt_password' do 
     xit 'it encrypts the password'
+  end
+
+  describe 'entering a photo' do 
+    xit 'must have a valid phone number'
   end
 end

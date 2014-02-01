@@ -18,8 +18,12 @@ class User
   field :last_name
   validates :last_name, presence: true
 
-  # phone is optional
+  # phone required for photo submission
   field :phone
+  before_validation :normalize_phone, if: :has_phone?
+  # message refers to what user can input
+  validates :phone, format: { with: /\A\d{3}-\d{3}-\d{4}(?:x\d+)?\z/,
+                              message: 'format is not recognized' }
 
   # admin
   field :password_hash
@@ -45,6 +49,7 @@ class User
   # TODO: add to before_save hook to check for wrong
   # params are rename them as you want
   # then can allow validates_confirmation_of :password as well
+  # http://api.rubyonrails.org/classes/ActiveModel/Errors.html
   def validate_password
     if self[:password]
       unless /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/ =~ self.password
@@ -53,5 +58,20 @@ class User
     else
       self.errors.add :password, 'must be present.'
     end
+  end
+
+  protected
+
+  def has_phone?
+    !(self.phone.nil? or self.phone.empty?)
+  end
+
+  def normalize_phone
+    phone = self.phone.gsub(/[^0-9x]/, '').
+                       gsub(/\A1/, '')
+    if phone.length >= 9
+      phone = phone[0..2] + '-' + phone[3..5] + '-' + phone[6..-1]
+    end
+    self.phone = phone
   end
 end
