@@ -32,10 +32,15 @@
                     %li= link_to 'Fauna', fauna_path
                     %li= link_to 'Flora', flora_path
                     %li= link_to 'Landscapes', landscapes_path
-                %li{:class => "#{'active' if current_page?(signup_path)}"}
-                  = link_to 'Sign Up', signup_path
-                %li{:class => "#{'active' if current_page?(signin_path)}"}
-                  = link_to 'Sign In', signin_path
+                - if contestant_signed_in?
+                  %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
+                    = link_to "#{current_contestant.first_name}'s Page", contestant_index_path
+                  %li= link_to 'Sign Out', destroy_contestant_session_path, :method => :delete
+                - else
+                  %li{:class => "#{'active' if current_page?(new_contestant_registration_path)}"}
+                    = link_to 'Sign Up', new_contestant_registration_path
+                  %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
+                    = link_to 'Sign In', new_contestant_session_path                 
 
     #alerts
       - if flash[:notice]

@@ -1,4 +1,11 @@
 class ContestantsController < ApplicationController
+  before_filter :authenticate_contestant!
+
+  def index
+  end
+
+  # deprecated afterwards
+
   def new
     @contestant = Contestant.new
   end
@@ -21,9 +28,6 @@ class ContestantsController < ApplicationController
     else
       render "new", contestant: @contestant
     end
-  end
-
-  def signin_form
   end
 
   def signin

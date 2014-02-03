@@ -1,19 +1,14 @@
 PhotoContest::Application.routes.draw do
+  devise_for :contestants
+
   root 'root#index'
-  
-  get  '/signup',  :to => 'contestants#new',    :as => 'signup'
-  post '/signup',  :to => 'contestants#create'
-  
-  get  '/signin',  :to => 'contestants#signin_form', :as => 'signin'
-  post '/signin',  :to => 'contestants#signin'
+
+  get '/contestant', :to => 'contestants#index', :as => 'contestant_index'
 
   get '/photos',            :to => 'photos#index',      :as => 'photos'
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
   get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
-
-  # resources :contestant, :only => [:show]
-  # nest :photo within :contestant
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

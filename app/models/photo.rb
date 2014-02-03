@@ -30,7 +30,7 @@ class Photo
   field :likes, :type => Integer, :default => 0
   field :favourites, :type => Integer, :default => 0
 
-  belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
+  belongs_to :owner, :class_name => 'User', :inverse_of => :entries
   validates :owner, presence: true
   
   has_and_belongs_to_many :contestants, :inverse_of => :favourites

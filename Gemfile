@@ -46,7 +46,11 @@ gem 'mongoid', '~> 4.0.0.alpha2', github: 'mongoid/mongoid'
 gem 'bson'
 gem 'bson_ext'
 
+# Use pry for debugging
 gem 'pry'
+
+# Use devise for authentication
+gem 'devise'
 
 # Use HAML templating
 gem 'haml'
