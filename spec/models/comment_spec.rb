@@ -3,8 +3,10 @@ require 'spec_helper'
 describe Comment do 
   before :each do 
     @contestant = Contestant.create :email      => 'valid@email.com',
+                                    :password   => 'supersecret',
                                     :first_name => 'Jenny',
                                     :last_name  => 'Smith'
+
     @photo = Photo.create :title    => 'Walk in the park',
                           :category => 'landscapes',
                           :owner    => @contestant

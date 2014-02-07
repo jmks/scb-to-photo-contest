@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-j = Contestant.create({ first_name: 'Jason', id: 'jason@somemail.com' })
-k = Contestant.create({ first_name: 'Kat',   id: 'kat@catmail.com'})
+j = Contestant.create({ first_name: 'Jason', email: 'jason@somemail.com' })
+k = Contestant.create({ first_name: 'Kat',   email: 'kat@catmail.com'})
 
 a = Photo.create({
     title:      'Moon at night',

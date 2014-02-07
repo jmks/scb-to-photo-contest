@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Photo do 
   before :each do
     @contestant = Contestant.create :email      => 'valid@email.com',
+                                    :password   => 'supersecret',
                                     :first_name => 'Jenny',
                                     :last_name  => 'Smith'
 

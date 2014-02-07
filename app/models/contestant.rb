@@ -8,12 +8,16 @@ class Contestant
     # :token_authenticatable, :encryptable,
     # :confirmable, :lockable, :timeoutable and
     # :omniauthable
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable,
-  :validatable
+  devise :database_authenticatable, :registerable, 
+         :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
   field :email,              :type => String
+  validates_confirmation_of :email
+  validates :email, presence: true, uniqueness: true,
+                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
+                           message: "%{value} is not a valid email" }
+                           
   field :encrypted_password, :type => String
   validates :encrypted_password, presence: true
 
@@ -51,11 +55,6 @@ class Contestant
   ## Invitable
   # field :invitation_token, :type => String
 
-  validates_confirmation_of :email
-  validates :email, presence: true, uniqueness: true,
-                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
-                           message: "%{value} is not a valid email" }
-
   field :first_name
   validates :first_name, presence: true
 
@@ -65,7 +64,6 @@ class Contestant
   # phone required for photo submission
   field :phone
   before_validation :normalize_phone, if: :phone_given?
-  # message refers to what user can input
   validates :phone, format: { with: /\A\d{3}-\d{3}-\d{4}(?:x\d+)?\z/,
                               message: 'format is not recognized' },
                     allow_blank: true
