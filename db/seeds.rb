@@ -6,23 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-j = Contestant.create({ first_name: 'Jason', email: 'jason@somemail.com' })
-k = Contestant.create({ first_name: 'Kat',   email: 'kat@catmail.com'})
+j = Contestant.create({ first_name: 'Jason', email: 'jason@somemail.com', password: 'monkey' })
+k = Contestant.create({ first_name: 'Kat',   email: 'kat@catmail.com', password: 'pony'})
 
-a = Photo.create({
+a = Photo.create!({
     title:      'Moon at night',
-    tags:       ['moon', 'night', 'ET']
+    category:    'landscapes',
+    tags:       ['moon', 'night', 'ET'],
+    owner:      j
 })
-b = Photo.create({
+b = Photo.create!({
     title:      'Trees in park',
-    tags:       ['trees']
+    category:   'flora',
+    tags:       ['trees'],
+    owner:      k
 })
 
-b.comments.create name: 'Jason', comment: 'Trees need more squirrels!'
-a.comments.create name: 'Kat',   comment: 'Photoshopped?'
-
-j.entries << a
-k.entries << b
+b.comments.create name: 'Jason', text: 'Trees need more squirrels!'
+a.comments.create name: 'Kat',   text: 'Photoshopped?'
 
 j.favourites << a
 j.favourites << b

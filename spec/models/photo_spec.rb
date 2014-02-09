@@ -95,12 +95,34 @@ describe Photo do
       expect(@photo.favourites).to eql 0
     end
 
-    xit "is favourited by many contestants"
+    it "is favourited by many contestants" do 
+      @contestant.favourites << @photo
+      another = @contestant.dup
+      another.update_attributes(email: 'spengler@ghostbusters.com', password: 'egon')
+      another.save
+      another.favourites << @photo
+
+      expect(@photo.contestants.length).to eql 2
+    end
   end
 
-  context "indexes" do
-    xit "tags"
-    xit "category"
-    xit "created_at"
+  context "index on" do
+    # Collection.where(criteria).explain[:cursor].starts_with? 'BtreeCursor'
+
+    before :all do 
+      @indexes = Photo.collection.indexes
+    end
+
+    itx "tags asc" do 
+      expect(@indexes[tags: 1]).to be_true
+    end
+
+    xit "category asc" do 
+      expect(@indexes[category: 1]).to be_true
+    end
+
+    xit "created_at desc" do 
+      expect(@indexes[created_at: -1]).to be_true
+    end
   end
 end

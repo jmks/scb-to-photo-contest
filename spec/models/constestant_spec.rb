@@ -8,6 +8,9 @@ describe Contestant do
                                  :first_name => 'Jenny',
                                  :last_name  => 'Smith',
                                  :phone      => '8675309'
+    @photo = Photo.new :title    => 'Walk in the park',
+                       :category => 'landscapes',
+                       :owner    => @contestant
   end
 
   context "validations" do 
@@ -46,17 +49,17 @@ describe Contestant do
     end
   end
 
-  describe '#phone_given?' do 
+  describe '#phone?' do 
     it 'is true if data is given' do 
-      expect(@contestant).to be_phone_given
+      expect(@contestant).to be_phone
     end
 
     it 'is false for nil or empty' do 
       @contestant.phone = ''
-      expect(@contestant).to_not be_phone_given
+      expect(@contestant).to_not be_phone
 
       @contestant.unset :phone
-      expect(@contestant).to_not be_phone_given
+      expect(@contestant).to_not be_phone
     end
   end
 
@@ -71,11 +74,7 @@ describe Contestant do
     end
   end
 
-  describe '#encrypt_password' do 
-    xit 'it encrypts the password'
-  end
-
-  describe 'entering a photo' do 
-    xit 'must have a valid phone number'
+  context 'index' do 
+    xit 'on email'
   end
 end

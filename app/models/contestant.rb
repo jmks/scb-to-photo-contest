@@ -18,7 +18,7 @@ class Contestant
                  format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
                            message: "%{value} is not a valid email" }
                            
-  field :encrypted_password, :type => String
+  field :encrypted_password
   validates :encrypted_password, presence: true
 
   ## Recoverable
@@ -63,7 +63,7 @@ class Contestant
 
   # phone required for photo submission
   field :phone
-  before_validation :normalize_phone, if: :phone_given?
+  before_validation :normalize_phone, if: :phone?
   validates :phone, format: { with: /\A\d{3}-\d{3}-\d{4}(?:x\d+)?\z/,
                               message: 'format is not recognized' },
                     allow_blank: true
@@ -71,11 +71,10 @@ class Contestant
   has_many :entries, :class_name => "Photo", :inverse_of => :entry_photos
   has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
 
-  protected
+  # indexes
+  index({ email: 1 }, { unique: true, background: true })
 
-  def phone_given?
-    !(self.phone.nil? or self.phone.empty?)
-  end
+  protected
 
   def normalize_phone
     phone = self.phone.gsub(/[^0-9x]/, '').

@@ -33,10 +33,10 @@ class Photo
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates :owner, presence: true
   
-  has_and_belongs_to_many :contestants, :inverse_of => :favourites
+  has_and_belongs_to_many :contestants, :class_name => 'Contestant', :inverse_of => :favourites
 
   # indexes
-  # index "tags",     :unique => true, :sparse => true
-  # index "category", :unique => true, :sparse => true
-  # index "created_at"
+  index({ tags: 1 })
+  index({ category: 1})
+  index({ created_at: -1 })
 end
