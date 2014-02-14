@@ -44,4 +44,8 @@ class Photo
   index({ tags: 1 })
   index({ category: 1})
   index({ created_at: -1 })
+
+  def add_tag tag
+    
+  end
 end

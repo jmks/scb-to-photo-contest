@@ -68,14 +68,26 @@ describe Photo do
 
     it "has many comments" do 
       @photo.save
-      @photo.comments.create name: "Quagmire", text: "Gigigity, gigitity!"
+      @photo.comments.create name: "Quagmire", text: "Giggity, giggity!"
       @photo.comments.create name: "Pea tear griffin", text: "Do you know the word?"
       expect(@photo.comments.length).to be 2
     end
   end
 
   context 'tags' do
+    describe '#add_tag' do 
+      it 'adds a tag' do 
+        @photo.add_tag "super-duper"
+        expect(@photo).to include("super-duper")
+      end
 
+      it 'adds many tags' do 
+        expect {
+          @photo.add_tag "stupendous"
+          @photo.add_tag "snowy"
+        }.to change { @photo.tags.length }.from(0).to(2)
+      end
+    end
   end
 
   context 'photo path' do 
