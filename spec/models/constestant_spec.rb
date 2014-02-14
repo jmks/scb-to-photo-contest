@@ -64,6 +64,7 @@ describe Contestant do
   end
 
   context 'before_validation' do 
+    
     describe '#normalize_phone' do 
       it 'reformats phone numbers to \d{3}-\d{3}-\d{4}(?:x\d+)?' do 
         @contestant.phone = "1-(555)-867-5309ext.123"
@@ -72,6 +73,52 @@ describe Contestant do
         expect(@contestant).to be_valid
       end
     end
+
+  end
+
+  describe '#is_favourite?' do 
+    it 'is false if contestant has no favourites' do 
+      expect(@contestant.is_favourite?(@photo)).to eql false
+    end
+
+    it 'is true if favourited by contestant' do 
+      @contestant.favourite_photo(@photo)
+      expect(@contestant.is_favourite?(@photo)).to eql true
+    end
+  end
+
+  describe '#defavourite_photo' do
+
+    context 'when contestant has no favourites' do 
+      it "does not change contestant's favourites" do 
+        expect { 
+          @contestant.defavourite_photo @photo
+        }.to_not change { @contestant.favourite_photo_ids.length }.from(0).to(0)
+      end
+
+      it "does not change photos's favourites" do 
+        expect {
+          @contestant.defavourite_photo @photo
+        }.to_not change { @photo.favourites }.from(0).to(0)
+      end
+    end
+
+    context 'when contestant does favourites photo' do 
+      it "removes the photo from contestant's favourites" do 
+        @contestant.favourite_photo @photo
+        expect { 
+          @contestant.defavourite_photo @photo
+        }.to change { @contestant.favourite_photo_ids.length }.from(1).to(0)
+      end
+      
+      it "decreases photo's favourites count by 1" do 
+        @contestant.favourite_photo @photo
+        expect { 
+          @contestant.defavourite_photo @photo
+        }.to change { @photo.favourites }.from(1).to(0)
+      end
+    end
+
   end
 
   describe '#favourite_photo' do 
@@ -85,7 +132,12 @@ describe Contestant do
         @contestant.favourite_photo(@photo)
       }.to change { @contestant.favourite_photo_ids.length }.by(1)
     end
-    
+
+    it 'add the photo to favourites' do 
+      @contestant.favourite_photo @photo
+      expect(@contestant.favourite_photo_ids).to include(@photo.id)
+    end
+
   end
 
   context 'index' do 

@@ -76,13 +76,32 @@ class Contestant
   # indexes
   index({ email: 1 }, { unique: true, background: true })
 
+
+
   def favourite_photo photo
-    if favourite_photo_ids.nil? or !favourite_photo_ids.member?(photo.id)
+    if is_favourite? photo
+      false
+    else
       self.push favourite_photo_ids: photo.id
       photo.inc :favourites => 1
       true
+    end
+  end
+
+  # is photo favourited by self contestant
+  def is_favourite? photo
+    if favourite_photo_ids?
+      return favourite_photo_ids.member? photo.id
     else
       false
+    end
+  end
+
+  # removes photo from favourites
+  def defavourite_photo photo 
+    if is_favourite? photo 
+      pull favourite_photo_ids: photo.id
+      photo.inc favourites: -1
     end
   end
 
