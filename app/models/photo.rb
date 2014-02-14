@@ -20,7 +20,7 @@ class Photo
   field :photo_location
   
   embeds_many :comments
-  field :tags, :type => Array
+  field :tags, :type => Array, :default => []
 
   # photo logistics fields -- will change
   field :thumbnail_path
@@ -34,6 +34,11 @@ class Photo
   validates :owner, presence: true
   
   has_and_belongs_to_many :contestants, :class_name => 'Contestant', :inverse_of => :favourites
+
+  # scopes
+  scope :landscapes, ->{ where(:category => "landscapes") }
+  scope :flora,      ->{ where(:category => "flora") }
+  scope :fauna,      ->{ where(:category => "fauna") }
 
   # indexes
   index({ tags: 1 })

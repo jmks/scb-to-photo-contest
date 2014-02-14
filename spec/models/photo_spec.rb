@@ -96,13 +96,13 @@ describe Photo do
     end
 
     it "is favourited by many contestants" do 
-      @contestant.favourites << @photo
       another = @contestant.dup
+      @contestant.favourite_photo @photo
       another.update_attributes(email: 'spengler@ghostbusters.com', password: 'egon')
       another.save
-      another.favourites << @photo
+      another.favourite_photo @photo
 
-      expect(@photo.contestants.length).to eql 2
+      expect(@photo.favourites).to eql 2
     end
   end
 
@@ -113,7 +113,7 @@ describe Photo do
       @indexes = Photo.collection.indexes
     end
 
-    itx "tags asc" do 
+    xit "tags asc" do 
       expect(@indexes[tags: 1]).to be_true
     end
 

@@ -25,6 +25,6 @@ b = Photo.create!({
 b.comments.create name: 'Jason', text: 'Trees need more squirrels!'
 a.comments.create name: 'Kat',   text: 'Photoshopped?'
 
-j.favourites << a
-j.favourites << b
-k.favourites << b
+j.favourite_photo a
+j.favourite_photo b
+k.favourite_photo b

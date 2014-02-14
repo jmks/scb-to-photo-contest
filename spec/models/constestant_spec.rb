@@ -74,6 +74,20 @@ describe Contestant do
     end
   end
 
+  describe '#favourite_photo' do 
+    before :each do 
+      @contestant.save
+      @photo.save
+    end
+
+    it 'adds a photo to favourites by id' do
+      expect {
+        @contestant.favourite_photo(@photo)
+      }.to change { @contestant.favourite_photo_ids.length }.by(1)
+    end
+    
+  end
+
   context 'index' do 
     xit 'on email'
   end

@@ -69,10 +69,22 @@ class Contestant
                     allow_blank: true
 
   has_many :entries, :class_name => "Photo", :inverse_of => :entry_photos
-  has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
+  
+  # has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
+  field :favourite_photo_ids, :type => Array, :default => []
 
   # indexes
   index({ email: 1 }, { unique: true, background: true })
+
+  def favourite_photo photo
+    if favourite_photo_ids.nil? or !favourite_photo_ids.member?(photo.id)
+      self.push favourite_photo_ids: photo.id
+      photo.inc :favourites => 1
+      true
+    else
+      false
+    end
+  end
 
   protected
 
