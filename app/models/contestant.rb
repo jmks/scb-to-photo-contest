@@ -73,25 +73,53 @@ class Contestant
   # has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
   field :favourite_photo_ids, :type => Array, :default => []
 
+  # votes
+  field :voted_photo_ids, type: Array
+
   # indexes
   index({ email: 1 }, { unique: true, background: true })
 
+  # number of votes cast
+  def votes
+    if voted_photo_ids?
+      voted_photo_ids.length
+    else
+      0
+    end
+  end
 
+  # vote for photo
+  def vote_for photo 
+    # vote limit may be enforced
+    unless voted_for? photo
+      push voted_photo_ids: photo.id
+      photo.inc votes: 1
+    end
+  end
+
+  # has contestant voted for photo
+  def voted_for? photo 
+    if voted_photo_ids?
+      voted_photo_ids.include? photo.id
+    else
+      false
+    end
+  end
 
   def favourite_photo photo
     if is_favourite? photo
       false
     else
-      self.push favourite_photo_ids: photo.id
+      push favourite_photo_ids: photo.id
       photo.inc :favourites => 1
       true
     end
   end
 
-  # is photo favourited by self contestant
+  # is photo favourited by contestant
   def is_favourite? photo
     if favourite_photo_ids?
-      return favourite_photo_ids.member? photo.id
+      favourite_photo_ids.member? photo.id
     else
       false
     end

@@ -121,6 +121,46 @@ describe Contestant do
 
   end
 
+  context 'voting' do 
+    describe '#vote_for' do 
+      it 'votes for a photo' do 
+        @contestant.vote_for @photo
+        expect(@contestant.voted_photo_ids).to include(@photo.id)
+      end
+
+      it 'does not double vote for same photo' do 
+        3.times { @contestant.vote_for @photo }
+        expect(@contestant.votes).to eql 1
+      end
+
+      it 'votes for many photos' do
+        another = @photo.dup
+
+        @contestant.vote_for @photo
+        @contestant.vote_for another 
+
+        expect(@contestant.voted_photo_ids.length).to eql 2
+      end
+
+      it 'successfully increments photos\'s vote count' do 
+        expect {
+          @contestant.vote_for @photo
+        }.to change { @photo.votes }.by 1
+      end
+    end
+
+    describe '#votes' do 
+      it 'returns 0 for no votes' do 
+        expect(@contestant.votes).to eql 0
+      end
+
+      it 'returns the number of votes made' do 
+        @contestant.vote_for @photo
+        expect(@contestant.votes).to eql 1
+      end
+    end
+  end
+
   describe '#favourite_photo' do 
     before :each do 
       @contestant.save

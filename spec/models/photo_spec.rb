@@ -75,10 +75,21 @@ describe Photo do
   end
 
   context 'tags' do
+    describe '#tagged?' do 
+      it 'is false for tags not present' do
+        expect(@photo.tagged? "pretty").to eql false
+      end
+
+      it 'is true for present tags' do
+        @photo.push tags: 'silly'
+        expect(@photo.tagged?('silly')).to eql true
+      end
+    end
+
     describe '#add_tag' do 
       it 'adds a tag' do 
         @photo.add_tag "super-duper"
-        expect(@photo).to include("super-duper")
+        expect(@photo.tags).to include("super-duper")
       end
 
       it 'adds many tags' do 
@@ -88,10 +99,6 @@ describe Photo do
         }.to change { @photo.tags.length }.from(0).to(2)
       end
     end
-  end
-
-  context 'photo path' do 
-
   end
 
   context "voting" do 

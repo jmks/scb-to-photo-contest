@@ -33,7 +33,7 @@ class Photo
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates :owner, presence: true
   
-  has_and_belongs_to_many :contestants, :class_name => 'Contestant', :inverse_of => :favourites
+  # has_and_belongs_to_many :contestants, :class_name => 'Contestant', :inverse_of => :favourites
 
   # scopes
   scope :landscapes, ->{ where(:category => "landscapes") }
@@ -46,6 +46,16 @@ class Photo
   index({ created_at: -1 })
 
   def add_tag tag
-    
+    unless tagged? tag
+      push tags: tag
+    end
+  end
+
+  def tagged? tag
+    if tags?
+      tags.include? tag
+    else
+      false
+    end
   end
 end
