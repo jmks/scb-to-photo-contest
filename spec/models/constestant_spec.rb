@@ -3,14 +3,8 @@ require 'spec_helper'
 describe Contestant do 
 
   before :each do 
-    @contestant = Contestant.new :email      => 'valid@email.com',
-                                 :password   => 'supersecret',
-                                 :first_name => 'Jenny',
-                                 :last_name  => 'Smith',
-                                 :phone      => '8675309'
-    @photo = Photo.new :title    => 'Walk in the park',
-                       :category => 'landscapes',
-                       :owner    => @contestant
+    @contestant = build(:contestant)
+    @photo = build(:photo)
   end
 
   context "validations" do 
@@ -67,10 +61,9 @@ describe Contestant do
     
     describe '#normalize_phone' do 
       it 'reformats phone numbers to \d{3}-\d{3}-\d{4}(?:x\d+)?' do 
-        @contestant.phone = "1-(555)-867-5309ext.123"
         expect(@contestant).to be_valid
-        @contestant.phone = "555.867.5309"
-        expect(@contestant).to be_valid
+        expect(build(:contestant, phone: "1-(555)-867-5309ext.123")).to be_valid
+        expect(build(:contestant, phone: "555.867.5309")).to be_valid
       end
     end
 
@@ -134,7 +127,7 @@ describe Contestant do
       end
 
       it 'votes for many photos' do
-        another = @photo.dup
+        another = build(:photo)
 
         @contestant.vote_for @photo
         @contestant.vote_for another 

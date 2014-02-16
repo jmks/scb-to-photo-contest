@@ -2,14 +2,8 @@ require 'spec_helper'
 
 describe Photo do 
   before :each do
-    @contestant = Contestant.create :email      => 'valid@email.com',
-                                    :password   => 'supersecret',
-                                    :first_name => 'Jenny',
-                                    :last_name  => 'Smith'
-
-    @photo = Photo.new :title    => 'A Walk in the Park',
-                       :category => 'landscapes',
-                       :owner    => @contestant
+    @contestant = build(:contestant)
+    @photo = build(:photo, owner: @contestant)
   end
 
   context "fail validations" do 
@@ -70,6 +64,7 @@ describe Photo do
       @photo.save
       @photo.comments.create name: "Quagmire", text: "Giggity, giggity!"
       @photo.comments.create name: "Pea tear griffin", text: "Do you know the word?"
+      
       expect(@photo.comments.length).to be 2
     end
   end
@@ -115,13 +110,10 @@ describe Photo do
     end
 
     it "is favourited by many contestants" do 
-      another = @contestant.dup
-      @contestant.favourite_photo @photo
-      another.update_attributes(email: 'spengler@ghostbusters.com', password: 'egon')
-      another.save
-      another.favourite_photo @photo
+      contestants = build_list(:contestant, 5)
+      contestants.each { |c| c.favourite_photo @photo }
 
-      expect(@photo.favourites).to eql 2
+      expect(@photo.favourites).to eql 5
     end
   end
 

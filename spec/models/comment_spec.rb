@@ -1,15 +1,10 @@
 require 'spec_helper'
 
 describe Comment do 
-  before :each do 
-    @contestant = Contestant.create :email      => 'valid@email.com',
-                                    :password   => 'supersecret',
-                                    :first_name => 'Jenny',
-                                    :last_name  => 'Smith'
 
-    @photo = Photo.create :title    => 'Walk in the park',
-                          :category => 'landscapes',
-                          :owner    => @contestant
+  before :each do 
+    @contestant = create(:contestant)
+    @photo = create(:photo, owner: @contestant)
   end
 
   context "fail validations" do
@@ -27,8 +22,13 @@ describe Comment do
   end
 
   context "pass validations" do 
+    before :each do 
+      @comment = @photo.comments.create(name: 'Jimbob', text: 'Sweet!')
+    end
+
     it "creates a comment for saved photos" do
-      expect(@photo.comments.create(name: 'Jimbob', text: 'Sweet!')).to be_an_instance_of Comment
+      expect(@comment).to be_an_instance_of Comment
+      expect(@photo.comments.length).to eql 1
     end
   end
 end
