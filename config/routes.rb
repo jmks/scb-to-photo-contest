@@ -10,6 +10,8 @@ PhotoContest::Application.routes.draw do
   get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
 
+  resources :photos
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

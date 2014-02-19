@@ -8,6 +8,7 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require font-awesome
  *= require_self
  *= require_tree .
  */
@@ -19,4 +20,152 @@ body { padding-top: 121px; }
 
 @media screen and (max-width: 768px) {
     body { padding-top: 72px; }
+}
+
+/* global colours */
+$darkblue:   #135870;
+$brightblue: #19b2d9;
+$darkblue-contrast: #3e88a2;
+
+
+/* Sassify below */
+
+/*#135870*/
+
+.navbar-default {
+  background-color: #135870;
+  border: 0;
+  color: #ffffff;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: #3e88a2;
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #FFFFFF;
+  background-color: #3e88a2;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #3E88A2;
+    color: #FFFFFF;
+}
+
+ul.dropdown-menu {
+    background-color: #90B0BC;
+}
+
+ul.dropdown-menu > li > a {
+    color: #FFFFFF;
+}
+
+ul.dropdown-menu > li > a:hover,
+ul.dropdown-menu > li > a:focus {
+    background-color: #135870;
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #FFFFFF;
+    background-color: #135870;
+}
+
+.navbar-nav .open .dropdown-menu {
+    background-color: #90B0BC;
+}
+
+.navbar-header {
+    padding-top: 5px;
+}
+
+.navbar-default .navbar-toggle .collapsed {
+    background-color: #135870;
+}
+
+.navbar-default .navbar-toggle {
+    background-color: #135870;
+}
+
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+    background-color: #3e88a2;
+}
+
+
+#nav-header-row {
+    background-color: #19b2d9;
+    min-height: 80px;
+}
+
+.scb-logo {
+    background: url('SCB_TO_Chap_white_clear_small.png');
+    min-height: 70px;
+}
+
+#other-nav-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hover-btn, .hover-btn {
+    background: #135870;
+    color: #FFFFFF;
+}
+
+.hover-btn:hover, .hover-btn:focus {
+    background: #3e88a2;
+    color: #FFFFFF;
+}
+
+#carousel-example-generic {
+    width:  750px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#quick-btns {
+    margin-top: 20px;
+}
+
+
+
+footer {
+    margin-top: 50px;
+}
+
+footer .skyline {
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #ffe6ad 50%, #fc9779 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#ffe6ad), color-stop(100%,#fc9779)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#ffe6ad 50%,#fc9779 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#ffe6ad 50%,#fc9779 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#ffe6ad 50%,#fc9779 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#ffe6ad 50%,#fc9779 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fc9779',GradientType=0 ); /* IE6-9 */
+}
+
+footer #skyline-img {
+    
 }

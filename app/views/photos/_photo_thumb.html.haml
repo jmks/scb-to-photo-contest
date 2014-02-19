@@ -1,0 +1,8 @@
+= link_to photo_path(photo), style: 'text-decoration: none;' do
+  -# photo or icon
+  - if photo.thumbnail_path?
+    = image_tag photo.thumbnail_path
+  - else
+    %i.fa.fa-camera.fa-2x
+  -# title
+  = (photo.title? and photo.title) || "Photo ##{@params[:id]}"

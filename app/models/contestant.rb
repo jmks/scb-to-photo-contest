@@ -12,7 +12,7 @@ class Contestant
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
-  field :email,              :type => String
+  field :email
   validates_confirmation_of :email
   validates :email, presence: true, uniqueness: true,
                  format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 

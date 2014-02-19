@@ -65,3 +65,33 @@
           = flash[:danger]
 
     = yield
+
+  %footer
+    #footer-wrapper
+      .row
+        .col-xs-12.text-center
+          %h3 Thank-you to our awsome sponsors:
+
+      .row
+        .col-xs-12.text-center
+          %h1= mail_to "scbtoronto@gmail.com", "Contact us for sponsorship packages", subject: "SCB-TO Photo Contest Sponsorship"
+
+      .row.text-center
+        .col-md-4
+          %h4 Awesome Sponsor #1
+        .col-md-4
+          %h4 Awesome Sponsor #2
+        .col-md-4
+          %h4 Awesome Sponsor #3
+
+      .row.text-center
+        .col-md-4
+          %h4 Awesome Sponsor #4
+        .col-md-4
+          %h4 Awesome Sponsor #5
+        .col-md-4
+          %h4 Awesome Sponsor #6
+
+      .row.skyline.text-center
+        .col-xs-12
+          = image_tag 'skyline-test.svg', id: "skyline-img", width: "100%"

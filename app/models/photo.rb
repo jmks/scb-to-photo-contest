@@ -2,7 +2,7 @@ class Photo
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  CATEGORIES = [ :flora, :fauna, :landscapes ]
+  CATEGORIES = [ :flora, :fauna, :landscapes, :all ]
 
   # photo details fields
   field :title
