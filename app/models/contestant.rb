@@ -61,6 +61,9 @@ class Contestant
   field :last_name
   validates :last_name, presence: true
 
+  field :public_name
+  validates :public_name, presence: true
+
   # phone required for photo submission
   field :phone
   before_validation :normalize_phone, if: :phone?
@@ -68,8 +71,8 @@ class Contestant
                               message: 'format is not recognized' },
                     allow_blank: true
 
-  has_many :entries, :class_name => "Photo", :inverse_of => :entry_photos
-  
+  has_many :entries, :class_name => "Photo", :inverse_of => :owner
+
   # has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
   field :favourite_photo_ids, :type => Array, :default => []
 

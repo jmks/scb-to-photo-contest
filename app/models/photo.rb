@@ -33,8 +33,6 @@ class Photo
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates :owner, presence: true
   
-  # has_and_belongs_to_many :contestants, :class_name => 'Contestant', :inverse_of => :favourites
-
   # scopes
   scope :landscapes, ->{ where(:category => "landscapes") }
   scope :flora,      ->{ where(:category => "flora") }

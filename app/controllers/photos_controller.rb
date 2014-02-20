@@ -5,7 +5,8 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id]) || Photo.new 
+    @photo = Photo.find(params[:id]) || Photo.new
+    #render 'photo_mock' unless @photo
   end
 
   def flora
