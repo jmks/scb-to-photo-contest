@@ -68,3 +68,15 @@
     %a#fave-btn.btn.btn-block.btn-danger.btn-lg
       %i.fa.fa-heart-o
         Favourite
+
+-# comments
+.container
+  - @photo.comments.each do |comment|
+    .row
+      .col-xs-6
+        %h4.pull-right= comment.name
+        %p= time_ago comment.created_at
+      .col-xs-6
+        %i.fa.fa-quote-left
+        %p= comment.text
+        %i.fa.fa-quote-right

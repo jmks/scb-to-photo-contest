@@ -4,7 +4,8 @@
     .img-responsive
       = image_tag photo.thumbnail_path
   - else
-    %i.fa.fa-camera.fa-2x
+    %i.fa.fa-picture-o.fa-4x
 
   -# title
-  = (photo.title? and photo.title) || "Photo ##{@params[:id]}"
+  - if photo.title?
+    %p= photo.title

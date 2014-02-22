@@ -5,6 +5,9 @@ class RootController < ApplicationController
   def rules
   end
 
+  def prizes
+  end
+
   def judges
   end
 end

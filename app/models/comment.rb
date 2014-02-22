@@ -1,5 +1,6 @@
 class Comment
   include Mongoid::Document
+  include Mongoid::Timestamps::Created
 
   embedded_in :photo, inverse_of: :comments
 

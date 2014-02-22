@@ -32,6 +32,8 @@
                     %li= link_to 'Fauna', fauna_path
                     %li= link_to 'Flora', flora_path
                     %li= link_to 'Landscapes', landscapes_path
+                %li{class: "#{'active' if current_page?(prizes_path)}"}
+                  = link_to 'Prizes', prizes_path
                 %li{class: "#{'active' if current_page?(judges_path)}"}
                   = link_to 'Judges', judges_path
                 %li{class: "#{'active' if current_page?(rules_path)}"}
@@ -74,28 +76,20 @@
     #footer-wrapper
       .row
         .col-xs-12.text-center
-          %h3 Thank-you to our awsome sponsors:
-
-      .row
-        .col-xs-12.text-center
-          %h1= mail_to "scbtoronto@gmail.com", "Contact us for sponsorship packages", subject: "SCB-TO Photo Contest Sponsorship"
+          %h2.link-blue Our amazing sponsors:
 
       .row.text-center
         .col-md-4
-          %h4 Awesome Sponsor #1
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
         .col-md-4
-          %h4 Awesome Sponsor #2
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
         .col-md-4
-          %h4 Awesome Sponsor #3
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
 
       .row.text-center
         .col-md-4
-          %h4 Awesome Sponsor #4
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
         .col-md-4
-          %h4 Awesome Sponsor #5
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
         .col-md-4
-          %h4 Awesome Sponsor #6
-
-      .row.skyline.text-center
-        .col-xs-12
-          = image_tag 'skyline-test.svg', id: "skyline-img", width: "100%"
+          = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"

@@ -1,9 +1,10 @@
 .container
   .row.judge
     .col-xs-6
-      %i.fa.fa-gavel.fa-4x.pull-right
-      %h4.pull-right Judge #1
+      .img-responsive
+        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
     .col-xs-6
+      %h4.text-center Judge #1
       %p
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -14,9 +15,9 @@
 
   .row.judge
     .col-xs-6
-      %i.fa.fa-gavel.fa-4x.pull-right
-      %h4.pull-right Judge #2
+      = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
     .col-xs-6
+      %h4.text-center Judge #2
       %p
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

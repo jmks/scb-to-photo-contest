@@ -14,4 +14,9 @@ module PhotosHelper
       default
     end
   end
+
+  def time_ago time
+    ago = time - Time.now
+    ago
+  end
 end
