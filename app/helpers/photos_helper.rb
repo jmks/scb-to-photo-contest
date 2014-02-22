@@ -8,7 +8,7 @@ module PhotosHelper
   end
 
   def display property, default
-    if @photo.respond_to?("#{property}?".to_sym)
+    if @photo.respond_to?("#{property}?".to_sym) and @photo.send(property.to_sym)
       @photo.send(property.to_sym)
     else
       default

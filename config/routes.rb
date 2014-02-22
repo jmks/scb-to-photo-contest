@@ -2,6 +2,8 @@ PhotoContest::Application.routes.draw do
   devise_for :contestants
 
   root 'root#index'
+  get '/judges', to: 'root#judges', as: 'judges'
+  get '/rules', to: 'root#rules', as: 'rules'
 
   get '/contestant', :to => 'contestants#index', :as => 'contestant_index'
 

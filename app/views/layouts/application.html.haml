@@ -32,6 +32,10 @@
                     %li= link_to 'Fauna', fauna_path
                     %li= link_to 'Flora', flora_path
                     %li= link_to 'Landscapes', landscapes_path
+                %li{class: "#{'active' if current_page?(judges_path)}"}
+                  = link_to 'Judges', judges_path
+                %li{class: "#{'active' if current_page?(rules_path)}"}
+                  = link_to 'Rules', rules_path
                 - if contestant_signed_in?
                   %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
                     = link_to "#{current_contestant.first_name}'s Page", contestant_index_path

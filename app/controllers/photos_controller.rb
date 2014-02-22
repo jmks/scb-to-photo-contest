@@ -21,7 +21,6 @@ class PhotosController < ApplicationController
     redirect_to photos_path(:category => :landscapes, :page => 1)
   end
 
-  # photos should always be displayed by category
   def index
     # TODO add pagination with infinite-scroll or will_paginate
 

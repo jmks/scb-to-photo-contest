@@ -1,75 +1,70 @@
-- if @photo
-  .row.text-center
-    %h2.photo-title= display_title "Photo Entry ##{params[:id]}"
+.row.text-center
+  %h2.photo-title= display_title "Photo Entry #{params[:id]}"
 
-  .row.text-center
-    .col-xs-12
-      /= link to full image
-      %a= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
-
-
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Contestant
-
-    .col-xs-9.col-md-6
-      %p= (@photo.owner.public_name? and @photo.owner.public_name) || 'anonymous'
-
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Description
-
-    .col-xs-9.col-md-6
-      %p= display_discription 'Cute kitten placeholders on demand!'
-
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Photo Location
-
-    .col-xs-9.col-md-6
-      %p= display_location 'Somewhere around Earth'
-
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Photo Date
-
-    .col-xs-9.col-md-6
-      %p= display_date 'Before Now'
+.row.text-center
+  .col-xs-12
+    /= link to full image
+    %a= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
 
 
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Votes
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Contestant
 
-    .col-xs-9.col-md-6
-      %p= display_votes '1,102,547'
+  .col-xs-9.col-md-6
+    %p= display_display_name 'anonymous'
 
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Likes
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Description
 
-    .col-xs-9.col-md-6
-      %p= display_likes '1,102,547'
+  .col-xs-9.col-md-6
+    %p= display_discription 'Cute kitten placeholders on demand!'
 
-  .row
-    .col-xs-3.col-md-offset-4.col-md-2
-      %strong Favourites
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Photo Location
 
-    .col-xs-9.col-md-6
-      %p= display_favourites '2,145,857'
+  .col-xs-9.col-md-6
+    %p= display_location 'Somewhere around Earth'
+
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Photo Date
+
+  .col-xs-9.col-md-6
+    %p= display_date 'Before Now'
 
 
-  .row
-    .col-xs-12.col-md-offset-4.col-md-2
-      %a#vote-btn.btn.btn-block.btn-success.btn-lg
-        %i.fa.fa-plus
-          Vote
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Votes
 
-    .col-xs-12.col-md-2
-      %a#fave-btn.btn.btn-block.btn-danger.btn-lg
-        %i.fa.fa-heart-o
-          Favourite
+  .col-xs-9.col-md-6
+    %p= display_votes '1,102,547'
 
-- else
-  .row.text-center
-    %h2.photo-title= display_title "Photo Entry ##{params[:id]}"
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Likes
+
+  .col-xs-9.col-md-6
+    %p= display_likes '1,102,547'
+
+.row
+  .col-xs-3.col-md-offset-4.col-md-2
+    %strong Favourites
+
+  .col-xs-9.col-md-6
+    %p= display_favourites '2,145,857'
+
+
+.row
+  .col-xs-12.col-md-offset-4.col-md-2
+    %a#vote-btn.btn.btn-block.btn-success.btn-lg
+      %i.fa.fa-plus
+        Vote
+
+  .col-xs-12.col-md-2
+    %a#fave-btn.btn.btn-block.btn-danger.btn-lg
+      %i.fa.fa-heart-o
+        Favourite
