@@ -5,8 +5,9 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id]) || Photo.new
-    #render 'photo_mock' unless @photo
+    @photo = Photo.find(params[:id])
+    @photo.inc views: 1
+    #render 'photo_mock' and return unless @photo
   end
 
   def flora

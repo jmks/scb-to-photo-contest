@@ -29,6 +29,7 @@ class Photo
   field :votes, :type => Integer, :default => 0
   field :likes, :type => Integer, :default => 0
   field :favourites, :type => Integer, :default => 0
+  field :views, type: Integer, default: 0
 
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates :owner, presence: true

@@ -96,7 +96,7 @@ describe Photo do
     end
   end
 
-  context "voting" do 
+  context "counts" do 
     it "has 0 votes by default" do 
       expect(@photo.votes).to eql 0
     end
@@ -107,6 +107,10 @@ describe Photo do
 
     it "has 0 favourites by default" do 
       expect(@photo.favourites).to eql 0
+    end
+
+    it "has 0 views by default" do 
+      expect(@photo.views).to eql 0
     end
 
     it "is favourited by many contestants" do 
