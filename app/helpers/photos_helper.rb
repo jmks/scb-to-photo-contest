@@ -16,7 +16,6 @@ module PhotosHelper
   end
 
   def time_ago time
-    ago = time - Time.now
-    ago
+    "#{time_ago_in_words time} ago"
   end
 end

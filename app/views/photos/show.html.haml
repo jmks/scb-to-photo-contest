@@ -79,11 +79,39 @@
 -# comments
 .container
   - @photo.comments.each do |comment|
-    .row
+    .row.comment-container
       .col-xs-6
-        %h4.pull-right= comment.name
-        %p= time_ago comment.created_at
+        %div.pull-right
+          %h4= comment.name 
+          %small= time_ago comment.created_at
       .col-xs-6
         %i.fa.fa-quote-left
-        %p= comment.text
+        %span= comment.text
         %i.fa.fa-quote-right
+
+  #new-comment-wrapper
+    .row
+      .col-xs-12.col-sm-offset-5.col-sm-2
+        %a#new-comment-btn.btn.btn-block.btn-primary
+          %span.fa-stack.fa-lg
+            %i.fa.fa-comment-o.fa-stack-2x
+            %i.fa.fa-plus.fa-stack-1x
+          %span Leave Comment
+    .new-comment.row
+      - if current_contestant
+        %input{type: 'hidden', name: 'contestant_id', value: "#{ current_contestant.id }"}
+        %label.control-label.col-xs-4 Comment
+        .col-xs-8
+          %textarea#comment-text.form-control{rows: 3, cols: 20}
+        .row
+          .col-xs-6.col-sm-offset-4
+            %a#cancel-comment.btn.btn-warning Cancel
+            %a#submit-comment.btn.btn-success Submit
+      - else
+        %span
+          %a{href: new_contestant_registration_path }
+            Sign up
+          %span or
+          %a{href: new_contestant_session_path }
+            Sign in
+          %span to leave a comment
