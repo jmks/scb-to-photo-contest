@@ -2,7 +2,7 @@ class Photo
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  CATEGORIES = [ :flora, :fauna, :landscapes, :all ]
+  CATEGORIES = [ :flora, :fauna, :landscapes ]
 
   # photo details fields
   field :title
@@ -16,7 +16,7 @@ class Photo
   field :description
   
   field :camera_stats
-  field :photo_date, :type => Date
+  field :photo_date, type: Date
   field :photo_location
   
   embeds_many :comments
@@ -26,10 +26,10 @@ class Photo
   field :thumbnail_path
   field :original_path
 
-  field :votes, :type => Integer, :default => 0
-  field :likes, :type => Integer, :default => 0
-  field :favourites, :type => Integer, :default => 0
-  field :views, type: Integer, default: 0
+  field :votes,       type: Integer, default: 0
+  field :likes,       type: Integer, default: 0
+  field :favourites,  type: Integer, default: 0
+  field :views,       type: Integer, default: 0
 
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates :owner, presence: true

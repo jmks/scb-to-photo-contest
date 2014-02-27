@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   #authorize on new
+  PHOTOS_PER_PAGE = 15
 
   def new
   end
@@ -27,15 +28,18 @@ class PhotosController < ApplicationController
 
     @category = params[:category] || 'all'
     @category = Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym
+    @tag      = params[:tag]
     page      = params[:page].to_i
 
-    case @category
-      when :all
-        @photos = Photo.desc(:created_at)
-      else
-        @photos = Photo.where(:category => @category)
-      end
-    @photos.desc(:created_at).limit(15)
+    if @tag
+      @photos = Photo.any_in(tags: [@tag])
+    elsif @category
+      @photos = Photo.where(:category => @category)
+    else
+      @photos = Photo.desc(:created_at)
+    end
 
+    @photos.skip(@page * PHOTOS_PER_PAGE) if @page
+    @photos.desc(:created_at).limit(15)
   end
 end

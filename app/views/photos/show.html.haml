@@ -4,65 +4,68 @@
 .row.text-center
   .col-xs-12
     /= link to full image
-    %a= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
+    %a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
 
-
+-# photo information
 .row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Contestant
+  .col-xs-6
+    .row
+      .col-xs-6
+        %strong.pull-right Description
+      .col-xs-6
+        %p= display_discription ''
+    .row
+      .col-xs-6
+        %strong.pull-right Tags
+      .col-xs-6
+        %ul#tags-container.list-inline
+          - @photo.tags.each do |tag|
+            %li= link_to tag, photos_path(tag: tag)
 
-  .col-xs-9.col-md-6
-    %p= display_display_name 'anonymous'
-
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Description
-
-  .col-xs-9.col-md-6
-    %p= display_discription 'Cute kitten placeholders on demand!'
-
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Photo Location
-
-  .col-xs-9.col-md-6
-    %p= display_location 'Somewhere around Earth'
-
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Photo Date
-
-  .col-xs-9.col-md-6
-    %p= display_date 'Before Now'
-
+  .col-xs-6
+    .row
+      .col-xs-6
+        %strong Contestant
+      .col-xs-6
+        %p= display_display_name 'anonymous'
+    .row
+      .col-xs-6
+        %strong Photo Location
+      .col-xs-6
+        %p= display_location 'unknown'
+    .row
+      .col-xs-6
+        %strong Photo Date
+      .col-xs-6
+        %p= display_date 'unknown'
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
     %strong Views
 
   .col-xs-9.col-md-6
-    %p= display_views '0'
+    %p= display_views 0
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
     %strong Votes
 
   .col-xs-9.col-md-6
-    %p= display_votes '1,102,547'
+    %p= display_votes 0
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
     %strong Likes
 
   .col-xs-9.col-md-6
-    %p= display_likes '1,102,547'
+    %p= display_likes 0
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
     %strong Favourites
 
   .col-xs-9.col-md-6
-    %p= display_favourites '2,145,857'
+    %p= display_favourites 0
 
 
 .row
@@ -98,7 +101,7 @@
             %i.fa.fa-plus.fa-stack-1x
           %span Leave Comment
     .new-comment.row
-      - if current_contestant
+      - if signed_in?
         %input{type: 'hidden', name: 'contestant_id', value: "#{ current_contestant.id }"}
         %label.control-label.col-xs-4 Comment
         .col-xs-8
