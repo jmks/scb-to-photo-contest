@@ -12,5 +12,7 @@ class ApplicationController < ActionController::Base
     %w{ first_name last_name public_name phone email_confirmation }.each do |param|
         devise_parameter_sanitizer.for(:sign_up) << param.to_sym
     end
+
+    # TODO photo submission
   end
 end

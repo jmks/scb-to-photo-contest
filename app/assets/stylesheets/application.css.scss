@@ -16,12 +16,23 @@
 @import "bootstrap";
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Condiment|Kaushan+Script|La+Belle+Aurore|Zeyada);
 
 /* for fixed header */
 body { padding-top: 135px; }
 
 @media screen and (max-width: 768px) {
     body { padding-top: 85px; }
+}
+
+.page-title {
+    font-family: La Belle Aurore, sans-serif;
+    font-size: 48px;
+}
+
+a.btn {
+    font-family: Droid Sans, sans-serif;
+    font-weight: 700;
 }
 
 /* global colours */

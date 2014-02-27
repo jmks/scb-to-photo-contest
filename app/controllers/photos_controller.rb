@@ -1,8 +1,18 @@
 class PhotosController < ApplicationController
-  #authorize on new
+  before_filter :authenticate_contestant!, only: [:new, :create]
+
   PHOTOS_PER_PAGE = 15
 
   def new
+    if params[:photo]
+      @photo = Photo.new(params[:photo])
+    else
+      @photo = Photo.new
+    end
+  end
+
+  def create
+
   end
 
   def show

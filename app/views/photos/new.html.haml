@@ -1,1 +1,44 @@
-%h2.text-center Photo#new
+%h2.text-center Photo Submission
+
+= form_for :photo, controller: 'photo', action: 'create', html: {:class => 'form-horizontal'} do |f|
+  =# csrf_meta_tags
+  = hidden_field_tag :id, @photo.id
+  
+  .form-group
+    = f.label :title, 'Photo Title', class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :description, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :description, class: 'form-control'
+
+  / .form-group
+  /   = f.label :photo_date, class: 'control-label col-sm-4'
+  /   .col-sm-8
+  /     = f.text_field :photo_date, class: 'form-control'
+
+  .form-group
+    = f.label :photo_location, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :photo_location, class: 'form-control'
+
+  .form-group
+    = f.label :camera_stats, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_area :camera_stats, class: 'form-control', rows: 5
+
+  .form-group
+    = f.label :category, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.select :category, Photo::CATEGORIES, {}, class: 'form-control'
+
+  .form-group
+    = f.label :tags, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :tags, class: 'form-control', value: @photo.tags.join(',')
+
+  .form-group
+    .col-sm-offset-4.col-sm-2
+      = f.submit nil, :class => 'btn btn-primary', :value => 'Sign up'

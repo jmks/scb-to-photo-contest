@@ -6,7 +6,7 @@ PhotoContest::Application.routes.draw do
   get '/judges', to: 'root#judges', as: 'judges'
   get '/rules', to: 'root#rules', as: 'rules'
 
-  get '/contestant', :to => 'contestants#index', :as => 'contestant_index'
+  get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
   get '/photos',            :to => 'photos#index',      :as => 'photos'
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'

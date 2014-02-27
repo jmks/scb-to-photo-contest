@@ -1,12 +1,16 @@
 .row.text-center
-  %h2.photo-title= display_title "Photo Entry #{params[:id]}"
-
-.row.text-center
   .col-xs-12
     /= link to full image
     %a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
 
 -# photo information
+.row
+  .col-xs-6
+    %h2= display_title "Photo Entry #{params[:id]}"
+  .col-xs-6
+    %strong Photographed by
+    %p= @photo.owner.public_name
+
 .row
   .col-xs-6
     .row
@@ -72,12 +76,12 @@
   .col-xs-12.col-md-offset-4.col-md-2
     %a#vote-btn.btn.btn-block.btn-success.btn-lg
       %i.fa.fa-plus
-        Vote
+      Vote
 
   .col-xs-12.col-md-2
     %a#fave-btn.btn.btn-block.btn-danger.btn-lg
-      %i.fa.fa-heart-o
-        Favourite
+      %i.fa.fa-heart
+      Favourite
 
 -# comments
 .container
