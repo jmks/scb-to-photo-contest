@@ -58,6 +58,7 @@ gem 'haml'
 # Use Twitter Bootstrap
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem "font-awesome-rails"
+gem 'bootstrap-datepicker-rails'
 
 # Use RSpec and Cucumber for TDD
 group :development, :test do
