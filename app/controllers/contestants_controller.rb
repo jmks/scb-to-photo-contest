@@ -3,4 +3,7 @@ class ContestantsController < ApplicationController
 
   def index
   end
+
+  # vote by ip
+  # request.remote_ip
 end
