@@ -101,23 +101,8 @@ describe Photo do
       expect(@photo.votes).to eql 0
     end
 
-    it "has 0 likes by default" do 
-      expect(@photo.likes).to eql 0
-    end
-
-    it "has 0 favourites by default" do 
-      expect(@photo.favourites).to eql 0
-    end
-
     it "has 0 views by default" do 
       expect(@photo.views).to eql 0
-    end
-
-    it "is favourited by many contestants" do 
-      contestants = build_list(:contestant, 5)
-      contestants.each { |c| c.favourite_photo @photo }
-
-      expect(@photo.favourites).to eql 5
     end
   end
 

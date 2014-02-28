@@ -73,9 +73,6 @@ class Contestant
 
   has_many :entries, :class_name => "Photo", :inverse_of => :owner
 
-  # has_and_belongs_to_many :favourites, :class_name => "Photo", :inverse_of => :favourite_photos
-  field :favourite_photo_ids, :type => Array, :default => []
-
   # votes
   field :voted_photo_ids, type: Array
 
@@ -106,33 +103,6 @@ class Contestant
       voted_photo_ids.include? photo.id
     else
       false
-    end
-  end
-
-  def favourite_photo photo
-    if is_favourite? photo
-      false
-    else
-      push favourite_photo_ids: photo.id
-      photo.inc :favourites => 1
-      true
-    end
-  end
-
-  # is photo favourited by contestant
-  def is_favourite? photo
-    if favourite_photo_ids?
-      favourite_photo_ids.member? photo.id
-    else
-      false
-    end
-  end
-
-  # removes photo from favourites
-  def defavourite_photo photo 
-    if is_favourite? photo 
-      pull favourite_photo_ids: photo.id
-      photo.inc favourites: -1
     end
   end
 
