@@ -32,6 +32,8 @@ RSpec.configure do |config|
     Mongoid.purge!
   end
 
+  config.include Devise::TestHelpers, :type => :controller
+
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.

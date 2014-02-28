@@ -2,6 +2,6 @@ When /I am on the homepage/ do
   visit root_path
 end
 
-Then /I should see text "(.+)"/ do |text|
-  page.should have_content(text)
+Then /I should be on the homepage/ do
+  page.current_path.should eql root_path
 end

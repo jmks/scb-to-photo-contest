@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
 
     # TODO photo submission
   end
+
+  def after_sign_in_path_for(resource)
+    contestant_index_path
+  end
 end
