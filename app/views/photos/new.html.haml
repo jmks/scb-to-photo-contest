@@ -1,8 +1,15 @@
 %h2.text-center Photo Submission
 
-= form_for :photo, controller: 'photo', action: 'create', html: {:class => 'form-horizontal'} do |f|
-  =# csrf_meta_tags
+- if @photo.errors.any?
+  %h4 Errors
+  %ul.errors-list
+    - @photo.errors.full_messages.each do |msg|
+      %li= msg
+
+= form_for :photo, url: photos_path, html: {:class => 'form-horizontal'} do |f|
+  = csrf_meta_tags
   = hidden_field_tag :id, @photo.id
+  = hidden_field_tag :owner, current_contestant.id
   
   .form-group
     = f.label :title, 'Photo Title', class: 'control-label col-sm-4'
@@ -14,10 +21,10 @@
     .col-sm-8
       = f.text_field :description, class: 'form-control'
 
-  / .form-group
-  /   = f.label :photo_date, class: 'control-label col-sm-4'
-  /   .col-sm-8
-  /     = f.text_field :photo_date, class: 'form-control'
+  .form-group
+    = f.label :photo_date, class: 'control-label col-sm-4'
+    .col-sm-8
+      = f.text_field :photo_date, class: 'form-control datepicker'
 
   .form-group
     = f.label :photo_location, class: 'control-label col-sm-4'
@@ -41,4 +48,4 @@
 
   .form-group
     .col-sm-offset-4.col-sm-2
-      = f.submit nil, :class => 'btn btn-primary', :value => 'Sign up'
+      = f.submit nil, :class => 'btn btn-primary', :value => 'Post'

@@ -24,20 +24,16 @@ k = Contestant.create!({
 
 a = Photo.create!({
     title:        'Moon at night',
-    category:     'landscapes',
+    category:     :landscapes,
     tags:         ['moon', 'night', 'ET'],
     owner: j
 })
 b = Photo.create!({
     title:        'Trees in park',
-    category:     'flora',
+    category:     :flora,
     tags:         ['trees'],
     owner: k
 })
 
 b.comments.create name: 'Jason', text: 'Trees need more squirrels!'
 a.comments.create name: 'Kat',   text: 'Photoshopped?'
-
-j.favourite_photo a
-j.favourite_photo b
-k.favourite_photo b

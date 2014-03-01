@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_contestant!, only: [:new, :create]
+  before_filter :preprocess_data, only: [:create]
 
   PHOTOS_PER_PAGE = 15
 
@@ -12,13 +13,19 @@ class PhotosController < ApplicationController
   end
 
   def create
-
+    @photo = Photo.new(params[:photo])
+    @photo.owner = current_contestant
+    if @photo.save
+      redirect_to photo_path(@photo)
+    else
+      render :new, photo: @photo
+    end
   end
 
   def show
-    @photo = Photo.find(params[:id])
+    @photo = Photo.find(params[:id]) if params[:id]
+    redirect_to(photos_path) and return unless @photo
     @photo.inc views: 1
-    #render 'photo_mock' and return unless @photo
   end
 
   def flora
@@ -51,5 +58,19 @@ class PhotosController < ApplicationController
 
     @photos.skip(@page * PHOTOS_PER_PAGE) if @page
     @photos.desc(:created_at).limit(15)
+  end
+
+  private
+
+  def preprocess_data
+    params[:photo][:tags]       = params[:photo][:tags].split(',').map { |tag| tag.strip }
+    params[:photo][:category]   = params[:photo][:category].to_sym
+    
+    begin
+      params[:photo][:photo_date] = Date.strptime(params[:photo][:photo_date], "%m/%d/%Y")
+    rescue
+      # keep the date as a string
+    end
+
   end
 end

@@ -6,3 +6,5 @@ $(document).on 'page:change', ->
   $('#new-comment-btn').click(-> 
     $(this).hide().closest('#new-comment-wrapper').find('.new-comment').show()
   )
+
+  $('.datepicker').datepicker({});

@@ -17,7 +17,7 @@
       .col-xs-6
         %strong.pull-right Description
       .col-xs-6
-        %p= display_discription ''
+        %p= display_description ''
     .row
       .col-xs-6
         %strong.pull-right Tags
@@ -29,19 +29,14 @@
   .col-xs-6
     .row
       .col-xs-6
-        %strong Contestant
-      .col-xs-6
-        %p= display_display_name 'anonymous'
-    .row
-      .col-xs-6
         %strong Photo Location
       .col-xs-6
-        %p= display_location 'unknown'
+        %p= display_photo_location 'unknown'
     .row
       .col-xs-6
         %strong Photo Date
       .col-xs-6
-        %p= display_date 'unknown'
+        %p= display_photo_date 'unknown'
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
@@ -56,20 +51,6 @@
 
   .col-xs-9.col-md-6
     %p= display_votes 0
-
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Likes
-
-  .col-xs-9.col-md-6
-    %p= display_likes 0
-
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %strong Favourites
-
-  .col-xs-9.col-md-6
-    %p= display_favourites 0
 
 
 .row

@@ -10,13 +10,13 @@ class Photo
 
   field :category
   validates :category, presence:  true, 
-                       inclusion: { in: %w(flora fauna landscapes), 
+                       inclusion: { in: CATEGORIES, 
                                     message: "%{value} is not a valid category"}
 
   field :description
   
   field :camera_stats
-  field :photo_date, type: Date
+  field :photo_date
   field :photo_location
   
   embeds_many :comments

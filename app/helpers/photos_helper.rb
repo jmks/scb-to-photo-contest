@@ -1,4 +1,10 @@
 module PhotosHelper
+
+  def display_photo_date default
+    date = @photo.photo_date && @photo.photo_date.strftime('%b %-d, %Y')
+    date || default
+  end
+
   def method_missing method, *args, &block
     if method.to_s =~ /^display_(.*)$/
       display($1, args.first)
