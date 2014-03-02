@@ -288,6 +288,11 @@ ul.dropdown-menu > li > a:focus {
 
     margin-top: 50px;
 
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     #social-media-footer {
         min-height: 40px;
         background-color: $darkblue;
@@ -301,6 +306,7 @@ ul.dropdown-menu > li > a:focus {
 
     #info-footer {
         min-height: 40px;
+        line-height: 40px;
         background-color: $darkblue;
         color: #fff;
 
@@ -308,10 +314,30 @@ ul.dropdown-menu > li > a:focus {
             color: #fff;
             text-decoration: none;
         }
+
+        .col-xs-12, .col-sm-6 {
+            vertical-align: center;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
     }
 }
 
-
+@media (max-width: 767px) {
+    #quick-btns a.btn:first-child {
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+}
+@media (min-width: 1200px) {
+}
 
 footer .skyline {
     background: #ffffff; /* Old browsers */
