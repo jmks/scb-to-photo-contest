@@ -43,20 +43,28 @@ class PhotosController < ApplicationController
   def index
     # TODO add pagination with infinite-scroll or will_paginate
 
-    @category = params[:category] || 'all'
-    @category = Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym
-    @tag      = params[:tag]
-    page      = params[:page].to_i
+    @category   = params[:category] || 'all'
+    @category   = Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym
 
-    if @tag
+    @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
+    @tag        = params[:tag]
+    page        = params[:page].to_i
+
+    if @contestant
+      @photos = @contestant.entries
+      @title  = "Photos by #{ @contestant.public_name }"
+    elsif @tag
       @photos = Photo.any_in(tags: [@tag])
+      @title  = "Photos tagged #{ @tag }"
     elsif @category
       @photos = Photo.where(:category => @category)
+      @title  = "Photos categorized #{ @category }"
     else
       @photos = Photo.desc(:created_at)
+      @title  = "All Photos"
     end
 
-    @photos.skip(@page * PHOTOS_PER_PAGE) if @page
+    @photos.skip((@page - 1) * PHOTOS_PER_PAGE) if @page
     @photos.desc(:created_at).limit(15)
   end
 
