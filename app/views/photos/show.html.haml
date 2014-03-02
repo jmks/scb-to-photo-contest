@@ -73,11 +73,13 @@
   /     Favourite
 
 -# comments
-%ul.list-unstyled.comments-container
-  - @photo.comments.each do |comment|
-    %li.comment
-      = "<strong>#{comment.name}</strong> <small>#{time_ago comment.created_at}</small>".html_safe
-      %span= comment.text
+.row
+  .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
+    %ul.list-unstyled.comments-container
+      - @photo.comments.each do |comment|
+        %li.comment
+          = "<strong>#{comment.name}</strong> <small>#{time_ago comment.created_at}</small>".html_safe
+          %span= comment.text
 
 #new-comment-wrapper
   .row
@@ -89,17 +91,17 @@
           .col-xs-8
             = f.text_area :text, class: "form-control", rows: 3
           .col-xs-4.text-center
-            = f.submit nil, class: "btn btn-primary", value: 'Leave Comment'
-          / , class: "btn btn-primary" do 
-          /   %span.fa-stack.fa-lg
-          /     %i.fa.fa-comment-o.fa-stack-2x
-          /     %i.fa.fa-plus.fa-stack-1x
-          /     %span Leave Comment
+            = f.button type: 'submit', class: "btn btn-primary" do 
+              %span.fa-stack.fa-lg
+                %i.fa.fa-comment-o.fa-stack-2x
+                %i.fa.fa-plus.fa-stack-1x
+              %span Leave Comment
     - else
-      %span
-        %a{href: new_contestant_registration_path }
-          Sign up
-        %span or
-        %a{href: new_contestant_session_path }
-          Sign in
-        %span to leave a comment
+      .col-xs-12.text-center
+        %span
+          %a{href: new_contestant_session_path }
+            Sign in
+          %span or
+          %a{href: new_contestant_registration_path }
+            Sign up
+          %span to leave a comment

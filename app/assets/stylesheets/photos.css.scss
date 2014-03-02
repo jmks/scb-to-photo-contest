@@ -12,12 +12,15 @@
 
     .comment {
         padding: 5px;
-        background-color: #E8E9E9;
 
         span {
             margin-left: 5px;
             font-size: 1.25em;
         }
+    }
+
+    .comment:nth-child(odd) {
+        background-color: #E8E9E9;
     }
 }
 
