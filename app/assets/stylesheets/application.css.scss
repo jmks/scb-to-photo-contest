@@ -18,15 +18,38 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|);
 
+html {
+    background: url(scarborough_bluffs_bg.jpg) no-repeat center center fixed;
+    background-position: 0% 130px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    min-height: 100%;
+    position: relative;
+}
+
 body { 
     /* for fixed header */
     padding-top: 135px;
 
-    background: url("wood-repeat.jpg") repeat scroll 0 0 #959796;
+    /* sticky footer */
+    margin-bottom: 72px;
+
+    background-color: transparent;
+    /*background: url("wood-repeat.jpg") repeat scroll 0 0 #959796;*/
 }
 
 @media screen and (max-width: 768px) {
-    body { padding-top: 85px; }
+    
+    html {
+        background-position: 0% 80px;
+    }
+    
+    body {
+        padding-top: 85px;
+    }
 }
 
 .main-title {
@@ -211,8 +234,44 @@ ul.dropdown-menu > li > a:focus {
     margin-top: 20px;
 }
 
+#sponsors-footer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
-footer#sponsors-footer {
+
+#footer {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+
+    margin-top: 50px;
+
+    #social-media-footer {
+        min-height: 40px;
+        background-color: $darkblue;
+
+        a {
+            color: #fff;
+        }
+
+        border-bottom: 1px solid #333;
+    }
+
+    #info-footer {
+        min-height: 40px;
+        background-color: $darkblue;
+        color: #fff;
+
+        a, a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
+
+
+/*footer#sponsors-footer {
     margin-top: 50px;
     margin-bottom: 20px;
 }
@@ -237,7 +296,7 @@ footer#info-footer {
         color: #fff;
         text-decoration: none;
     }
-}
+}*/
 
 footer .skyline {
     background: #ffffff; /* Old browsers */
