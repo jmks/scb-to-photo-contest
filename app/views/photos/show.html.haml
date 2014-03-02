@@ -65,14 +65,16 @@
 
 .row
   .col-xs-12.col-sm-offset-5.col-sm-2
-    %a#vote-btn.btn.btn-block.btn-success.btn-lg
-      %i.fa.fa-plus
-      Vote
+    = form_tag vote_photo_path, class: 'form form-inline' do
+      = hidden_field_tag :id, @photo.id
+      = submit_tag nil, class: 'vote-btn btn btn-block btn-success btn-lg' do 
+        %i.fa.fa-plus
+        Vote
 
   / .col-xs-12.col-md-2
-  /   %a#fave-btn.btn.btn-block.btn-danger.btn-lg
-  /     %i.fa.fa-heart
-  /     Favourite
+  /   %a#fave-btn.btn.btn-block.btn-success.btn-lg
+  /     %i.fa.fa-plus
+  /     Vote
 
 -# comments
 .row

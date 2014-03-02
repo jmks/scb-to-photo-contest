@@ -4,8 +4,6 @@ class Comment
 
   embedded_in :photo, inverse_of: :comments
 
-  # TODO field :user_id
-
   field :name
   validates :name, presence: true
   

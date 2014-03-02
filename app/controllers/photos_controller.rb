@@ -66,6 +66,25 @@ class PhotosController < ApplicationController
     render :show
   end
 
+  def vote
+    @photo = Photo.find(params[:id])
+
+    # move to own controller if any more complicated
+    voter = Vote.find(request.remote_ip) || Vote.create(id: request.remote_ip)
+
+    if voter.vote
+      @photo.inc votes: 1
+      flash[:notice] = "Thank you for voting"
+    else
+      flash[:danger] = "You have reached your vote limit for today. Please try again tomorrow."
+    end
+    
+    # vote tracking for contestants
+    current_contestant && current_contestant.vote_for(@photo)
+
+    redirect_to @photo
+  end
+
   private
 
   def preprocess_data
@@ -75,6 +94,7 @@ class PhotosController < ApplicationController
     begin
       params[:photo][:photo_date] = Date.strptime(params[:photo][:photo_date], "%m/%d/%Y")
     rescue
+      # datepicker enforces date format
       # keep the date as a string
     end
 

@@ -79,31 +79,10 @@ class Contestant
   # indexes
   index({ email: 1 }, { unique: true, background: true })
 
-  # number of votes cast
-  def votes
-    if voted_photo_ids?
-      voted_photo_ids.length
-    else
-      0
-    end
-  end
 
-  # vote for photo
+  # track voted for photos
   def vote_for photo 
-    # vote limit may be enforced
-    unless voted_for? photo
-      push voted_photo_ids: photo.id
-      photo.inc votes: 1
-    end
-  end
-
-  # has contestant voted for photo
-  def voted_for? photo 
-    if voted_photo_ids?
-      voted_photo_ids.include? photo.id
-    else
-      false
-    end
+    add_to_set voted_photo_ids: photo.id
   end
 
   protected
