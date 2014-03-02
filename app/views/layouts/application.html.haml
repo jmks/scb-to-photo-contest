@@ -3,6 +3,7 @@
   %head
     %title SCB-TO Photo Contest
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag :modernizr
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
 
@@ -74,6 +75,23 @@
 
       = yield
 
-      %footer
-        - if display_sponsors?
+        
+      - if display_sponsors?
+        %footer#sponsors-footer
           = render partial: 'layouts/sponsors'
+    
+    %footer#social-media-footer
+      %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank'}
+        %i.fa.fa-home.fa-2x
+      %a.btn.pull-right{href: 'https://twitter.com/SCBToronto', target: '_blank'}
+        %i.fa.fa-twitter.fa-2x
+      %a.btn.pull-right{href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank'}
+        %i.fa.fa-facebook.fa-2x
+
+    %footer#info-footer
+      .row
+        .col-xs-6
+          %p &#169; 2014 Society for Conservation Biology - Toronto Chapter
+        .col-xs-6
+          %a{href: '#'} Terms of Use
+          

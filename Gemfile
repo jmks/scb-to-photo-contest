@@ -60,6 +60,8 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem "font-awesome-rails"
 gem 'bootstrap-datepicker-rails'
 
+gem 'modernizr-rails'
+
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'

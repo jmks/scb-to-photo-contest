@@ -112,6 +112,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    modernizr-rails (2.7.1)
     moped (2.0.0.beta4)
       bson (~> 2.0)
       connection_pool (~> 1.2)
@@ -223,6 +224,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   meta_request
+  modernizr-rails
   mongoid (~> 4.0.0.alpha2)!
   pry
   rails (= 4.0.2)

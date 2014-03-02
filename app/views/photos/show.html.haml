@@ -18,16 +18,16 @@
   .col-xs-6
     .row
       .col-xs-6
-        %strong.pull-right Description
+        %strong Description
       .col-xs-6
         %p= display_description ''
     .row
       .col-xs-6
-        %strong.pull-right Tags
+        %strong Tags
       .col-xs-6
         %ul#tags-container.list-inline
           - @photo.tags.each do |tag|
-            %li= link_to tag, photos_path(tag: tag)
+            %li.tag= link_to tag, photos_path(tag: tag)
 
   .col-xs-6
     .row
@@ -48,6 +48,7 @@
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
+    %i.fa.fa-eye.fa-2x
     %strong Views
 
   .col-xs-9.col-md-6
@@ -55,6 +56,7 @@
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
+    %i.fa.fa-thumbs-up.fa-2x
     %strong Votes
 
   .col-xs-9.col-md-6

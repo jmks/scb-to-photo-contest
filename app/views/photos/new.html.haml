@@ -39,7 +39,7 @@
   .form-group
     = f.label :category, class: 'control-label col-sm-4'
     .col-sm-8
-      = f.select :category, Photo::CATEGORIES, {}, class: 'form-control'
+      = f.select :category, Photo::CATEGORIES.map { |c| c.capitalize }, {}, class: 'form-control'
 
   .form-group
     = f.label :tags, class: 'control-label col-sm-4'
