@@ -1,10 +1,10 @@
 %h2.text-center Photo Submission
 
-- if @photo.errors.any?
-  %h4 Errors
-  %ul.errors-list
-    - @photo.errors.full_messages.each do |msg|
-      %li= msg
+#submit-errors
+  - if @photo.errors.any?
+    %ul.errors-list
+      - @photo.errors.full_messages.each do |msg|
+        %li= msg
 
 = form_for :photo, url: photos_path, html: {:class => 'form-horizontal'} do |f|
   = csrf_meta_tags
