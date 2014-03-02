@@ -26,3 +26,20 @@ end
 Then /^I should be on my personal home page$/ do 
     page.current_path.should eql contestant_index_path
 end
+
+Given /^I am on a photo page$/ do 
+    visit photo_path(@photo.id)
+end
+
+Given /^I am on the photos page$/ do 
+    visit photos_path
+end
+
+Then /^I can not leave a comment$/ do 
+    page.should_not have_selector '#leave-comment-form'
+end
+
+Then /^I can see the photos$/ do 
+    page.should have_selector '#photo-wall .photo'
+end
+

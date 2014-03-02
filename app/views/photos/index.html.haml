@@ -7,4 +7,4 @@
   %ul.text-center.list-inline
     - @photos.each do |photo|
       .col-xs-4
-        %li= render 'photo_thumb', photo: photo
+        %li.photo= render 'photo_thumb', photo: photo

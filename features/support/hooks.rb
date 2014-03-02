@@ -13,3 +13,11 @@ Before '@unregistered' do
   @unregistered = FactoryGirl.build(:contestant)
   @unregistered[:password] = "password123"
 end
+
+Before '@photo' do
+  @photo = FactoryGirl.create(:photo)
+end
+
+Before '@photos' do 
+  @photos = FactoryGirl.create_list :photo, 5
+end
