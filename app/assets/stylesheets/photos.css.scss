@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.photo-title {
+    margin-top: 0;
+}
+
+.comments-container {
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    .comment {
+        padding: 5px;
+        background-color: #E8E9E9;
+
+        span {
+            margin-left: 5px;
+            font-size: 1.25em;
+        }
+    }
+}
+
 #new-comment-wrapper {
   .new-comment {
     display: none;

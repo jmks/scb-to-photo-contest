@@ -48,30 +48,32 @@
                   %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
                     = link_to 'Sign In', new_contestant_session_path                 
 
-    #alerts
-      - if flash[:notice]
-        .alert.alert-success.alert-dismissable
-          %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-            &times;
-          = flash[:notice]
-      - if flash[:info]
-        .alert.alert-info.alert-dismissable
-          %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-            &times;
-          = flash[:info]
-      - if flash[:alert]
-        .alert.alert-warning.alert-dismissable
-          %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-            &times;
-          = flash[:alert]
-      - if flash[:danger]
-        .alert.alert-danger.alert-dismissable
-          %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-            &times;
-          = flash[:danger]
+    .container
+      
+      #alerts
+        - if flash[:notice]
+          .alert.alert-success.alert-dismissable
+            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+              &times;
+            = flash[:notice]
+        - if flash[:info]
+          .alert.alert-info.alert-dismissable
+            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+              &times;
+            = flash[:info]
+        - if flash[:alert]
+          .alert.alert-warning.alert-dismissable
+            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+              &times;
+            = flash[:alert]
+        - if flash[:danger]
+          .alert.alert-danger.alert-dismissable
+            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+              &times;
+            = flash[:danger]
 
-    = yield
+      = yield
 
-  %footer
-    - if display_sponsors?
-      = render partial: 'layouts/sponsors'
+      %footer
+        - if display_sponsors?
+          = render partial: 'layouts/sponsors'

@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_contestant!, only: [:new, :create]
+  before_filter :authenticate_contestant!, only: [:new, :create, :comment]
   before_filter :preprocess_data, only: [:create]
 
   PHOTOS_PER_PAGE = 15
@@ -58,6 +58,12 @@ class PhotosController < ApplicationController
 
     @photos.skip(@page * PHOTOS_PER_PAGE) if @page
     @photos.desc(:created_at).limit(15)
+  end
+
+  def comment
+    @photo = Photo.find(params[:photo_id])
+    @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]
+    render :show
   end
 
   private

@@ -6,10 +6,13 @@
 -# photo information
 .row
   .col-xs-6
-    %h2= display_title "Photo Entry #{params[:id]}"
+    .row
+      .col-xs-12
+        %h2.photo-title= display_title "Photo Entry #{params[:id]}"
   .col-xs-6
-    %strong Photographed by
-    %p= @photo.owner.public_name
+    .row
+      .col-xs-12
+        %p= "Photographed by <strong>#{@photo.owner.public_name}</strong>".html_safe
 
 .row
   .col-xs-6
@@ -37,6 +40,11 @@
         %strong Photo Date
       .col-xs-6
         %p= display_photo_date 'unknown'
+    .row
+      .col-xs-6
+        %strong Camera details
+      .col-xs-6
+        %pre= display_camera_stats ''
 
 .row
   .col-xs-3.col-md-offset-4.col-md-2
@@ -54,52 +62,44 @@
 
 
 .row
-  .col-xs-12.col-md-offset-4.col-md-2
+  .col-xs-12.col-md-offset-5.col-md-2
     %a#vote-btn.btn.btn-block.btn-success.btn-lg
       %i.fa.fa-plus
       Vote
 
-  .col-xs-12.col-md-2
-    %a#fave-btn.btn.btn-block.btn-danger.btn-lg
-      %i.fa.fa-heart
-      Favourite
+  / .col-xs-12.col-md-2
+  /   %a#fave-btn.btn.btn-block.btn-danger.btn-lg
+  /     %i.fa.fa-heart
+  /     Favourite
 
 -# comments
-.container
+%ul.list-unstyled.comments-container
   - @photo.comments.each do |comment|
-    .row.comment-container
-      .col-xs-6
-        %div.pull-right
-          %h4= comment.name 
-          %small= time_ago comment.created_at
-      .col-xs-6
-        %i.fa.fa-quote-left
-        %span= comment.text
-        %i.fa.fa-quote-right
+    %li.comment
+      = "<strong>#{comment.name}</strong> <small>#{time_ago comment.created_at}</small>".html_safe
+      %span= comment.text
 
-  #new-comment-wrapper
-    .row
-      .col-xs-12.col-sm-offset-5.col-sm-2
-        %a#new-comment-btn.btn.btn-block.btn-primary
-          %span.fa-stack.fa-lg
-            %i.fa.fa-comment-o.fa-stack-2x
-            %i.fa.fa-plus.fa-stack-1x
-          %span Leave Comment
-    .new-comment.row
-      - if signed_in?
-        %input{type: 'hidden', name: 'contestant_id', value: "#{ current_contestant.id }"}
-        %label.control-label.col-xs-4 Comment
-        .col-xs-8
-          %textarea#comment-text.form-control{rows: 3, cols: 20}
-        .row
-          .col-xs-6.col-sm-offset-4
-            %a#cancel-comment.btn.btn-warning Cancel
-            %a#submit-comment.btn.btn-success Submit
-      - else
-        %span
-          %a{href: new_contestant_registration_path }
-            Sign up
-          %span or
-          %a{href: new_contestant_session_path }
-            Sign in
-          %span to leave a comment
+#new-comment-wrapper
+  .row
+    - if signed_in?
+      = form_for :comment, url: new_comment_path do |f|
+        = csrf_meta_tags
+        = hidden_field_tag :photo_id, @photo.id
+        .form-group
+          .col-xs-8
+            = f.text_area :text, class: "form-control", rows: 3
+          .col-xs-4.text-center
+            = f.submit nil, class: "btn btn-primary", value: 'Leave Comment'
+          / , class: "btn btn-primary" do 
+          /   %span.fa-stack.fa-lg
+          /     %i.fa.fa-comment-o.fa-stack-2x
+          /     %i.fa.fa-plus.fa-stack-1x
+          /     %span Leave Comment
+    - else
+      %span
+        %a{href: new_contestant_registration_path }
+          Sign up
+        %span or
+        %a{href: new_contestant_session_path }
+          Sign in
+        %span to leave a comment
