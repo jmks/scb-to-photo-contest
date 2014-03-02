@@ -8,6 +8,26 @@
     = csrf_meta_tags
 
   %body
+    #mail-us-modal.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{type: 'button', class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
+            %h4.modal-title Email Us
+          .modal-body
+            = form_tag contact_path, class: 'form form-horizontal' do
+              .form-group
+                .col-xs-12
+                  = text_area_tag :message, nil, class: 'form-control', rows: 5, placeholder: 'Your message'
+              .form-group
+                .col-xs-12
+                  = text_field_tag :email, nil, id: 'mail-email', class: 'form-control', type: 'text', placeholder: 'Your email address'
+              .form-group
+                .col-xs-6
+                  %button.btn.btn-default{type: 'button', 'data-dismiss' => 'modal'} Cancel
+                .col-xs-6
+                  = submit_tag 'Send', class: 'send-mail btn btn-primary'
+
     %header
       %nav#navbar.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
         #nav-header-row.row
@@ -18,12 +38,17 @@
                 %span.icon-bar
                 %span.icon-bar
 
-              %a{href: 'http://scbtoronto.com'}
-                = image_tag 'SCB_TO_Chap_white_clear_small.png', :alt => 'SCB-TO'
+              .scb-logo
+                %a{href: 'http://scbtoronto.com'}
+                  = image_tag 'scb-bird.svg', alt: 'SCB'
+                .logo-text
+                  .times Society for Conservation Biology
+                  %p.droid Toronto Chapter
 
         .row
           .col-xs-12
             #navbar-links.collapse.navbar-collapse
+              
               %ul.nav.navbar-nav
                 %li{:class => "#{'active' if current_page?(root_path)}"}
                   = link_to 'Home', root_path
@@ -39,6 +64,8 @@
                   = link_to 'Judges', judges_path
                 %li{class: "#{'active' if current_page?(rules_path)}"}
                   = link_to 'Rules', rules_path
+
+              %ul.nav.navbar-nav.navbar-right
                 - if contestant_signed_in?
                   %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
                     = link_to "#{current_contestant.first_name}'s Page", contestant_index_path
@@ -48,6 +75,9 @@
                     = link_to 'Sign Up', new_contestant_registration_path
                   %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
                     = link_to 'Sign In', new_contestant_session_path                 
+                %li
+                  %a#mail-us{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
+                    %i.fa.fa-envelope
 
     .container
       
@@ -83,11 +113,13 @@
     #footer
       .row#social-media-footer
         .col-xs-12
-          %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank'}
+          %a.btn.pull-right{ href: 'http://www.conbio.org', target: '_blank' }
+            = image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
+          %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank' }
             %i.fa.fa-home.fa-2x
-          %a.btn.pull-right{href: 'https://twitter.com/SCBToronto', target: '_blank'}
+          %a.btn.pull-right{ href: 'https://twitter.com/SCBToronto', target: '_blank' }
             %i.fa.fa-twitter.fa-2x
-          %a.btn.pull-right{href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank'}
+          %a.btn.pull-right{ href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank' }
             %i.fa.fa-facebook.fa-2x
       .row#info-footer
         .col-xs-6

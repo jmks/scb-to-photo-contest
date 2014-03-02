@@ -18,6 +18,17 @@
 
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|);
 
+.times {
+    font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+}
+.droid {
+    font-family: Droid Sans, sans-serif;
+    font-weight: 700;
+}
+.cursive-font {
+    font-family: La Belle Aurore, sans-serif;
+}
+
 html {
     background: url(scarborough_bluffs_bg.jpg) no-repeat center center fixed;
     background-position: 0% 130px;
@@ -56,10 +67,6 @@ body {
     font-size: 48px;
 }
 
-.cursive-font {
-    font-family: La Belle Aurore, sans-serif;
-}
-
 a.btn, button.btn, input.btn {
     font-family: Droid Sans, sans-serif;
     font-weight: 700;
@@ -86,6 +93,7 @@ $darkblue-contrast: #3e88a2;
 
 $droid: Droid Sans, sans-serif;
 
+
 /* tags */
 
 ul#tags-container {
@@ -111,6 +119,8 @@ ul#tags-container {
 /* Sassify below */
 
 /*#135870*/
+
+
 
 nav#navbar a {
     font-family: Droid Sans, sans-serif;
@@ -197,6 +207,9 @@ ul.dropdown-menu > li > a:focus {
     background-color: #3e88a2;
 }
 
+#navbar .row:not(#nav-header-row) {
+    margin-right: 0;
+}
 
 #nav-header-row {
     background-color: #19b2d9;
@@ -204,8 +217,34 @@ ul.dropdown-menu > li > a:focus {
 }
 
 .scb-logo {
-    background: url('SCB_TO_Chap_white_clear_small.png');
-    min-height: 70px;
+    a {
+        /*display: inline-block;*/
+
+        img {
+            height: 70px;
+        }
+    }
+
+    .logo-text {
+        display: inline-block;
+
+        .times {
+            font-size: 2em;
+            font-weight: 500;
+        }
+
+        .droid {
+            font-family: $droid;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+    }
+}
+
+#mail-us, #mail-us:hover {
+    i {
+        font-size: 1.25em;
+    }
 }
 
 #other-nav-wrapper {
@@ -240,6 +279,8 @@ ul.dropdown-menu > li > a:focus {
 }
 
 
+
+
 #footer {
     bottom: 0;
     position: absolute;
@@ -271,32 +312,6 @@ ul.dropdown-menu > li > a:focus {
 }
 
 
-/*footer#sponsors-footer {
-    margin-top: 50px;
-    margin-bottom: 20px;
-}
-
-footer#social-media-footer {
-    min-height: 40px;
-    background-color: $darkblue;
-
-    a {
-        color: #fff;
-    }
-
-    border-bottom: 1px solid #333;
-}
-
-footer#info-footer {
-    min-height: 40px;
-    background-color: $darkblue;
-    color: #fff;
-
-    a, a:hover {
-        color: #fff;
-        text-decoration: none;
-    }
-}*/
 
 footer .skyline {
     background: #ffffff; /* Old browsers */

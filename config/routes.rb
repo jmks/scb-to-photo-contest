@@ -2,9 +2,10 @@ PhotoContest::Application.routes.draw do
   devise_for :contestants
 
   root 'root#index'
-  get '/prizes', to: 'root#prizes', as: 'prizes'
-  get '/judges', to: 'root#judges', as: 'judges'
-  get '/rules', to: 'root#rules', as: 'rules'
+  get '/prizes',   to: 'root#prizes',  as: 'prizes'
+  get '/judges',   to: 'root#judges',  as: 'judges'
+  get '/rules',    to: 'root#rules',   as: 'rules'
+  post '/contact', to: 'root#contact', as: 'contact'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
