@@ -16,8 +16,7 @@
 
 @import "bootstrap";
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
-@import url(http://fonts.googleapis.com/css?family=Condiment|Kaushan+Script|La+Belle+Aurore|Zeyada);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|);
 
 /* for fixed header */
 body { padding-top: 135px; }
@@ -31,9 +30,13 @@ body { padding-top: 135px; }
     font-size: 48px;
 }
 
-a.btn {
+a.btn, button.btn {
     font-family: Droid Sans, sans-serif;
     font-weight: 700;
+
+    i {
+        vertical-align: middle;
+    }
 }
 
 /* global colours */

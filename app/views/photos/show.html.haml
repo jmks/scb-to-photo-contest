@@ -62,7 +62,7 @@
 
 
 .row
-  .col-xs-12.col-md-offset-5.col-md-2
+  .col-xs-12.col-sm-offset-5.col-sm-2
     %a#vote-btn.btn.btn-block.btn-success.btn-lg
       %i.fa.fa-plus
       Vote
@@ -88,7 +88,7 @@
         = csrf_meta_tags
         = hidden_field_tag :photo_id, @photo.id
         .form-group
-          .col-xs-8
+          .col-xs-8.col-md-offset-3.col-md-5
             = f.text_area :text, class: "form-control", rows: 3
           .col-xs-4.text-center
             = f.button type: 'submit', class: "btn btn-primary" do 
