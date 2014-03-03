@@ -97,6 +97,12 @@ $droid: Droid Sans, sans-serif;
 /* tags */
 
 ul#tags-container {
+    line-height: 35px;
+
+    li.tag {
+        margin: 2px 2px;
+    }
+
     li.tag a {
         background-color: #CCC;
         color: #333;
@@ -105,7 +111,6 @@ ul#tags-container {
 
         text-decoration: none;
         border-radius: 5px 5px 5px 5px;
-        margin: 2px 2px;
         padding: 8px 8px;
     }
 
