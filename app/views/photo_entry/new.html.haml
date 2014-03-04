@@ -1,0 +1,7 @@
+
+%h3 Step 2 of 3
+%h4= "Uploading Photo '#{ @photo.title }'"
+
+= direct_upload_form_for @uploader do |f|
+  = f.file_field :photo
+  = f.submit "Upload Directly!"

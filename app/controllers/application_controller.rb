@@ -12,8 +12,6 @@ class ApplicationController < ActionController::Base
     %w{ first_name last_name public_name phone email_confirmation }.each do |param|
         devise_parameter_sanitizer.for(:sign_up) << param.to_sym
     end
-
-    # TODO photo submission
   end
 
   def after_sign_in_path_for(resource)

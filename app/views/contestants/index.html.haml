@@ -1,2 +1,57 @@
 %h2.text-center= "Welcome #{current_contestant.first_name} (#{current_contestant.email})"
 %h4.text-center On you personalized home page, you will be able to view your favourite photos and track who you've voted for!
+
+#entries-wrapper
+  - if @contestant.entries.any?
+    %h3 Your Photo Submissions
+    .table-responsive
+      %table#entry-table.table.table-hover
+        %thead
+          %tr
+            %td Entry Id
+            %td Title
+            %td Date
+            %td Registration Status
+            %td Votes
+            %td Views
+            %td Actions Required
+        %tbody
+          - @contestant.entries.each do |entry|
+            %tr
+              %td= link_to entry.id, photo_path(entry)
+              %td= entry.title
+              %td= entry.created_at
+              %td= registration_status entry
+              %td= entry.votes
+              %td= entry.views
+              %td NA
+  - else
+    %h3 You haven't submitted any photos yet!
+
+#favorites-wrapper
+  - if @favourites.length.zero?
+    %h3 You haven't voted for any photos
+    %h5
+      %span Look for some
+      = link_to 'here', photos_path
+  - else
+    %h3 Photos You've Voted For
+    .table-responsive
+      %table#favourites-table.table.table-hover
+        %thead
+          %tr
+            %td Entry Id
+            %td Title
+            %td Votes
+            %td Views
+        %tbody
+          - @favourites.each do |entry|
+            %tr
+              %td= link_to entry.id, photo_path(entry)
+              %td= entry.title
+              %td= entry.votes
+              %td= entry.views
+
+.row
+  .col-xs-12
+    %p= "You have #{ @votes_left_today } votes remaining today"

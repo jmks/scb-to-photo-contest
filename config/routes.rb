@@ -19,6 +19,9 @@ PhotoContest::Application.routes.draw do
 
   resources :photos
 
+  get '/photo_entry/new', to: 'photo_entry#new',    as: 'new_photo_entry'
+  get '/photo_entry',     to: 'photo_entry#create', as: 'photo_entry'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

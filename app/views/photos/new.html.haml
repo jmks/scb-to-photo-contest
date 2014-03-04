@@ -1,5 +1,7 @@
 %h2.text-center Photo Submission
 
+%h3.text-center Step 1 of 3
+
 #submit-errors
   - if @photo.errors.any?
     %ul.errors-list
@@ -48,4 +50,4 @@
 
   .form-group
     .col-sm-offset-4.col-sm-2
-      = f.submit nil, :class => 'btn btn-primary', :value => 'Post'
+      = f.submit nil, :class => 'btn btn-primary', :value => 'Proceed to Step 2'

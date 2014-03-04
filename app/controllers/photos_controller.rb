@@ -10,13 +10,18 @@ class PhotosController < ApplicationController
     else
       @photo = Photo.new
     end
+
+    #? @photo = Photo.new(params[:photo] || nil)
   end
 
   def create
     @photo = Photo.new(params[:photo])
     @photo.owner = current_contestant
     if @photo.save
-      redirect_to photo_path(@photo)
+      #redirect_to photo_path(@photo)
+
+      # redirect to step #2
+      redirect_to new_photo_entry_path photo_id: @photo.id
     else
       render :new, photo: @photo
     end

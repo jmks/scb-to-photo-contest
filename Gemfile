@@ -63,6 +63,11 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'modernizr-rails'
 
+# for uploading
+gem 'carrierwave'
+gem 'carrierwave_direct'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'

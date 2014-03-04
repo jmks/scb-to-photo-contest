@@ -107,14 +107,13 @@ describe Photo do
   end
 
   context "index on" do
-    # Collection.where(criteria).explain[:cursor].starts_with? 'BtreeCursor'
 
-    before :all do 
-      @indexes = Photo.collection.indexes
-    end
+    # before :each do 
+    #   Mongoid.create_indexes
+    # end
 
     xit "tags asc" do 
-      expect(@indexes[tags: 1]).to be_true
+      expect(Photo.any_in(tags: "some tag").explain["cursor"].starts_with?('BtreeCursor')).to be_true
     end
 
     xit "category asc" do 

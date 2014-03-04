@@ -4,6 +4,8 @@ class Photo
 
   CATEGORIES = [ :flora, :fauna, :landscapes ]
 
+  mount_uploader :photo, PhotoEntryUploader
+
   # photo details fields
   field :title
   validates :title, presence: true
