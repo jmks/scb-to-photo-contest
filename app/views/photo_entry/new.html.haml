@@ -2,6 +2,13 @@
 %h3 Step 2 of 3
 %h4= "Uploading Photo '#{ @photo.title }'"
 
-= direct_upload_form_for @uploader do |f|
-  = f.file_field :photo
-  = f.submit "Upload Directly!"
+= direct_upload_form_for @uploader, html: { class: 'form form-horizontal' } do |f|
+  .form-group
+    .col-xs-12.col-sm-4
+      = f.file_field :photo, class: ''
+
+  .form-group
+    .col-xs-12
+      = f.button type: 'submit', class: 'btn btn-primary' do
+        %i.fa.fa-cloud-upload
+        Upload

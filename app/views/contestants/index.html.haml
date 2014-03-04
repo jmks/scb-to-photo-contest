@@ -20,11 +20,11 @@
             %tr
               %td= link_to entry.id, photo_path(entry)
               %td= entry.title
-              %td= entry.created_at
+              %td= human_date(entry.created_at)
               %td= registration_status entry
               %td= entry.votes
               %td= entry.views
-              %td NA
+              %td= next_action entry
   - else
     %h3 You haven't submitted any photos yet!
 

@@ -15,7 +15,14 @@ class PhotoEntryController < ApplicationController
 
   # not from a post!
   def create
-    # params[:key]
-    pry.binding
+    if params[:key].nil? || params[:photo_id].nil?
+      flash[:notice] = "Invalid photo creation request. Please reupload your photo."
+      redirect_to contestant_index_path and return
+    end
+
+    photo_aws_key = params[:key]
+    photo_id      = params[:photo_id]
+
+    
   end
 end
