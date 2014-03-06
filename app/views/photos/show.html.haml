@@ -74,11 +74,20 @@
 -# comments
 .row
   .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-    %ul.list-unstyled.comments-container
-      - @photo.comments.each do |comment|
-        %li.comment
-          = "<strong>#{comment.name}</strong> <small>#{time_ago comment.created_at}</small>".html_safe
-          %span= comment.text
+    %h3 Comments
+    #comments-container
+      %table.table
+        - @photo.comments.each do |comment|
+          %tr.comment
+            %td.name
+              %p= comment.name
+              %p
+                %small= time_ago comment.created_at
+            %td.text= comment.text
+            %td.report
+              = form_tag report_comment_path do 
+                = hidden_field_tag :id, comment.id
+                = submit_tag "Report Misuse"
 
 #new-comment-wrapper
   .row

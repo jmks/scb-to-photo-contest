@@ -15,12 +15,14 @@ PhotoContest::Application.routes.draw do
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
   
   post '/photos/:id/comment', to: 'photos#comment', as: 'new_comment'
-  post '/photos/:id/vote', to: 'photos#vote', as: 'vote_photo'
+  post '/photos/:id/vote',    to: 'photos#vote',    as: 'vote_photo'
 
   resources :photos
 
   get '/photo_entry/new', to: 'photo_entry#new',    as: 'new_photo_entry'
   get '/photo_entry/:id', to: 'photo_entry#create', as: 'photo_entry'
+
+  post '/admin/report_comment', to: 'admin#report_comment', as: 'report_comment'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

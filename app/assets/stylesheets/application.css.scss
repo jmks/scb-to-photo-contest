@@ -56,6 +56,11 @@ body > .container {
     margin-bottom: 90px;
 }
 
+pre {
+    background-color: transparent;
+    border: none;
+}
+
 @media screen and (max-width: 768px) {
     
     html {

@@ -3,42 +3,62 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .photo-title {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .comments-container {
-    margin-top: 30px;
-    margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 
-    .comment {
-        padding: 5px;
+  .comment {
+    padding: 5px;
 
-        span {
-            margin-left: 5px;
-            font-size: 1.25em;
-        }
+    span {
+      margin-left: 5px;
+      font-size: 1.25em;
     }
+  }
 
-    .comment:nth-child(odd) {
-        background-color: #E8E9E9;
-    }
+  .comment:nth-child(odd) {
+    background-color: #E8E9E9;
+  }
 }
 
 #new-comment-wrapper {
-  .new-comment {
-    display: none;
-  }
-
   textarea {
-    resize: none;
+  resize: none;
+  }
+}
+
+#comments-container {
+  table.table {
+
+    tr.comment {
+    
+      td.name {
+        width: 20%;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      td.text {
+        width: 70%;
+      }
+
+      td.report {
+        width: 10%;
+      }
+    }
   }
 }
 
 .thumbnail-lg > img {
-    margin-bottom: 30px;
-    max-width: 100%
+  margin-bottom: 30px;
+  max-width: 100%
 }
 
 #tags-container {
-    
+  
 }
