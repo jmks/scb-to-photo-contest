@@ -18,8 +18,6 @@ class PhotosController < ApplicationController
     @photo = Photo.new(params[:photo])
     @photo.owner = current_contestant
     if @photo.save
-      #redirect_to photo_path(@photo)
-
       # redirect to step #2
       redirect_to new_photo_entry_path photo_id: @photo.id
     else

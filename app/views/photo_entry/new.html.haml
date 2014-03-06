@@ -3,7 +3,7 @@
 
 .row
   .col-xs-12.col-sm-offset-2.col-sm-8
-    = direct_upload_form_for @uploader, html: { class: 'form form-horizontal' } do |f|
+    = direct_upload_form_for @uploader, html: { class: 'form form-horizontal', targe: '_blank_iframe' } do |f|
       .form-group
         .col-xs-12.col-sm-4
           = f.file_field :photo, class: ''
