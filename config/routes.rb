@@ -21,7 +21,7 @@ PhotoContest::Application.routes.draw do
   resources :photos
 
   get '/photo_entry/new', to: 'photo_entry#new',    as: 'new_photo_entry'
-  get '/photo_entry/:id', to: 'photo_entry#create', as: 'photo_entry'
+  post '/photo_entry',    to: 'photo_entry#create', as: 'photo_entry'
 
   
 

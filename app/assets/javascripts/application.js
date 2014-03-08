@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require turbolinks
+//= require s3_direct_upload
 //= require_tree .

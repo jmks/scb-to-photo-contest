@@ -1,15 +1,26 @@
 %h3 Step 2 of 3
 %h4= "Uploading Photo '#{ @photo.title }'"
 
-.row
-  .col-xs-12.col-sm-offset-2.col-sm-8
-    = direct_upload_form_for @uploader, html: { class: 'form form-horizontal', targe: '_blank_iframe' } do |f|
-      .form-group
-        .col-xs-12.col-sm-4
-          = f.file_field :photo, class: ''
+/ carrierwave_direct attempt
+/ .row
+/   .col-xs-12.col-sm-offset-2.col-sm-8
+/     = direct_upload_form_for @uploader, html: { class: 'form form-horizontal' } do |f|
+/       .form-group
+/         .col-xs-12.col-sm-4
+/           = f.file_field :photo, class: ''
 
-      .form-group
-        .col-xs-12
-          = f.button type: 'submit', class: 'btn btn-primary' do
-            %i.fa.fa-cloud-upload
-            Upload
+/       .form-group
+/         .col-xs-12
+/           = f.button type: 'submit', class: 'btn btn-primary' do
+/             %i.fa.fa-cloud-upload
+/             Upload
+
+= s3_uploader_form callback_url: photo_entry_path, id: "s3-uploader" do
+  = file_field_tag :file, multiple: true
+/  = hidden_field_tag :photo_id, @photo.id
+
+%script#template-upload{type: 'text/x-tmpl'}
+  .upload{id: "file-{%= o.unique_id %}"}
+    {%=o.name%}
+    .progress
+      .bar{style: 'width: 0%'}

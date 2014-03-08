@@ -4,7 +4,8 @@ class Photo
 
   CATEGORIES = [ :flora, :fauna, :landscapes ]
 
-  mount_uploader :photo, PhotoEntryUploader
+  #mount_uploader :photo, PhotoEntryUploader
+  #field :photo
 
   # photo details fields
   field :title
@@ -26,9 +27,11 @@ class Photo
   embeds_many :comments
   field :tags, :type => Array, :default => []
 
-  # photo logistics fields -- will change
-  field :thumbnail_path
-  field :original_path
+  field :original_url
+  field :original_filename
+
+  # thumbnail related -- will update
+  field :thumbnail_url
 
   field :votes,       type: Integer, default: 0
   field :views,       type: Integer, default: 0

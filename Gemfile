@@ -68,6 +68,9 @@ gem 'carrierwave'
 gem 'carrierwave_direct'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
+# for better uploading
+gem 's3_direct_upload'
+
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'
