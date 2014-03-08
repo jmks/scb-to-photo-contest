@@ -96,6 +96,18 @@ class PhotosController < ApplicationController
     redirect_to @photo
   end
 
+  def report_comment
+    photo   = Photo.find(params[:photo_id])
+    comment = photo.comments.find(params[:comment_id])
+
+    comment.reported = true
+    comment.save
+
+    flash.now[:alert] = "Thank you for helping moderate comments. A SCB-TO admin will review the comment shortly."
+
+    redirect_to photo
+  end
+
   private
 
   def preprocess_data

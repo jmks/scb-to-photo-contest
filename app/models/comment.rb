@@ -9,4 +9,6 @@ class Comment
   
   field :text
   validates :text, presence: true
+
+  field :reported, type: Boolean, default: false
 end

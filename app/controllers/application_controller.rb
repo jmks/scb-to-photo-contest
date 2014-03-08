@@ -17,4 +17,13 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     contestant_index_path
   end
+
+  # redirect back to referrer or homepage
+  def redirect_back_or_home
+    if !request.env["HTTP_REFERER"].blank? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+      redirect_to :back
+    else
+      redirect_to root_path
+    end
+  end
 end
