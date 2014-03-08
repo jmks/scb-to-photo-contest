@@ -101,14 +101,15 @@
         = csrf_meta_tags
         = hidden_field_tag :photo_id, @photo.id
         .form-group
-          .col-xs-8.col-md-offset-3.col-md-5
+          .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
             = f.text_area :text, class: "form-control", rows: 3
-          .col-xs-4.text-center
-            = f.button type: 'submit', class: "btn btn-primary" do 
+        .form-group
+          .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
+            = f.button type: 'submit', class: "btn btn-primary btn-sm pull-right" do 
               %span.fa-stack.fa-lg
                 %i.fa.fa-comment-o.fa-stack-2x
                 %i.fa.fa-plus.fa-stack-1x
-              %span Leave Comment
+              %span Post Comment
     - else
       .col-xs-12.text-center
         %span
