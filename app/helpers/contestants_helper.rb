@@ -8,7 +8,7 @@ module ContestantsHelper
   def next_action photo
     if !photo.original_url
       "<a href='#{ new_photo_entry_path photo_id: photo.id }'>Upload your photo</a>".html_safe
-    elsif photo.responds_to(:paid?) && photo.paid?
+    elsif photo.respond_to?(:paid?) && photo.paid?
       # payment
       "You need to pay!"
     else

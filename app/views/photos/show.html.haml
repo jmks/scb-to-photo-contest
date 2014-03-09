@@ -1,7 +1,8 @@
 .row.text-center
   .col-xs-12
     /= link to full image
-    %a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
+    /%a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
+    = image_tag @photo.original_url
 
 -# photo information
 .row
