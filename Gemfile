@@ -58,18 +58,26 @@ gem 'haml'
 
 # Use Twitter Bootstrap
 gem 'bootstrap-sass', '~> 3.0.3.0'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'bootstrap-datepicker-rails'
 
 gem 'modernizr-rails'
 
 # for uploading
-gem 'carrierwave'
-gem 'carrierwave_direct'
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+# gem 'carrierwave'
+# gem 'carrierwave_direct'
+# gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # for better uploading
 gem 's3_direct_upload'
+
+# for background processing
+gem 'resque'
+gem 'redis'
+
+# generating thumbnails
+gem 'aws-sdk', '~> 1.0'
+
 
 # Use RSpec and Cucumber for TDD
 group :development, :test do

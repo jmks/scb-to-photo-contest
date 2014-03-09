@@ -29,6 +29,8 @@ class PhotoEntryController < ApplicationController
 
     session.delete :photo_id
 
+    Resque.enqueue(ThumbnailJob, @photo.id)
+
     redirect_to contestant_index_path
   end
 end
