@@ -5,9 +5,8 @@
       = image_tag photo.thumbnail_url
   - else
     %i#placeholder-thumbnail.fa.fa-picture-o.fa-4x
-
-  -# title
-  - if photo.title?
+- if photo.title?
+  .thumb-title
     %p= photo.title
 .stats
   %span

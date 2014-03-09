@@ -8,3 +8,12 @@ $(document).on 'page:change', ->
   )
 
   $('.datepicker').datepicker({});
+
+  $('.photo').hover(
+    ->
+      $(this).find('.stats').stop().animate({'opacity': 0.6})
+      $(this).find('.thumb-title').stop().animate({'opacity': 0.6})
+    -> 
+      $(this).find('.stats').stop().animate({'opacity': 0})
+      $(this).find('.thumb-title').stop().animate({'opacity': 0})
+  )
