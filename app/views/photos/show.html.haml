@@ -1,66 +1,66 @@
 .row.text-center
   .col-xs-12
-    /= link to full image
     /%a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
     = image_tag @photo.original_url
 
 -# photo information
 .row
   .col-xs-6
-    .row
-      .col-xs-12
-        %h2.photo-title= display_title "Photo Entry #{params[:id]}"
+    %h2.photo-title= display_title "Photo Entry #{params[:id]}"
   .col-xs-6
-    .row
-      .col-xs-12
-        %p= photographer_link
+    %p= photographer_link
 
 .row
-  .col-xs-6
-    .row
-      .col-xs-6
-        %strong Description
-      .col-xs-6
-        %p= display_description ''
-    .row
-      .col-xs-6
-        %strong Tags
-      .col-xs-6
-        %ul#tags-container.list-inline
-          - @photo.tags.each do |tag|
-            %li.tag= link_to tag, photos_path(tag: tag)
-
-  .col-xs-6
-    .row
-      .col-xs-6
-        %strong Photo Location
-      .col-xs-6
-        %p= display_photo_location 'unknown'
-    .row
-      .col-xs-6
-        %strong Photo Date
-      .col-xs-6
-        %p= display_photo_date 'unknown'
-    .row
-      .col-xs-6
-        %strong Camera details
-      .col-xs-6
-        %pre= display_camera_stats 'unknown'
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+      %strong Description
+    .col-xs-6.col-md-8
+      %p= display_description ''
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+      %strong Photo Location
+    .col-xs-6.col-md-8
+      %p= display_photo_location 'unknown'
 
 .row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %i.fa.fa-eye.fa-2x
-    %strong Views
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+      %strong Tags
+    .col-xs-6.col-md-8
+      %ul#tags-container.list-inline
+        - @photo.tags.each do |tag|
+          %li.tag= link_to tag, photos_path(tag: tag)
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+      %strong Photo Date
+    .col-xs-6.col-md-8
+      %p= display_date 'unknown'
 
-  .col-xs-9.col-md-6
+.row
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+    .col-xs-6.col-md-8
+  .col-xs-12.col-md-6
+    .col-xs-6.col-md-4
+      %strong Camera Details
+    .col-xs-6.col-md-8
+      %pre= display_camera_stats ''
+
+.row
+  .col-xs-3
+    .pull-right
+      %i.fa.fa-eye.fa-2x
+      %strong Views
+
+  .col-xs-3
     %p= display_views 0
 
-.row
-  .col-xs-3.col-md-offset-4.col-md-2
-    %i.fa.fa-thumbs-up.fa-2x
-    %strong Votes
+  .col-xs-3
+    .pull-right
+      %i.fa.fa-thumbs-up.fa-2x
+      %strong Votes
 
-  .col-xs-9.col-md-6
+  .col-xs-3
     %p= display_votes 0
 
 

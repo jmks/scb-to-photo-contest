@@ -14,7 +14,7 @@ class Photo
   field :category
   validates :category, presence:  true, 
                        inclusion: { in: CATEGORIES, 
-                                    message: "%{value} is not a valid category"}
+                                    message: "%{value} is not a valid category" }
 
   field :description
   

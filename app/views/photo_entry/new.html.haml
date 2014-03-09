@@ -17,7 +17,6 @@
 
 = s3_uploader_form callback_url: photo_entry_path, id: "s3-uploader" do
   = file_field_tag :file, multiple: true
-/  = hidden_field_tag :photo_id, @photo.id
 
 %script#template-upload{type: 'text/x-tmpl'}
   .upload{id: "file-{%= o.unique_id %}"}
