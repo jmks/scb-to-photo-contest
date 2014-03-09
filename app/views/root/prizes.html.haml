@@ -1,1 +1,93 @@
-%h1.text-center Prizes!
+%h1.text-center.cursive-font.main-title Prizes
+
+#prizes-wrapper
+  .row
+    .col-xs-6
+      .prize
+        = link_to '#', class: 'prize-img' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Grand Prize
+        = image_tag 'grand.svg', height: '125px', class: 'grand'
+    .col-xs-6
+      .prize
+        = link_to '#', class: 'prize-img' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Made in Canada
+        = image_tag 'canada.svg', height: '100px', class: 'canada'
+
+  .row.category-header
+    .col-xs-12.text-center
+      = image_tag 'flora.svg', height: '60px'
+      %span Flora
+
+  .row
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Flora - 1st Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Flora - 2nd Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Flora - 3rd Place
+
+  .row.category-header
+    .col-xs-12.text-center
+      = image_tag 'fauna.svg', height: '60px'
+      %span Fauna
+
+  .row
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Fauna - 1st Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Fauna - 2nd Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Fauna - 3rd Place
+
+  .row.category-header
+    .col-xs-12.text-center
+      = image_tag 'landscape.svg', height: '50px'
+      %span Landscape
+
+  .row
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Landscape - 1st Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Landscape - 2nd Place
+    .col-xs-12.col-sm-6.col-md-4
+      .prize
+        = link_to '#' do 
+          .img-responsive
+            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        %p.cursive-font Landscape - 3rd Place

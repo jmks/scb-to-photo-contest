@@ -56,3 +56,52 @@ ul.judges-gallery li.judge:nth-child(odd) {
     -webkit-transform: rotate(10deg);
     -moz-transform: rotate(10deg);
 }
+
+#prizes-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+
+    .category-header {
+        font-size: 36px;
+        color: #fff;
+
+        span {
+            font-family: Droid Sans, sans-serif;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        margin: 15px 0;
+    }
+
+    .prize {
+        display: block;
+        float: left;
+        padding: 10px 10px 10px 10px;
+        margin: 10px 10px;
+        background-color: #fff;
+        -webkit-box-shadow: 7px 7px 10px 0px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    7px 7px 10px 0px rgba(50, 50, 50, 0.75);
+        box-shadow:         7px 7px 10px 0px rgba(50, 50, 50, 0.75);
+        position: relative;
+        font-size: 1.2em;
+
+        .grand, .canada {
+            display: absolute;
+            bottom: 0;
+            z-index: 10;
+            margin-top: -220px;
+        }
+
+        .prize-img, .prize-img img {
+            z-index: 1;
+        }
+
+        p {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+    }
+}
