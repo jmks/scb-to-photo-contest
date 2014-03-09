@@ -4,8 +4,15 @@
     .img-responsive
       = image_tag photo.thumbnail_url
   - else
-    %i.fa.fa-picture-o.fa-4x
+    %i#placeholder-thumbnail.fa.fa-picture-o.fa-4x
 
   -# title
   - if photo.title?
     %p= photo.title
+.stats
+  %span
+    %i.fa.fa-thumbs-up
+    = photo.votes
+  %span
+    %i.fa.fa-eye
+    = photo.views
