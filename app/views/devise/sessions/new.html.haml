@@ -1,33 +1,34 @@
-%h1.text-center Sign In
+.form-background
+  %h1.text-center Sign In
 
-.row
-  .col-xs-12.col-sm-offset-1.col-sm-10
-    = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
-      -# Email
-      .form-group
-        = label_tag :email, nil, :class => 'control-label col-sm-3'
-        .col-sm-6
-          = email_field_tag :contestant_email, params[:email], :class => 'form-control', :name => 'contestant[email]'
-
-      -# Password
-      .form-group
-        = label_tag 'Password', nil, :class => 'control-label col-sm-3'
-        .col-sm-6
-          = password_field_tag :contestant_password, nil, :class => 'form-control', :name => 'contestant[password]'
-
-      - if devise_mapping.rememberable?
+  .row
+    .col-xs-12.col-sm-offset-1.col-sm-10
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
+        -# Email
         .form-group
-          = label_tag 'Remember Me?', nil, :class => 'control-label col-sm-3'
+          = label_tag :email, nil, :class => 'control-label col-sm-3'
           .col-sm-6
-            = f.check_box :remember_me, :class => 'form-control'
+            = email_field_tag :contestant_email, params[:email], :class => 'form-control', :name => 'contestant[email]'
 
-      -# Submit/Cancel
-      .form-group
-        .col-sm-offset-3.col-sm-2
-          = submit_tag nil, :class => 'btn btn-primary btn-block btn-lg', :value => 'Sign in'
+        -# Password
+        .form-group
+          = label_tag 'Password', nil, :class => 'control-label col-sm-3'
+          .col-sm-6
+            = password_field_tag :contestant_password, nil, :class => 'form-control', :name => 'contestant[password]'
 
-.row
-  .col-xs-12.col-sm-offset-1.col-sm-10
-    .row
-      .col-sm-offset-3.col-sm-9
-        = render "devise/shared/links"
+        - if devise_mapping.rememberable?
+          .form-group
+            = label_tag 'Remember Me?', nil, :class => 'control-label col-sm-3'
+            .col-sm-6
+              = f.check_box :remember_me, :class => 'form-control'
+
+        -# Submit/Cancel
+        .form-group
+          .col-sm-offset-3.col-sm-2
+            = submit_tag nil, :class => 'btn btn-primary btn-block btn-lg', :value => 'Sign in'
+
+  .row
+    .col-xs-12.col-sm-offset-1.col-sm-10
+      .row
+        .col-sm-offset-3.col-sm-9
+          = render "devise/shared/links"
