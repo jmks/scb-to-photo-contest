@@ -1,4 +1,37 @@
-.container
-    %h2 Rules and Regulations
-    %p Use at own risk! We are not responsible for losses, injury, plagues, Mongol invasions, etc.
-    %p .... Aliens!!
+%h1.cursive-font.main-title.text-center Rules and Regulations
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 Submit up to FIVE of your ORIGINAL photographs
+  .col-xs-12.col-sm-6
+    .img-responsive= image_tag 'five-photos.svg'
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 Provide your photographs @ 300dpi in either 8x10 or 8x12 inch formats
+  .col-xs-12.col-sm-6
+    .img-responsive= image_tag 'form-factor.svg'
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 For best results, save your photographs in Adobe RGB colour space
+  .col-xs-12.col-sm-6
+    .img-responsive= image_tag 'no-cmyk.svg'
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 Images MUST be true to life, only corrections to all pixels are acceptable (e.g. contrast, brightness, etc)
+  .col-xs-12.col-sm-6
+    .img-responsive= image_tag 'no-shopping3.svg'
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 
+      You MUST have your photographs printed to be eligible for display and awards. Significantly discounted printing provided by our sponsor 
+      = link_to 'Downtown Camera', 'https://www.downtowncamera.com', target: '_blank'
+  .col-xs-12.col-sm-6
+    .img-responsive= image_tag 'no-printer.svg'
+
+.row.rule
+  .col-xs-12.col-sm-6
+    %h2 By entering our contest, you grant SCB-TO rights to use your submitted photographs for fundraising purposes to support conservation initiatives in the GTA. Thank you!
