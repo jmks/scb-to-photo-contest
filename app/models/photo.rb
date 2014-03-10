@@ -33,6 +33,10 @@ class Photo
   # thumbnail related -- will update
   field :thumbnail_url
 
+  field :thumbnail_xs_url
+  field :thumbnail_sm_url
+  field :thumbnail_lg_url
+
   field :votes,       type: Integer, default: 0
   field :views,       type: Integer, default: 0
 

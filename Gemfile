@@ -77,7 +77,7 @@ gem 'redis'
 
 # generating thumbnails
 gem 'aws-sdk', '~> 1.0'
-
+gem 'rmagick'
 
 # Use RSpec and Cucumber for TDD
 group :development, :test do

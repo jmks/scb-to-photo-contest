@@ -85,6 +85,10 @@ class Contestant
     add_to_set voted_photo_ids: photo.id
   end
 
+  def full_name
+    first_name + ' ' + last_name
+  end
+
   protected
 
   def normalize_phone
