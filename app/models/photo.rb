@@ -3,6 +3,14 @@ class Photo
   include Mongoid::Timestamps
 
   CATEGORIES = [ :flora, :fauna, :landscapes ]
+  
+  Registration = [ :submitted, :uploaded, :printed, :confirmed ]
+  Registration_Message = {
+    :submitted => 'Upload Your Photo',
+    :uploaded  => 'Print Your Photo',
+    :printed   => 'Awaiting Printed Copy',
+    :confirmed => 'Registration Complete'
+  }
 
   #mount_uploader :photo, PhotoEntryUploader
   #field :photo
@@ -37,6 +45,9 @@ class Photo
   field :thumbnail_sm_url
   field :thumbnail_lg_url
 
+  # registration details
+  field :printed, type: Boolean, default: false
+
   field :votes,       type: Integer, default: 0
   field :views,       type: Integer, default: 0
 
@@ -64,6 +75,29 @@ class Photo
       tags.include? tag
     else
       false
+    end
+  end
+
+  def original_key
+    if original_url?
+      original_url.split(/scbto-photos-originals\//).last
+    else
+      nil
+    end
+  end
+
+  # sizes: [:xs, :sm, :lg]
+  def aws_key size
+    id + "-#{size.to_s}"
+  end
+
+  def registration_status
+    if !original_url
+      :submitted
+    elsif printed
+      :confirmed
+    else
+      :uploaded
     end
   end
 end

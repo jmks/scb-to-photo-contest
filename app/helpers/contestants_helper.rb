@@ -1,18 +1,17 @@
 module ContestantsHelper
-  def registration_status photo
-    # must have filled out initial form
-    # TODO must check photo uploaded and paid?
-    photo.original_url?
-  end
-
   def next_action photo
-    if !photo.original_url
-      "<a href='#{ new_photo_entry_path photo_id: photo.id }'>Upload your photo</a>".html_safe
-    elsif photo.respond_to?(:paid?) && photo.paid?
-      # payment
-      "You need to pay!"
-    else
-      "Registration Complete"
+    status  = photo.registration_status
+    message = Photo::Registration_Message[status]
+
+    case status
+    when :submitted
+      "<a href='#{ new_photo_entry_path photo_id: photo.id }'>#{message}</a>".html_safe
+    when :uploaded
+      link_to message, 'http://www.downtowncamera.com', target: '_blank'
+    when :printed
+      message
+    when :confirmed
+      message
     end
   end
 

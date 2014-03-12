@@ -22,7 +22,7 @@
                 %td= link_to entry.id, photo_path(entry)
                 %td= entry.title
                 %td= human_date(entry.created_at)
-                %td= registration_status entry
+                %td= entry.registration_status.to_s.capitalize
                 %td= entry.votes
                 %td= entry.views
                 %td= next_action entry
