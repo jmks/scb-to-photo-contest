@@ -24,8 +24,10 @@ class PhotoEntryController < ApplicationController
     @photo = Photo.find(session[:photo_id])
 
     @photo.original_url      = params[:url]
+
     # TODO want original_key
     @photo.original_filename = params[:filename]
+    
     @photo.save
 
     session.delete :photo_id

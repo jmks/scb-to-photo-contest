@@ -75,8 +75,10 @@ gem 's3_direct_upload'
 gem 'resque'
 gem 'redis'
 
-# generating thumbnails
+# AWS
 gem 'aws-sdk', '~> 1.0'
+
+# generating thumbnails
 gem 'rmagick'
 
 # Use RSpec and Cucumber for TDD

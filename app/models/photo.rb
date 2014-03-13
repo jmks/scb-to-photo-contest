@@ -36,7 +36,7 @@ class Photo
   field :tags, :type => Array, :default => []
 
   field :original_url
-  field :original_filename
+  field :original_filename # not useful
 
   # thumbnail related -- will update
   field :thumbnail_url
@@ -80,7 +80,7 @@ class Photo
 
   def original_key
     if original_url?
-      original_url.split(/scbto-photos-originals\//).last
+      CGI::unescape(original_url.split(/scbto-photos-originals\//).last)
     else
       nil
     end
@@ -88,7 +88,7 @@ class Photo
 
   # sizes: [:xs, :sm, :lg]
   def aws_key size
-    id + "-#{size.to_s}"
+    id.to_s + "-#{size.to_s}"
   end
 
   def registration_status

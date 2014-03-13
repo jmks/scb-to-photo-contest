@@ -1,7 +1,11 @@
 .row.text-center
   .col-xs-12
     /%a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
-    = image_tag @photo.original_url
+    .img-responsive
+      - if @photo.thumbnail_lg_url?
+        = image_tag @photo.thumbnail_lg_url
+      - else
+        %h2 Thumbnails pending...
 
 -# photo information
 .row
