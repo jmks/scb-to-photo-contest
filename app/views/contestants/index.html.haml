@@ -4,7 +4,13 @@
 
   #entries-wrapper
     - if @contestant.entries.any?
-      %h3 Your Photo Submissions
+      .row
+        .col-xs-6
+          %h3 Your Photo Submissions
+        .col-xs-6
+          %a.btn.btn-default.hover-btn.pull-right{ href: new_photo_path }
+            %i.fa.fa-camera.fa-2x
+            Begin Submission
       .table-responsive
         %table#entry-table.table.table-hover
           %thead
