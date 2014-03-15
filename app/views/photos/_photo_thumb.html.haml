@@ -1,8 +1,8 @@
 = link_to photo_path(photo), style: 'text-decoration: none;' do
   -# photo or icon
-  - if photo.thumbnail_url?
+  - if photo.thumbnail_sm_url?
     .img-responsive
-      = image_tag photo.thumbnail_url
+      = image_tag photo.thumbnail_sm_url
   - else
     %i#placeholder-thumbnail.fa.fa-picture-o.fa-4x
 - if photo.title?

@@ -15,6 +15,14 @@ module ContestantsHelper
     end
   end
 
+  def photo_link photo
+    if photo.thumbnail_xs_url?
+      link_to image_tag(photo.thumbnail_xs_url), photo_path(photo)
+    else
+      link_to photo.id, photo_path(photo)
+    end
+  end
+
 
   def human_date date
     date.strftime('%b %-d, %Y')

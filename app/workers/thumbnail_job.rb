@@ -8,7 +8,7 @@ class ThumbnailJob
   Thumbnail_Sizes = {
     :xs => 100,
     :sm => 200,
-    :lg => 800
+    :lg => 1000
   }
   
   def self.perform photo_id
@@ -46,6 +46,8 @@ class ThumbnailJob
       photo["thumbnail_#{ name.to_s }_url"] = obj.public_url.to_s
     end
 
+    # todo: move original to private location
+    
     photo.save
   end
 

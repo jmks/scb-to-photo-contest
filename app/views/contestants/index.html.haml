@@ -19,7 +19,7 @@
           %tbody
             - @contestant.entries.each do |entry|
               %tr
-                %td= link_to entry.id, photo_path(entry)
+                %td.text-center= photo_link entry
                 %td= entry.title
                 %td= human_date(entry.created_at)
                 %td= entry.registration_status.to_s.capitalize
