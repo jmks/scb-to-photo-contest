@@ -81,6 +81,11 @@ gem 'aws-sdk', '~> 1.0'
 # generating thumbnails
 gem 'rmagick'
 
+# pagination and infinite scroll
+# gem 'will_paginate', '~>3.0.5'
+# gem 'bootstrap-will_paginate', '~>0.0.10'
+# gem 'kaminari'
+
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'
@@ -88,11 +93,12 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+# rail panel
 group :development do 
   gem 'meta_request'
 end
 
-group :test  do 
+group :test do 
   gem 'cucumber-rails', :require => false
   gem 'shoulda-matchers'
 end

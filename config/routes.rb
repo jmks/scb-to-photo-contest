@@ -10,15 +10,19 @@ PhotoContest::Application.routes.draw do
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
   get '/photos',            :to => 'photos#index',      :as => 'photos'
+
+  # not used
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
   get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
   
-  post '/photos/:id/comment', to: 'photos#comment', as: 'new_comment'
-  post '/photos/:id/vote',    to: 'photos#vote',    as: 'vote_photo'
+  post '/photos/:id/comment',   to: 'photos#comment',        as: 'new_comment'
+  post '/photos/:id/vote',      to: 'photos#vote',           as: 'vote_photo'
   post '/photo/report_comment', to: 'photos#report_comment', as: 'report_comment'
 
-  resources :photos
+  resources :photos do
+    get 'page/:page', action: 'index', on: :collection, as: 'page'
+  end
 
   get '/photo_entry/new', to: 'photo_entry#new',    as: 'new_photo_entry'
   post '/photo_entry',    to: 'photo_entry#create', as: 'photo_entry'

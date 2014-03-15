@@ -5,3 +5,9 @@
     - @photos.each do |photo|
       .col-xs-4
         %li.photo= render 'photo_thumb', photo: photo
+
+#pagination.row
+  .col-xs-12
+    - if @page > 1
+      = link_to 'Previous', page_photos_path(@prev_params), class: 'btn btn-default pull-left'
+    = link_to 'Next', page_photos_path(@next_params), class: 'btn btn-default pull-right'

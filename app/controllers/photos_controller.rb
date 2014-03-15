@@ -51,24 +51,42 @@ class PhotosController < ApplicationController
 
     @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
     @tag        = params[:tag]
-    page        = params[:page].to_i
+    @page       = params[:page].to_i || 1
 
     if @contestant
       @photos = @contestant.entries
-      @title  = "Photos by #{ @contestant.public_name }"
+      @title  = "Photos by '#{ @contestant.public_name }'"
     elsif @tag
       @photos = Photo.any_in(tags: [@tag])
-      @title  = "Photos tagged #{ @tag }"
+      @title  = "Photos tagged '#{ @tag }'"
     elsif @category
-      @photos = Photo.where(:category => @category)
-      @title  = "Photos categorized #{ @category }"
+      @photos = Photo.where(category: @category)
+      @title  = "Photos categorized '#{ @category }'"
     else
-      @photos = Photo.desc(:created_at)
+      @photos = Photo.all
       @title  = "All Photos"
     end
 
-    @photos.skip((@page - 1) * PHOTOS_PER_PAGE) if @page
-    @photos.desc(:created_at).limit(15)
+    @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
+                      desc(:created_at).
+                      limit(PHOTOS_PER_PAGE)
+
+    @params = {
+      tag:      @tag || nil,
+      category: @category || nil,
+      page:     @page
+    }.reject { |key, val| val.nil? }
+
+    @prev_params = @params.dup
+    @prev_params[:page] -= 1
+
+    @next_params = @params.dup
+    @next_params[:page] += 1
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def comment
