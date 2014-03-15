@@ -29,22 +29,25 @@ class ThumbnailJob
 
     # open as image
     img = Magick::Image::from_blob(original_img).first
-    img.format = 'PNG'
+    img.format = 'JPG'
 
-    # make max 800x800, 200x200, 100x100
-    Thumbnail_Sizes.each_pair do |name, size|
-      thumb = img.resize_to_fit(size, size)
+    # watermark image
+    # img = get_watermarked(thumb, photo.owner.full_name)
 
-      # add watermark
-      # thumb = get_watermarked(thumb, photo.owner.full_name)
+    # size lg => max 1000x1000
+    aws_lg = thumbs.objects[photo.aws_key(:lg) + '.jpg']
+    aws_lg.write(img.resample(72,72).resize_to_fit(1000, 1000).to_blob, acl: :public_read)
+    photo.thumbnail_lg_url = aws_lg.public_url.to_s
 
-      # save to s3
-      obj = thumbs.objects[photo.aws_key(size) + ".png"]
-      obj.write(thumb.to_blob, acl: :public_read)
+    # size xs => max 100x100
+    aws_xs = thumbs.objects[photo.aws_key(:xs) + '.jpg']
+    aws_xs.write(img.resample(72,72).resize_to_fit(100, 100).to_blob, acl: :public_read)
+    photo.thumbnail_xs_url = aws_xs.public_url.to_s
 
-      # save urls
-      photo["thumbnail_#{ name.to_s }_url"] = obj.public_url.to_s
-    end
+    # size sm => max 240x240 with cropping
+    aws_sm = thumbs.objects[photo.aws_key(:sm) + '.jpg']
+    aws_sm.write(img.resample(72,72).resize_to_fill(240, 240).to_blob, acl: :public_read)
+    photo.thumbnail_sm_url = aws_sm.public_url.to_s
 
     # todo: move original to private location
     
