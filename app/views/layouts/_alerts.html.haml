@@ -1,21 +1,21 @@
 #alerts
-- if flash[:notice]
-  .alert.alert-success.alert-dismissable
-    %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-      &times;
-    = flash[:notice]
-- if flash[:info]
-  .alert.alert-info.alert-dismissable
-    %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-      &times;
-    = flash[:info]
-- if flash[:alert]
-  .alert.alert-warning.alert-dismissable
-    %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-      &times;
-    = flash[:alert]
-- if flash[:danger]
-  .alert.alert-danger.alert-dismissable
-    %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-      &times;
-    = flash[:danger]
+  - if flash[:notice]
+    .alert.alert-success.alert-dismissable
+      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+        &times;
+      = flash[:notice]
+  - if flash[:info]
+    .alert.alert-info.alert-dismissable
+      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+        &times;
+      = flash[:info]
+  - if flash[:alert]
+    .alert.alert-warning.alert-dismissable
+      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+        &times;
+      = flash[:alert]
+  - if flash[:danger]
+    .alert.alert-danger.alert-dismissable
+      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+        &times;
+      = flash[:danger]

@@ -1,5 +1,5 @@
 And /^I try to sign up$/ do 
-  click_link "Sign Up"
+  click_link "SIGN UP"
 end
 
 Then /^I am on the sign up page$/ do 

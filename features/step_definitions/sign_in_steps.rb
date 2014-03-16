@@ -3,7 +3,7 @@ Given /^a registered user$/ do
 end
 
 Then /^I follow the sign in link$/ do 
-    click_link "Sign In"
+    click_link "SIGN IN"
 end
 
 Then /^I should be on the sign in page$/ do 
