@@ -8,115 +8,18 @@
     = csrf_meta_tags
 
   %body
-    #mail-us-modal.modal.fade
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %button.close{type: 'button', class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
-            %h4.modal-title Email Us
-          .modal-body
-            = form_tag contact_path, class: 'form form-horizontal' do
-              .form-group
-                .col-xs-12
-                  = text_area_tag :message, nil, class: 'form-control', rows: 5, placeholder: 'Your message'
-              .form-group
-                .col-xs-12
-                  = text_field_tag :email, nil, id: 'mail-email', class: 'form-control', type: 'text', placeholder: 'Your email address'
-              .form-group.btns
-                .col-xs-12
-                  %button.btn.btn-default.pull-left{type: 'button', 'data-dismiss' => 'modal'} Cancel
-                  = submit_tag 'Send', class: 'send-mail btn btn-primary pull-right'
+    = render 'layouts/contact_modal'
 
     %header
-      %nav#navbar.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
-        #nav-header-row.row
-          .col-xs-12
-            .navbar-header
-              %button.navbar-toggle{'data-target' => '#navbar-links', 'data-toggle' => 'collapse', :type => 'button'}
-                %span.icon-bar
-                %span.icon-bar
-                %span.icon-bar
-
-              .scb-logo
-                %a{href: 'http://scbtoronto.com'}
-                  = image_tag 'scb-logo.svg', alt: 'SCB-TO'
-
-        .row
-          .col-xs-12
-            #navbar-links.collapse.navbar-collapse
-              
-              %ul.nav.navbar-nav
-                %li{:class => "#{'active' if current_page?(root_path)}"}
-                  = link_to 'HOME', root_path
-                %li.dropdown{:class => "#{'active' if current_page?(photos_path)}"}
-                  = link_to 'PHOTOS', photos_path, {'data-toggle' => 'dropdown', :href => '#', :class => 'dropdown-toggle'}
-                  %ul.dropdown-menu
-                    %li= link_to 'FAUNA', fauna_path
-                    %li= link_to 'FLORA', flora_path
-                    %li= link_to 'LANDSCAPES', landscapes_path
-                %li{class: "#{'active' if current_page?(prizes_path)}"}
-                  = link_to 'PRIZES', prizes_path
-                %li{class: "#{'active' if current_page?(judges_path)}"}
-                  = link_to 'JUDGES', judges_path
-                %li{class: "#{'active' if current_page?(rules_path)}"}
-                  = link_to 'RULES', rules_path
-
-              %ul.nav.navbar-nav.navbar-right
-                - if contestant_signed_in?
-                  %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
-                    = link_to "#{current_contestant.first_name.upcase}'S PAGE", contestant_index_path
-                  %li= link_to 'SIGN OUT', destroy_contestant_session_path, :method => :delete
-                - else
-                  %li{:class => "#{'active' if current_page?(new_contestant_registration_path)}"}
-                    = link_to 'SIGN UP', new_contestant_registration_path
-                  %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
-                    = link_to 'SIGN IN', new_contestant_session_path                 
-                %li
-                  %a#mail-us{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
-                    %i.fa.fa-envelope
+      = render 'layouts/navbar'
 
     .container
-      
-      #alerts
-        - if flash[:notice]
-          .alert.alert-success.alert-dismissable
-            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-              &times;
-            = flash[:notice]
-        - if flash[:info]
-          .alert.alert-info.alert-dismissable
-            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-              &times;
-            = flash[:info]
-        - if flash[:alert]
-          .alert.alert-warning.alert-dismissable
-            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-              &times;
-            = flash[:alert]
-        - if flash[:danger]
-          .alert.alert-danger.alert-dismissable
-            %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-              &times;
-            = flash[:danger]
+      = render 'layouts/alerts'
 
       = yield
 
-        
       - if display_sponsors?
         #sponsors-footer
-          = render partial: 'layouts/sponsors'
+          = render 'layouts/sponsors'
     
-    #footer
-      .row#social-media-footer
-        .col-xs-12
-          %a.btn.pull-right{ href: 'http://www.conbio.org', target: '_blank' }
-            = image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
-          %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank' }
-            %i.fa.fa-home.fa-2x
-          %a.btn.pull-right{ href: 'https://twitter.com/SCBToronto', target: '_blank' }
-            %i.fa.fa-twitter.fa-2x
-          %a.btn.pull-right{ href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank' }
-            %i.fa.fa-facebook.fa-2x
-      .row#info-footer
-        %span &#169; 2014 Society for Conservation Biology - Toronto Chapter
-        %a.pull-right{href: '#'} Terms of Use
+    = render 'layouts/footer'
