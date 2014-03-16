@@ -17,7 +17,7 @@
 
 @import "bootstrap";
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|Montserrat:400,700);
 
 .times {
     font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
@@ -81,13 +81,26 @@ pre {
     font-size: 48px;
 }
 
-a.btn, button.btn, input.btn {
-    font-family: Droid Sans, sans-serif;
+a.btn.btn-inverse, button.btn.btn-inverse, input.btn.btn-inverse {
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    border-radius: 0;
+    border: 3px solid #fff;
+    background: transparent;
+    text-transform: uppercase;
+    color: #fff;
 
     i {
         vertical-align: middle;
     }
+}
+
+a.btn.btn-inverse:hover, a.btn.btn-inverse:focus,
+button.btn.btn-inverse:hover, button.btn.btn-inverse:focus,
+input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
+    border-color: #fff;
+    color: #135870;
+    background-color: #fff;
 }
 
 #sponsors-wrapper, .form-background {
@@ -151,8 +164,10 @@ ul#tags-container {
 
 
 nav#navbar a {
-    font-family: Droid Sans, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.9em;
 }
 
 .navbar-default {
@@ -279,16 +294,6 @@ ul.dropdown-menu > li > a:focus {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.hover-btn, .hover-btn {
-    background: #135870;
-    color: #FFFFFF;
-}
-
-.hover-btn:hover, .hover-btn:focus {
-    background: #3e88a2;
-    color: #FFFFFF;
 }
 
 #carousel-example-generic {

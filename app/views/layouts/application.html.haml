@@ -47,30 +47,30 @@
               
               %ul.nav.navbar-nav
                 %li{:class => "#{'active' if current_page?(root_path)}"}
-                  = link_to 'Home', root_path
+                  = link_to 'HOME', root_path
                 %li.dropdown{:class => "#{'active' if current_page?(photos_path)}"}
-                  = link_to 'Photos', photos_path, {'data-toggle' => 'dropdown', :href => '#', :class => 'dropdown-toggle'}
+                  = link_to 'PHOTOS', photos_path, {'data-toggle' => 'dropdown', :href => '#', :class => 'dropdown-toggle'}
                   %ul.dropdown-menu
-                    %li= link_to 'Fauna', fauna_path
-                    %li= link_to 'Flora', flora_path
-                    %li= link_to 'Landscapes', landscapes_path
+                    %li= link_to 'FAUNA', fauna_path
+                    %li= link_to 'FLORA', flora_path
+                    %li= link_to 'LANDSCAPES', landscapes_path
                 %li{class: "#{'active' if current_page?(prizes_path)}"}
-                  = link_to 'Prizes', prizes_path
+                  = link_to 'PRIZES', prizes_path
                 %li{class: "#{'active' if current_page?(judges_path)}"}
-                  = link_to 'Judges', judges_path
+                  = link_to 'JUDGES', judges_path
                 %li{class: "#{'active' if current_page?(rules_path)}"}
-                  = link_to 'Rules', rules_path
+                  = link_to 'RULES', rules_path
 
               %ul.nav.navbar-nav.navbar-right
                 - if contestant_signed_in?
                   %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
-                    = link_to "#{current_contestant.first_name}'s Page", contestant_index_path
-                  %li= link_to 'Sign Out', destroy_contestant_session_path, :method => :delete
+                    = link_to "#{current_contestant.first_name.upcase}'S PAGE", contestant_index_path
+                  %li= link_to 'SIGN OUT', destroy_contestant_session_path, :method => :delete
                 - else
                   %li{:class => "#{'active' if current_page?(new_contestant_registration_path)}"}
-                    = link_to 'Sign Up', new_contestant_registration_path
+                    = link_to 'SIGN UP', new_contestant_registration_path
                   %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
-                    = link_to 'Sign In', new_contestant_session_path                 
+                    = link_to 'SIGN IN', new_contestant_session_path                 
                 %li
                   %a#mail-us{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
                     %i.fa.fa-envelope

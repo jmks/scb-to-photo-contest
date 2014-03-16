@@ -6,22 +6,22 @@
     - if @contestant.entries.any?
       .row
         .col-xs-6
-          %h3 Your Photo Submissions
+          %h3 YOUR SUBMISSIONS
         .col-xs-6
           %a.btn.btn-default.hover-btn.pull-right{ href: new_photo_path }
             %i.fa.fa-camera.fa-2x
             Begin Submission
       .table-responsive
-        %table#entry-table.table.table-hover
+        %table#entry-table.table.table-striped.table-hover
           %thead
             %tr
-              %td Entry Id
-              %td Title
-              %td Date
-              %td Registration Status
-              %td Votes
-              %td Views
-              %td Actions Required
+              %td ENTRY
+              %td TITLE
+              %td DATE
+              %td REGISTRATION STATUS
+              %td VOTES
+              %td VIEWS
+              %td ACTIONS REQUIRED
           %tbody
             - @contestant.entries.each do |entry|
               %tr
@@ -47,10 +47,10 @@
         %table#favourites-table.table.table-hover
           %thead
             %tr
-              %td Entry Id
-              %td Title
-              %td Votes
-              %td Views
+              %td ENTRY
+              %td TITLE
+              %td VOTES
+              %td VIEWS
           %tbody
             - @favourites.each do |entry|
               %tr
