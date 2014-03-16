@@ -22,7 +22,7 @@ describe Vote do
   describe '#vote' do 
     context 'voting multiple times in one day' do 
 
-      it 'valid voting increase votes_today by 1' do 
+      it 'valid voting increases votes_today by 1' do 
         expect {
           @vote.vote
         }.to change { @vote.votes_today }.by 1
@@ -38,24 +38,24 @@ describe Vote do
 
     context 'voting on subsequent days' do
 
-      xit 'resets votes_today' do 
+      it 'resets votes_today' do 
         @vote.vote
         @vote.save!
         # implementation dependant
-        Date.should_receive(:today).and_return { 1.day.from_now }
+        expect(Date).to receive(:today).twice.and_return { 1.day.from_now }
 
         expect {
           @vote.vote
-          }.to change { @vote.votes_today }.by 0
+          }.to change { @vote.votes_today }.by(0)
       end
 
-      xit 'increases votes by votes_today' do
-        (@max_votes - 1).times { @vote.vote }
-        Date.should_receive(:today).and_return { 1.day.from_now }
+      it 'increases votes by votes_today' do
+        @max_votes.times { @vote.vote }
+        expect(Date).to receive(:today).twice.and_return { 1.day.from_now }
 
         expect {
           @vote.vote
-        }.to change { @vote.votes }.by (@max_votes - 1)
+        }.to change { @vote.votes }.from(0).to(5)
       end
     end
   end

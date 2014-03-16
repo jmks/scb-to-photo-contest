@@ -18,10 +18,12 @@ class Vote
   end
 
   def vote
+    today = Date.today
     if vote?
-      if date != Date.today
-        date = Date.today
+      if date != today
+        date = today
         inc votes: votes_today
+        set votes_today: 0
       end
       
       inc votes_today: 1
