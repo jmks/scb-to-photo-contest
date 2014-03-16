@@ -23,7 +23,7 @@ class PhotoEntryController < ApplicationController
 
     @photo = Photo.find(session[:photo_id])
 
-    @photo.original_url      = params[:url]
+    @photo.original_url = params[:url]
 
     # TODO want original_key
     @photo.original_filename = params[:filename]
@@ -34,6 +34,12 @@ class PhotoEntryController < ApplicationController
 
     Resque.enqueue(ThumbnailJob, @photo.id.to_s)
 
-    redirect_to contestant_index_path
+    if request.xhr?
+      flash[:notice] = "Photo '#{@photo.title}'' successfully received. It's thumbnails will be generated shortly."
+      flash.keep(:notice) # Keep flash notice around for the redirect.
+      render :js => "window.location = #{ contestant_index_path.to_json }"
+    else
+      redirect_to contestant_index_path
+    end
   end
 end
