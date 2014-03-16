@@ -13,13 +13,12 @@
     %header
       = render 'layouts/navbar'
 
-    .container
-      = render 'layouts/alerts'
+    = render 'layouts/alerts'
 
-      = yield
+    = yield
 
-      - if display_sponsors?
-        #sponsors-footer
-          = render 'layouts/sponsors'
+    - if display_sponsors?
+      #sponsors-footer
+        = render 'layouts/sponsors'
     
     = render 'layouts/footer'

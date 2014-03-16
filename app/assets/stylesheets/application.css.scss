@@ -31,22 +31,13 @@
 }
 
 html {
-    background: url(scarborough_bluffs_bg.jpg) no-repeat center center fixed;
-    background-position: 0% 130px;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-
     min-height: 100%;
     position: relative;
-
-    /* beige #FFF5D6 */
 }
 
 body { 
     /* for fixed header */
-    padding-top: 135px;
+    padding-top: 125px;
 
     /* sticky footer */
     margin-bottom: 90px;
@@ -56,9 +47,6 @@ body {
 
 body > .container {
     margin-bottom: 90px;
-    /*background: url("natural_paper.png") repeat scroll 0 0 #959796;*/
-    /*background: url("wrinkled paper.png") center center no-repeat;
-    background-size: 100%;*/
 }
 
 pre {
@@ -69,11 +57,11 @@ pre {
 @media screen and (max-width: 768px) {
     
     html {
-        background-position: 0% 80px;
+        
     }
     
     body {
-        padding-top: 85px;
+        padding-top: 80px;
     }
 }
 
@@ -101,6 +89,29 @@ input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
     border-color: #fff;
     color: #135870;
     background-color: #fff;
+}
+
+#gratitude {
+    height: 100px;
+    width:  100px;
+    padding-top: 25px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #135870;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #fff;
+
+    display: block;
+    position: relative;
+    left: calc(50% - 50px);
+    top:  -90px;
+    z-index: 2;
+
+    -webkit-border-radius: 130px;
+    -moz-border-radius:    130px;
+    border-radius:         130px;
 }
 
 #sponsors-wrapper, .form-background {
@@ -159,15 +170,30 @@ ul#tags-container {
 
 /* Sassify below */
 
-/*#135870*/
+nav#navbar {
+    
+    a {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        font-size: 0.9em;
+    }
 
+    .navbar-header {
+        width: 100%;
 
+        .scb-logo {
+            display: inline-block;
+            a img {
+                height: 70px;
+            }
+        }
 
-nav#navbar a {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    font-size: 0.9em;
+        #social-media {
+            display: inline-block;
+            margin-right : 10px;
+        }
+    }
 }
 
 .navbar-default {
@@ -259,31 +285,6 @@ ul.dropdown-menu > li > a:focus {
     min-height: 80px;
 }
 
-.scb-logo {
-    a {
-        /*display: inline-block;*/
-
-        img {
-            height: 70px;
-        }
-    }
-
-    .logo-text {
-        display: inline-block;
-
-        .times {
-            font-size: 2em;
-            font-weight: 500;
-        }
-
-        .droid {
-            font-family: $droid;
-            font-weight: 700;
-            font-size: 1.2em;
-        }
-    }
-}
-
 #mail-us, #mail-us:hover {
     i {
         font-size: 1.25em;
@@ -296,23 +297,14 @@ ul.dropdown-menu > li > a:focus {
     left: 0;
 }
 
-#carousel-example-generic {
-    width:  750px;
-    height: auto;
-    margin: 0 auto;
-}
-
 #quick-btns {
     margin-top: 20px;
 }
 
 #sponsors-footer {
-    margin-top: 30px;
+    margin-top:    30px;
     margin-bottom: 30px;
 }
-
-
-
 
 #footer {
     bottom: 0;

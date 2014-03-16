@@ -8,3 +8,5 @@ $(document).on 'page:change', ->
   $('a#mail-us').click (e) ->
     $('#mail-us-modal').modal('show');
     e.preventDefault();
+
+  $('#home-welcome').backstretch '/assets/scarborough_bluffs_bg.jpg'

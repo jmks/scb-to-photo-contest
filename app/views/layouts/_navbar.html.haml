@@ -8,13 +8,25 @@
           %span.icon-bar
 
         .scb-logo
-          %a{href: 'http://scbtoronto.com'}
-            = image_tag 'scb-logo.svg', alt: 'SCB-TO'
+          = link_to (image_tag 'white-logo-text.svg', alt: 'SCB-TO'), 'http://scbtoronto.com'
+
+        %ul#social-media.nav.navbar-nav.navbar-right.hidden-xs
+          %li
+            %a.btn{ href: 'http://www.conbio.org', target: '_blank' }
+              = image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
+          %li
+            %a.btn{ href: 'http://www.scbtoronto.com', target: '_blank' }
+              %i.fa.fa-home.fa-2x
+          %li
+            %a.btn{ href: 'https://twitter.com/SCBToronto', target: '_blank' }
+              %i.fa.fa-twitter.fa-2x
+          %li
+            %a.btn{ href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank' }
+              %i.fa.fa-facebook.fa-2x
 
   .row
     .col-xs-12
       #navbar-links.collapse.navbar-collapse
-        
         %ul.nav.navbar-nav
           %li{:class => "#{'active' if current_page?(root_path)}"}
             = link_to 'HOME', root_path
