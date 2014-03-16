@@ -54,7 +54,7 @@
           %tbody
             - @favourites.each do |entry|
               %tr
-                %td= link_to entry.id, photo_path(entry)
+                %td= photo_link entry
                 %td= entry.title
                 %td= entry.votes
                 %td= entry.views

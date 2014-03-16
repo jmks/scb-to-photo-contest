@@ -51,6 +51,7 @@ describe Vote do
 
       it 'increases votes by votes_today' do
         @max_votes.times { @vote.vote }
+        # implementation dependant
         expect(Date).to receive(:today).twice.and_return { 1.day.from_now }
 
         expect {
