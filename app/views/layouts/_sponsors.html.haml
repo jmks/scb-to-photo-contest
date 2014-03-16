@@ -1,9 +1,11 @@
 #sponsors-wrapper
-  %article#gratitude
-    %header Our Sponsors
+  - if current_page? root_path
+    %article#gratitude
+      %header Our Sponsors
   .row
     .col-xs-12.text-center
-      %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
+      - unless current_page? root_path
+        %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
   .row.text-center
     .col-sm-6.col-md-4.sponsor
       = link_to 'http://www.grassrootsstore.com/', target: '_blank' do
