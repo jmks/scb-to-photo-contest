@@ -44,7 +44,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # gem 'debugger', group: [:development, :test]
 
 # Use MongoDB as database
-gem 'mongoid', '~> 4.0.0.alpha2', github: 'mongoid/mongoid'
+gem 'mongoid', '~> 4.0.0.beta1'
 gem 'bson'
 gem 'bson_ext'
 
