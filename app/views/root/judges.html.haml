@@ -1,79 +1,44 @@
+#judge-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true' }
+          &times;
+        %h4.modal-title Judge
+      .modal-body
+
 #judges-wrapper
-  %ul.list-unstyled.list-inline.judges-gallery.clearfix.og-grid
+  %ul.list-unstyled.list-inline.judges-gallery.clearfix
     %li.judge
       .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Judgy McJudgerson
+        = image_tag 'judges/daveireland.jpg', alt: 'Dave Ireland', height: '250px'
+      %p.judge-name.cursive-font Dave Ireland
       .judge-bio.hidden
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        %p Managing Director, Centre of Discovery in Biodiversity, Royal Ontario Museum
+        %p I'm responsible for developing programs, projects and partnerships that help people understand and conserve biodiversity. I work with everyone at the ROM, from the Department of Natural History, Education, Marketing and Communication, Web and Print Media, and Programs, to all other ROM Centre's of Discovery, the ROM Governors and the ROM Executive team.  My role is help internal teams work with each other toward unified and focused goals, and to represent the Centre of Discovery in Biodiversity with all external partners.
+        %p I grew up in Huntsville, Ontario on the doorstep of Algonquin Park, and have been living in Toronto for the last eight years. I love the outdoors, connecting people to wildlife and wild spaces - and I'm a big fan of change.
 
     %li.judge
       .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Judge Judy
+        = image_tag 'judges/maxskwarna.jpg', alt: 'Max Skwarna', height: '250px'
+      %p.judge-name.cursive-font Max Skwarna
       .judge-bio.hidden
+        %p Photographer
+        %p For almost 40 years Max has been making his living as a professional photographer. He owns one of the oldest photographic studios in Canada, Ashley and Crippen. Although making his living photographing people he spends much of his free time doing what he loves best, being outside in nature and capturing the beauty that surrounds us. He has been published in Photo Life, Canadian Geographic and many other magazines.  Max has also sold his images through the Cadogan Gallery in Toronto and many homes in and around the GTA show off his beautiful birds on their walls. During this time he has also given presentations to naturalist groups, schools, camera clubs and community colleges. Max is also a member of Ontario Field Ornithologists, Pickering Naturalists, Toronto Entomologists Association, Hamilton Naturalist and other organizations. He has also been a judge for international insect and nature photography competitions many times.
+        %p Max currently conducts workshops on macro photography, bird photography, and leads nature photography hikes. If you wish to attend any of these, feel free to e-mail him and you will be put on the list for upcoming events
+        %p If you wish to contact Max, you can do so at max@maxskwarna.com
         %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          You can also see more of his work at 
+          %span= link_to 'www.maxskwarna.com', 'www.maxskwarna.com'
+        %p
+          If you like you may also wish to join his meet-up group at 
+          %span= link_to 'http://www.meetup.com/Small-Game-Nature-Photography/', 'http://www.meetup.com/Small-Game-Nature-Photography/'
+
 
     %li.judge
       .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Judge Dredd
+        = image_tag 'judges/bridgetstutchbury.jpg', alt: 'Bridget Stutchbury', height: '250px'
+      %p.judge-name.cursive-font Bridget Stutchbury
       .judge-bio.hidden
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    %li.judge
-      .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Mr T
-      .judge-bio.hidden
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    %li.judge
-      .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Q
-      .judge-bio.hidden
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    %li.judge
-      .img-responsive
-        = image_tag 'person-placeholder.jpg', alt: 'Judge', height: '250px'
-      %p.cursive-font Scolia
-      .judge-bio.hidden
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        %p Professor of Biology, Canada Research Chair in Ecology and Conservation Biology
+        %p Bridget Stutchbury is a professor at York University, Toronto. She completed her M.Sc. at Queen’s University and her Ph.D. at Yale, and was a postdoctoral fellow at the Smithsonian Institution. Since the 1980s, she has followed songbirds to their wintering grounds in Latin America and back to their breeding grounds in North America to understand their behaviour, ecology and conservation. Her latest research uses “geolocators” to track the amazing migratory journeys of Wood Thrushes, Purple Martins and Red-eyed Vireos. She serves on scientific advisory committees for World Wildlife Fund Canada, Wildlife Preservation Canada, and Earth Rangers.  She is also author of Silence of the Songbirds (2007 finalist for the Governor General’s Award) and The Bird Detective (April 2010).

@@ -1,3 +1,27 @@
+= content_for :head do
+  / Facebook
+  %meta{ name: 'title', content: "#{@photo.title}" }
+  %meta{ name: 'description', content: "#{@photo.description}" }
+  %link{ rel: 'image_src', href: "#{@photo.thumbnail_sm_url}" }
+
+  / Twitter Card
+  %meta{ name: 'twitter:site',        content: '@SCBToronto' }
+  %meta{ name: 'twitter:domain',      content: 'scbtorontophotos.com' }
+  %meta{ name: 'twitter:creator',     content: '@SCBToroto' }
+  %meta{ name: 'twitter:title',       content: "#{@photo.title}" }
+  %meta{ name: 'twitter:description', content: "SCB-TO Photo Contest: #{@photo.description}" }
+  %meta{ name: 'twitter:image:src',   content: "#{@photo.thumbnail_lg_url}" }
+
+  / Open Graph - Pinterest, g+
+  %meta{ property: 'og:title',       content: "#{@photo.title}" }
+  %meta{ property: 'og:type',        content: 'article' }
+  %meta{ property: 'og:url',         content: "#{request.original_url}" }
+  %meta{ property: 'og:image',       content: "#{@photo.thumbnail_lg_url}" }
+  %meta{ property: 'og:description', content: "Photo by: #{@photo.owner.public_name}. #{@photo.description}" }
+  %meta{ property: 'og:site_name',    content: 'SCB-Toronto Chapter' }
+  %meta{ property: 'article:tag',     content: 'Photography' }
+
+
 .row.text-center
   .col-xs-12
     .img-responsive

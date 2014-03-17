@@ -36,7 +36,7 @@
 }
 
 #judges-wrapper {
-
+    margin-top: 30px;
 }
 
 ul.judges-gallery {
@@ -60,7 +60,7 @@ ul.judges-gallery li.judge {
     p {
         margin-top: 10px;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 2em;
     }
 }
 
@@ -123,13 +123,27 @@ ul.judges-gallery li.judge:nth-child(odd) {
             font-size: 1.5em;
         }
     }
+
+    .prize.tilt-left {
+        z-index: 3;
+        -webkit-transform: rotate(-3deg);
+        -moz-transform: rotate(-3deg);
+    }
+
+    .prize.tilt-right {
+        z-index: 3;
+        -webkit-transform: rotate(10deg);
+        -moz-transform: rotate(10deg);
+    }
 }
 
-.rule {
-    padding-bottom: 30px;
-    h2 {
-        color: #fff;
-        font-weight: 700;
-        font-family: Droid Sans, sans-serif;    
-    }
+#rules-wrapper {
+    .rule {
+        padding-bottom: 30px;
+        h2 {
+            color: #135870;
+            font-weight: 700;
+            font-family: Droid Sans, sans-serif;    
+        }
+    }   
 }
