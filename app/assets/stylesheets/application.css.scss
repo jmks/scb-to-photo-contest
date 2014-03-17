@@ -23,7 +23,7 @@
     font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 }
 .droid {
-    font-family: Droid Sans, sans-serif;
+    font-family: 'Droid Sans', sans-serif;
     font-weight: 700;
 }
 .cursive-font {
@@ -92,21 +92,29 @@ input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
 }
 
 #gratitude {
-    height: 100px;
-    width:  100px;
-    padding-top: 25px;
+    height: 175px;
+    width:  175px;
+    padding-top: 50px;
+    margin-bottom: -90px;
     text-transform: uppercase;
     text-align: center;
-    background-color: #135870;
+
+    /*-webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);*/
+
+    background: rgba(19, 88, 112, 0.8) url(pattern-1.png);
 
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    font-size: 1.5em;
     color: #fff;
 
     display: block;
     position: relative;
-    left: calc(50% - 50px);
-    top:  -90px;
+    left: calc(50% - 87.5px);
+    top:  -130px;
     z-index: 2;
 
     -webkit-border-radius: 130px;
@@ -124,9 +132,8 @@ input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
     padding: 10px 10px;
 
     .sponsor {
-
         img {
-            max-width: 100%;
+            max-width: 70%;
         }
     }
 }
@@ -281,7 +288,7 @@ ul.dropdown-menu > li > a:focus {
 }
 
 #nav-header-row {
-    background-color: #19b2d9;
+    background-color: #135870;
     min-height: 80px;
 }
 
@@ -295,10 +302,6 @@ ul.dropdown-menu > li > a:focus {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-#quick-btns {
-    margin-top: 20px;
 }
 
 #sponsors-footer {

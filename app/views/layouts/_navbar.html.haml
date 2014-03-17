@@ -53,6 +53,6 @@
               = link_to 'SIGN UP', new_contestant_registration_path
             %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
               = link_to 'SIGN IN', new_contestant_session_path                 
-          %li
+          %li.hidden-xs
             %a#mail-us{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
               %i.fa.fa-envelope

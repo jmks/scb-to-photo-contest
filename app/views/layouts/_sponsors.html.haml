@@ -1,23 +1,22 @@
 #sponsors-wrapper.container
   - if current_page? root_path
     %article#gratitude
-      %header Our Sponsors
+      %header
+        %p
+          Our
+          %br
+          Sponsors
   .row
     .col-xs-12.text-center
       - unless current_page? root_path
         %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
   .row.text-center
     .col-sm-6.col-md-4.sponsor
+      = link_to 'http://www.downtowncamera.com/', target: '_blank' do 
+        = image_tag 'sponsors/downtown-camera.jpg', alt: 'Downtown Camera'
+    .col-sm-6.col-md-4.sponsor
       = link_to 'http://www.grassrootsstore.com/', target: '_blank' do
         = image_tag 'sponsors/grassroots.png', alt: 'Grassroots'
     .col-sm-6.col-md-4.sponsor
-      = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
-    .col-sm-6.col-md-4.sponsor
-      = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
-  .row.text-center
-    .col-sm-6.col-md-4.sponsor
-      = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
-    .col-sm-6.col-md-4.sponsor
-      = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
-    .col-sm-6.col-md-4.sponsor
-      = image_tag 'acme-logo.svg', alt: 'Acme', class: "place-logo"
+      = link_to 'http://bloorcinema.com/', target: '_blank' do 
+        = image_tag 'sponsors/bloorhotdocs.jpg', alt: 'Bloor Hot Docs Cinema'

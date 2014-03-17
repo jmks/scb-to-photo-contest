@@ -1,9 +1,23 @@
 #home-welcome {
-    height: 350px;
+    height: 450px;
 
-    h1 {
+    h1.main-title {
         margin-top: 0;
-        padding-top: 20px;
+        padding-top: 70px;
+        color: #fff;
+        font-size: 52px;
+    }
+
+    #quick-btns {
+        margin-top: 70px;
+
+        a.btn {
+            width: 243px;
+        }
+    }
+
+    #quick-btns:after {
+        clear: both;
     }
 }
 

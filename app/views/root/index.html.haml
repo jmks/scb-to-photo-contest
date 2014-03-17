@@ -1,14 +1,16 @@
 #home-welcome
-  %h1.main-title.cursive-font.text-center SCB-TO Wildlife and Nature Photography Contest
+  %h1.main-title.cursive-font.text-center
+    Nature and Wildlife
+    %br
+    Photography Contest
 
-  -# quick links
   %section#quick-btns
     .row.text-center
-      .col-xs-6.col-sm-offset-3.col-sm-4.col-md-offset-3.col-md-3
-        %a.btn.btn-lg.btn-block.btn-default.btn-inverse{href: new_photo_path }
+      .col-xs-12.col-sm-offset-3.col-sm-4.col-md-offset-3.col-md-3
+        %a.btn.btn-lg.btn-default.btn-inverse{href: new_photo_path }
           %i.fa.fa-camera.fa-2x
           Submit a Photo
-      .col-xs-6.col-sm-4.col-md-3
-        %a.btn.btn-lg.btn-block.btn-default.btn-inverse{href: photos_path }
+      .col-xs-12.col-sm-4.col-md-3
+        %a.btn.btn-lg.btn-default.btn-inverse{href: photos_path }
           %i.fa.fa-picture-o.fa-2x
           View Photos
