@@ -1,126 +1,121 @@
 .row.text-center
   .col-xs-12
-    /%a.thumbnail-lg= image_tag 'http://placekitten.com/g/800/600', alt: "Kitten"
     .img-responsive
       - if @photo.thumbnail_lg_url?
         = image_tag @photo.thumbnail_lg_url
       - else
         %h2 Thumbnails pending...
 
--# photo information
-.row
-  .col-xs-6
-    %h2.photo-title= display_title "Photo Entry #{params[:id]}"
-  .col-xs-6
-    %p= photographer_link
+.container
+  .row
+    .col-xs-6
+      %h2.photo-title= display_title "Photo Entry #{params[:id]}"
+    .col-xs-6
+      %p= photographer_link
 
-.row
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-      %strong Description
-    .col-xs-6.col-md-8
-      %p= display_description ''
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-      %strong Photo Location
-    .col-xs-6.col-md-8
-      %p= display_photo_location 'unknown'
+  .row
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+        %strong Description
+      .col-xs-6.col-md-8
+        %p= display_description ''
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+        %strong Photo Location
+      .col-xs-6.col-md-8
+        %p= display_photo_location 'unknown'
 
-.row
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-      %strong Tags
-    .col-xs-6.col-md-8
-      %ul#tags-container.list-inline
-        - @photo.tags.each do |tag|
-          %li.tag= link_to tag, photos_path(tag: tag)
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-      %strong Photo Date
-    .col-xs-6.col-md-8
-      %p= display_date 'unknown'
+  .row
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+        %strong Tags
+      .col-xs-6.col-md-8
+        %ul#tags-container.list-inline
+          - @photo.tags.each do |tag|
+            %li.tag= link_to tag, photos_path(tag: tag)
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+        %strong Photo Date
+      .col-xs-6.col-md-8
+        %p= display_date 'unknown'
 
-.row
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-    .col-xs-6.col-md-8
-  .col-xs-12.col-md-6
-    .col-xs-6.col-md-4
-      %strong Camera Details
-    .col-xs-6.col-md-8
-      %pre= display_camera_stats ''
+  .row
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+      .col-xs-6.col-md-8
+    .col-xs-12.col-md-6
+      .col-xs-6.col-md-4
+        %strong Camera Details
+      .col-xs-6.col-md-8
+        %pre= display_camera_stats ''
 
-.row
-  .col-xs-3
-    .pull-right
+  .row
+    .col-xs-6.col-sm-3
       %i.fa.fa-eye.fa-2x
       %strong Views
+      %span= display_views 0
 
-  .col-xs-3
-    %p= display_views 0
-
-  .col-xs-3
-    .pull-right
+    .col-xs-6.col-sm-3
       %i.fa.fa-thumbs-up.fa-2x
       %strong Votes
+      %span= display_votes 0
 
-  .col-xs-3
-    %p= display_votes 0
+    .col-xs-12.col-sm-6
+      = render './addthis'
 
-
-.row
-  .col-xs-12.col-sm-offset-5.col-sm-2
-    = form_tag vote_photo_path, class: 'form form-inline' do
-      = hidden_field_tag :id, @photo.id
-      = button_tag type: 'submit', class: 'vote-btn btn btn-block btn-success btn-lg' do
-        %i.fa.fa-plus
-        Vote
-
--# comments
-.row
-  .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-    %h3 Comments
-    #comments-container
-      %table.table
-        - @photo.comments.each do |comment|
-          %tr.comment
-            %td.name
-              %p= comment.name
-              %p
-                %small= time_ago comment.created_at
-            %td.text= comment.text
-            %td.report
-              - if comment.reported?
-                %p Under Review
-              - else
-                = form_tag report_comment_path do 
-                  = hidden_field_tag :photo_id, @photo.id
-                  = hidden_field_tag :comment_id, comment.id
-                  = button_tag type: 'submit', class: 'btn btn-default btn-xs' do
-                    Report Misuse
-
-#new-comment-wrapper
   .row
-    - if signed_in?
-      = form_for :comment, url: new_comment_path, html: { id: 'leave-comment-form' } do |f|
-        = csrf_meta_tags
-        = hidden_field_tag :photo_id, @photo.id
-        .form-group
-          .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-            = f.text_area :text, class: "form-control", rows: 3
-        .form-group
-          .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-            = f.button type: 'submit', class: "btn btn-primary btn-sm pull-right" do 
-              %span.fa-stack.fa-lg
-                %i.fa.fa-comment-o.fa-stack-2x
-                %i.fa.fa-plus.fa-stack-1x
-              %span Post Comment
-    - else
-      .col-xs-12.text-center
-        %span
-          %a{href: new_contestant_session_path }
-            Sign in
-          %span or
-          %a{href: new_contestant_registration_path }
-            Sign up
-          %span to leave a comment
+    .col-xs-12.col-sm-offset-5.col-sm-2
+      = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
+        = hidden_field_tag :id, @photo.id
+        = button_tag type: 'submit', class: 'vote-btn btn btn-block btn-success btn-lg' do
+          %i.fa.fa-plus
+          Vote
+
+  -# comments
+  .row
+    .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
+      %h3 Comments
+      #comments-container
+        %table.table
+          - @photo.comments.each do |comment|
+            %tr.comment
+              %td.name
+                %p= comment.name
+                %p
+                  %small= time_ago comment.created_at
+              %td.text= comment.text
+              %td.report
+                - if comment.reported?
+                  %p Under Review
+                - else
+                  = form_tag report_comment_path do 
+                    = hidden_field_tag :photo_id, @photo.id
+                    = hidden_field_tag :comment_id, comment.id
+                    = button_tag type: 'submit', class: 'btn btn-default btn-xs' do
+                      Report Misuse
+
+  #new-comment-wrapper
+    .row
+      - if signed_in?
+        = form_for :comment, url: new_comment_path, html: { id: 'leave-comment-form' } do |f|
+          = csrf_meta_tags
+          = hidden_field_tag :photo_id, @photo.id
+          .form-group
+            .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
+              = f.text_area :text, class: "form-control", rows: 3
+          .form-group
+            .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
+              = f.button type: 'submit', class: "btn btn-primary btn-sm pull-right" do 
+                %span.fa-stack.fa-lg
+                  %i.fa.fa-comment-o.fa-stack-2x
+                  %i.fa.fa-plus.fa-stack-1x
+                %span Post Comment
+      - else
+        .col-xs-12.text-center
+          %span
+            %a{href: new_contestant_session_path }
+              Sign in
+            %span or
+            %a{href: new_contestant_registration_path }
+              Sign up
+            %span to leave a comment
