@@ -5,10 +5,10 @@
 
   %meta{ name: 'twitter:site',        content: '@SCBToronto' }
   %meta{ name: 'twitter:card',        content: 'summary' }
-  %meta{ name: 'twitter:domain',      content: 'scbtorontophotos.com' }
+  %meta{ name: 'twitter:domain',      content: 'http://www.scbtorontophotos.com' }
   %meta{ name: 'twitter:creator',     content: '@SCBToroto' }
-  %meta{ name: 'twitter:title',       content: "#{@photo.title}" }
-  %meta{ name: 'twitter:description', content: "SCB-TO Photo Contest: #{@photo.description}" }
+  %meta{ name: 'twitter:title',       content: "#{@photo.title} by #{@photo.owner.public_name}" }
+  %meta{ name: 'twitter:description', content: "Win a camera from Downtown Camera-Enter the SCB-Toronto Nature and Wildlife Photo Contest today" }
   %meta{ name: 'twitter:image:src',   content: "#{@photo.thumbnail_lg_url}" }
 
   %meta{ property: 'og:title',       content: "#{@photo.title}" }
