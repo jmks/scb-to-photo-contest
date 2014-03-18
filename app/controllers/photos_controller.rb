@@ -15,7 +15,7 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new(photo_params)
     @photo.owner = current_contestant
     if @photo.save
       # redirect to step #2
@@ -138,6 +138,9 @@ class PhotosController < ApplicationController
       # datepicker enforces date format
       # keep the date as a string
     end
+  end
 
+  def photo_params
+    params.require(:photo).permit(:title, :description, :photo_date, :photo_location, :camera_stats, :tags, :terms_of_service, :category)
   end
 end
