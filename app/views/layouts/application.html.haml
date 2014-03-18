@@ -7,8 +7,8 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = favicon_link_tag
-    = if content_for? :head
-      = yield :head
+    - if content_for? :metatags
+      = yield :metatags
 
   %body
     = render 'layouts/contact_modal'

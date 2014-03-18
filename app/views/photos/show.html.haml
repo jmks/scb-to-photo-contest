@@ -1,10 +1,8 @@
-= content_for :head do
-  / Facebook
+= content_for :metatags do
   %meta{ name: 'title', content: "#{@photo.title}" }
   %meta{ name: 'description', content: "#{@photo.description}" }
   %link{ rel: 'image_src', href: "#{@photo.thumbnail_sm_url}" }
 
-  / Twitter Card
   %meta{ name: 'twitter:site',        content: '@SCBToronto' }
   %meta{ name: 'twitter:card',        content: 'summary' }
   %meta{ name: 'twitter:domain',      content: 'scbtorontophotos.com' }
@@ -13,7 +11,6 @@
   %meta{ name: 'twitter:description', content: "SCB-TO Photo Contest: #{@photo.description}" }
   %meta{ name: 'twitter:image:src',   content: "#{@photo.thumbnail_lg_url}" }
 
-  / Open Graph - Pinterest, g+
   %meta{ property: 'og:title',       content: "#{@photo.title}" }
   %meta{ property: 'og:type',        content: 'article' }
   %meta{ property: 'og:url',         content: "#{request.original_url}" }
