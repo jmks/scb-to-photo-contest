@@ -6,9 +6,9 @@
           Our
           %br
           Sponsors
-  .row
-    .col-xs-12.text-center
-      - unless current_page? root_path
+  - unless current_page? root_path
+    .row
+      .col-xs-12.text-center
         %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
   .row.text-center
     .col-sm-6.col-md-4.sponsor
@@ -20,3 +20,7 @@
     .col-sm-6.col-md-4.sponsor
       = link_to 'http://bloorcinema.com/', target: '_blank' do 
         = image_tag 'sponsors/bloorhotdocs.jpg', alt: 'Bloor Hot Docs Cinema'
+  .row.text-center
+    .col-sm-6.col-md-4.sponsor
+      = link_to 'http://www.torontofieldnaturalists.org/', target: '_blank' do 
+        = image_tag 'sponsors/torontofieldnaturalists.jpg', alt: 'Toronto Field Naturalists'
