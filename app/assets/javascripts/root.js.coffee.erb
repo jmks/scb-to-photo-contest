@@ -13,4 +13,4 @@ $(document).on 'page:change', ->
     $('#mail-us-modal').modal('show')
     e.preventDefault()
 
-  $('#home-welcome').backstretch '/assets/scarborough_bluffs_bg.jpg'
+  $('#home-welcome').backstretch '<%= asset_path('scarborough_bluffs_bg.jpg') %>'
