@@ -50,6 +50,8 @@ gem 'bson_ext'
 
 gem 'thin'
 
+gem 'rails_12factor', group: :production
+
 # Use pry for debugging
 gem 'pry'
 
