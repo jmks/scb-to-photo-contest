@@ -48,6 +48,8 @@ gem 'mongoid', '~> 4.0.0.beta1'
 gem 'bson'
 gem 'bson_ext'
 
+gem 'thin'
+
 # Use pry for debugging
 gem 'pry'
 
@@ -94,7 +96,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
-# rail panel
+# rails panel
 group :development do 
   gem 'meta_request'
 end
