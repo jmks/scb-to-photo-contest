@@ -99,7 +99,11 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
 
     # move to own controller if any more complicated
-    voter = Vote.find(request.remote_ip) || Vote.create(id: request.remote_ip)
+    voter = begin
+      Vote.find(request.remote_ip)
+    rescue Mongoid::Errors::DocumentNotFound
+      Vote.create(id: request.remote_ip)
+    end
 
     if voter.vote
       @photo.inc votes: 1
