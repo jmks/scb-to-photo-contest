@@ -2,13 +2,13 @@
   %h3 Step 2 of 3
   %h4= "Uploading Photo '#{ @photo.title }'"
 
-  = s3_uploader_form callback_url: photo_entry_path, id: "s3-uploader", class: 'form' do
+  = s3_uploader_form callback_url: photo_entry_path, id: 's3-uploader', class: 'form' do
     .form-group
       .col-xs-12.col-sm-offset-4.col-sm-8
         = file_field_tag :file, multiple: true
 
   %script#template-upload{type: 'text/x-tmpl'}
-    .upload{id: "file-{%= o.unique_id %}"}
+    .upload{id: 'file-{%= o.unique_id %}'}
       {%=o.name%}
       .progress
         .bar{style: 'width: 0%'}
