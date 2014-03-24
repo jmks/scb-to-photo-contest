@@ -49,6 +49,12 @@ body > .container {
     margin-bottom: 90px;
 }
 
+#alerts {
+    .alert {
+        margin-bottom: 0px;
+    }
+}
+
 pre {
     background-color: transparent;
     border: none;
