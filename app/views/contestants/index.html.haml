@@ -3,14 +3,14 @@
   %h4.text-center On you personalized home page, you will be able to view your favourite photos and track who you've voted for!
 
   #entries-wrapper
+    %a.btn.btn-flat.pull-right{ href: workflow_photo_entry_path }
+      %i.fa.fa-camera.fa-2x
+      Begin Submission
     - if @contestant.entries.any?
       .row
         .col-xs-6
           %h3 YOUR SUBMISSIONS
-        .col-xs-6
-          %a.btn.btn-default.btn-inverse.pull-right{ href: new_photo_path }
-            %i.fa.fa-camera.fa-2x
-            Begin Submission
+          
       .table-responsive
         %table#entry-table.table.table-striped.table-hover
           %thead
@@ -42,7 +42,7 @@
         %span Look for some
         = link_to 'here', photos_path
     - else
-      %h3 Photos You've Voted For
+      %h3 YOUR VOTES
       .table-responsive
         %table#favourites-table.table.table-hover
           %thead

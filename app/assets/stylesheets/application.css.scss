@@ -97,6 +97,28 @@ input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
     background-color: #fff;
 }
 
+a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    border-radius: 0;
+    border: 3px solid #135870;
+    background: transparent;
+    text-transform: uppercase;
+    color: #135870;
+
+    i {
+        vertical-align: middle;
+    }
+}
+
+a.btn.btn-flat:hover, a.btn.btn-flat:focus,
+button.btn.btn-flat:hover, button.btn.btn-flat:focus,
+input.btn.btn-flat:hover, input.btn.btn-flat:focus {
+    border-color: #135870;
+    color: #fff;
+    background-color: #135870;
+}
+
 #gratitude {
     height: 175px;
     width:  175px;
@@ -180,6 +202,28 @@ ul#tags-container {
     }
 }
 
+#photo-steps {
+    margin: 20px 0;
+    ul#steps {
+        li {
+            img {
+                height: 40px;
+            }
+        }
+
+        li.active {
+            img {
+                -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+                -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+                box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+
+                -webkit-border-radius: 7px;
+                -moz-border-radius: 7px;
+                border-radius: 7px;
+            }
+        }
+    }
+}
 
 /* Sassify below */
 
@@ -212,9 +256,9 @@ nav#navbar {
 
 /* blend in blud #adc7e2 */
 .navbar-default {
-  background-color: #fff;
+  background-color: #135870;
   border: 0;
-  color: #135870;
+  color: #FFFFFF;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -303,41 +347,6 @@ ul.dropdown-menu > li > a:focus {
 #mail-us, #mail-us:hover {
     i {
         font-size: 1.25em;
-    }
-}
-
-#photo-steps {
-    li {
-        padding: 5px;
-        text-align: center;
-        margin-right: 16px;
-    }
-
-    li.active {
-        background-color: #135870;
-        color: #fff;
-    }
-
-    li:not(:first-child):before {
-        content: ' ';
-        width: 8px;
-        height: 1px;
-
-        position: relative;
-        top: 50%;
-        left: -8px;
-        border-top: 2px dashed #135870;
-    }
-
-    li:not(:last-child):after {
-        content: ' ';
-        width: 8px;
-        height: 1px;
-
-        position: relative;
-        top: 50%;
-        right: -8px;
-        border-top: 2px dashed #135870;
     }
 }
 

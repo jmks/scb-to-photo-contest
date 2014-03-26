@@ -6,37 +6,37 @@
       %ul#workflow.list-unstyled
         %li
           .icon-wrap
-            %i.fa.fa-user
+            = image_tag asset_path('Account-icon.svg')
           .text-wrap
             %span
               Create an account
         %li
           .icon-wrap
-            %i.fa.fa-picture-o
+            = image_tag asset_path('Photo-icon.svg')
           .text-wrap
             %span
-              Select your photos
+              Add photo details
         %li
           .icon-wrap
-            %i.fa.fa-cloud-upload
+            = image_tag asset_path('Upload-icon.svg')
           .text-wrap
             %span
               Upload your photo
         %li
           .icon-wrap
-            %i.fa.fa-print
+            = image_tag asset_path('print-icon.svg')
           .text-wrap
             %span
               Have them printed
         %li
           .icon-wrap
-            %i.fa.fa-thumbs-up
+            = image_tag asset_path('Vote-icon.svg')
           .text-wrap
             %span
-              Get your friends to vote
+              Get friends to vote
         %li
           %i.fa.fa-angle-down.fa-3x
 
   .row
     .col-xs-12.col-sm-offset-3.col-sm-6
-      = link_to 'Get Started', new_photo_path, class: 'btn btn-default btn-lg'
+      = link_to 'Get Started', new_photo_path, class: 'btn btn-lg btn-flat'
