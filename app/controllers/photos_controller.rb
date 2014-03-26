@@ -16,13 +16,22 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
+
+    # TODO fix these hacks
     @photo.owner = current_contestant
+    @photo.tags = params['photo']['tags']
+    
     if @photo.save
       # redirect to step #2
       redirect_to new_photo_entry_path photo_id: @photo.id
     else
       render :new, photo: @photo
     end
+  end
+
+  def edit
+    @photo = Photo.find params[:id]
+    render :new
   end
 
   def show
