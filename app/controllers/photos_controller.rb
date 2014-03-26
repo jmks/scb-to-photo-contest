@@ -60,7 +60,7 @@ class PhotosController < ApplicationController
 
     @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
     @tag        = params[:tag]
-    @page       = params[:page].to_i || 1
+    @page       = params.key?(:page) ? params[:page].to_i : 1
 
     if @contestant
       @photos = @contestant.entries
