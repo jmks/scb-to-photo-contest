@@ -228,7 +228,6 @@ ul#tags-container {
 /* Sassify below */
 
 nav#navbar {
-    background-color: #fff;
     
     a {
         font-family: 'Montserrat', sans-serif;
@@ -254,11 +253,10 @@ nav#navbar {
     }
 }
 
-/* blend in blud #adc7e2 */
 .navbar-default {
-  background-color: #135870;
+  background-color: #adc7e2;
   border: 0;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -267,11 +265,11 @@ nav#navbar {
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #135870;
+    color: #FFFFFF;
 }
 
 .navbar-default .navbar-brand {
-    color: #135870;
+    color: #FFFFFF;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
@@ -291,7 +289,7 @@ nav#navbar {
 }
 
 ul.dropdown-menu {
-    background-color: #135870;
+    background-color: #adc7e2;
 }
 
 ul.dropdown-menu > li > a {
@@ -305,7 +303,7 @@ ul.dropdown-menu > li > a:focus {
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #135870;
+    color: #FFFFFF;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
@@ -315,7 +313,7 @@ ul.dropdown-menu > li > a:focus {
 }
 
 .navbar-nav .open .dropdown-menu {
-    background-color: #135870;
+    background-color: #adc7e2;
 }
 
 .navbar-header {
@@ -323,11 +321,11 @@ ul.dropdown-menu > li > a:focus {
 }
 
 .navbar-default .navbar-toggle .collapsed {
-    background-color: #135870;
+    background-color: #adc7e2;
 }
 
 .navbar-default .navbar-toggle {
-    background-color: #135870;
+    background-color: #adc7e2;
 }
 
 .navbar-default .navbar-toggle:focus,
@@ -340,7 +338,7 @@ ul.dropdown-menu > li > a:focus {
 }
 
 #nav-header-row {
-    background-color: #fff;
+    background-color: #adc7e2;
     min-height: 80px;
 }
 
