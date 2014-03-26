@@ -24,8 +24,11 @@ PhotoContest::Application.routes.draw do
     get 'page/:page', action: 'index', on: :collection, as: 'page'
   end
 
-  get '/photo_entry/new', to: 'photo_entry#new',    as: 'new_photo_entry'
-  post '/photo_entry',    to: 'photo_entry#create', as: 'photo_entry'
+  get  '/photo_entry',        to: 'photo_entry#workflow',         as: 'workflow_photo_entry'
+  get  '/photo_entry/new',    to: 'photo_entry#new',              as: 'new_photo_entry'
+  post '/photo_entry',        to: 'photo_entry#create',           as: 'photo_entry'
+  get  '/photo_entry/print',  to: 'photo_entry#print_and_verify', as: 'print_photo_entry'
+  post '/photo_entry/verify', to: 'photo_entry#verify',           as: 'verify_photo_entry'
 
   
 

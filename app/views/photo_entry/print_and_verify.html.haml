@@ -1,0 +1,42 @@
+.container.text-center
+  = render './photo_steps', step: :print
+  %h2 Print and Verify Your Photo
+
+  .row
+    .col-xs-12
+      %span You can print your photos at our sponsor
+      = link_to 'Downtown Camera\'s', 'http://downtowncamera.photofinale.com/prints', target: '_blank'
+      %span online print shop. They have provided COUPON CODES for discount printing services. Please use the correct coupon code for the appropriate photograph size to receive the discount.
+  .row
+    .col-xs-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %td 
+              %strong Photo Size
+            %td
+              %strong Typical Camera
+            %td
+              %strong Coupon Code
+        %tbody
+          %tr
+            %td 8x10
+            %td point-and-shoot
+            %td SCB8x10
+          %tr
+            %td 8x12
+            %td DSLR
+            %td SCB8x12
+  .row
+    .col-xs-12
+      %strong Note: Select '3-day service' for coupon code to be applied.
+
+  %h3 Current Photos
+  = form_tag verify_photo_entry_path, class: 'form form-horizontal' do 
+    - @entries.each do |entry|
+      .form-group
+        = label_tag entry.id, entry.title, class: 'control-label col-xs-6'
+        .col-xs-6
+          = text_field_tag entry.id, entry.order_number || '', placeholder: 'Order Number', class: 'form-control'
+    .form-group
+      = button_tag 'Verify Photos', type: 'submit', class: 'btn btn-primary'

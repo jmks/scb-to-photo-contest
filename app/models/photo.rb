@@ -47,6 +47,7 @@ class Photo
 
   # registration details
   field :printed, type: Boolean, default: false
+  field :order_number
 
   field :votes,       type: Integer, default: 0
   field :views,       type: Integer, default: 0

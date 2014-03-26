@@ -1,7 +1,7 @@
 .form-background
-  %h2.text-center Photo Submission
+  .text-center= render './photo_steps', step: :details
 
-  %h3.text-center Step 1 of 3
+  %h2.text-center Photo Details
 
   #submit-errors
     - if @photo.errors.any?

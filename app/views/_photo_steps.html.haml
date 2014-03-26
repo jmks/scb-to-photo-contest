@@ -1,0 +1,14 @@
+#photo-steps.row
+  %ul#steps.list-unstyled.list-inline
+    %li{class: "#{step == :details ? 'active' : ''}"}
+      %i.fa.fa-picture-o
+      .text
+        %small IMAGE DETAILS
+    %li{class: "#{step == :upload ? 'active' : ''}"}
+      %i.fa.fa-cloud-upload
+      .text
+        %small UPLOAD
+    %li{class: "#{step == :print ? 'active' : ''}"}
+      %i.fa.fa-print
+      .text
+        %small PRINT & VERIFY

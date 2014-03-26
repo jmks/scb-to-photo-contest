@@ -1,6 +1,18 @@
-.form-background.text-center
-  %h3 Step 2 of 3
-  %h4= "Uploading Photo '#{ @photo.title }'"
+.container.text-center
+  = render './photo_steps', step: :upload
+  %h2= "Uploading Photo '#{ @photo.title }'"
+
+  .row.rule-reminder
+    .col-xs-12.text-center
+      %div
+        Make sure photo dimensions are in accordance with the 
+        = link_to 'contest\'s rules.', rules_path, target: '_blank'
+      %div= image_tag asset_path('form-factor-blue.svg'), height: '100px'
+
+  - if @photo.thumbnail_xs_url?
+    %h4 Current image:
+    = image_tag @photo.thumbnail_xs_url
+    %h5 Uploading a new photo will replace the current one
 
   = s3_uploader_form callback_url: photo_entry_path, id: 's3-uploader', class: 'form' do
     .form-group

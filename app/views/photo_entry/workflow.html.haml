@@ -1,0 +1,42 @@
+.container
+  %h1.text-center Photo Submission Process
+
+  .row
+    .col-xs-12.col-sm-offset-3.col-sm-6
+      %ul#workflow.list-unstyled
+        %li
+          .icon-wrap
+            %i.fa.fa-user
+          .text-wrap
+            %span
+              Create an account
+        %li
+          .icon-wrap
+            %i.fa.fa-picture-o
+          .text-wrap
+            %span
+              Select your photos
+        %li
+          .icon-wrap
+            %i.fa.fa-cloud-upload
+          .text-wrap
+            %span
+              Upload your photo
+        %li
+          .icon-wrap
+            %i.fa.fa-print
+          .text-wrap
+            %span
+              Have them printed
+        %li
+          .icon-wrap
+            %i.fa.fa-thumbs-up
+          .text-wrap
+            %span
+              Get your friends to vote
+        %li
+          %i.fa.fa-angle-down.fa-3x
+
+  .row
+    .col-xs-12.col-sm-offset-3.col-sm-6
+      = link_to 'Get Started', new_photo_path, class: 'btn btn-default btn-lg'
