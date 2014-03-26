@@ -43,9 +43,9 @@ class PhotoEntryController < ApplicationController
     if request.xhr?
       flash[:notice] = "Photo '#{@photo.title}' successfully received. It's thumbnails will be generated shortly."
       flash.keep(:notice) # Keep flash notice around for the redirect.
-      render :js => "window.location = #{ contestant_index_path.to_json }"
+      render :js => "window.location = #{ print_photo_entry_path.to_json }"
     else
-      redirect_to contestant_index_path
+      redirect_to print_photo_entry_path
     end
   end
 
@@ -70,6 +70,8 @@ class PhotoEntryController < ApplicationController
 
     unless flash[:notice]
       flash[:alert] = 'Order Number could not be verified. Please verify and re-enter your Order Number.'
+      @entries = current_contestant.entries
+      render :print_and_verify and return
     end
 
     redirect_to contestant_index_path
