@@ -8,12 +8,14 @@
           %span.icon-bar
 
         .scb-logo
-          = link_to (image_tag 'white-logo-text.svg', alt: 'SCB-TO'), 'http://scbtoronto.com'
+          = link_to 'http://scbtoronto.com' do
+            .img-responsive
+              = image_tag asset_path('white-logo-text.svg'), alt: 'SCB-TO'
 
         %ul#social-media.nav.navbar-nav.navbar-right.hidden-xs
           %li
             %a.btn{ href: 'http://www.conbio.org', target: '_blank' }
-              = image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
+              = image_tag asset_path('scb-bird.svg'), alt: 'SCB', height: '28px'
           %li
             %a.btn{ href: 'http://www.scbtoronto.com', target: '_blank' }
               %i.fa.fa-home.fa-2x

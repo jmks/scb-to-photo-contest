@@ -242,14 +242,21 @@ nav#navbar {
         .scb-logo {
             display: inline-block;
             a img {
-                height: 70px;
+                max-height: 70px;
             }
         }
 
         #social-media {
             display: inline-block;
-            margin-right : 10px;
+            margin-right: 10px;
         }
+    }
+}
+
+@media (max-width: 485px) {
+    #navbar .scb-logo img {
+        margin-top: 10px;
+        height: 50px;
     }
 }
 
@@ -356,7 +363,7 @@ ul.dropdown-menu > li > a:focus {
 
 #sponsors-footer {
     margin-top:    30px;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
 }
 
 #footer {
