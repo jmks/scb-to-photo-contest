@@ -10,16 +10,25 @@
 
     #quick-btns {
         margin-top: 70px;
-
-        a.btn {
-            width: 243px;
-        }
-    }
-
-    #quick-btns:after {
-        clear: both;
     }
 }
+
+@media (max-width: 767px) {
+    #quick-btns {
+        a {
+            margin: 10px 10px;
+            width: 280px;
+        }
+    } 
+}
+
+@media (min-width: 1200px) {
+    #quick-btns a {
+        margin: 0 10px;
+        min-width: 280px;
+    }
+}
+
 
 .judge {
   margin: 20px 20px;
