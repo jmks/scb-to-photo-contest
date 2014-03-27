@@ -8,7 +8,7 @@ class Photo
   Registration = [ :submitted, :uploaded, :printed, :confirmed ]
   Registration_Message = {
     :submitted => 'Upload Your Photo',
-    :uploaded  => 'Print Your Photo',
+    :uploaded  => 'Print & Verify',
     :printed   => 'Awaiting Printed Copy',
     :confirmed => 'Registration Complete'
   }

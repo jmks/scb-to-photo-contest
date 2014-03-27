@@ -1,4 +1,4 @@
-.form-background
+.container
   .text-center= render './photo_steps', step: :details
 
   %h2.text-center Photo Details
@@ -14,45 +14,45 @@
     = hidden_field_tag :id, @photo.id
     
     .form-group
-      = f.label :title, 'Photo Title', class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :title, 'Photo Title', class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_field :title, class: 'form-control', value: @photo.title
 
     .form-group
-      = f.label :description, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :description, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_field :description, class: 'form-control', value: @photo.description
 
     .form-group
-      = f.label :photo_date, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :photo_date, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_field :photo_date, class: 'form-control datepicker', value: @photo.photo_date
 
     .form-group
-      = f.label :photo_location, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :photo_location, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_field :photo_location, class: 'form-control', value: @photo.photo_location
 
     .form-group
-      = f.label :camera_stats, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :camera_stats, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_area :camera_stats, class: 'form-control', rows: 5, value: @photo.camera_stats
 
     .form-group
-      = f.label :category, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :category, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.select :category, Photo::CATEGORIES.map { |c| c.capitalize }, {}, class: 'form-control'
 
     .form-group
-      = f.label :tags, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :tags, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.text_field :tags, class: 'form-control', value: @photo.tags.join(',')
 
     .form-group
-      = f.label :terms_of_service, class: 'control-label col-sm-4'
-      .col-sm-8
+      = f.label :terms_of_service, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+      .col-xs-8.col-sm-8.col-md-6
         = f.check_box :terms_of_service, class: 'form-control'
 
     .form-group
-      .col-sm-offset-4.col-sm-2
+      .text-center
         = f.submit nil, :class => 'btn btn-flat', :value => 'Submit Details'

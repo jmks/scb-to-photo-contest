@@ -19,13 +19,12 @@
   %meta{ property: 'article:tag',     content: 'Photography' }
 
 
-.row.text-center
-  .col-xs-12
-    .img-responsive
-      - if @photo.thumbnail_lg_url?
-        = image_tag @photo.thumbnail_lg_url
-      - else
-        %h2 Thumbnails pending...
+.row
+  .col-xs-12.text-center
+    - if @photo.thumbnail_lg_url?
+      = image_tag @photo.thumbnail_lg_url, class: 'img-responsive'
+    - else
+      %h2 Thumbnails pending...
 
 .container
   .row

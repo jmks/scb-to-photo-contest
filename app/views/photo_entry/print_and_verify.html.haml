@@ -4,9 +4,9 @@
 
   .row
     .col-xs-12
-      %span You can print your photos at our sponsor
-      = link_to 'Downtown Camera\'s', 'http://downtowncamera.photofinale.com/prints', target: '_blank'
-      %span online print shop. They have provided COUPON CODES for discount printing services. Please use the correct coupon code for the appropriate photograph size to receive the discount.
+      %h4 Discounted printing provided by DOWNTOWN CAMERA!
+      %h4 To take advantage of the discount, select use 3 BUSINESS DAY printing and use the COUPON CODE below at checkout.
+  
   .row
     .col-xs-12
       %table.table.table-hover
@@ -27,16 +27,18 @@
             %td 8x12
             %td DSLR
             %td SCB8x12
-  .row
-    .col-xs-12
-      %strong Note: Select '3-day service' for coupon code to be applied.
 
-  %h3 Current Photos
+  .row.text-center
+    = link_to 'http://downtowncamera.photofinale.com/prints', target: '_blank', class: 'btn btn-flat' do 
+      %i.fa.fa-external-link.fa-2x
+      %span  Printing Site
+
+  %h3 Enter ORDER NUMBER
   = form_tag verify_photo_entry_path, class: 'form form-horizontal' do 
     - @entries.each do |entry|
       .form-group
-        = label_tag entry.id, entry.title, class: 'control-label col-xs-6 col-sm-offset-3 col-sm-3'
-        .col-xs-6.col-sm-3
+        = label_tag entry.id, entry.title, class: 'control-label col-xs-4 col-sm-4'
+        .col-xs-6.col-sm-4
           = text_field_tag entry.id, entry.order_number || '', placeholder: 'Order Number', class: 'form-control'
     .form-group
       = button_tag 'Verify Photos', type: 'submit', class: 'btn btn-flat'

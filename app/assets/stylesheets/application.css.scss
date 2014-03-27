@@ -60,6 +60,10 @@ pre {
     border: none;
 }
 
+img {
+    margin: auto auto;
+}
+
 @media screen and (max-width: 768px) {
     
     html {
@@ -105,6 +109,7 @@ a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat {
     background: transparent;
     text-transform: uppercase;
     color: #135870;
+    margin: 10px 0;
 
     i {
         vertical-align: middle;
@@ -150,7 +155,7 @@ input.btn.btn-flat:hover, input.btn.btn-flat:focus {
     border-radius:         130px;
 }
 
-#sponsors-wrapper, .form-background {
+#sponsors-wrapper {
     background-color: rgba(255,255,255,0.65);
 
     -webkit-border-radius: 15px;

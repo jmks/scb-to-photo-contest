@@ -7,7 +7,7 @@
 
     li {
         margin-bottom: 30px;
-        line-height: 20px;
+        line-height: 48px;
         font-size: 20px;
 
         div {
@@ -15,6 +15,9 @@
         }
 
         .icon-wrap {
+            max-height: 48px;
+            max-width: 48px;
+
             img {
                 max-height: 48px;
             }
@@ -22,11 +25,11 @@
 
         .text-wrap {
             width: 100%;
+            min-height: 48px;
             span {
                 display: inline-block;
-                padding: 10px;
                 background-color: #eee;
-                min-width: 231px;
+                min-width: 230px;
             }
         }
     }
@@ -35,9 +38,7 @@
         color: #135870;
 
         i {
-            position: relative;
-            left: calc(35% - 23px);
-            bottom: 50%;
+            text-align: center;
         }
     }
 }
@@ -47,7 +48,7 @@
     width: 1px;
     height: calc(100% - 80px);
     position: absolute;
-    left: 35%;
+    left: 50%;
     top: 30px;
     border-left: 2px dashed #135870;
     z-index: -1;

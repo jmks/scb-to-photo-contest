@@ -3,16 +3,13 @@
 
   .row
     .col-xs-12.col-sm-offset-3.col-sm-6
-      %ul#workflow.list-unstyled
+      %ul#workflow.list-unstyled.text-center
         %li
-          .icon-wrap
-            = image_tag asset_path('Account-icon.svg')
+          .icon-wrap= image_tag asset_path('Account-icon.svg')
           .text-wrap
-            %span
-              Create an account
-        %li
-          .icon-wrap
-            = image_tag asset_path('Photo-icon.svg')
+            %span Create an account
+        %li.active
+          .icon-wrap= image_tag asset_path('Photo-icon.svg')
           .text-wrap
             %span
               Add photo details
@@ -37,6 +34,5 @@
         %li
           %i.fa.fa-angle-down.fa-3x
 
-  .row
-    .col-xs-12.col-sm-offset-3.col-sm-6
-      = link_to 'Get Started', new_photo_path, class: 'btn btn-lg btn-flat'
+  .row.text-center
+    = link_to 'Continue', new_photo_path, class: 'btn btn-lg btn-flat'

@@ -51,7 +51,7 @@ class PhotoEntryController < ApplicationController
 
   # photo submission step 3 - display print and verify
   def print_and_verify
-    @entries = current_contestant.entries
+    @entries = contestant_unverified_photos
   end
 
   # photo submission step 3.5 - verify
@@ -59,21 +59,35 @@ class PhotoEntryController < ApplicationController
 
     photos = params.select { |key, val| key =~ /^[a-f0-9]{24}/ }
 
+    invalid_photo_order_numbers = []
+
     photos.each_pair do |key, val|
       val.strip!
-      next if val.empty? || !(val =~ /^\d{8}$/ )
+      if val.empty? || !(val =~ /^\d{8}$/ )
+        invalid_photo_order_numbers << key
+        next
+      end
       photo = Photo.find(key)
       next if photo.order_number == val
       photo.set order_number: val
-      flash[:notice] = 'Thank-you for completing your submission. Good luck!'
     end
 
-    unless flash[:notice]
-      flash[:alert] = 'Order Number could not be verified. Please verify and re-enter your Order Number.'
-      @entries = current_contestant.entries
+    if invalid_photo_order_numbers.any?
+      flash[:alert] = 'Some ORDER NUMBERs could not be verified. Please correct and re-enter your ORDER NUMBER.'
+      @entries = contestant_unverified_photos
       render :print_and_verify and return
     end
 
+    # remove
+    session[:invalid_photo_order_numbers] = invalid_photo_order_numbers
+
+    flash[:notice] = 'Thank-you for completing your submission. Good luck!'
     redirect_to contestant_index_path
+  end
+
+  private
+
+  def contestant_unverified_photos
+    current_contestant.entries.select { |entry| entry.order_number.nil? }
   end
 end

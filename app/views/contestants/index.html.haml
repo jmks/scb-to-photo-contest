@@ -1,15 +1,15 @@
 .form-background
-  %h2.text-center= "Welcome #{current_contestant.first_name} (#{current_contestant.email})"
-  %h4.text-center On you personalized home page, you will be able to view your favourite photos and track who you've voted for!
+  %h2.text-center= "Welcome #{current_contestant.first_name} to your personalized home page"
+  %h4.text-center=  "(#{current_contestant.email})"
 
   #entries-wrapper
-    %a.btn.btn-flat.pull-right{ href: workflow_photo_entry_path }
-      %i.fa.fa-camera.fa-2x
-      Begin Submission
+    .row.text-center
+      %a.btn.btn-flat{ href: workflow_photo_entry_path }
+        %i.fa.fa-camera.fa-2x
+        Begin Submission
+    
     - if @contestant.entries.any?
-      .row
-        .col-xs-6
-          %h3 YOUR SUBMISSIONS
+      %h3.text-center YOUR SUBMISSIONS
           
       .table-responsive
         %table#entry-table.table.table-striped.table-hover
@@ -18,20 +18,21 @@
               %td ENTRY
               %td TITLE
               %td DATE
-              %td REGISTRATION STATUS
+              %td ACTIONS REQUIRED
+              %td STATUS
               %td VOTES
               %td VIEWS
-              %td ACTIONS REQUIRED
+              
           %tbody
             - @contestant.entries.each do |entry|
               %tr
                 %td.text-center= photo_link entry
                 %td= entry.title
                 %td= human_date(entry.created_at)
+                %td= next_action entry
                 %td= entry.registration_status.to_s.capitalize
                 %td= entry.votes
                 %td= entry.views
-                %td= next_action entry
     - else
       %h3 You haven't submitted any photos yet!
 
@@ -42,9 +43,9 @@
         %span Look for some
         = link_to 'here', photos_path
     - else
-      %h3 YOUR VOTES
+      %h3.text-center YOUR VOTES
       .table-responsive
-        %table#favourites-table.table.table-hover
+        %table#favourites-table.table.table-striped.table-hover
           %thead
             %tr
               %td ENTRY
