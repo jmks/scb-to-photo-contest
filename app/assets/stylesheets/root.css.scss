@@ -1,5 +1,5 @@
 #home-welcome {
-    height: 450px;
+    height: 500px;
 
     h1.main-title {
         margin-top: 0;
@@ -14,12 +14,16 @@
 }
 
 @media (max-width: 767px) {
-    #quick-btns {
-        a {
-            margin: 10px 10px;
-            width: 280px;
+    #home-welcome {
+        min-height: 575px;
+
+        #quick-btns {
+            a {
+                margin: 10px 10px;
+                width: 280px;
+            }
         }
-    } 
+    }    
 }
 
 @media (min-width: 1200px) {
