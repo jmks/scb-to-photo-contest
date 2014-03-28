@@ -37,28 +37,34 @@
       %h3 You haven't submitted any photos yet!
 
   #favorites-wrapper
-    - if @favourites.length.zero?
-      %h3 You haven't voted for any photos
-      %h5
-        %span Look for some
-        = link_to 'here', photos_path
-    - else
-      %h3.text-center YOUR VOTES
-      .table-responsive
-        %table#favourites-table.table.table-striped.table-hover
-          %thead
-            %tr
-              %td ENTRY
-              %td TITLE
-              %td TOTAL VOTES
-              %td VIEWS
-          %tbody
-            - @favourites.each do |entry|
-              %tr
-                %td= photo_link entry
-                %td= entry.title
-                %td= entry.votes
-                %td= entry.views
+    / - if @favourites.length.zero?
+    /   %h3 You haven't voted for any photos
+    /   %h5
+    /     %span Look for some
+    /     = link_to 'here', photos_path
+    / - else
+    /   %h3.text-center YOUR VOTES
+    /   .table-responsive
+    /     %table#favourites-table.table.table-striped.table-hover
+    /       %thead
+    /         %tr
+    /           %td ENTRY
+    /           %td TITLE
+    /           %td TOTAL VOTES
+    /           %td VIEWS
+    /       %tbody
+    /         - @favourites.each do |entry|
+    /           %tr
+    /             %td= photo_link entry
+    /             %td= entry.title
+    /             %td= entry.votes
+    /             %td= entry.views
+    #photo-wall.row
+      %h3.text-center YOU'VE VOTED FOR
+      .col-xs-12
+        %ul.text-center.list-inline
+          - @favourites.each do |photo|
+            %li.photo= render 'photos/photo_thumb', photo: photo
 
   .row
     .col-xs-12
