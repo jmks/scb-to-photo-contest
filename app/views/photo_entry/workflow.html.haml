@@ -2,35 +2,33 @@
   %h1.text-center Photo Submission Process
 
   .row
-    .col-xs-12.col-sm-offset-3.col-sm-6
+    .col-xs-12.col-sm-offset-2.col-sm-8
       %ul#workflow.list-unstyled.text-center
         %li
-          .icon-wrap= image_tag asset_path('Account-icon.svg')
-          .text-wrap
-            %span Create an account
+          .btn-flow.btn-group
+            = button_tag nil, type: 'button', class: ' btn btn-default' do 
+              %i.fa.fa-user.fa-3x
+            = button_tag 'Create Account', type: 'button', class: 'btn btn-default'
         %li.active
-          .icon-wrap= image_tag asset_path('Photo-icon.svg')
-          .text-wrap
-            %span
-              Add photo details
+          .btn-flow.btn-group
+            = button_tag nil, type: 'button', class: ' btn btn-default' do 
+              %i.fa.fa-picture-o.fa-3x
+            = button_tag 'Add Photo Details', type: 'button', class: 'btn btn-default'
         %li
-          .icon-wrap
-            = image_tag asset_path('Upload-icon.svg')
-          .text-wrap
-            %span
-              Upload your photo
+          .btn-flow.btn-group
+            = button_tag nil, type: 'button', class: ' btn btn-default' do 
+              %i.fa.fa-cloud-upload.fa-3x
+            = button_tag 'Upload Photo', type: 'button', class: 'btn btn-default'
         %li
-          .icon-wrap
-            = image_tag asset_path('print-icon.svg')
-          .text-wrap
-            %span
-              Have them printed
+          .btn-flow.btn-group
+            = button_tag nil, type: 'button', class: ' btn btn-default' do 
+              %i.fa.fa-credit-card.fa-3x
+            = button_tag 'Order Display Print', type: 'button', class: 'btn btn-default'
         %li
-          .icon-wrap
-            = image_tag asset_path('Vote-icon.svg')
-          .text-wrap
-            %span
-              Get friends to vote
+          .btn-flow.btn-group
+            = button_tag nil, type: 'button', class: ' btn btn-default' do 
+              %i.fa.fa-thumbs-up.fa-3x
+            = button_tag 'Share & Vote', type: 'button', class: 'btn btn-default'
         %li
           %i.fa.fa-angle-down.fa-3x
 

@@ -29,6 +29,7 @@ PhotoContest::Application.routes.draw do
   post '/photo_entry',        to: 'photo_entry#create',           as: 'photo_entry'
   get  '/photo_entry/print',  to: 'photo_entry#print_and_verify', as: 'print_photo_entry'
   post '/photo_entry/verify', to: 'photo_entry#verify',           as: 'verify_photo_entry'
+  get '/photo_entry/share',   to: 'photo_entry#share',            as: 'share_photo_entry'
 
   
 

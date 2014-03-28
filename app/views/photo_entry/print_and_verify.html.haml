@@ -1,11 +1,18 @@
-.container.text-center
+#print-verify.container.text-center
   = render './photo_steps', step: :print
-  %h2 Print and Verify Your Photo
+  %h2 Order and Verify Display Print
 
-  .row
+  .row.text-left
     .col-xs-12
-      %h4 Discounted printing provided by DOWNTOWN CAMERA!
-      %h4 To take advantage of the discount, select use 3 BUSINESS DAY printing and use the COUPON CODE below at checkout.
+      %ul
+        %li
+          %h4 You must provide display prints to be eligible for exhibition and awards.
+        %li
+          %h4 Printing provided by Downtown Camera for $3.99! Select 3 BUSINESS DAY printing and use the COUPON CODE below at checkout.
+        %li
+          %h4 SCB-TO picks up display prints from Downtown Camera weekly.
+        %li
+          %h4 After ordering the display print enter your Order Number below.
   
   .row
     .col-xs-12
@@ -31,7 +38,7 @@
   .row.text-center
     = link_to 'http://downtowncamera.photofinale.com/prints', target: '_blank', class: 'btn btn-flat' do 
       %i.fa.fa-external-link.fa-2x
-      %span  Printing Site
+      %span  Downtown Camera Printing Site
 
   %h3 Enter ORDER NUMBER
   = form_tag verify_photo_entry_path, class: 'form form-horizontal' do 

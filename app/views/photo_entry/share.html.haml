@@ -1,0 +1,18 @@
+#share.container.text-center
+  = render './photo_steps', step: :share
+
+  %h2
+    %i.fa.fa-check
+    %span Submission Complete
+
+  .container
+    %h4
+      Share your photos &amp; get your friends to vote for a chance to win 
+      = link_to 'prizes', prizes_path
+      %span and a spot in our photo exhibition.
+
+  %h2 Good luck!
+
+  = link_to contestant_index_path, class: 'btn btn-flat' do
+    %i.fa.fa-undo.fa-2x
+    %span Return to My Page

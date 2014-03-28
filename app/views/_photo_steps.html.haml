@@ -1,8 +1,17 @@
-#photo-steps.row
-  %ul#steps.list-unstyled.list-inline
-    %li{class: "#{step == :details ? 'active' : ''}"}
-      = image_tag asset_path('Photo-icon.svg')
-    %li{class: "#{step == :upload ? 'active' : ''}"}
-      = image_tag asset_path('Upload-icon.svg')
-    %li{class: "#{step == :print ? 'active' : ''}"}
-      = image_tag asset_path('print-icon.svg')
+#photo-steps.row.text-center
+  .btn-group
+    = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :account ? ' active' : '') do 
+      %i.fa.fa-user
+      %span Account
+    = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :details ? ' active' : '') do 
+      %i.fa.fa-picture-o
+      %span Details
+    = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :upload ? ' active' : '') do 
+      %i.fa.fa-cloud-upload
+      %span Upload
+    = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :print ? ' active' : '') do 
+      %i.fa.fa-credit-card
+      %span Order
+    = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :share ? ' active' : '') do 
+      %i.fa.fa-thumbs-up
+      %span Share

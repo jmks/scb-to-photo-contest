@@ -6,32 +6,7 @@
     margin-top: 30px;
 
     li {
-        margin-bottom: 30px;
-        line-height: 48px;
-        font-size: 20px;
-
-        div {
-            display: inline;
-        }
-
-        .icon-wrap {
-            max-height: 48px;
-            max-width: 48px;
-
-            img {
-                max-height: 48px;
-            }
-        }
-
-        .text-wrap {
-            width: 100%;
-            min-height: 48px;
-            span {
-                display: inline-block;
-                background-color: #eee;
-                min-width: 230px;
-            }
-        }
+        margin: 20px 0;
     }
 
     li:last-child {
@@ -56,4 +31,10 @@
 
 .rule-reminder {
     margin: 30px 0;
+}
+
+#print-verify {
+    .row.text-left {
+        margin: 30px 0;
+    }
 }

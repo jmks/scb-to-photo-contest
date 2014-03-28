@@ -81,8 +81,11 @@ class PhotoEntryController < ApplicationController
     # remove
     session[:invalid_photo_order_numbers] = invalid_photo_order_numbers
 
-    flash[:notice] = 'Thank-you for completing your submission. Good luck!'
-    redirect_to contestant_index_path
+    flash[:notice] = 'Order Numbers successfully verified. Thank you.'
+    redirect_to share_photo_entry_path
+  end
+
+  def share
   end
 
   private

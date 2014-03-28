@@ -1,5 +1,5 @@
 .form-background
-  %h2.text-center= "Welcome #{current_contestant.first_name} to your personalized home page"
+  %h2.text-center= "#{current_contestant.first_name} - welcome to your personalized home page"
   %h4.text-center=  "(#{current_contestant.email})"
 
   #entries-wrapper
@@ -50,7 +50,7 @@
             %tr
               %td ENTRY
               %td TITLE
-              %td VOTES
+              %td TOTAL VOTES
               %td VIEWS
           %tbody
             - @favourites.each do |entry|
