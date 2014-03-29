@@ -70,15 +70,16 @@
           %pre= display_camera_stats ''
 
     .row
-      .col-xs-6.col-sm-3
-        %i.fa.fa-eye.fa-2x
-        %strong Views
-        %span= display_views 0
+      .col-xs-12.col-sm-6.text-center
+        .views-wrapper
+          %i.fa.fa-eye
+          %strong Views
+          %span= display_views 0
 
-      .col-xs-6.col-sm-3
-        %i.fa.fa-thumbs-up.fa-2x
-        %strong Votes
-        %span= display_votes 0
+        .votes-wrapper
+          %i.fa.fa-thumbs-up
+          %strong Votes
+          %span= display_votes 0
 
       .col-xs-12.col-sm-6
         = render './addthis'
