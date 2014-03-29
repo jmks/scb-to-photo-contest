@@ -15,6 +15,8 @@
           %h4 SCB-TO picks up display prints from Downtown Camera weekly.
         %li
           %h4 After ordering the display print enter your Order Number below.
+        %li
+          %h4 You may upload up to 5 entries before ordering
   
   .row
     .col-xs-12
@@ -48,6 +50,7 @@
       .form-group
         = label_tag entry.id, entry.title, class: 'control-label col-xs-4 col-sm-4'
         .col-xs-6.col-sm-4
-          = text_field_tag entry.id, entry.order_number || '', placeholder: 'Order Number', class: 'form-control'
+          = text_field_tag entry.id, entry.order_number, placeholder: 'Order Number', class: 'form-control'
     .form-group
+      = link_to 'Add Another Entry', new_photo_path, class: 'btn btn-flat'
       = button_tag 'Verify Photos', type: 'submit', class: 'btn btn-flat'

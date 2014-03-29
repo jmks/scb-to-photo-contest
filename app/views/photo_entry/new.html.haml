@@ -1,5 +1,5 @@
-.container.text-center
-  - unless params[:hide_workflow]
+#photo-upload-wrapper.container.text-center
+  - if params[:referrer] == 'new'
     = render './photo_steps', step: :upload
   .two-tone-title.text-center
     %span Photo
@@ -26,17 +26,26 @@
       .col-xs-12.text-center
         /= file_field_tag :file, multiple: true, class: 'btn btn-flat'
 
+        = link_to edit_photo_path(@photo, referrer: params[:referrer]), class: 'btn btn-flat' do 
+          %i.fa.fa-arrow-left.fa-2x
+          Previous
+
         %span.btn.btn-flat.btn-file
+          %i.fa.fa-folder-open.fa-2x
           Browse...
           = file_field_tag :file, multiple: true
+
+  / .upload.js-progress-bars
+  /   .progress
+  /     .bars
+
+  %script#template-upload{type: 'text/x-tmpl'}
+    .upload{id: 'file-{%= o.unique_id %}'}
+      {%=o.name%}
+      .progress
+        .bar{style: 'width: 0%'}
 
   - if @photo.thumbnail_xs_url?
     = link_to contestant_index_path, class: 'btn btn-flat' do
       %i.fa.fa-undo.fa-2x
       %span Return to My Page
-
-  %script#template-upload{type: 'text/x-tmpl'}
-    .upload.text-center{id: 'file-{%= o.unique_id %}'}
-      {%=o.name%}
-      .progress
-        .bar{style: 'width: 0%'}

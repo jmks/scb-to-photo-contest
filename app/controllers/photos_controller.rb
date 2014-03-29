@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
     
     if @photo.save
       # redirect to step #2
-      redirect_to new_photo_entry_path photo_id: @photo.id
+      redirect_to new_photo_entry_path(photo_id: @photo.id, referrer: :new)
     else
       render :new, photo: @photo
     end
@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find params[:id]
 
     if @photo.update_attributes(photo_params)
-      redirect_to new_photo_entry_path photo_id: @photo, hide_workflow: true
+      redirect_to new_photo_entry_path(referrer: params[:referrer], photo_id: @photo.id)
     else
       render :edit
     end
