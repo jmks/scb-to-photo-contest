@@ -171,7 +171,7 @@ input.btn.btn-inverse:hover, input.btn.btn-inverse:focus {
     background-color: #fff;
 }
 
-a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat {
+a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat, span.btn.btn-flat {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     border-radius: 0;
@@ -188,7 +188,8 @@ a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat {
 
 a.btn.btn-flat:hover, a.btn.btn-flat:focus,
 button.btn.btn-flat:hover, button.btn.btn-flat:focus,
-input.btn.btn-flat:hover, input.btn.btn-flat:focus {
+input.btn.btn-flat:hover, input.btn.btn-flat:focus,
+span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     border-color: #135870;
     color: #fff;
     background-color: #135870;

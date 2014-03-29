@@ -23,8 +23,12 @@
 
   = s3_uploader_form callback_url: photo_entry_path, id: 's3-uploader', class: 'form' do
     .form-group
-      .col-xs-12.col-sm-offset-4.col-sm-8
-        = file_field_tag :file, multiple: true, class: 'btn btn-flat'
+      .col-xs-12.text-center
+        /= file_field_tag :file, multiple: true, class: 'btn btn-flat'
+
+        %span.btn.btn-flat.btn-file
+          Browse...
+          = file_field_tag :file, multiple: true
 
   - if @photo.thumbnail_xs_url?
     = link_to contestant_index_path, class: 'btn btn-flat' do
