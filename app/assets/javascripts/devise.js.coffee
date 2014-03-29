@@ -1,2 +1,2 @@
-$(document).on 'page:change', ->
+jQuery ->
   $('.tooltipped').tooltip({ container: 'body' });

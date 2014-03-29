@@ -1,2 +1,2 @@
-$(document).on 'page:change', ->
+jQuery ->
   $("#s3-uploader").S3Uploader()

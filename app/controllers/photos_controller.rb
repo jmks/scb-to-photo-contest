@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find params[:id]
 
     if @photo.update_attributes(photo_params)
-      redirect_to photo_path(@photo)
+      redirect_to new_photo_entry_path photo_id: @photo, hide_workflow: true
     else
       render :edit
     end

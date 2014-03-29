@@ -1,5 +1,4 @@
-$(document).on 'page:change', ->
-
+jQuery ->
   if ($('#judges-wrapper'))
     $('li.judge').click ->
       name = $(this).find('.judge-name').html().split ' '
