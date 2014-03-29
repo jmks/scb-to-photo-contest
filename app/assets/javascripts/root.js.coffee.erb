@@ -2,10 +2,13 @@ $(document).on 'page:change', ->
 
   if ($('#judges-wrapper'))
     $('li.judge').click ->
-      name = $(this).find('.judge-name').html()
+      name = $(this).find('.judge-name').html().split ' '
+      firstName = name[0]
+      lastName  = name[1]
       bio  = $(this).find('.judge-bio').html()
       modal$ = $('#judge-modal')
-      modal$.find('.modal-title').empty().html(name)
+      modal$.find('.modal-header span:first-child').empty().html firstName
+      modal$.find('.modal-header span:last-child').empty().html lastName
       modal$.find('.modal-body').empty().html(bio)
       modal$.modal 'show'
 

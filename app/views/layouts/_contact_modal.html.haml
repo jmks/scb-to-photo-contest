@@ -3,7 +3,10 @@
     .modal-content
       .modal-header
         %button.close{type: 'button', class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
-        %h4.modal-title Email Us
+        .modal-title
+          .two-tone-title.text-center
+            %span Email
+            %span Us
       .modal-body
         = form_tag contact_path, class: 'form form-horizontal' do
           .form-group
@@ -14,5 +17,5 @@
               = text_field_tag :email, nil, id: 'mail-email', class: 'form-control', type: 'text', placeholder: 'Your email address'
           .form-group.btns
             .col-xs-12
-              %button.btn.btn-default.pull-left{type: 'button', 'data-dismiss' => 'modal'} Cancel
-              = submit_tag 'Send', class: 'send-mail btn btn-primary pull-right'
+              %button.btn.btn-flat.pull-left{type: 'button', 'data-dismiss' => 'modal'} Cancel
+              = button_tag 'Send', type: 'submit', id: 'send-mail', class: 'btn btn-flat pull-right'

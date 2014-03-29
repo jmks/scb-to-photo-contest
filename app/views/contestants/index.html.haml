@@ -1,6 +1,7 @@
-.form-background
-  %h2.text-center= "#{current_contestant.first_name} - welcome to your personalized home page"
-  %h4.text-center=  "(#{current_contestant.email})"
+#contestant-activity-wrapper
+  .two-tone-title.text-center
+    %span Activity Page
+    %span= current_contestant.first_name
 
   #entries-wrapper
     .row.text-center

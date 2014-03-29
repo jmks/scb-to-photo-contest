@@ -30,6 +30,13 @@
     font-family: La Belle Aurore, sans-serif;
 }
 
+.modal-content {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
 html {
     min-height: 100%;
     position: relative;
