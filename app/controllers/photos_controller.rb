@@ -64,16 +64,16 @@ class PhotosController < ApplicationController
 
     if @contestant
       @photos = @contestant.entries
-      @title  = "Photos by '#{ @contestant.public_name }'"
+      @title  = @contestant.public_name
     elsif @tag
       @photos = Photo.any_in(tags: [@tag])
-      @title  = "Photos tagged '#{ @tag }'"
+      @title  = @tag
     elsif @category
       @photos = Photo.where(category: @category)
-      @title  = "Photos categorized '#{ @category }'"
+      @title  = @category
     else
       @photos = Photo.all
-      @title  = "All Photos"
+      @title  = "All"
     end
 
     @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
