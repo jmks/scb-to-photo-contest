@@ -1,6 +1,10 @@
 .container.text-center
   = render './photo_steps', step: :upload
-  %h2= "Uploading Photo '#{ @photo.title }'"
+  .two-tone-title.text-center
+    %span Photo
+    %span Upload
+
+  %h2= @photo.title
 
   .row.rule-reminder
     .col-xs-12.text-center

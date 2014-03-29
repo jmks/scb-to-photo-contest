@@ -17,15 +17,12 @@
 
 @import "bootstrap";
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|La+Belle+Aurore|Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore|Montserrat:400,700|Raleway:700,400);
 
 .times {
     font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
 }
-.droid {
-    font-family: 'Droid Sans', sans-serif;
-    font-weight: 700;
-}
+
 .cursive-font {
     font-family: La Belle Aurore, sans-serif;
 }
@@ -238,10 +235,6 @@ $darkblue:   #135870;
 $brightblue: #19b2d9;
 $darkblue-contrast: #3e88a2;
 
-
-$droid: Droid Sans, sans-serif;
-
-
 /* tags */
 
 ul#tags-container {
@@ -254,7 +247,7 @@ ul#tags-container {
     li.tag a {
         background-color: #CCC;
         color: #333;
-        font-family: $droid;
+        font-family: Montserrat, sans;
         font-weight: 700;
 
         text-decoration: none;
@@ -276,7 +269,7 @@ ul#tags-container {
         text-transform: uppercase;
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
-        color: #555;
+        color: #777;
 
         cursor: default;
         line-height: 20px;

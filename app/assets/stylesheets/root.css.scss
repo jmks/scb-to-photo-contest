@@ -154,11 +154,18 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
 #rules-wrapper {
     .rule {
+
+        h3 {
+            font-family: 'Raleway', sans-serif;
+        }
+        
         padding-bottom: 30px;
+
         h2 {
             color: #135870;
             font-weight: 700;
             font-family: 'Droid Sans', sans-serif;    
         }
+        
     }   
 }

@@ -1,7 +1,9 @@
 .container
   .text-center= render './photo_steps', step: :details
 
-  %h2.text-center Photo Details
+  .two-tone-title.text-center
+    %span Photo
+    %span Details
 
   #submit-errors
     - if @photo.errors.any?
