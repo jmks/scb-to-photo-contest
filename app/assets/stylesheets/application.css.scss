@@ -17,7 +17,52 @@
 
 @import "bootstrap";
 
-@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore|Montserrat:400,700|Raleway:700,400);
+@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore);
+
+@font-face {
+  font-family: 'Montserrat';
+  src:font-url('/assets/montserrat-regular-webfont.eot');
+  src:font-url('/assets/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('/assets/montserrat-regular-webfont.svg#montserrat') format('svg'),
+    font-url('/assets/montserrat-regular-webfont.woff') format('woff'),
+    font-url('/assets/montserrat-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src:font-url('/assets/montserrat-bold-webfont.eot');
+  src:font-url('/assets/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('/assets/montserrat-bold-webfont.svg#montserrat') format('svg'),
+    font-url('/assets/montserrat-bold-webfont.woff') format('woff'),
+    font-url('/assets/montserrat-bold-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src:font-url('/assets/raleway-regular-webfont.eot');
+  src:font-url('/assets/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('/assets/raleway-regular-webfont.svg#raleway') format('svg'),
+    font-url('/assets/raleway-regular-webfont.woff') format('woff'),
+    font-url('/assets/raleway-regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src:font-url('/assets/raleway-bold-webfont.eot');
+  src:font-url('/assets/raleway-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('/assets/raleway-bold-webfont.svg#raleway') format('svg'),
+    font-url('/assets/raleway-bold-webfont.woff') format('woff'),
+    font-url('/assets/raleway-bold-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: bold;
+}
+
 
 .times {
     font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
