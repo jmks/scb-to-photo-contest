@@ -104,6 +104,15 @@ class PhotosController < ApplicationController
     end
   end
 
+  def destroy
+    @photo = Photo.find params[:id]
+
+    @photo.destroy
+    flash[:danger] = "Your entry #{@photo.title} has been deleted"
+
+    redirect_to contestant_index_path
+  end
+
   def comment
     @photo = Photo.find(params[:photo_id])
     @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]

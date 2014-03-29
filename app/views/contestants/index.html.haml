@@ -1,3 +1,29 @@
+#confirm-delete-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', class: "close", 'data-dismiss' => "modal", 'aria-hidden' => "true"} &times;
+        .modal-title
+          .two-tone-title.text-center
+            %span Delete
+            %span Entry
+      .modal-body
+        .row
+          .col-xs-12.text-center
+            %i.fa.fa-exclamation-triangle.fa-2x
+
+        .row
+          .col-xs-12.text-center
+            %span This action will remove
+            %span
+              %strong.photo-title
+            %span from view and competition
+
+        .row
+          .col-xs-12
+            %button.btn.btn-flat.pull-left{ type: 'button', 'data-dismiss' => 'modal'} Cancel
+            = link_to nil, 'Confirm Delete', id: 'delete-photo-confirmation', class: 'btn btn-flat pull-right', method: :delete
+
 #contestant-activity-wrapper
   .two-tone-title.text-center
     %span Activity Page
@@ -17,6 +43,7 @@
           %thead
             %tr
               %td
+              %td
               %td ENTRY
               %td TITLE
               %td DATE
@@ -27,12 +54,15 @@
               
           %tbody
             - @contestant.entries.each do |entry|
-              %tr
+              %tr{ 'data-id' => entry.id }
                 %td
                   = link_to edit_photo_path(entry) do
-                    %i.fa.fa-edit
+                    %i.fa.fa-edit.fa-2x
+                %td
+                  = link_to photo_path(entry.id), method: :delete, class: 'delete-photo-link', 'data-no-turbolink' => true do
+                    %i.fa.fa-trash-o.fa-2x
                 %td.text-center= photo_link entry
-                %td= entry.title
+                %td.photo-title= entry.title
                 %td= human_date(entry.created_at)
                 %td= next_action entry
                 %td= entry.registration_status.to_s.capitalize
