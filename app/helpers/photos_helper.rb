@@ -5,7 +5,7 @@ module PhotosHelper
   end
 
   def display_photo_date default
-    date = @photo.photo_date && @photo.photo_date.strftime('%b %-d, %Y')
+    date = @photo.photo_date? && @photo.photo_date.strftime('%b %-d, %Y')
     date || default
   end
 

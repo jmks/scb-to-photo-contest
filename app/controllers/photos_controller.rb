@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_contestant!, only: [:new, :create, :comment]
-  before_filter :preprocess_data, only: [:create]
+  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment]
+  before_filter :preprocess_data, only: [:create, :update]
 
   PHOTOS_PER_PAGE = 15
 
@@ -16,10 +16,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
-
-    # TODO fix these hacks
     @photo.owner = current_contestant
-    @photo.tags = params['photo']['tags']
     
     if @photo.save
       # redirect to step #2
@@ -31,7 +28,16 @@ class PhotosController < ApplicationController
 
   def edit
     @photo = Photo.find params[:id]
-    render :new
+  end
+
+  def update
+    @photo = Photo.find params[:id]
+
+    if @photo.update_attributes(photo_params)
+      redirect_to photo_path(@photo)
+    else
+      render :edit
+    end
   end
 
   def show
@@ -154,6 +160,6 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:title, :description, :photo_date, :photo_location, :camera_stats, :tags, :terms_of_service, :category)
+    params.require(:photo).permit(:title, :description, :photo_date, :photo_location, :camera_stats, :terms_of_service, :category, :tags => [])
   end
 end
