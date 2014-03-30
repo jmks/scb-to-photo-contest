@@ -24,7 +24,7 @@
         = f.text_field :last_name, :class => 'form-control'
 
     .form-group
-      = f.label :public_name, :class => 'control-label col-sm-4 col-md-4'
+      = f.label :public_name, 'Username', class: 'control-label col-sm-4 col-md-4'
       .col-sm-8.col-md-6
         = f.text_field :public_name, class: 'form-control tooltipped', 'data-toggle' => 'tooltip',
           'data-placement' => 'auto', title: 'This will be publicly viewable by other users'
@@ -37,10 +37,10 @@
       .col-sm-8.col-md-6
         = f.email_field :email, :class => 'form-control'
 
-    .form-group
-      = f.label :email_confirmation, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.email_field :email_confirmation, :class => 'form-control'
+    / .form-group
+    /   = f.label :email_confirmation, :class => 'control-label col-sm-4 col-md-4'
+    /   .col-sm-8.col-md-6
+    /     = f.email_field :email_confirmation, :class => 'form-control'
 
     -# Phone - only required to submit photos
     .form-group

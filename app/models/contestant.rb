@@ -13,7 +13,6 @@ class Contestant
 
   ## Database authenticatable
   field :email
-  validates_confirmation_of :email
   validates :email, presence: true, uniqueness: true,
                  format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
                            message: "%{value} is not a valid email" }
