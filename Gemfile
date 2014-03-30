@@ -90,6 +90,9 @@ gem 'rmagick'
 # typeahead picker
 gem 'select2-rails'
 
+# heroku startup
+gem 'foreman'
+
 # pagination and infinite scroll
 # gem 'will_paginate', '~>3.0.5'
 # gem 'bootstrap-will_paginate', '~>0.0.10'
