@@ -2,16 +2,16 @@
   .btn-group
     = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :account ? ' active' : '') do 
       %i.fa.fa-user
-      %span Account
+      %span.hidden-xs Account
     = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :details ? ' active' : '') do 
       %i.fa.fa-picture-o
-      %span Details
+      %span.hidden-xs Details
     = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :upload ? ' active' : '') do 
       %i.fa.fa-cloud-upload
-      %span Upload
+      %span.hidden-xs Upload
     = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :print ? ' active' : '') do 
       %i.fa.fa-credit-card
-      %span Order
+      %span.hidden-xs Order
     = button_tag nil, type: 'button', class: 'btn btn-default' + (step == :share ? ' active' : '') do 
       %i.fa.fa-thumbs-up
-      %span Share
+      %span.hidden-xs Share

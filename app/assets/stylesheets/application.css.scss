@@ -322,6 +322,10 @@ ul#tags-container {
 #photo-steps {
     margin: 20px 0;
 
+    .hidden-xs {
+        display: inline-block !important;
+    }
+
     button {
         border: none;
         text-transform: uppercase;
@@ -363,6 +367,12 @@ ul#tags-container {
         border-left: 12px solid #135870;
         border-bottom: 20px solid transparent;
         z-index: 1000;
+    }
+}
+
+@media (max-width: 767px) {
+    #photo-steps .hidden-xs {
+        display: none !important;
     }
 }
 
