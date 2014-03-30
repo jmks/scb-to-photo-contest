@@ -267,23 +267,21 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
 #sponsors-wrapper {
     background-color: rgba(255,255,255,0.65);
 
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 
     padding: 10px 10px;
 
     .sponsor {
-        display: table-cell;
-        vertical-align: middle;
-        align: center;
-        text-align: center;
-        width: 100%;
-        margin: 0 auto;
+        height: 115px;
+        line-height: 115px;
 
-        img {
-            max-width: 70%;
-            max-height: 115px;
+        a {
+            img {
+                max-width: 80%;
+                max-height: 115px;
+            }
         }
     }
 }
