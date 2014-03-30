@@ -452,6 +452,11 @@ nav#navbar {
 
 ul.dropdown-menu {
     background-color: #adc7e2;
+    
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: none;
 }
 
 ul.dropdown-menu > li > a {
