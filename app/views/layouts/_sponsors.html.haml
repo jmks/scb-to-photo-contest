@@ -11,19 +11,22 @@
       .col-xs-12.text-center
         %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
   .row.text-center
-    .col-sm-6.col-md-4.sponsor
-      = link_to 'http://www.downtowncamera.com/', target: '_blank' do 
+    .col-sm-6.col-md-4
+      = link_to 'http://www.downtowncamera.com/', class: 'sponsor', target: '_blank' do 
         = image_tag 'sponsors/downtown-camera.jpg', alt: 'Downtown Camera'
-    .col-sm-6.col-md-4.sponsor
-      = link_to 'http://www.grassrootsstore.com/', target: '_blank' do
-        = image_tag 'sponsors/grassroots.png', alt: 'Grassroots'
-    .col-sm-6.col-md-4.sponsor
-      = link_to 'http://bloorcinema.com/', target: '_blank' do 
-        = image_tag 'sponsors/bloorhotdocs.jpg', alt: 'Bloor Hot Docs Cinema'
-  .row.text-center
-    .col-sm-6.col-md-4.sponsor
-      = link_to 'http://www.torontofieldnaturalists.org/', target: '_blank' do 
-        = image_tag 'sponsors/torontofieldnaturalists.jpg', alt: 'Toronto Field Naturalists', height: '115px'
-    .col-sm-6.col-md-4.sponsor
-      = link_to 'http://www.ripleyaquariums.com/canada/', target: '_blank' do 
+    .col-sm-6.col-md-4
+      = link_to 'http://www.mec.ca/', class: 'sponsor', target: '_blank' do 
+        = image_tag 'sponsors/mec.png', alt: 'Mountain Equipment Co-op'
+    .col-sm-6.col-md-4
+      = link_to 'http://www.ripleyaquariums.com/canada/', class: 'sponsor', target: '_blank' do 
         = image_tag 'sponsors/ripleys-aquarium.png', alt: "Ripley's Aquarium of Canada"
+  .row.text-center
+    .col-sm-6.col-md-4
+      = link_to 'http://www.torontofieldnaturalists.org/', class: 'sponsor', target: '_blank' do 
+        = image_tag 'sponsors/torontofieldnaturalists.jpg', alt: 'Toronto Field Naturalists'
+    .col-sm-6.col-md-4
+      = link_to 'http://www.grassrootsstore.com/', class: 'sponsor', target: '_blank' do
+        = image_tag 'sponsors/grassroots.png', alt: 'Grassroots'
+    .col-sm-6.col-md-4
+      = link_to 'http://bloorcinema.com/', class: 'sponsor', target: '_blank' do 
+        = image_tag 'sponsors/bloorhotdocs.jpg', alt: 'Bloor Hot Docs Cinema'

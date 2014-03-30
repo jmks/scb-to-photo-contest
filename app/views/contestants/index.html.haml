@@ -45,12 +45,12 @@
               %td
               %td
               %td ENTRY
-              %td TITLE
-              %td DATE
+              %td.hidden-xs TITLE
+              %td.hidden-xs DATE
               %td ACTIONS REQUIRED
               %td STATUS
-              %td VOTES
-              %td VIEWS
+              %td.hidden-xs VOTES
+              %td.hidden-xs VIEWS
               
           %tbody
             - @contestant.entries.each do |entry|
@@ -62,12 +62,12 @@
                   = link_to photo_path(entry.id), method: :delete, class: 'delete-photo-link', 'data-no-turbolink' => true do
                     %i.fa.fa-trash-o.fa-2x
                 %td.text-center= photo_link entry
-                %td.photo-title= entry.title
-                %td= human_date(entry.created_at)
+                %td.photo-title.hidden-xs= entry.title
+                %td.hidden-xs= human_date(entry.created_at)
                 %td= next_action entry
                 %td= entry.registration_status.to_s.capitalize
-                %td= entry.votes
-                %td= entry.views
+                %td.hidden-xs= entry.votes
+                %td.hidden-xs= entry.views
     - else
       %h3 You haven't submitted any photos yet!
 

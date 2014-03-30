@@ -63,6 +63,9 @@
   font-style: bold;
 }
 
+form input.form-control {
+    color: #000;
+}
 
 .times {
     font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
@@ -269,8 +272,16 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     padding: 10px 10px;
 
     .sponsor {
+        display: table-cell;
+        vertical-align: middle;
+        align: center;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+
         img {
             max-width: 70%;
+            max-height: 115px;
         }
     }
 }

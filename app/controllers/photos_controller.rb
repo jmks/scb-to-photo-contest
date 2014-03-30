@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment]
+  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment, :flora, :fauna, :landscapes]
   before_filter :preprocess_data, only: [:create, :update]
 
   PHOTOS_PER_PAGE = 15
