@@ -158,18 +158,31 @@ ul.judges-gallery li.judge:nth-child(odd) {
 }
 
 #rules-wrapper {
+    text-align: center;
+    
     .rule {
+        height: 310px;
+        width: 400px;
+        background-color: #fff;
 
-        h3 {
+        vertical-align: top;
+        text-align: left;
+        position: relative;
+
+        margin-right: 20px;
+        margin-bottom: 20px;
+
+        padding: 20px;
+
+        p, h4 {
             font-family: 'Raleway', sans-serif;
-        }
-        
-        padding-bottom: 30px;
 
-        h2 {
-            color: #135870;
-            font-weight: 700;
+            position: absolute;
+            bottom: 0;
         }
-        
-    }   
+
+        img#white-logo svg {
+            fill: blue;
+        }
+    }
 }
