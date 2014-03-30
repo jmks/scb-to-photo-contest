@@ -87,6 +87,9 @@ gem 'aws-sdk', '~> 1.0'
 # generating thumbnails
 gem 'rmagick'
 
+# typeahead picker
+gem 'select2-rails'
+
 # pagination and infinite scroll
 # gem 'will_paginate', '~>3.0.5'
 # gem 'bootstrap-will_paginate', '~>0.0.10'

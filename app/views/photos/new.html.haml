@@ -45,10 +45,15 @@
       .col-xs-8.col-sm-8.col-md-6
         = f.select :category, Photo::CATEGORIES.map { |c| c.capitalize }, {}, class: 'form-control'
 
+    / .form-group
+    /   = f.label :tags, class: 'control-label col-xs-4 col-sm-3 col-md-3'
+    /   .col-xs-8.col-sm-8.col-md-6
+    /     = f.text_field :tags, class: 'form-control', value: @photo.tags.join(',')
+
     .form-group
       = f.label :tags, class: 'control-label col-xs-4 col-sm-3 col-md-3'
       .col-xs-8.col-sm-8.col-md-6
-        = f.text_field :tags, class: 'form-control', value: @photo.tags.join(',')
+        = f.hidden_field :tags, class: 'select2 form-control', value: tags_string(@photo)
 
     .form-group
       = f.label :terms_of_service, class: 'control-label col-xs-4 col-sm-3 col-md-3'

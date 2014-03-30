@@ -28,4 +28,8 @@ module PhotosHelper
   def time_ago time
     "#{time_ago_in_words time} ago"
   end
+
+  def tags_string photo
+    photo.tags? ? photo.tags.join(', ') : ''
+  end
 end

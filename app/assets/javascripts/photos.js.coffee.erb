@@ -16,3 +16,9 @@ jQuery ->
       $(this).find('.stats').stop().animate({'opacity': 0})
       $(this).find('.thumb-title').stop().animate({'opacity': 0})
   )
+
+  $('.select2').select2
+    placeholder: 'Add Tags'
+    tokenSeparators: [',']
+    multiple: true
+    tags: <%= Tag.get_tags %>

@@ -19,6 +19,9 @@ class PhotosController < ApplicationController
     @photo.owner = current_contestant
     
     if @photo.save
+      # update tags
+      Tag.add_tags params[:photo][:tags]
+
       # redirect to step #2
       redirect_to new_photo_entry_path(photo_id: @photo.id, referrer: :new)
     else
@@ -34,6 +37,9 @@ class PhotosController < ApplicationController
     @photo = Photo.find params[:id]
 
     if @photo.update_attributes(photo_params)
+      # update tags
+      Tag.add_tags params[:photo][:tags]
+      
       redirect_to new_photo_entry_path(referrer: params[:referrer], photo_id: @photo.id)
     else
       render :edit
