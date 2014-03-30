@@ -293,6 +293,8 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
 $darkblue:   #135870;
 $brightblue: #19b2d9;
 $darkblue-contrast: #3e88a2;
+$orange: #f8694d;
+$purple: #7d4a82;
 
 /* tags */
 
@@ -304,8 +306,8 @@ ul#tags-container {
     }
 
     li.tag a {
-        background-color: #CCC;
-        color: #333;
+        background-color: $orange;
+        color: #fff;
         font-family: Montserrat, sans;
         font-weight: 700;
 
@@ -313,9 +315,13 @@ ul#tags-container {
         padding: 8px 8px;
     }
 
+    li.tag:first-child {
+        margin-left: 0;
+    }
+
     li.tag a:hover {
         color: #fff;
-        background-color: $darkblue;
+        background-color: $brightblue;
     }
 }
 

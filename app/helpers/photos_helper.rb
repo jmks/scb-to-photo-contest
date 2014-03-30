@@ -1,7 +1,7 @@
 module PhotosHelper
 
   def photographer_link
-    "Photographed by <a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
+    "<a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
   end
 
   def display_photo_date default

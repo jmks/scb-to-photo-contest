@@ -5,15 +5,32 @@
 #photo-wrapper {
   margin-top: 30px;
 
-  .views-wrapper, .votes-wrapper {
-    background-color: #ccc;
-    color: #333;
-    text-align: center;
-    padding: 10px 10px;
+  .photo-field {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
-    max-height: 32px;
+  #photo-stats {
+    button {
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      border: none;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #777;
+      cursor: default;
+      background-color: #efefef;
+      padding: 10px 20px;
+    }
 
-    display: inline-block;
+    button:focus, button:hover, button:active {
+        box-shadow: none;
+        z-index: auto;
+    }
+
+
   }
 }
 

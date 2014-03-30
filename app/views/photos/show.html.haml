@@ -28,69 +28,56 @@
 
   .container
     .row
-      .col-xs-6
-        %h2.photo-title= display_title "Photo Entry #{params[:id]}"
-      .col-xs-6
-        %p= photographer_link
+      .col-xs-12
+        %h2.photo-title= @photo.title
 
     .row
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-          %strong Description
-        .col-xs-6.col-md-8
-          %p= display_description ''
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-          %strong Photo Location
-        .col-xs-6.col-md-8
-          %p= display_photo_location 'unknown'
-
-    .row
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-          %strong Tags
-        .col-xs-6.col-md-8
-          %ul#tags-container.list-inline
-            - @photo.tags.each do |tag|
-              %li.tag= link_to tag, photos_path(tag: tag)
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-          %strong Photo Date
-        .col-xs-6.col-md-8
-          %p= display_date 'unknown'
-
-    .row
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-        .col-xs-6.col-md-8
-      .col-xs-12.col-md-6
-        .col-xs-6.col-md-4
-          %strong Camera Details
-        .col-xs-6.col-md-8
-          %pre= display_camera_stats ''
-
-    .row
-      .col-xs-12.col-sm-6.text-center
-        .views-wrapper
-          %i.fa.fa-eye
-          %strong Views
-          %span= display_views 0
-
-        .votes-wrapper
-          %i.fa.fa-thumbs-up
-          %strong Votes
-          %span= display_votes 0
+      .col-xs-12.col-sm-6
+        %p
+          %span.photo-field Photographed By
+          %span.photo-value= photographer_link
+        %p
+          %span.photo-field Description
+          %span.photo-value= display_description 'None.'
+        %p
+          %span.photo-field Location
+          %span.photo-value= display_photo_location 'None.'
+        %p
+          %span.photo-field Date
+          %span.photo-value= display_date 'None.'
+        %p
+          %span.photo-field Camera Stats
+          %span.photo-value= display_camera_stats 'None.'
 
       .col-xs-12.col-sm-6
-        = render './addthis'
+        %ul#tags-container.list-inline
+          - @photo.tags.each do |tag|
+            %li.tag= link_to tag, photos_path(tag: tag)
+        
+        #photo-stats.row
+          .col-xs-12.col-sm-10
+            .btn-group.btn-group-justified
+              .btn-group
+                = button_tag nil, type: 'button', class: 'btn btn-default' do 
+                  %i.fa.fa-eye.fa-2x
+                  Views
+                  %span= display_views 0
+              .btn-group
+                = button_tag nil, type: 'button', class: 'btn btn-default' do 
+                  %i.fa.fa-thumbs-up.fa-2x
+                  Votes
+                  %span= display_votes 0
 
-    .row
-      .col-xs-12.col-sm-offset-5.col-sm-2
-        = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
-          = hidden_field_tag :id, @photo.id
-          = button_tag type: 'submit', class: 'vote-btn btn btn-block btn-lg btn-flat' do
-            %i.fa.fa-plus
-            Vote
+        .row.text-center
+          .col-xs-12.col-sm-10
+            = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
+              = hidden_field_tag :id, @photo.id
+              = button_tag type: 'submit', class: 'vote-btn btn btn-block btn-lg btn-flat' do
+                %i.fa.fa-plus
+                Vote
+
+        %div.text-center
+          = render './addthis'
 
     -# comments
     .row
@@ -126,7 +113,7 @@
                 = f.text_area :text, class: "form-control", rows: 3
             .form-group
               .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-                = f.button type: 'submit', class: "btn btn-flat btn-sm pull-right" do 
+                = f.button type: 'submit', class: "btn btn-flat btn-block btn-sm pull-right" do 
                   %span.fa-stack.fa-lg
                     %i.fa.fa-comment-o.fa-stack-2x
                     %i.fa.fa-plus.fa-stack-1x
