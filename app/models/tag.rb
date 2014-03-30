@@ -12,7 +12,9 @@ class Tag
 
   def self.add_tags names
     names.each do |name|
-      unless Tag.find(name: name)
+      begin
+        Tag.find(name: name)
+      rescue
         Tag.create(name: name)
       end
     end
