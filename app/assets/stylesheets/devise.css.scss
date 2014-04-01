@@ -1,0 +1,24 @@
+
+#signin-wrapper {
+    background-color: #777;
+    position: relative;
+    
+    .island {
+        margin-top: 40px;
+        background-color: #fff;
+
+        .checkbox-label.text-left {
+            text-align: left;
+        }
+    }
+}
+
+/*@media( min-width: 993px) {
+    #signin-wrapper {
+        .island {
+            display: block;
+            margin: auto auto;
+            max-width: 400px;
+        }
+    }
+}*/
