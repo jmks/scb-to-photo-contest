@@ -122,7 +122,11 @@ class PhotosController < ApplicationController
 
   def comment
     @photo = Photo.find(params[:photo_id])
-    @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]
+    if params[:comment][:text].empty?
+      flash.now[:alert] = "Please fill in a comment before commenting"
+    else
+      @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]
+    end
     render :show
   end
 
