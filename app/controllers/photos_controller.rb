@@ -95,7 +95,8 @@ class PhotosController < ApplicationController
     @params = {
       tag:      @tag || nil,
       category: @category || nil,
-      page:     @page
+      page:     @page,
+      contestant_id: params[:contestant_id]
     }.reject { |key, val| val.nil? }
 
     @prev_params = @params.dup
