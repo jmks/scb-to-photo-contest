@@ -38,7 +38,7 @@ class ThumbnailJob
     # watermark image
     # img = get_watermarked(thumb, photo.owner.full_name)
 
-    image = full_composite(img_lg, Magick::CenterGravity, Magick::OverCompositeOp)
+    image = full_composite.composite(img_lg, Magick::CenterGravity, Magick::OverCompositeOp)
     image.format = 'JPG' # just to make sure
 
     # size lg => max 1000px in largest dimension
