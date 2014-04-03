@@ -25,7 +25,7 @@ class ThumbnailJob
     # open as image
     img = Magick::Image::from_blob(original_img).first
     #img.format = 'JPG'
-    
+
     # strip metadata
     img.strip!
 
@@ -54,6 +54,7 @@ class ThumbnailJob
     # size sm => max 240x240 with cropping
     aws_sm = thumbs.objects[photo.aws_key(:sm) + '.jpg']
     img_sm = img.resize_to_fill(240, 240)
+    img_sm.format = 'JPG'
     aws_sm.write(img_sm.to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_sm_url = aws_sm.public_url.to_s
 
