@@ -25,8 +25,9 @@ class ThumbnailJob
     # open as image
     img = Magick::Image::from_blob(original_img).first
     #img.format = 'JPG'
+    
     # strip metadata
-    # img.strip!
+    img.strip!
 
     # watermark image
     # img = get_watermarked(thumb, photo.owner.full_name)
