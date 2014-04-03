@@ -29,32 +29,33 @@ class ThumbnailJob
     # strip metadata
     img.strip!
 
+    full_composite = Magick::Image.new(img.columns, img.rows) do 
+      self.background_color = 'none'
+      self.density = '96x96'
+      self.format = 'JPG'
+    end
+
     # watermark image
     # img = get_watermarked(thumb, photo.owner.full_name)
 
-    # composite for large image
-    img_lg = img.resize_to_fit 1000
-    comp   = Magick::Image.new(img_lg.columns, img_lg.rows) do 
-      self.background_color = 'none'
-      self.density = '96x96'
-    end
-    img_lg = comp.composite(img_lg, Magick::CenterGravity, Magick::OverCompositeOp)
-    img_lg.format = 'JPG'
+    image = full_composite(img_lg, Magick::CenterGravity, Magick::OverCompositeOp)
+    image.format = 'JPG' # just to make sure
 
-    # size lg => max 1000x1000
+    # size lg => max 1000px in largest dimension
+    img_lg = image.resize_to_fit 1000
     aws_lg = thumbs.objects[photo.aws_key(:lg) + '.jpg']
     aws_lg.write(img_lg.to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_lg_url = aws_lg.public_url.to_s
 
-    # size xs => max 100x100
+    # size xs => max 100px in largest dimension
     aws_xs = thumbs.objects[photo.aws_key(:xs) + '.jpg']
     aws_xs.write(img_lg.resize_to_fit(100, 100).to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_xs_url = aws_xs.public_url.to_s
 
-    # size sm => max 240x240 with cropping
+    # size sm => 240x240 with cropping
     aws_sm = thumbs.objects[photo.aws_key(:sm) + '.jpg']
-    img_sm = img.resize_to_fill(240, 240)
-    img_sm.format = 'JPG'
+    img_sm = image.resize_to_fill(240, 240)
+    img_sm.format = 'JPG' # really make sure
     aws_sm.write(img_sm.to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_sm_url = aws_sm.public_url.to_s
 
