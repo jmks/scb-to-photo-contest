@@ -390,7 +390,6 @@ nav#navbar {
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
         letter-spacing: 0.1em;
-        font-size: 0.9em;
     }
 
     .navbar-header {
@@ -406,6 +405,13 @@ nav#navbar {
         #social-media {
             display: inline-block;
             margin-right: 10px;
+        }
+    }
+
+    ul.dropdown-menu {
+        li {
+            min-height: 36px;
+            line-height: 36px;
         }
     }
 }
