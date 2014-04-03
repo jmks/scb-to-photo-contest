@@ -1,6 +1,6 @@
 require 'RMagick'
 
-class ThumbnailJob
+class Thumbnailer
   @queue = :thumbnails_queue
 
   Original_Bucket  = 'scbto-photos-originals'

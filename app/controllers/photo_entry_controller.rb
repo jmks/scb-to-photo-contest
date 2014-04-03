@@ -38,7 +38,7 @@ class PhotoEntryController < ApplicationController
 
     session.delete :photo_id
 
-    Resque.enqueue(ThumbnailJob, @photo.id.to_s)
+    Resque.enqueue(Thumbnailer, @photo.id.to_s)
 
     if request.xhr?
       flash[:notice] = "Photo '#{@photo.title}' successfully received. It's thumbnails will be generated shortly."
