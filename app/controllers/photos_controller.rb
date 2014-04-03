@@ -5,13 +5,7 @@ class PhotosController < ApplicationController
   PHOTOS_PER_PAGE = 15
 
   def new
-    if params[:photo]
-      @photo = Photo.new(params[:photo])
-    else
-      @photo = Photo.new
-    end
-
-    #? @photo = Photo.new(params[:photo] || nil)
+    @photo = Photo.new(params[:photo])
   end
 
   def create
@@ -68,7 +62,7 @@ class PhotosController < ApplicationController
     # TODO add pagination with infinite-scroll or will_paginate
 
     @category   = params[:category] || 'all'
-    @category   = Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym
+    @category   = (Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym) || nil
 
     @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
     @tag        = params[:tag]

@@ -27,7 +27,7 @@
     .form-group
       = f.label :photo_date, class: 'control-label col-xs-4 col-sm-3 col-md-3'
       .col-xs-8.col-sm-8.col-md-6
-        = f.text_field :photo_date, class: 'form-control datepicker', value: @photo.photo_date.strftime('%m/%d/%Y')
+        = f.text_field :photo_date, class: 'form-control datepicker', value: form_photo_date
 
     .form-group
       = f.label :photo_location, class: 'control-label col-xs-4 col-sm-3 col-md-3'
@@ -47,7 +47,7 @@
     .form-group
       = f.label :tags, class: 'control-label col-xs-4 col-sm-3 col-md-3'
       .col-xs-8.col-sm-8.col-md-6
-        = f.text_field :tags, class: 'form-control', value: @photo.tags.join(', ')
+        = f.text_field :tags, class: 'form-control', value: tags_string(@photo)
 
     .form-group
       .text-center

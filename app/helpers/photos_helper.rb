@@ -1,5 +1,12 @@
 module PhotosHelper
 
+  # form helpers
+  def form_photo_date
+    (@photo.photo_date? && @photo.photo_date.strftime('%m/%d/%Y')) || ''
+  end
+
+  # display helpers
+
   def photographer_link
     "<a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
   end

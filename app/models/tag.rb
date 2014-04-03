@@ -6,8 +6,16 @@ class Tag
 
   index({ name: 1 }, { unique: true })
 
+  def self.exists? tag 
+    begin
+      Tag.find(name: tag)
+    rescue
+      false
+    end
+  end
+
   def self.get_tags
-    Tag.all.only(:name).entries.map { |t| t.name }
+    Tag.all.map { |t| t.name }
   end
 
   def self.add_tags names
