@@ -1,0 +1,18 @@
+#photo-steps-tabbed.row
+  .col-xs-12
+    .btn-group.btn-group-justified
+      = link_to nil, class: 'btn btn-default' + (step == :details ? ' active' : '') do 
+        %i.fa.fa-picture-o.fa-2x
+        %span.hidden-xs.hidden-sm Details
+      = link_to nil, class: 'btn btn-default' + (step == :upload ? ' active' : '') do 
+        %i.fa.fa-cloud-upload.fa-2x
+        %span.hidden-xs.hidden-sm Upload
+      = link_to nil, class: 'btn btn-default' + (step == :order ? ' active' : '') do 
+        %i.fa.fa-credit-card.fa-2x
+        %span.hidden-xs.hidden-sm Order
+      = link_to nil, class: 'btn btn-default' + (step == :verify ? ' active' : '') do 
+        %i.fa.fa-check-circle.fa-2x
+        %span.hidden-xs.hidden-sm Verify
+      = link_to nil, class: 'btn btn-default' + (step == :share ? ' active' : '') do 
+        %i.fa.fa-thumbs-up.fa-2x
+        %span.hidden-xs.hidden-sm Share

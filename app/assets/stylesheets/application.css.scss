@@ -280,6 +280,7 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     @include border-radius(130px);
 }
 
+
 #sponsors-wrapper {
     background-color: rgba(255,255,255,0.65);
 
@@ -300,7 +301,6 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     }
 }
 
-/* tags */
 
 #tags-container {
     line-height: 35px;
@@ -329,6 +329,8 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
         background-color: $brightblue;
     }
 }
+
+/* Photo steps */
 
 #photo-steps {
     margin: 20px 0;
@@ -379,11 +381,67 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     }
 }
 
+#photo-steps-tabbed {
+    .hidden-xs {
+        display: inline-block !important;
+    }
+
+    .btn-group {
+        a {
+            @include border-radius(0);
+            @include nav-font;
+            
+            border-left: none;
+            border-top: none;
+            box-shadow: none;
+
+            cursor: default;
+
+            color: #777;
+            background-color: #e3e3e3;
+            border-color: #777 !important;
+
+            i {
+                vertical-align: middle;
+            }
+        }
+
+        a.active {
+            border-bottom: none;
+            background-color: #fff;
+
+            color: $brightblue;
+        }
+
+        a:focus, a:hover, a:active {
+            box-shadow: none;
+            text-decoration: none;
+            border-color: inherit;
+        }
+
+        a:last-child {
+            border-right: none;
+        }
+    }
+}
+
 @media (max-width: 767px) {
-    #photo-steps .hidden-xs {
+    #photo-steps .hidden-xs, #photo-steps-tabbed .hidden-xs {
         display: none !important;
     }
 }
+
+/* /Photo Steps */
+
+/* Form Error Messages */
+
+#submit-errors {
+    ul.errors-list {
+        color: red;
+    }
+}
+
+/* /Form Error Messages */
 
 nav#navbar {
 

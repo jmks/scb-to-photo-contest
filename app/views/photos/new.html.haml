@@ -1,5 +1,6 @@
-.container
-  .text-center= render './photo_steps', step: :details
+#photo-details-wrapper.container
+  /.text-center= render './photo_steps', step: :details
+  = render './photo_steps_tabbed', step: :details
 
   .two-tone-title.text-center
     %span Photo
@@ -7,15 +8,17 @@
 
   #submit-errors
     - if @photo.errors.any?
-      %ul.errors-list
+      %ul.errors-list.list.list-unstyled
         - @photo.errors.full_messages.each do |msg|
-          %li= msg
+          %li.error.text-center
+            %i.fa.fa-warning
+            %span= msg
 
   = form_for :photo, url: photos_path, html: {:class => 'form form-horizontal'} do |f|
     = csrf_meta_tags
     = hidden_field_tag :id, @photo.id
     
-    .form-group
+    %div{class: "form-group #{'bg-danger' if @photo.errors.messages.key?(:title)}"}
       = f.label :title, 'Photo Title', class: 'control-label col-xs-4 col-sm-3 col-md-3'
       .col-xs-8.col-sm-8.col-md-6
         = f.text_field :title, class: 'form-control', value: @photo.title
@@ -55,7 +58,7 @@
       .col-xs-8.col-sm-8.col-md-6
         = f.hidden_field :tags, class: 'select2 form-control', value: tags_string(@photo)
 
-    .form-group
+    %div{class: "form-group #{'bg-danger' if @photo.errors.messages.key?(:terms_of_service)}"}
       = f.label :terms_of_service, class: 'control-label col-xs-4 col-sm-3 col-md-3'
       .col-xs-8.col-sm-8.col-md-6
         = f.check_box :terms_of_service, class: 'form-control'
