@@ -18,7 +18,7 @@
  */
 
 $font-size-base: 16px;
-$grid-float-breakpoint: 991px;
+$grid-float-breakpoint: 1025px;
 @import "bootstrap";
 
 @import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore);
@@ -93,7 +93,7 @@ html {
 
 body { 
     /* for fixed header */
-    padding-top: 125px;
+    padding-top: 70px;
 
     /* sticky footer */
     margin-bottom: 90px;
@@ -108,6 +108,10 @@ body > .container {
 #alerts {
     .alert {
         margin-bottom: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        border: none;
     }
 }
 
@@ -127,7 +131,7 @@ img {
     }
     
     body {
-        padding-top: 80px;
+        padding-top: 70px;
     }
 }
 
@@ -385,15 +389,23 @@ ul#tags-container {
 /* Sassify below */
 
 nav#navbar {
+
+    margin-bottom: 0;
+
+    i.fa {
+        font-size: 20px;
+        line-height: 20px;
+    }
     
     a {
         font-family: 'Montserrat', sans-serif;
         font-weight: 700;
+        text-transform: uppercase;
         letter-spacing: 0.1em;
     }
 
     .navbar-header {
-        width: 100%;
+        max-height: 70px;
 
         .scb-logo {
             display: inline-block;
@@ -401,10 +413,20 @@ nav#navbar {
                 max-height: 70px;
             }
         }
+    }
 
-        #social-media {
-            display: inline-block;
-            margin-right: 10px;
+    #navbar-links {
+        ul.dropdown-menu {
+            right: auto;
+        }
+
+        ul.nav.navbar-nav {
+            margin-top: 19px;
+            margin-right: 0;
+
+            li a {
+                min-height: 51px;
+            }
         }
     }
 
@@ -491,10 +513,6 @@ ul.dropdown-menu > li > a:focus {
     background-color: #adc7e2;
 }
 
-.navbar-header {
-    padding-top: 5px;
-}
-
 .navbar-default .navbar-toggle .collapsed {
     background-color: #adc7e2;
 }
@@ -510,11 +528,6 @@ ul.dropdown-menu > li > a:focus {
 
 #navbar .row:not(#nav-header-row) {
     margin-right: 0;
-}
-
-#nav-header-row {
-    background-color: #adc7e2;
-    min-height: 80px;
 }
 
 #mail-us, #mail-us:hover {

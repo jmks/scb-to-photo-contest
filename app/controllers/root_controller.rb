@@ -11,6 +11,9 @@ class RootController < ApplicationController
   def judges
   end
 
+  def about
+  end
+
   def contact
     email, message = params[:email], params[:message]
     
