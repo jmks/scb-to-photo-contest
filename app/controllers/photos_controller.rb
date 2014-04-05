@@ -164,6 +164,7 @@ class PhotosController < ApplicationController
   def preprocess_data
     params[:photo][:tags]       = params[:photo][:tags].split(',').map { |tag| tag.strip }
     params[:photo][:category]   = params[:photo][:category].downcase.to_sym
+    params[:photo][:photo_date] = "#{params[:photo_date_month]} #{params[:photo_date_year]}"
     
     begin
       params[:photo][:photo_date] = Date.strptime(params[:photo][:photo_date], "%m/%d/%Y")

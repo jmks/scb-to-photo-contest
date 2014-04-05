@@ -2,12 +2,28 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+class Picker
+  constructor: (pickerContainer, @values) ->
+    @picker$ = $(pickerContainer)
+    @picker$.find('.picker-inc').on 'click', =>
+      @inc()
+    @picker$.find('.picker-dec').on 'click', =>
+      @dec()
+  current: =>
+    @picker$.find('.picker-val').html()
+  inc: =>
+    index = $.inArray @current(), @values
+    next = @values[(index + 1) % @values.length]
+    @update next
+  dec: =>
+    index = $.inArray @current(), @values
+    prev = @values[if index == 0 then @values.length - 1 else index - 1]
+    @update prev
+  update: (value) =>
+    @picker$.find('.picker-val').html value
+    @picker$.find('.picker-hidden-val').val value
+
 jQuery ->
-  $('#new-comment-btn').click -> 
-    $(this).hide().closest('#new-comment-wrapper').find('.new-comment').show()
-
-  $('.datepicker').datepicker({});
-
   $('.photo').hover(
     ->
       $(this).find('.stats').stop().animate({'opacity': 0.6})
@@ -23,3 +39,9 @@ jQuery ->
     multiple: true
     tags: <%= Tag.get_tags %>
     containerCssClass: 'tags-picker'
+
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  years = (''+i for i in [1990..2014])
+
+  monthPicker = new Picker '#month-picker', months
+  yearPicker  = new Picker '#year-picker', years

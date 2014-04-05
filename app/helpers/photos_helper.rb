@@ -1,19 +1,21 @@
 module PhotosHelper
-
-  # form helpers
-  def form_photo_date
-    (@photo.photo_date? && @photo.photo_date.strftime('%m/%d/%Y')) || ''
+  
+  def months
+    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   end
 
   # display helpers
 
-  def photographer_link
-    "<a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
+  def display_photo_month
+    (@photo.photo_date? && @photo.photo_date.split(' ').first) || Date.today.strftime('%B')
   end
 
-  def display_photo_date default
-    date = @photo.photo_date? && @photo.photo_date.strftime('%b %-d, %Y')
-    date || default
+  def display_photo_year
+    (@photo.photo_date? && @photo.photo_date.split(' ').last) || Date.today.strftime('%Y')
+  end  
+
+  def photographer_link
+    "<a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
   end
 
   def method_missing method, *args, &block

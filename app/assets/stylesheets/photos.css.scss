@@ -29,8 +29,6 @@
         box-shadow: none;
         z-index: auto;
     }
-
-
   }
 }
 
@@ -175,5 +173,9 @@
   .form-group div {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  #month-picker, #year-picker {
+    display: inline-block;
   }
 }

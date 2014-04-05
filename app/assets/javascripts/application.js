@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require jquery.backstretch
 //= require bootstrap
-//= require bootstrap-datepicker
 //= require turbolinks
 //= require s3_direct_upload
 //= require select2

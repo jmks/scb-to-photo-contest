@@ -1,4 +1,6 @@
-.container
+#photo-details-wrapper.container
+  - if params[:referrer] == 'new'
+    = render './photo_steps_tabbed', step: :details
 
   .two-tone-title.text-center
     %span Photo
@@ -14,40 +16,56 @@
     = csrf_meta_tags
     = hidden_field_tag :id, @photo.id
     
-    .form-group
-      = f.label :title, 'Photo Title', class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
+    %div{class: "form-group #{'bg-danger' if @photo.errors.messages.key?(:title)}"}
+      = f.label :title, 'Photo Title', class: 'control-label col-md-3'
+      .col-md-6
         = f.text_field :title, class: 'form-control', value: @photo.title
 
     .form-group
-      = f.label :description, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
+      = f.label :description, class: 'control-label col-md-3'
+      .col-md-6
         = f.text_field :description, class: 'form-control', value: @photo.description
 
     .form-group
-      = f.label :photo_date, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
-        = f.text_field :photo_date, class: 'form-control datepicker', value: form_photo_date
+      = f.label :photo_date, class: 'control-label col-md-3'
+      .col-md-6
+        #month-picker
+          = hidden_field_tag :photo_date_month, display_photo_month, class: 'picker-hidden-val'
+          .btn-group-vertical.btn-group-lg
+            = button_tag nil, type: 'button', class: 'btn btn-default picker-dec' do
+              %i.fa.fa-minus-circle.fa-2x
+            = button_tag display_photo_month, type: 'button', class: 'btn btn-default picker-val'
+            = button_tag nil, type: 'button', class: 'btn btn-default picker-inc' do
+              %i.fa.fa-plus-circle.fa-2x
+
+        #year-picker
+          = hidden_field_tag :photo_date_year, display_photo_year, class: 'picker-hidden-val'
+          .btn-group-vertical.btn-group-lg
+            = button_tag nil, type: 'button', class: 'btn btn-default picker-dec' do
+              %i.fa.fa-minus-circle.fa-2x
+            = button_tag display_photo_year, type: 'button', class: 'btn btn-default picker-val'
+            = button_tag nil, type: 'button', class: 'btn btn-default picker-inc' do
+              %i.fa.fa-plus-circle.fa-2x
 
     .form-group
-      = f.label :photo_location, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
+      = f.label :photo_location, class: 'control-label col-md-3'
+      .col-md-6
         = f.text_field :photo_location, class: 'form-control', value: @photo.photo_location
 
     .form-group
-      = f.label :camera_stats, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
+      = f.label :camera_stats, class: 'control-label col-md-3'
+      .col-md-6
         = f.text_area :camera_stats, class: 'form-control', rows: 5, value: @photo.camera_stats
 
     .form-group
-      = f.label :category, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
-        = f.select :category, Photo::CATEGORIES.map { |c| c.capitalize }, { selected: @photo.category.to_s.capitalize }, class: 'form-control'
+      = f.label :category, class: 'control-label col-md-3'
+      .col-md-6
+        = f.select :category, Photo::CATEGORIES.map { |c| c.capitalize }, {}, class: 'form-control'
 
     .form-group
-      = f.label :tags, class: 'control-label col-xs-4 col-sm-3 col-md-3'
-      .col-xs-8.col-sm-8.col-md-6
-        = f.text_field :tags, class: 'form-control', value: tags_string(@photo)
+      = f.label :tags, class: 'control-label col-md-3'
+      .col-md-6
+        = f.hidden_field :tags, class: 'select2 form-control', value: tags_string(@photo)
 
     .form-group
       .text-center
