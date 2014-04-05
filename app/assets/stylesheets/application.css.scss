@@ -248,6 +248,20 @@ span.btn.btn-flat:hover, span.btn.btn-flat:focus {
     background-color: #135870;
 }
 
+a.btn.btn-flat.btn-secondary, button.btn.btn-flat.btn-secondary, input.btn.btn-flat.btn-secondary, span.btn.btn-flat.btn-secondary {
+    border: 3px solid #777;
+    color: #777;
+}
+
+a.btn.btn-flat.btn-secondary:hover, a.btn.btn-flat.btn-secondary:focus,
+button.btn.btn-flat.btn-secondary:hover, button.btn.btn-flat.btn-secondary:focus,
+input.btn.btn-flat.btn-secondary:hover, input.btn.btn-flat.btn-secondary:focus,
+span.btn.btn-flat.btn-secondary:hover, span.btn.btn-flat.btn-secondary:focus {
+    border-color: #777;
+    color: #fff;
+    background-color: #777;
+}
+
 .btn-flow.btn-group {
     @include nav-font;
 

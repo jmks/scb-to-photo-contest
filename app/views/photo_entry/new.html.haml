@@ -1,18 +1,31 @@
 #photo-upload-wrapper.container.text-center
   - if params[:referrer] == 'new'
-    = render './photo_steps', step: :upload
-  .two-tone-title.text-center
-    %span Photo
-    %span Upload
+    = render './photo_steps_tabbed', step: :upload
 
-  %h2= @photo.title
+  .row
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Photo
+        %span Upload
 
   .row.rule-reminder
-    .col-xs-12.text-center
-      %div
-        Make sure photo is at 300dpi and the dimensions are in accordance with the 
-        = link_to 'contest\'s rules.', rules_path, target: '_blank'
+    .col-xs-12.text-left
+      %i.fa.fa-warning
+      %span Make sure photo is at 300dpi and the dimensions are in accordance with the 
+      %span= link_to 'rules', rules_path, target: '_blank'
+      
+  .row
+    .col-xs-12
       %div= image_tag asset_path('form-factor-blue.svg'), height: '100px'
+
+  .row.select-file
+    .col-xs-12.text-left
+      .two-tone-title
+        %span Select
+        %span A File For:
+  .row.text-center.photo-title
+    .col-xs-12
+      '#{@photo.title}'
 
   - if @photo.thumbnail_xs_url?
     %h4 Current image:
@@ -21,12 +34,17 @@
       %i.fa.fa-warning
       %span Uploading a new photo will replace the current one
 
+  %script#template-upload{type: 'text/x-tmpl'}
+    .upload{id: 'file-{%= o.unique_id %}'}
+      {%=o.name%}
+      .progress
+        .bar{style: 'width: 0%'}
+
   = s3_uploader_form callback_url: photo_entry_path, id: 's3-uploader', class: 'form' do
     .form-group
       .col-xs-12.text-center
-        /= file_field_tag :file, multiple: true, class: 'btn btn-flat'
 
-        = link_to edit_photo_path(@photo, referrer: params[:referrer]), class: 'btn btn-flat' do 
+        = link_to edit_photo_path(@photo, referrer: params[:referrer]), class: 'btn btn-flat btn-secondary' do 
           %i.fa.fa-arrow-left.fa-2x
           Previous
 
@@ -35,17 +53,7 @@
           Browse...
           = file_field_tag :file, multiple: true
 
-  / .upload.js-progress-bars
-  /   .progress
-  /     .bars
-
-  %script#template-upload{type: 'text/x-tmpl'}
-    .upload{id: 'file-{%= o.unique_id %}'}
-      {%=o.name%}
-      .progress
-        .bar{style: 'width: 0%'}
-
-  - if @photo.thumbnail_xs_url?
+  - unless params[:referrer] == 'new'
     = link_to contestant_index_path, class: 'btn btn-flat' do
       %i.fa.fa-undo.fa-2x
       %span Return to My Page
