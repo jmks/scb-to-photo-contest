@@ -55,21 +55,19 @@
             %li.tag= link_to tag, photos_path(tag: tag)
         
         #photo-stats.row
-          .col-xs-12.col-sm-10
-            .btn-group.btn-group-justified
-              .btn-group
-                = button_tag nil, type: 'button', class: 'btn btn-default' do 
-                  %i.fa.fa-eye.fa-2x
-                  Views
-                  %span= display_views 0
-              .btn-group
-                = button_tag nil, type: 'button', class: 'btn btn-default' do 
-                  %i.fa.fa-thumbs-up.fa-2x
-                  Votes
-                  %span= display_votes 0
+          .col-xs-12.col-md-6
+            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do 
+              %i.fa.fa-eye
+              %span Views
+              %span= display_views 0
+          .col-xs-12.col-md-6
+            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do 
+              %i.fa.fa-thumbs-up
+              %span Votes
+              %span= display_votes 0
 
-        .row.text-center
-          .col-xs-12.col-sm-10
+        .row
+          .col-xs-12.col-md-6
             = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
               = hidden_field_tag :id, @photo.id
               = button_tag type: 'submit', class: 'vote-btn btn btn-block btn-lg btn-flat' do
@@ -113,7 +111,7 @@
                 = f.text_area :text, class: "form-control", rows: 3
             .form-group
               .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-                = f.button type: 'submit', class: "btn btn-flat btn-block btn-sm pull-right" do 
+                = f.button type: 'submit', class: "btn btn-flat btn-block pull-right" do 
                   %span.fa-stack.fa-lg
                     %i.fa.fa-comment-o.fa-stack-2x
                     %i.fa.fa-plus.fa-stack-1x

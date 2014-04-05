@@ -5,10 +5,19 @@
 #photo-wrapper {
   margin-top: 30px;
 
+  .photo-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
   .photo-field {
     text-transform: uppercase;
     font-weight: bold;
   }
+
+  .photo-field, .photo-value {
+      font-size: 20px;
+    }
 
   #photo-stats {
     button {
@@ -16,13 +25,18 @@
       -moz-border-radius: 0px;
       border-radius: 0px;
       border: none;
+      
       text-transform: uppercase;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
+      
+      font-size: 24px;
       color: #777;
       cursor: default;
       background-color: #efefef;
       padding: 10px 20px;
+
+      margin-bottom: 8px;
     }
 
     button:focus, button:hover, button:active {
@@ -32,22 +46,11 @@
   }
 }
 
-.comments-container {
+#comments-container {
   margin-top: 30px;
   margin-bottom: 20px;
 
-  .comment {
-    padding: 5px;
-
-    span {
-      margin-left: 5px;
-      font-size: 1.25em;
-    }
-  }
-
-  .comment:nth-child(odd) {
-    background-color: #E8E9E9;
-  }
+  font-size: 20px;
 }
 
 #vote-form {
@@ -91,10 +94,6 @@
 .thumbnail-lg > img {
   margin-bottom: 30px;
   max-width: 100%
-}
-
-#tags-container {
-  
 }
 
 .list-inline > li:first-child {
