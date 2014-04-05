@@ -128,6 +128,14 @@ html {
     position: relative;
 }
 
+body.rouge2005 {
+    background: url(image-path('green blurry.jpg')) no-repeat top center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 body { 
     /* for fixed header */
     padding-top: 70px;
