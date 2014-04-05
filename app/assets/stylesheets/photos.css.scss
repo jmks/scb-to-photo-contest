@@ -170,4 +170,10 @@
 
 #photo-details-wrapper {
   background-color: #fff;
+  max-width: 992px;
+
+  .form-group div {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
