@@ -17,6 +17,9 @@ module ApplicationHelper
   end
 
   def on_photo_step?
-    [current_page?(new_photo_path), current_page?(new_photo_entry_path), current_page?(print_photo_entry_path), current_page?(verify_photo_entry_path), current_page?(share_photo_entry_path)].any?
+    [new_photo_path, new_photo_entry_path, order_path, verify_path, share_photo_path].each do |path|
+      return true if current_page? path
+    end
+    false
   end
 end

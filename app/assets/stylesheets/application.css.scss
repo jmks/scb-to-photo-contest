@@ -262,6 +262,20 @@ span.btn.btn-flat.btn-secondary:hover, span.btn.btn-flat.btn-secondary:focus {
     background-color: #777;
 }
 
+a.btn.btn-flat.btn-go, button.btn.btn-flat.btn-go, input.btn.btn-flat.btn-go, span.btn.btn-flat.btn-go {
+    border: 3px solid #00a14b;
+    color: #00a14b;
+}
+
+a.btn.btn-flat.btn-go:hover, a.btn.btn-flat.btn-go:focus,
+button.btn.btn-flat.btn-go:hover, button.btn.btn-flat.btn-go:focus,
+input.btn.btn-flat.btn-go:hover, input.btn.btn-flat.btn-go:focus,
+span.btn.btn-flat.btn-go:hover, span.btn.btn-flat.btn-go:focus {
+    border-color: #00a14b;
+    color: #fff;
+    background-color: #00a14b;
+}
+
 .btn-flow.btn-group {
     @include nav-font;
 

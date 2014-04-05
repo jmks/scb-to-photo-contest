@@ -1,0 +1,63 @@
+#order-wrapper.container
+  = render './photo_steps_tabbed', step: :order
+
+  .row
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Order
+        %span Display Print
+
+  .row.text-left.instructions
+    .col-xs-12
+      %ul
+        %li
+          %span Support Us -
+          %span Prints used for silent auction fundraiser
+        %li
+          %span Win Prizes - 
+          %span Display prints required for exhibition and awards
+        %li
+          %span Discount Printing -
+          %span Use Downtown Camera for $3.99! Select 3 BUSINESS DAY printing and use our COUPON CODE
+        %li
+          %span Convenience - 
+          %span SCB-TO picks up display prints from Downtown Camera weekly.
+        %li
+          %span Bulk - 
+          %span Add up to 5 entries before ordering
+
+  .row
+    .col-xs-12.text-center
+      = image_tag asset_path('no-printer-blue.svg'), height: '200px'
+  
+  .row.codes
+    .col-xs-12.text-center
+      %table.table
+        %thead
+          %tr
+            %td 
+              %strong Photo Size
+            %td
+              %strong Typical Camera
+            %td
+              %strong Coupon Code
+        %tbody
+          %tr
+            %td 8x10
+            %td point-and-shoot
+            %td SCB8x10
+          %tr
+            %td 8x12
+            %td DSLR
+            %td SCB8x12
+
+  .row.text-center
+    = link_to new_photo_path, class: 'btn btn-flat btn-secondary' do 
+      %i.fa.fa-arrow-left.fa-2x
+      %span Add Entry
+    = link_to 'http://downtowncamera.photofinale.com/prints', target: '_blank', class: 'btn btn-flat' do 
+      %i.fa.fa-external-link.fa-2x
+      %span Downtown Camera
+    = link_to verify_path, target: '_blank', class: 'btn btn-flat btn-go' do 
+      %span Continue
+      %i.fa.fa-arrow-right.fa-2x

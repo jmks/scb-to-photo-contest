@@ -7,7 +7,7 @@ module ContestantsHelper
     when :submitted
       "<a href='#{ new_photo_entry_path photo_id: photo.id }'>#{message}</a>".html_safe
     when :uploaded
-      link_to message, print_photo_entry_path
+      link_to message, verify_path
     when :printed
       message
     when :confirmed

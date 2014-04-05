@@ -1,2 +1,14 @@
 .container.text-center
   = render './photo_steps', step: :details
+
+%h3 Enter ORDER NUMBER
+  = form_tag verify_path, class: 'form form-horizontal' do 
+    - @entries.each do |entry|
+      .form-group
+        = label_tag entry.id, entry.title, class: 'control-label col-xs-4 col-sm-4'
+        .col-xs-6.col-sm-4
+          = text_field_tag entry.id, entry.order_number, placeholder: 'Order Number', class: 'form-control'
+    .form-group
+      = button_tag type: 'submit', class: 'btn btn-flat' do
+        %i.fa.fa-check-circle.fa-2x
+        %span Verify Photos

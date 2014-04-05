@@ -43,19 +43,21 @@ class PhotoEntryController < ApplicationController
     if request.xhr?
       flash[:notice] = "Photo '#{@photo.title}' successfully received. It's thumbnails will be generated shortly."
       flash.keep(:notice) # Keep flash notice around for the redirect.
-      render :js => "window.location = #{ print_photo_entry_path.to_json }"
+      render :js => "window.location = #{ order_path.to_json }"
     else
-      redirect_to print_photo_entry_path
+      redirect_to order_path
     end
   end
 
-  # photo submission step 3 - display print and verify
-  def print_and_verify
-    @entries = contestant_unverified_photos
+  # photo submission step 3 - order display print
+  def order
   end
 
-  # photo submission step 3.5 - verify
   def verify
+  end
+
+  # photo submission step 4.5 - verify
+  def verify_orders
 
     photos = params.select { |key, val| key =~ /^[a-f0-9]{24}/ }
 
