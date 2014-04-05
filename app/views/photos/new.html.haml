@@ -32,23 +32,23 @@
         .form-group
           = f.label :photo_date, class: 'control-label col-md-3'
           .col-md-6
-            #month-picker
+            #month-picker.picker
               = hidden_field_tag :photo_date_month, display_photo_month, class: 'picker-hidden-val'
               .btn-group-vertical.btn-group-lg
                 = button_tag nil, type: 'button', class: 'btn btn-default picker-dec' do
-                  %i.fa.fa-minus-circle.fa-2x
+                  %i.fa.fa-minus
                 = button_tag display_photo_month, type: 'button', class: 'btn btn-default picker-val'
                 = button_tag nil, type: 'button', class: 'btn btn-default picker-inc' do
-                  %i.fa.fa-plus-circle.fa-2x
+                  %i.fa.fa-plus
 
-            #year-picker
+            #year-picker.picker
               = hidden_field_tag :photo_date_year, display_photo_year, class: 'picker-hidden-val'
               .btn-group-vertical.btn-group-lg
                 = button_tag nil, type: 'button', class: 'btn btn-default picker-dec' do
-                  %i.fa.fa-minus-circle.fa-2x
+                  %i.fa.fa-minus
                 = button_tag display_photo_year, type: 'button', class: 'btn btn-default picker-val'
                 = button_tag nil, type: 'button', class: 'btn btn-default picker-inc' do
-                  %i.fa.fa-plus-circle.fa-2x
+                  %i.fa.fa-plus
 
         .form-group
           = f.label :photo_location, class: 'control-label col-md-3'

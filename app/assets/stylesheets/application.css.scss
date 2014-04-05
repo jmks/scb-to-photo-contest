@@ -93,6 +93,11 @@ $input-border: none;
     -webkit-border-radius: $radius;
     -moz-border-radius:    $radius;
     border-radius:         $radius;
+
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
 }
 
 $darkblue:   #135870;
@@ -683,6 +688,16 @@ ul.dropdown-menu > li > a:focus {
         span {
             margin-left: 5px;
         }
+    }
+}
+
+.picker {
+    display: inline-block;
+    
+    .btn-group-vertical > button.btn,
+    .btn-group-vertical > .btn:first-child:not(:last-child),
+    .btn-group-vertical > .btn:last-child:not(:first-child) {
+        @include border-radius(0);
     }
 }
 
