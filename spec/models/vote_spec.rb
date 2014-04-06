@@ -34,6 +34,12 @@ describe Vote do
           valid_vote_amout.times { @vote.vote }
         }.to change { @vote.votes_today }.by valid_vote_amout 
       end
+
+      it 'fails after maximum voting reached' do 
+        @max_votes.times { @vote.vote }
+
+        expect(@vote.vote).to eql false
+      end
     end
 
     context 'voting on subsequent days' do
@@ -41,8 +47,9 @@ describe Vote do
       it 'resets votes_today' do 
         @vote.vote
         @vote.save!
+
         # implementation dependant
-        expect(Date).to receive(:today).twice.and_return { 1.day.from_now }
+        expect(Date).to receive(:today).and_return { 1.day.from_now }
 
         expect {
           @vote.vote
@@ -51,8 +58,9 @@ describe Vote do
 
       it 'increases votes by votes_today' do
         @max_votes.times { @vote.vote }
+
         # implementation dependant
-        expect(Date).to receive(:today).twice.and_return { 1.day.from_now }
+        expect(Date).to receive(:today).and_return { 1.day.from_now }
 
         expect {
           @vote.vote
