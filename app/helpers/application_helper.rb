@@ -15,6 +15,8 @@ module ApplicationHelper
   def background_class
     if on_photo_step?
       'rouge2005'
+    elsif current_page?(about_path)
+      'grey-bg'
     else
       nil
     end

@@ -1,3 +1,8 @@
+$xs: "only screen and (max-width: 767px)";
+$sm: "only screen and (min-width: 768px)";
+$md: "only screen and (min-width: 992px)";
+$lg: "only screen and (min-width: 1200px)";
+
 #home-welcome {
     height: 500px;
 
@@ -185,6 +190,98 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
         img#white-logo svg {
             fill: blue;
+        }
+    }
+}
+
+#about-wrapper {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 18px;
+
+    background-color: transparent;
+
+    .row:nth-child(1), .row:nth-child(2) {
+        background-color: #fff;
+        margin-left: -6px;
+        margin-right: -6px;
+
+        text-align: justify;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .row:nth-child(2) {
+        padding-bottom: 20px;
+    }
+
+    .photo-panel {
+        cursor: pointer;
+        padding: 10px;
+        
+        .wrapper{
+            background-color: #19b2d9;
+        }
+
+        .panel-photo {
+            width: 100%;
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 0px 0px 5px rgba(60,60,60,1);
+
+            position: absolute;
+            left: 20px;
+            top: 30px;
+
+            z-index: 3;
+        }
+
+        p {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+
+            position: absolute;
+            width: 80%;
+            left: 10%;
+            top: 30%;
+
+            z-index: -1;
+
+            @media #{$xs} {
+                font-size: 16px;
+            }
+
+            @media #{$sm} {
+                font-size: 14px;
+            }
+
+            @media #{$md} {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .photo-panel.clicked {
+        .title {
+            text-shadow: none;
+        }
+
+        .panel-photo {
+            z-index: -1;
+        }
+
+        p {
+            z-index: 2;
         }
     }
 }

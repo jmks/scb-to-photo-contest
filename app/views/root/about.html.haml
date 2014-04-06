@@ -1,1 +1,42 @@
-%h1 About SCB Toronto
+#about-wrapper.container
+  .row
+    .col-xs-12
+      .two-tone-title.text-center
+        %span SCB
+        %span - Toronto Chapter
+
+  .row
+    .col-xs-12
+      %p The Society for Conservation Biology (SCB) is an international professional organization dedicated advancing the science and practice of conserving the Earth's biological diversity. SCB has local chapters across the globe that provide opportunities for members to engage in conservation at the local level. 
+      %p SCB-TO is one of these local chapters, we strive to build a network of active conservation biologists from the three local academic research universities – University of Toronto, York University and Ryerson University, as well as government, non-government and private agencies operating within the Greater Toronto Area. Our goal is to facilitate the discussion of and solutions to urban conservation biology issues that threaten the function of Toronto’s local ecosystems.
+
+  .row
+    .col-xs-12.col-sm-6.photo-panel
+      .wrapper
+        .title Conservation
+        = image_tag asset_path('conservation.jpg'), class: 'panel-photo'
+        %p Our Executive Board is composed of conservation scientists actively working to study biodiversity. They direct the field work, research projects and outreach initatives of our chapter.
+
+    .col-xs-12.col-sm-6.photo-panel
+      .wrapper
+        .title Outreach
+        = image_tag asset_path('outreach.jpg'), class: 'panel-photo'
+        %p We host formal lectures with local experts, informal discussions, film screening, draft policy statements to inform municipal government decisions, and involve the local community in the practive of conservation science.
+
+    .col-xs-12.col-sm-6.photo-panel
+      .wrapper
+        .title Volunteers
+        = image_tag asset_path('volunteers.jpg'), class: 'panel-photo'
+        %p Our chapter is 100% volunteer run and driven. Anybody interested in the conservation and study of biological diversity can join, from managers, educators, to government & private conservation workers, and students.
+
+    .col-xs-12.col-sm-6.photo-panel
+      .wrapper
+        .title Research
+        = image_tag asset_path('research6.jpg'), class: 'panel-photo'
+        %p For the past two years over 100 SCB-TO volunteers have worked to conduct a baseline pollinator biodiversity survey at restoration sites across Rouge Park, soon to be Canada’s first urban national park.
+
+.row.text-center
+  = link_to 'http://conbio.org/membership/become-a-member', target: '_blank', class: 'btn btn-lg btn-flat btn-logo' do 
+    = image_tag asset_path('bird-darkblue.svg'), class: 'blue'
+    = image_tag asset_path('bird-white.svg'), class: 'white'
+    %span Join Today!
