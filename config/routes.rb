@@ -7,6 +7,7 @@ PhotoContest::Application.routes.draw do
   get '/rules',    to: 'root#rules',   as: 'rules'
   get '/about',    to: 'root#about',   as: 'about'
   post '/contact', to: 'root#contact', as: 'contact'
+  get '/terms',    to: 'root#terms',   as: 'terms'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 

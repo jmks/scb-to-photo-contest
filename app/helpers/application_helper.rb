@@ -17,6 +17,8 @@ module ApplicationHelper
       'rouge2005'
     elsif current_page?(about_path)
       'grey-bg'
+    elsif current_page?(new_contestant_registration_path) || current_page?(new_contestant_session_path)
+      'stjohnswart'
     else
       nil
     end

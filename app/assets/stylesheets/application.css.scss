@@ -143,6 +143,14 @@ body.rouge2005 {
     background-size: cover;
 }
 
+body.stjohnswart {
+    background: url(image-path('yellow blurry.jpg')) no-repeat top center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 body.grey-bg {
     background-color: #E6E6E6;
 }
@@ -539,6 +547,11 @@ a.btn-flat.btn-logo:active {
     ul.errors-list {
         color: red;
     }
+}
+
+.form-group.error {
+    padding: 5px;
+    background-color: #F9BDA7;
 }
 
 /* /Form Error Messages */

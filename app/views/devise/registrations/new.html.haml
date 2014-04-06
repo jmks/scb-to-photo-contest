@@ -1,72 +1,70 @@
-#signup-wrapper
-  .two-tone-title.text-center
-    %span Sign
-    %span Up
+#signup-wrapper.container
+  .row
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Sign
+        %span Up
 
-  #submit-errors
-    - if @contestant.errors.any?
-      %ul.errors-list
-        - @contestant.errors.full_messages do |msg|
-          %li= msg
-
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
-    = devise_error_messages!
-
-    -# Name
-    .form-group
-      = f.label :first_name, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.text_field :first_name, :class => 'form-control'
-
-    .form-group
-      = f.label :last_name, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.text_field :last_name, :class => 'form-control'
-
-    .form-group
-      = f.label :public_name, 'Username', class: 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.text_field :public_name, class: 'form-control tooltipped', 'data-toggle' => 'tooltip',
-          'data-placement' => 'auto', title: 'This will be publicly viewable by other users'
-      .col-sm-5
-        %small 
-
-    -# Email
-    .form-group
-      = f.label :email, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.email_field :email, :class => 'form-control'
-
-    / .form-group
-    /   = f.label :email_confirmation, :class => 'control-label col-sm-4 col-md-4'
-    /   .col-sm-8.col-md-6
-    /     = f.email_field :email_confirmation, :class => 'form-control'
-
-    -# Phone - only required to submit photos
-    .form-group
-      = f.label :phone, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.text_field :phone, class: 'form-control tooltipped', 'data-toggle' => 'tooltip',
-          'data-placement' => 'auto', title: 'A phone number for accepting awards'
-
-    -# Password
-    .form-group
-      = f.label :password, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.password_field :password, class: 'form-control tooltipped', 'data-toggle' => 'tooltip', 
-          'data-placement' => 'auto', title: 'Passwords must be 8 characters or more and contain a letter and number'
-
-    .form-group
-      = f.label :password_confirmation, :class => 'control-label col-sm-4 col-md-4'
-      .col-sm-8.col-md-6
-        = f.password_field :password_confirmation, :class => 'form-control'
-
-    -# Submit/Cancel
-    .form-group
-      .col-sm-offset-4.col-sm-2.col-md-offset-4.col-md-2
-        = f.submit nil, :class => 'btn btn-flat btn-block btn-lg', :value => 'Sign up'
+  #submit-errors.row
+    .col-xs-12.text-center
+      - if @contestant.errors.any?
+        %ul.errors-list.list.list-unstyled
+          - @contestant.errors.full_messages.each do |msg|
+            %li.error.text-center
+              %i.fa.fa-warning
+              %span= msg
 
   .row
-    .col-sm-offset-4.col-sm-8.col-md-offset-4.col-md-8
+    .col-xs-12
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
+        /= devise_error_messages!
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:first_name)}"}
+          = f.label :first_name, :class => 'control-label col-md-4'
+          .col-md-5
+            = f.text_field :first_name, :class => 'form-control'
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:last_name)}"}
+          = f.label :last_name, :class => 'control-label col-md-4'
+          .col-md-5
+            = f.text_field :last_name, :class => 'form-control'
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:public_name)}"}
+          = f.label :public_name, 'Username', class: 'control-label col-md-4'
+          .col-md-5
+            = f.text_field :public_name, class: 'form-control'
+          .col-md-offset-4.col-md-5
+            %small This name will be public
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:email)}"}
+          = f.label :email, :class => 'control-label col-md-4'
+          .col-md-5
+            = f.email_field :email, :class => 'form-control'
+
+        .form-group
+          = f.label :phone, :class => 'control-label col-md-4 optional'
+          .col-md-5
+            = f.text_field :phone, class: 'form-control'
+          .col-md-offset-4.col-md-5
+            %small For accepting awards
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:password)}"}
+          = f.label :password, :class => 'control-label col-md-4'
+          .col-md-5
+            = f.password_field :password, class: 'form-control'
+          .col-md-offset-4.col-md-5
+            %small 8 Letters and numbers
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:password_confirmation)}"}
+          = f.label :password_confirmation, 'Confirm Password', :class => 'control-label col-md-4'
+          .col-md-5
+            = f.password_field :password_confirmation, :class => 'form-control'
+
+        .form-group
+          .col-md-offset-4.col-md-3
+            = f.submit nil, :class => 'btn btn-flat btn-block btn-lg', :value => 'Sign up'
+
+  .row
+    .col-md-offset-4.col-md-5
       %small Already registered?
       = render "devise/shared/links"

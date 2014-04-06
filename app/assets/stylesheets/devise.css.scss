@@ -1,13 +1,34 @@
-
 #signin-wrapper {
-    position: relative;
-    
-    .island {
-        margin-top: 40px;
-        background-color: #fff;
+  position: relative;
+  padding-bottom: 20px;
+  
+  .island {
+    margin-top: 40px;
+    background-color: #fff;
+    padding-bottom: 20px;
 
-        .checkbox-label.text-left {
-            text-align: left;
-        }
+    .checkbox-label.text-left {
+      text-align: left;
     }
+  }
+
+  .devise-links {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+#signup-wrapper {
+  margin-top: 30px;
+  margin-bottom: 20px;
+
+  padding-bottom: 20px;
+
+  background-color: #fff;
+  max-width: 750px;
+
+  .optional:after {
+    content: ' (optional)';
+    color: #999;
+  }
 }

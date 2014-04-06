@@ -69,9 +69,14 @@
           = f.label :tags, class: 'control-label col-md-3'
           .col-md-6
             = f.hidden_field :tags, class: 'select2 form-control', value: tags_string(@photo)
+          .col-md-offset-3.col-md-6
+            %small Keywords to help others find your photos
 
         %div{class: "form-group #{'error' if @photo.errors.messages.key?(:terms_of_service)}"}
-          = f.label :terms_of_service, 'I accept the Terms of Service', class: 'control-label col-md-offset-3 col-md-4 text-left'
+          = f.label :terms_of_service, class: 'control-label col-md-offset-3 col-md-4 text-left' do 
+            %span I accept the
+            = link_to 'Terms of Service', terms_path, target: '_blank'
+
           .col-md-1
             = f.check_box :terms_of_service, class: 'form-control'
 

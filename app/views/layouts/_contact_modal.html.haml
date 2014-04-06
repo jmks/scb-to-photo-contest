@@ -17,5 +17,5 @@
               = text_field_tag :email, nil, id: 'mail-email', class: 'form-control', type: 'text', placeholder: 'Your email address'
           .form-group.btns
             .col-xs-12
-              %button.btn.btn-flat.pull-left{type: 'button', 'data-dismiss' => 'modal'} Cancel
+              %button.btn.btn-flat.btn-secondary.pull-left{type: 'button', 'data-dismiss' => 'modal'} Cancel
               = button_tag 'Send', type: 'submit', id: 'send-mail', class: 'btn btn-flat pull-right'
