@@ -19,7 +19,7 @@
         = csrf_meta_tags
         = hidden_field_tag :id, @photo.id
         
-        %div{class: "form-group #{'bg-danger' if @photo.errors.messages.key?(:title)}"}
+        %div{class: "form-group #{'error' if @photo.errors.messages.key?(:title)}"}
           = f.label :title, 'Photo Title', class: 'control-label col-md-3'
           .col-md-6
             = f.text_field :title, class: 'form-control', value: @photo.title
@@ -70,7 +70,7 @@
           .col-md-6
             = f.hidden_field :tags, class: 'select2 form-control', value: tags_string(@photo)
 
-        %div{class: "form-group #{'bg-danger' if @photo.errors.messages.key?(:terms_of_service)}"}
+        %div{class: "form-group #{'error' if @photo.errors.messages.key?(:terms_of_service)}"}
           = f.label :terms_of_service, for: 'photo_terms_of_service', class: 'control-label col-md-3'
           .col-md-6
             = f.check_box :terms_of_service, class: 'form-control'

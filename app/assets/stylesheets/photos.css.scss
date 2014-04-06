@@ -202,4 +202,9 @@
   .picker + .picker {
     margin-left: 20px;
   }
+
+  .form-group.error {
+    padding: 5px;
+    background-color: #F9BDA7;
+  }
 }

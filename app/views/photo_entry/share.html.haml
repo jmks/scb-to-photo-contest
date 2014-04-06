@@ -1,20 +1,40 @@
-#share.container.text-center
-  = render './photo_steps', step: :share
+#share-wrapper.container
+  = render './photo_steps_tabbed', step: :share
 
-  .two-tone-title.text-center
-    %span
-      %i.fa.fa-check
-      Submission
-    %span Complete
+  .row
+    .col-xs-12
+      .two-tone-title.text-center
+        %span
+          %i.fa.fa-check
+          Submission
+        %span Complete
 
-  .container
-    %h4
-      Share your photos &amp; get your friends to vote for a chance to win 
-      = link_to 'prizes', prizes_path
-      %span and a spot in our photo exhibition.
+  .row.share-actions
+    .col-xs-12.col-md-offset-3.col-md-9
+      %ul.list.list-unstyled
+        %li
+          %i.fa.fa-eye.fa-2x
+          %span
+            %strong View - 
+          %span Click the thumbnails on MY PAGE to see your entries
+        %li
+          %i.fa.fa-comment.fa-2x
+          %span 
+            %strong Discuss - 
+          %span Post comments to chat with other photographers
+        %li
+          %i.fa.fa-thumbs-up.fa-2x
+          %span
+            %strong Share - 
+          %span Get your friends to vote so you can win 
+          = link_to 'prizes', prizes_path
 
-  %h2 Good luck!
+  .row.text-center
+    .col-xs-12
+      %h2 Good Luck!
 
-  = link_to contestant_index_path, class: 'btn btn-flat' do
-    %i.fa.fa-undo.fa-2x
-    %span Return to My Page
+  .row.text-center
+    .col-xs-12
+      = link_to contestant_index_path, class: 'btn btn-flat' do
+        %i.fa.fa-undo.fa-2x
+        %span Return to My Page

@@ -30,8 +30,8 @@ PhotoContest::Application.routes.draw do
   post '/photo_entry',        to: 'photo_entry#create',   as: 'photo_entry'
   get  '/photo_entry/order',  to: 'photo_entry#order',    as: 'order'
   get  '/photo_entry/verify', to: 'photo_entry#verify',   as: 'verify'
-  post '/photo_entry/verity_orders', to: 'photo_entry#verify_orders', as: 'verify_orders'
-  get  '/photo_entry/share',  to: 'photo_entry#share',    as: 'share_photo'
+  post '/photo_entry/verify_orders', to: 'photo_entry#verify_orders', as: 'verify_orders'
+  get  '/photo_entry/share',  to: 'photo_entry#share',    as: 'share_photos'
 
   get '/tags', to: 'tag#index', as: 'tags'
 

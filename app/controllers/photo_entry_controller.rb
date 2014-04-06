@@ -54,11 +54,12 @@ class PhotoEntryController < ApplicationController
   end
 
   def verify
+    @entries = contestant_unverified_photos
+    @errors  = nil
   end
 
   # photo submission step 4.5 - verify
   def verify_orders
-
     photos = params.select { |key, val| key =~ /^[a-f0-9]{24}/ }
 
     invalid_photo_order_numbers = []
@@ -75,16 +76,16 @@ class PhotoEntryController < ApplicationController
     end
 
     if invalid_photo_order_numbers.any?
-      flash[:alert] = 'Some ORDER NUMBERs could not be verified. Please correct and re-enter your ORDER NUMBER.'
       @entries = contestant_unverified_photos
-      render :print_and_verify and return
+      @errors = invalid_photo_order_numbers
+      render :verify and return
     end
 
     # remove
     session[:invalid_photo_order_numbers] = invalid_photo_order_numbers
 
     flash[:notice] = 'Order Numbers successfully verified. Thank you.'
-    redirect_to share_photo_entry_path
+    redirect_to share_photos_path
   end
 
   def share
