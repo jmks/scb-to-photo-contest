@@ -15,7 +15,7 @@ module ApplicationHelper
   def background_class
     if on_photo_step?
       'rouge2005'
-    elsif current_page?(about_path)
+    elsif current_page?(about_path) || current_page?(contest_path)
       'grey-bg'
     elsif current_page?(new_contestant_registration_path) || current_page?(new_contestant_session_path)
       'stjohnswart'

@@ -20,6 +20,8 @@
           %ul.dropdown-menu
             %li{class: "#{'active' if current_page?(about_path)}"}
               = link_to 'WHO WE ARE', about_path  
+            %li{class: "#{'active' if current_page?(contest_path)}"}
+              = link_to 'OUR CONTEST', contest_path
             %li{class: "#{'active' if current_page?(judges_path)}"}
               = link_to 'JUDGES', judges_path
             %li{class: "#{'active' if current_page?(rules_path)}"}

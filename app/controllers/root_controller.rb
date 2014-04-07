@@ -14,6 +14,9 @@ class RootController < ApplicationController
   def about
   end
 
+  def contest
+  end
+
   def contact
     email, message = params[:email], params[:message]
     

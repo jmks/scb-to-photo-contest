@@ -1,0 +1,112 @@
+#contest-wrapper.container
+  .row.white-wrapper
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Photo
+        %span Contest
+
+  .row.white-wrapper
+    .col-xs-12
+      %p Grab your camera and explore the great outdoors this spring!
+      %p SCB-Toronto is excited to host our first Nature &amp; Wildlife Photography contest. We want to encourage communities around our city to think about conservation and get people more engaged with the natural world.
+
+  .row
+    .col-xs-12.photo-panel
+      .wrapper
+        .title Get Outside
+        = image_tag asset_path('getoutside.jpg'), class: 'panel-photo'
+        %p Explore the wonders of the natural world around you to learn more about local plants and wildlife.
+
+  .row
+    .col-xs-12.col-sm-4.photo-panel.metro-panel.photograph
+      .wrapper
+        .title Photograph
+        = image_tag asset_path('photograph.svg'), class: 'panel-photo'
+        %p Document your exerience with a camera and show us what conservation and biodiversity mean to you.
+
+    .col-xs-12.col-sm-4.photo-panel.metro-panel.submit
+      .wrapper
+        .title Submit
+        = image_tag asset_path('submit.svg'), class: 'panel-photo'
+        %p Upload photos and have them printed ($4). Display prints are used in our Silent Auction to raise funds for local conservation projects.
+
+    .col-xs-12.col-sm-4.photo-panel.metro-panel.share
+      .wrapper
+        .title Share
+        = image_tag asset_path('share.svg'), class: 'panel-photo'
+        %p Share your photos using social media. Ask friends to vote for a chance to win our 'People's Choice' award and a spot in our exhibition.
+
+  .row.white-wrapper
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Three
+        %span Categories
+
+  .row
+    .col-xs-12.col-sm-4.photo-panel
+      .wrapper
+        .title Flora
+        .panel-photo
+          = image_tag asset_path('trillium_byJackFrost2121.jpg'), class: 'panel-photo'
+        %p Images of plants/vegetation
+
+    .col-xs-12.col-sm-4.photo-panel
+      .wrapper
+        .title Fauna
+        .panel-photo
+          = image_tag asset_path('fauna.jpg'), class: 'panel-photo'
+        %p Images of animals
+
+    .col-xs-12.col-sm-4.photo-panel
+      .wrapper
+        .title Landscape
+        .panel-photo
+          = image_tag asset_path('landscape.jpg'), class: 'panel-photo'
+        %p Images of scenery
+
+  .row.white-wrapper
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Contest
+        %span Dates
+    
+      .row
+        .col-xs-6
+          %ul.list.list-unstyled
+            %li
+              %strong Submissions Open - 
+              %span April 14 2014
+            %li
+              %strong Submissions Close - 
+              %span May 14 2014
+            %li
+              %strong Judging Period - 
+              %span May 15-22 2014
+        .col-xs-6
+          %ul.list.list-unstyled
+            %li
+              %strong Results Annouced - 
+              %span May 23 2014
+            %li
+              %strong Exhibition & Silent Auction -
+              %span May 26-30 2014
+            %li
+              %strong Closing Ceremony -
+              %span May 30 2014, 7pm
+
+  .row
+    .col-xs-12.photo-panel
+      = image_tag asset_path('contest-dates-blue.svg'), class: 'panel-photo'
+
+  .row.white-wrapper
+    .col-xs-12
+      .two-tone-title.text-center
+        %span Contest
+        %span Results
+
+  .row.white-wrapper
+    .col-xs-8
+      %p Winners will be contacted via email and announced online after the juding period. All awards will be handed out at the Closing Ceremony.
+      %p Exhibition, Silent Auction and Closing Ceremony held at Baka Gallery Cafe. 2256 Bloor St W, Toronto, ON M6S 1N6 at Runnymede TTC Station near High Park.
+    .col-xs-4.photo-panel
+      = render './google_map_baka'
