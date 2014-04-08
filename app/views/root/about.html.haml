@@ -37,6 +37,8 @@
 
 .row.text-center
   = link_to 'http://conbio.org/membership/become-a-member', target: '_blank', class: 'btn btn-lg btn-flat btn-logo' do 
-    = image_tag asset_path('bird-darkblue.svg'), class: 'blue'
-    = image_tag asset_path('bird-white.svg'), class: 'white'
+    /= image_tag asset_path('bird-darkblue.svg'), class: 'blue'
+    /= image_tag asset_path('bird-white.svg'), class: 'white'
+    = svg_png_fallback 'bird-darkblue.svg', class: 'blue'
+    = svg_png_fallback 'bird-white.svg', class: 'white'
     %span Join Today!

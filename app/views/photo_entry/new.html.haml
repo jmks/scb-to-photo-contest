@@ -16,7 +16,8 @@
       
   .row
     .col-xs-12
-      %div= image_tag asset_path('form-factor-blue.svg'), height: '100px'
+      /%div= image_tag asset_path('form-factor-blue.svg'), height: '100px'
+      %div= svg_png_fallback 'form-factor-blue.svg', height: '100px'
 
   .row.select-file
     .col-xs-12.text-left

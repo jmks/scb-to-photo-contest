@@ -2,7 +2,8 @@
   .row#social-media-footer
     .col-xs-12
       %a.btn.pull-right{ href: 'http://www.conbio.org', target: '_blank' }
-        = image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
+        /= image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
+        = svg_png_fallback 'scb-bird.svg', alt: 'SCB', height: '28px'
       %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank' }
         %i.fa.fa-home.fa-2x
       %a.btn.pull-right{ href: 'https://twitter.com/SCBToronto', target: '_blank' }

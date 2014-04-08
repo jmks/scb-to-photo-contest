@@ -21,19 +21,22 @@
     .col-xs-12.col-sm-4.photo-panel.metro-panel.photograph
       .wrapper
         .title Photograph
-        = image_tag asset_path('photograph.svg'), class: 'panel-photo'
+        /= image_tag asset_path('photograph.svg'), class: 'panel-photo'
+        = svg_png_fallback 'photograph.svg', class: 'panel-photo'
         %p Document your exerience with a camera and show us what conservation and biodiversity mean to you.
 
     .col-xs-12.col-sm-4.photo-panel.metro-panel.submit
       .wrapper
         .title Submit
-        = image_tag asset_path('submit.svg'), class: 'panel-photo'
+        /= image_tag asset_path('submit.svg'), class: 'panel-photo'
+        = svg_png_fallback 'submit.svg', class: 'panel-photo'
         %p Upload photos and have them printed ($4). Display prints are used in our Silent Auction to raise funds for local conservation projects.
 
     .col-xs-12.col-sm-4.photo-panel.metro-panel.share
       .wrapper
         .title Share
-        = image_tag asset_path('share.svg'), class: 'panel-photo'
+        /= image_tag asset_path('share.svg'), class: 'panel-photo'
+        = svg_png_fallback 'share.svg', class: 'panel-photo'
         %p Share your photos using social media. Ask friends to vote for a chance to win our 'People's Choice' award and a spot in our exhibition.
 
   .row.white-wrapper
@@ -96,7 +99,8 @@
 
   .row.calendar
     .col-xs-12
-      = image_tag asset_path('contest-dates-blue.svg'), class: 'panel-photo'
+      /= image_tag asset_path('contest-dates-blue.svg'), class: 'panel-photo'
+      = svg_png_fallback 'contest-dates-blue.svg', class: 'panel-photo'
 
   .row.white-wrapper
     .col-xs-12

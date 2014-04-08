@@ -7,27 +7,34 @@
     .col-xs-12
       %ul.list-inline
         %li.rule
-          = image_tag asset_path('residents-gta.svg'), class: 'img-responsive'
+          /= image_tag asset_path('residents-gta.svg'), class: 'img-responsive'
+          = svg_png_fallback 'residents-gta.svg', class: 'img-responsive'
           %h4 You live near the GTA in Ontario
 
         %li.rule
-          = image_tag asset_path('five-photos-blue.svg'), class: 'img-responsive'
-          = image_tag asset_path('form-factor-blue.svg'), class: 'img-responsive'
+          /= image_tag asset_path('five-photos-blue.svg'), class: 'img-responsive'
+          /= image_tag asset_path('form-factor-blue.svg'), class: 'img-responsive'
+          = svg_png_fallback 'five-photos-blue.svg', class: 'img-responsive'
+          = svg_png_fallback 'form-factor-blue.svg', class: 'img-responsive'
           %h4 Submit up to 5 of your ORIGINAL photos, at 300dpi in either 8x10 or 8x12 inch formats
 
         %li.rule
-          = image_tag asset_path('no-cmyk.svg'), class: 'img-responsive'
+          /= image_tag asset_path('no-cmyk.svg'), class: 'img-responsive'
+          = svg_png_fallback 'no-cmyk.svg', class: 'img-responsive'
           %h4 Save photographs in RGB colour space
 
         %li.rule
-          = image_tag asset_path('no-shoping3-blue.svg'), class: 'img-responsive'
+          /= image_tag asset_path('no-shoping3-blue.svg'), class: 'img-responsive'
+          = svg_png_fallback 'no-shoping3-blue.svg', class: 'img-responsive'
           %h4 MUST be true to life, only corrections to all pixels are acceptable
 
         %li.rule
-          = image_tag asset_path('no-printer-blue.svg'), class: 'img-responsive'
+          /= image_tag asset_path('no-printer-blue.svg'), class: 'img-responsive'
+          = svg_png_fallback 'no-printer-blue.svg', class: 'img-responsive'
           %h4 
             You MUST provide display prints to be eligible for exhibition and prizes. Discount printing provided by
             = link_to 'Downtown Camera', 'https://www.downtowncamera.com', target: '_blank'
         %li.rule
-          = image_tag asset_path('fundraising-scbto.svg'), class: 'img-responsive', id: 'white-logo'
+          /= image_tag asset_path('fundraising-scbto.svg'), class: 'img-responsive', id: 'white-logo'
+          = svg_png_fallback 'fundraising-scbto.svg', class: 'img-responsive', id: 'white-logo'
           %h4 By entering our contest, you grant SCB-TO rights to use submitted photographs for fundraising purposes. Thank you!

@@ -28,7 +28,8 @@
 
   .row
     .col-xs-12.text-center
-      = image_tag asset_path('no-printer-blue.svg'), height: '200px'
+      /= image_tag asset_path('no-printer-blue.svg'), height: '200px'
+      = svg_png_fallback 'no-printer-blue.svg', height: '200px'
   
   .row.codes
     .col-xs-12.text-center
