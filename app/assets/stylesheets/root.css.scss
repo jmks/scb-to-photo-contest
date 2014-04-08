@@ -4,7 +4,7 @@ $md: "only screen and (min-width: 992px)";
 $lg: "only screen and (min-width: 1200px)";
 
 #home-welcome {
-    height: 500px;
+    height: 650px;
 
     h1.main-title {
         margin-top: 0;
@@ -15,6 +15,16 @@ $lg: "only screen and (min-width: 1200px)";
 
     #quick-btns {
         margin-top: 70px;
+    }
+
+    #sponsors-link {
+        margin-top: 70px;
+
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
     }
 }
 
@@ -420,5 +430,31 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
     .white-wrapper .col-xs-8 {
         padding-right: 50px;
+    }
+
+    .calendar {
+        margin: 10px -6px;
+
+        background-color: #135870;
+
+        img {
+            max-width: 100%;
+            position: relative;
+            top: 0;
+
+            @media #{$sm} {
+                left: 10%;
+                max-width: 80%;
+            }
+
+            @media #{$md} {
+                left: 15%;
+                max-width: 70%;
+            }
+        }
+    }
+
+    .banner {
+        text-align: justify;
     }
 }

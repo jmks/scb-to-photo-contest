@@ -5,7 +5,7 @@
         %span Photo
         %span Contest
 
-  .row.white-wrapper
+  .row.white-wrapper.banner
     .col-xs-12
       %p Grab your camera and explore the great outdoors this spring!
       %p SCB-Toronto is excited to host our first Nature &amp; Wildlife Photography contest. We want to encourage communities around our city to think about conservation and get people more engaged with the natural world.
@@ -71,7 +71,7 @@
         %span Dates
     
       .row
-        .col-xs-6
+        .col-xs-12.col-sm-6
           %ul.list.list-unstyled
             %li
               %strong Submissions Open - 
@@ -82,7 +82,7 @@
             %li
               %strong Judging Period - 
               %span May 15-22 2014
-        .col-xs-6
+        .col-xs-12.col-sm-6
           %ul.list.list-unstyled
             %li
               %strong Results Annouced - 
@@ -94,8 +94,8 @@
               %strong Closing Ceremony -
               %span May 30 2014, 7pm
 
-  .row
-    .col-xs-12.photo-panel
+  .row.calendar
+    .col-xs-12
       = image_tag asset_path('contest-dates-blue.svg'), class: 'panel-photo'
 
   .row.white-wrapper

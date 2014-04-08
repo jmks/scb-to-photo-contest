@@ -1,15 +1,10 @@
 #sponsors-wrapper.container
-  - if current_page? root_path
-    %article#gratitude
-      %header
-        %p
-          Our
-          %br
-          Sponsors
-  - else
+  - unless current_page? root_path
     .row
       .col-xs-12.text-center
-        %h2.cursive-font.main-title.dark-blue Our amazing sponsors:
+        .two-tone-title
+          %span Our amazing 
+          %span Sponsors
 
   .row.text-center
     .col-xs-12.col-sm-6.col-md-4.sponsor
