@@ -9,16 +9,20 @@ module ApplicationHelper
 
   def about_page?
     # better?
-    [current_page?(about_path), current_page?(judges_path), current_page?(rules_path)].any?
+    [current_page?(about_path), current_page?(rules_path)].any?
   end
 
   def background_class
     if on_photo_step?
       'rouge2005'
-    elsif current_page?(about_path) || current_page?(contest_path)
+    elsif current_page?(about_path) || current_page?(contest_path) || current_page?(rules_path)
       'grey-bg'
     elsif current_page?(new_contestant_registration_path) || current_page?(new_contestant_session_path)
       'stjohnswart'
+    elsif current_page?(judges_path) || current_page?(prizes_path)
+      'fieldsite'
+    elsif current_page?(photos_path) || current_page?(contestant_index_path)
+      'light-grey-bg'
     else
       nil
     end

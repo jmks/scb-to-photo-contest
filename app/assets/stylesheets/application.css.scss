@@ -23,12 +23,13 @@ $input-bg: #e3e3e3;
 $input-border-radius: 0;
 $input-color: #333;
 $input-border: none;
-
+$table-bg-hover: #F3F3F3;
+$table-bg-accent: #F7F7F7;
 @import "bootstrap";
 
 /* FONTS */
 
-@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore);
+@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore|Open+Sans:400,300,700);
 
 /* Serve our own fonts for better rendering in Chrome */
 @font-face {
@@ -53,7 +54,7 @@ $input-border: none;
   font-style: bold;
 }
 
-@font-face {
+/*@font-face {
   font-family: 'Raleway';
   src:font-url('/assets/raleway-regular-webfont.eot');
   src:font-url('/assets/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -73,7 +74,7 @@ $input-border: none;
     font-url('/assets/raleway-bold-webfont.ttf') format('truetype');
   font-weight: 700;
   font-style: bold;
-}
+}*/
 
 .cursive-font {
     font-family: La Belle Aurore, sans-serif;
@@ -153,6 +154,18 @@ body.stjohnswart {
 
 body.grey-bg {
     background-color: #E6E6E6;
+}
+
+body.light-grey-bg {
+    background-color: #F9F9F9;
+}
+
+body.fieldsite {
+    background: url(image-path('field-site-bkg.jpg')) no-repeat top center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /* /Backgrounds */
@@ -367,11 +380,13 @@ a.btn-flat.btn-logo:active {
 
 
 #sponsors-wrapper {
-    background-color: rgba(255,255,255,0.65);
+    background-color: #fff;
 
     @include border-radius(0);
 
     padding: 10px 10px;
+
+    margin-bottom: 10px;
 
     .sponsor {
         height: 115px;

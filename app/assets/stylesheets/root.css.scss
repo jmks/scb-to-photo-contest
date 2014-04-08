@@ -70,7 +70,7 @@ $lg: "only screen and (min-width: 1200px)";
 }
 
 #judges-wrapper {
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 ul.judges-gallery {
@@ -174,8 +174,6 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
 #rules-wrapper {
     text-align: center;
-
-    background: url(asset-path('debut-light.png')) repeat;
     
     .rule {
         height: 310px;
@@ -192,10 +190,12 @@ ul.judges-gallery li.judge:nth-child(odd) {
         padding: 20px;
 
         p, h4 {
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Open Sans', sans-serif;
 
             position: absolute;
             bottom: 0;
+
+            padding: 0 5px;
         }
 
         img#white-logo svg {

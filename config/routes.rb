@@ -13,7 +13,6 @@ PhotoContest::Application.routes.draw do
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
   get '/photos',            :to => 'photos#index',      :as => 'photos'
-
   get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
   get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
@@ -26,7 +25,9 @@ PhotoContest::Application.routes.draw do
     get 'page/:page', action: 'index', on: :collection, as: 'page'
   end
 
+  #dep
   get  '/photo_entry',        to: 'photo_entry#workflow', as: 'workflow_photo_entry'
+
 
   get  '/photo_entry/new',    to: 'photo_entry#new',      as: 'new_photo_entry'
   post '/photo_entry',        to: 'photo_entry#create',   as: 'photo_entry'
