@@ -34,4 +34,9 @@ module ApplicationHelper
     end
     false
   end
+
+  def svg_png_fallback svg_path, html_attrs, fallback_data_attr='fallback'
+    attributes = html_attrs.merge 'src' => asset_path(svg_path), 'data' => { fallback_data_attr => asset_path(svg_path.gsub(/svg\Z/, 'png')) }
+    tag('img', attributes)
+  end
 end
