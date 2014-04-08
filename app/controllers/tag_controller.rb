@@ -1,6 +1,10 @@
 class TagController < ApplicationController
 
   def index
-    render :json => Tag.get_tags
+    if params[:q]
+        render :json => Tag.where(name: /#{params[:q]}/).to_a.map(&:name)
+    else
+        render :json => Tag.get_tags
+    end
   end
 end

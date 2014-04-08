@@ -33,12 +33,26 @@ jQuery ->
       $(this).find('.thumb-title').stop().animate({'opacity': 0})
   )
 
+  <% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
   $('.select2').select2
     placeholder: 'Add Tags'
     tokenSeparators: [',']
+    minimumInputLength: 2
     multiple: true
-    tags: <%= Tag.get_tags %>
     containerCssClass: 'tags-picker'
+    ajax:
+      url: '/tags'
+      dataType: 'json'
+      data: (term, page) ->
+        q: term
+      results: (data, page) ->
+        res = []
+        $.each data, (i, n) ->
+          res.push
+            id: i
+            text: n
+        results: res
+      
 
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   years = (''+i for i in [1990..2014])
