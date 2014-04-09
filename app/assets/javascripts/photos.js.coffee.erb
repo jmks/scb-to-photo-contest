@@ -34,12 +34,15 @@ jQuery ->
   )
 
   <% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
-  $('.select2').select2
+  select2Options = 
     placeholder: 'Add Tags'
     tokenSeparators: [',']
     minimumInputLength: 2
     multiple: true
     containerCssClass: 'tags-picker'
+    createSearchChoice: (term) ->
+      id: term
+      text: term
     ajax:
       url: '/tags'
       dataType: 'json'
@@ -52,7 +55,8 @@ jQuery ->
             id: i
             text: n
         results: res
-      
+
+  $('.select2:not(#select2-query)').select2 select2Options
 
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   years = (''+i for i in [1990..2014])
@@ -60,7 +64,16 @@ jQuery ->
   monthPicker = new Picker '#month-picker', months
   yearPicker  = new Picker '#year-picker', years
 
+
+  select2SearchOptions =
+    placeholder: 'Search by tag'
+    multiple: false
+
+  select2QueryOptions = $.extend {}, select2Options, select2SearchOptions
+  
+  $('#select2-query').select2 select2QueryOptions
+
   $('#select2-query').on 'change', ->
     #alert 'selected ' + $(this).select2('data')[0].text
-    tag = $(this).select2('data')[0].text
-    window.location = '/photos?tag=' + tag
+    tag = $(this).select2('data').text
+    window.location = '/photos?tag=' + encodeURIComponent(tag)
