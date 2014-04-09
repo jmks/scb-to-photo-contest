@@ -4,11 +4,11 @@ $md: "only screen and (min-width: 992px)";
 $lg: "only screen and (min-width: 1200px)";
 
 #home-welcome {
-    height: 650px;
+    height: 800px;
 
     h1.main-title {
         margin-top: 0;
-        padding-top: 70px;
+        padding-top: 200px;
         color: #fff;
         font-size: 52px;
     }
@@ -27,6 +27,14 @@ $lg: "only screen and (min-width: 1200px)";
         cursor: pointer;
     }
 }
+
+.row.light-grey-separator {
+    margin: 0;
+    background-color: #e3e3e3;
+    min-height: 70px;
+}
+
+/* think these @media are deprecated */
 
 @media (max-width: 767px) {
     #home-welcome {
@@ -47,6 +55,7 @@ $lg: "only screen and (min-width: 1200px)";
         min-width: 280px;
     }
 }
+
 
 
 .judge {

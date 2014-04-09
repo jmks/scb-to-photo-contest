@@ -12,6 +12,14 @@ module ApplicationHelper
     [current_page?(about_path), current_page?(rules_path)].any?
   end
 
+  def navbar_class
+    if current_page? root_path
+      'navbar-inverse'
+    else
+      ''
+    end
+  end
+
   def background_class
     if on_photo_step?
       'rouge2005'
@@ -23,6 +31,8 @@ module ApplicationHelper
       'fieldsite'
     elsif current_page?(photos_path) || current_page?(contestant_index_path)
       'light-grey-bg'
+    elsif current_page? root_path
+      'home'
     else
       nil
     end

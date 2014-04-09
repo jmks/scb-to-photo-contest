@@ -15,7 +15,17 @@
  *= require_tree .
  */
 
+/* custom colors and font stacks */
+$darkblue:   #135870;
+$brightblue: #19b2d9;
+$darkblue-contrast: #3e88a2;
+$orange: #f8694d;
+$purple: #7d4a82;
+
+$cursive-fonts: 'La Belle Aurore', sans-serif;
+
 /* boostrap overrides */
+
 $font-size-base: 16px;
 $grid-float-breakpoint: 1025px;
 
@@ -25,7 +35,37 @@ $input-color: #333;
 $input-border: none;
 $table-bg-hover: #F3F3F3;
 $table-bg-accent: #F7F7F7;
+
+$navbar-height: 70px;
+$navbar-border-radius: 0;
+
+$navbar-default-color: #777;
+$navbar-default-bg: #f8f8f8;
+$navbar-default-border: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-color: #777;
+$navbar-default-link-hover-color: #333;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-color: #555;
+$navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-toggle-border-color: #ddd;
+
+/* nearly transparent nav */
+$navbar-inverse-color: #fff;
+$navbar-inverse-bg: rgba(255, 255, 255, 0.4);
+$navbar-inverse-border: darken($navbar-inverse-bg, 10%);
+$navbar-inverse-link-color: #fff;
+$navbar-inverse-link-hover-color: #555;
+$navbar-inverse-toggle-hover-bg: #555;
+$navbar-inverse-toggle-border-color: #555;
+
+/* screwing around */
+/*$navbar-default-color: #fff;
+$navbar-default-bg: $darkblue;*/
+
+
 @import "bootstrap";
+
+
 
 /* FONTS */
 
@@ -101,14 +141,6 @@ $table-bg-accent: #F7F7F7;
     border-top-right-radius: $radius;
 }
 
-$darkblue:   #135870;
-$brightblue: #19b2d9;
-$darkblue-contrast: #3e88a2;
-$orange: #f8694d;
-$purple: #7d4a82;
-
-$cursive-fonts: 'La Belle Aurore', sans-serif;
-
 /* FORMS */
 
 form input.form-control,
@@ -178,6 +210,10 @@ body {
     margin-bottom: 90px;
 
     background-color: transparent;
+}
+
+body.home {
+    padding-top: 0;
 }
 
 body > .container {
@@ -392,6 +428,8 @@ a.btn-flat.btn-logo:active {
         height: 115px;
         line-height: 115px;
 
+        margin-bottom: 15px;
+
         a {
             img {
                 max-width: 80%;
@@ -571,18 +609,36 @@ a.btn-flat.btn-logo:active {
 
 /* /Form Error Messages */
 
+#navbar.navbar-inverse {
+    .nav.navbar-nav {
+        .dropdown-menu {
+            background-color: rgba(255, 255, 255, 0.4);
+            /* border radius */
+        }
+
+        .dropdown-menu > li > a {
+            color: #555;
+        }
+    }
+}
+
 nav#navbar {
 
     margin-bottom: 0;
 
     i.fa {
         font-size: 20px;
-        line-height: 20px;
+        line-height: 19px;
     }
     
     a {
         @include nav-font;
         letter-spacing: 0.1em;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > a,
+    .navbar-nav .open .dropdown-menu .dropdown-header {
+        padding: 5px 15px 5px 40px;
     }
 
     .navbar-header {
@@ -596,18 +652,21 @@ nav#navbar {
         }
     }
 
+    .navbar-toggle {
+        @include border-radius(0);
+    }
+
     #navbar-links {
         ul.dropdown-menu {
             right: auto;
         }
 
         ul.nav.navbar-nav {
-            margin-top: 19px;
             margin-right: 0;
+        }
 
-            li a {
-                min-height: 51px;
-            }
+        .navbar-nav > li > .dropdown-menu {
+            @include border-radius(0);
         }
     }
 
@@ -626,101 +685,11 @@ nav#navbar {
     }
 }
 
-.navbar-default {
-  background-color: #adc7e2;
-  border: 0;
-  color: #ffffff;
-}
-
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #FFFFFF;
-}
-
-.navbar-default .navbar-nav > li > a {
-    color: #FFFFFF;
-}
-
-.navbar-default .navbar-brand {
-    color: #FFFFFF;
-}
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: #3e88a2;
-    color: #FFFFFF;
-}
-
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #FFFFFF;
-  background-color: #3e88a2;
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    background-color: #3E88A2;
-    color: #FFFFFF;
-}
-
-ul.dropdown-menu {
-    background-color: #adc7e2;
-    
-    @include border-radius(0);
-    border: none;
-}
-
-ul.dropdown-menu > li > a {
-    color: #FFFFFF;
-}
-
-ul.dropdown-menu > li > a:hover,
-ul.dropdown-menu > li > a:focus {
-    background-color: #135870;
-    color: #FFFFFF;
-}
-
-.navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #FFFFFF;
-}
-
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #FFFFFF;
-    background-color: #135870;
-}
-
-.navbar-nav .open .dropdown-menu {
-    background-color: #adc7e2;
-}
-
-.navbar-default .navbar-toggle .collapsed {
-    background-color: #adc7e2;
-}
-
-.navbar-default .navbar-toggle {
-    background-color: #adc7e2;
-}
-
-.navbar-default .navbar-toggle:focus,
-.navbar-default .navbar-toggle:hover {
-    background-color: #3e88a2;
-}
-
-#navbar .row:not(#nav-header-row) {
-    margin-right: 0;
-}
-
 #mail-us, #mail-us:hover {
     i {
         font-size: 1.25em;
     }
 }
-
-#other-nav-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 
 #sponsors-footer {
     margin-top:    30px;
@@ -732,39 +701,31 @@ ul.dropdown-menu > li > a:focus {
     bottom: 0;
     position: absolute;
     width: 100%;
+    background-color: #f8f8f8;
 
     margin-top: 50px;
-
-    opacity: 0.9;
 
     .row {
         margin-left: 0;
         margin-right: 0;
     }
 
+    a {
+        color: #777;
+    }
+
+    a:hover {
+        color: #333;
+    }
+
     #social-media-footer {
-        min-height: 40px;
-        background-color: $darkblue;
-
-        a {
-            color: #fff;
-        }
-
-        border-bottom: 1px solid #333;
+        min-height: 65px;
     }
 
     #info-footer {
-        min-height: 40px;
-        line-height: 40px;
-        background-color: $darkblue;
-        color: #fff;
-
-        a, a:hover {
-            color: #fff;
-            text-decoration: none;
-
-            margin-right: 5px;
-        }
+        min-height: 30px;
+        line-height: 30px;
+        color: #777;
 
         span {
             margin-left: 5px;

@@ -1,17 +1,16 @@
 #footer
   .row#social-media-footer
-    .col-xs-12
-      %a.btn.pull-right{ href: 'http://www.conbio.org', target: '_blank' }
-        /= image_tag 'scb-bird.svg', alt: 'SCB', height: '28px'
-        = svg_png_fallback 'scb-bird.svg', alt: 'SCB', height: '28px'
-      %a.btn.pull-right{ href: 'http://www.scbtoronto.com', target: '_blank' }
-        %i.fa.fa-home.fa-2x
-      %a.btn.pull-right{ href: 'https://twitter.com/SCBToronto', target: '_blank' }
-        %i.fa.fa-twitter.fa-2x
-      %a.btn.pull-right{ href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank' }
-        %i.fa.fa-facebook.fa-2x
-      %a.btn#mail-us.pull-right{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
-        %i.fa.fa-envelope.fa-2x
+    .col-xs-12.text-center
+      %a.btn{ href: 'http://www.conbio.org', target: '_blank' }
+        = image_tag asset_path('social-icon/bird2.png'), alt: 'SCB'
+      %a.btn{ href: 'http://www.scbtoronto.com', target: '_blank' }
+        = image_tag asset_path('social-icon/home.png')
+      %a.btn{ href: 'https://twitter.com/SCBToronto', target: '_blank' }
+        = image_tag asset_path('social-icon/twitter.png')
+      %a.btn{ href: 'https://www.facebook.com/pages/Toronto-Chapter-Society-for-Conservation-Biology/236337883092881', target: '_blank' }
+        = image_tag asset_path('social-icon/facebook.png')
+      %a.btn#mail-us{href: 'mailto:scbtoronto@gmail.com?subject=Photo Contest Inquiry&body=Ask us your question'}
+        = image_tag asset_path('social-icon/mail.png')
   .row#info-footer
     %span &#169; 2014 Society for Conservation Biology - Toronto Chapter
     %a.pull-right{href: '#'} Terms of Use
