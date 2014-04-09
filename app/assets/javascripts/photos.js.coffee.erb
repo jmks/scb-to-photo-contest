@@ -59,3 +59,8 @@ jQuery ->
 
   monthPicker = new Picker '#month-picker', months
   yearPicker  = new Picker '#year-picker', years
+
+  $('#select2-query').on 'change', ->
+    #alert 'selected ' + $(this).select2('data')[0].text
+    tag = $(this).select2('data')[0].text
+    window.location = '/photos?tag=' + tag

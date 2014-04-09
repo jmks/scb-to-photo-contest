@@ -41,4 +41,13 @@ module PhotosHelper
   def tags_string photo
     photo.tags? ? photo.tags.join(', ') : ''
   end
+
+  # params: filter, path, options, filter_sym
+  def filter_link_to *args, &block
+    if block_given?
+
+    else
+      
+    end
+  end
 end

@@ -59,27 +59,46 @@ class PhotosController < ApplicationController
   end
 
   def index
-    # TODO add pagination with infinite-scroll or will_paginate
-
     @category   = params[:category] || 'all'
     @category   = (Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym) || nil
 
     @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
     @tag        = params[:tag]
+    @popular    = params[:popular]
     @page       = params.key?(:page) ? params[:page].to_i : 1
 
     if @contestant
       @photos = @contestant.entries
       @title  = @contestant.public_name
+      @filter = :contestant
     elsif @tag
       @photos = Photo.any_in(tags: [@tag])
       @title  = @tag
+      @filter = :tag
     elsif @category
       @photos = Photo.where(category: @category)
       @title  = @category
+      @filter = @category.to_sym
+    elsif @popular
+      case @popular
+      when 'votes'
+        @photos = Photo.desc(:votes)
+        @title  = @popular
+        @filter = :votes
+      when 'views'
+        @photos = Photo.desc(:views)
+        @title  = @popular
+        @filter = :views
+      else
+        # params :popular => junk
+        @photos = Photo.all
+        @title  = "All"
+        @filter = :all
+      end
     else
       @photos = Photo.all
       @title  = "All"
+      @filter = :all
     end
 
     @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
@@ -87,10 +106,11 @@ class PhotosController < ApplicationController
                       limit(PHOTOS_PER_PAGE)
 
     @params = {
-      tag:      @tag || nil,
-      category: @category || nil,
+      tag:      @tag,
+      category: @category,
       page:     @page,
-      contestant_id: params[:contestant_id]
+      contestant_id: @contestant && @contestant.id,
+      popular: @popular
     }.reject { |key, val| val.nil? }
 
     @prev_params = @params.dup
