@@ -11,7 +11,7 @@
         = form_tag contact_path, class: 'form form-horizontal' do
           .form-group
             .col-xs-12
-              = text_area_tag :message, nil, class: 'form-control', rows: 5, placeholder: 'Your message'
+              = text_area_tag :message, nil, id: 'mail-message', class: 'form-control', rows: 5, placeholder: 'Your message'
           .form-group
             .col-xs-12
               = text_field_tag :email, nil, id: 'mail-email', class: 'form-control', type: 'text', placeholder: 'Your email address'

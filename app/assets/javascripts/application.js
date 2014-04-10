@@ -21,8 +21,10 @@
 //= require select2
 //= require_tree .
 
-if (!Modernizr.svg) {
-  $('img[src$=".svg"]').each(function() {
+$(function() {
+  if (!Modernizr.svg) {
+    $('img[src$=".svg"]').each(function() {
     $(this).attr('src', $(this).data('fallback'));
-  });
-}
+    });
+  }
+});
