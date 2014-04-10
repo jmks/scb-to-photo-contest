@@ -7,9 +7,12 @@ module ApplicationHelper
     [root_path, prizes_path].map { |path| current_page? path }.any?
   end
 
+  # to highlight 'about' dropdown in navbar
   def about_page?
-    # better?
-    [current_page?(about_path), current_page?(rules_path)].any?
+    [about_path, contest_path, judges_path, rules_path].each do |path|
+      return true if current_page? path
+    end
+    false
   end
 
   def navbar_class
@@ -25,7 +28,7 @@ module ApplicationHelper
       'rouge2005'
     elsif current_page?(about_path) || current_page?(contest_path) || current_page?(rules_path)
       'grey-bg'
-    elsif current_page?(new_contestant_registration_path) || current_page?(new_contestant_session_path)
+    elsif contestant_admin_path?
       'fieldsite'
     elsif current_page?(judges_path) || current_page?(prizes_path)
       'fieldsite'
@@ -42,7 +45,12 @@ module ApplicationHelper
     [new_photo_path, new_photo_entry_path, order_path, verify_path, share_photos_path].each do |path|
       return true if current_page? path
     end
-    false
+    # photo#create post path
+    params[:controller] == 'photos' && params[:action] == 'create'
+  end
+
+  def contestant_admin_path?
+    devise_controller? && params[:action] != :index
   end
 
   def svg_png_fallback svg_path, html_attrs, fallback_data_attr='fallback'
