@@ -15,7 +15,7 @@ module PhotosHelper
   end  
 
   def photographer_link
-    "<a href='#{ photos_path contestant_id: @photo.owner.id }'><strong>#{ @photo.owner.public_name }</strong></a>".html_safe
+    content_tag(:a, content_tag(:strong, @photo.owner.public_name), href: photos_path(contestant_id: @photo.owner.id))
   end
 
   def method_missing method, *args, &block
@@ -42,12 +42,26 @@ module PhotosHelper
     photo.tags? ? photo.tags.join(', ') : ''
   end
 
-  # params: filter, path, options, filter_sym
+  # params: filter, name, path, options, filter_sym, &block
   def filter_link_to *args, &block
     if block_given?
+      filter, path, options = args
 
+      if @filter == filter
+        options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
+      end
+
+      link_to path, options do
+        yield
+      end
     else
-      
+      filter, name, path, options = args
+
+      if @filter == filter
+        options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
+      end
+
+      link_to name, path, options
     end
   end
 end

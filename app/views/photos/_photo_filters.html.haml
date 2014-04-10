@@ -1,12 +1,12 @@
 #photo-filters.row.text-center
   .col-xs-12
-    = link_to 'Flora', flora_path, class: "btn btn-default #{ 'active' if @filter == :flora }"
-    = link_to 'Fauna', fauna_path, class: "btn btn-default #{ 'active' if @filter == :fauna }"
-    = link_to 'Landscape', landscapes_path, class: "btn btn-default #{'active' if @filter == :landscapes }"
-    = link_to photos_path(popular: :votes), class: "btn btn-default #{'active' if @filter == :votes }" do 
+    = filter_link_to :flora, 'Flora', flora_path, class: 'btn btn-default'
+    = filter_link_to :fauna, 'Fauna', fauna_path, class: 'btn btn-default'
+    = filter_link_to :landscapes, 'Landscape', landscapes_path, class: 'btn btn-default'
+    = filter_link_to :votes, photos_path(popular: :votes), class: "btn btn-default" do 
       Most
       %i.fa.fa-thumbs-up
-    = link_to photos_path(popular: :views), class: "btn btn-default #{'active' if @filter == :views }" do 
+    = filter_link_to :views, photos_path(popular: :views), class: "btn btn-default" do
       Most
       %i.fa.fa-eye
     .select-container
