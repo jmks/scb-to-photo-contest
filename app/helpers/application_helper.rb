@@ -26,7 +26,7 @@ module ApplicationHelper
     elsif current_page?(about_path) || current_page?(contest_path) || current_page?(rules_path)
       'grey-bg'
     elsif current_page?(new_contestant_registration_path) || current_page?(new_contestant_session_path)
-      'stjohnswart'
+      'fieldsite'
     elsif current_page?(judges_path) || current_page?(prizes_path)
       'fieldsite'
     elsif current_page?(photos_path) || current_page?(contestant_index_path)
