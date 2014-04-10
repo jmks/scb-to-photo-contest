@@ -128,6 +128,8 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find params[:id]
 
+    redirect_to contestant_index_path unless @photo.owner.id == current_contestant.id
+
     @photo.destroy
     flash[:danger] = "Your entry #{@photo.title} has been deleted"
 
@@ -147,12 +149,7 @@ class PhotosController < ApplicationController
   def vote
     @photo = Photo.find(params[:id])
 
-    # move to own controller if any more complicated
-    voter = begin
-      Vote.find(request.remote_ip)
-    rescue Mongoid::Errors::DocumentNotFound
-      Vote.create(id: request.remote_ip)
-    end
+    voter = Vote.first_or_initialize(request.remote_ip)
 
     if voter.vote
       @photo.inc votes: 1
@@ -160,6 +157,8 @@ class PhotosController < ApplicationController
     else
       flash[:danger] = "You have reached your vote limit for today. Please try again tomorrow."
     end
+
+    voter.save
     
     # vote tracking for contestants
     current_contestant && current_contestant.vote_for(@photo)
