@@ -18,6 +18,7 @@ PhotoContest::Application.routes.draw do
   get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
   
   post '/photos/:id/comment',   to: 'photos#comment',        as: 'new_comment'
+  get '/photos/:id/comments(/:page)', to: 'photos#comments', as: 'photo_comments'
   post '/photos/:id/vote',      to: 'photos#vote',           as: 'vote_photo'
   post '/photo/report_comment', to: 'photos#report_comment', as: 'report_comment'
 

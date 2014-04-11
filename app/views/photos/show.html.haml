@@ -83,22 +83,7 @@
         %h3 Comments
         #comments-container
           %table.table.table-striped
-            - @photo.comments.each do |comment|
-              %tr.comment
-                %td.name
-                  %p= comment.name
-                  %p
-                    %small= time_ago comment.created_at
-                %td.text= comment.text
-                %td.report
-                  - if comment.reported?
-                    %p Under Review
-                  - else
-                    = form_tag report_comment_path do 
-                      = hidden_field_tag :photo_id, @photo.id
-                      = hidden_field_tag :comment_id, comment.id
-                      = button_tag type: 'submit', class: 'btn btn-default btn-xs' do
-                        Report Misuse
+            = render 'comments', comments: @photo.comments
 
     #new-comment-wrapper
       .row

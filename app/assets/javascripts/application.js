@@ -38,9 +38,10 @@ addthis = function() {
   }
   window.addthis_share = null;
   // load addthis script
-  $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5326371b24ec2b84");
+  if ($('.addthis_toolbox').length > 0) {
+    addthis_config = { "data_track_addressbar" : true };
+    $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5326371b24ec2b84");
+  }
 }
 
 $(document).ready(addthis);
-$(document).on('page:load', addthis);
-$(document).on('page:change', addthis);

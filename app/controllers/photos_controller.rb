@@ -1,8 +1,9 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment, :flora, :fauna, :landscapes]
+  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment, :comments, :flora, :fauna, :landscapes]
   before_filter :preprocess_data, only: [:create, :update]
 
   PHOTOS_PER_PAGE = 15
+  COMMENTS_PER_PAGE = 25
 
   def new
     @photo = Photo.new(params[:photo])
@@ -135,6 +136,15 @@ class PhotosController < ApplicationController
     flash[:danger] = "Your entry #{@photo.title} has been deleted"
 
     redirect_to contestant_index_path
+  end
+
+  def comments
+    @photo = Photo.find params[:id]
+    page  = (params[:page] && params[:page].to_i) || 1
+
+    @comments = @photo.comments.skip((page - 1) * COMMENTS_PER_PAGE).limit(COMMENTS_PER_PAGE)
+
+    render partial: 'comments', layout: false
   end
 
   def comment
