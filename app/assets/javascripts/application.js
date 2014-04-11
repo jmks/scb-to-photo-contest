@@ -28,3 +28,19 @@ $(function() {
     });
   }
 });
+
+addthis = function() {
+  // remove addthis globals
+  for (var i in window) {
+    if (/^addthis/.test(i) || /^_at/.test(i)) {
+      delete window[i];
+    }
+  }
+  window.addthis_share = null;
+  // load addthis script
+  $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5326371b24ec2b84");
+}
+
+$(document).ready(addthis);
+$(document).on('page:load', addthis);
+$(document).on('page:change', addthis);

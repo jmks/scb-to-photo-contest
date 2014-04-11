@@ -161,7 +161,7 @@ class PhotosController < ApplicationController
     voter.save
     
     # vote tracking for contestants
-    current_contestant && current_contestant.vote_for(@photo)
+    current_contestant.vote_for(@photo) if contestant_signed_in?
 
     redirect_to @photo
   end
