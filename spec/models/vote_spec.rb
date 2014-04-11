@@ -17,6 +17,10 @@ describe Vote do
       @max_votes.times { @vote.vote }
       expect(@vote).to_not be_vote
     end
+
+    it 'multiple different ips can vote' do 
+      5.times { expect(Vote.new).to be_vote }
+    end
   end
 
   describe '#vote' do 
@@ -66,6 +70,62 @@ describe Vote do
           @vote.vote
         }.to change { @vote.votes }.from(0).to(5)
       end
+    end
+  end
+
+  describe '#votes_remaining' do 
+    it 'new voters have full vote allotment' do 
+      expect(@vote.votes_remaining).to eql @max_votes
+    end
+
+    it 'voting decreases votes_remaining' do 
+      expect {
+        @vote.vote
+      }.to change { @vote.votes_remaining }.from(@max_votes).to(@max_votes - 1)
+    end
+
+    it 'voting your full allotment leaves you with 0 votes remaining' do 
+      expect {
+        (@max_votes).times { @vote.vote }
+      }.to change { @vote.votes_remaining }.from(@max_votes).to(0)
+    end
+  end
+
+  describe 'self.votes_remaining' do 
+    it 'behaves like votes_remaining' do 
+      expect(Vote.votes_remaining(@vote.ip)).to eql @max_votes
+
+      expect {
+        @vote.vote
+        @vote.save
+      }.to change { Vote.votes_remaining(@vote.ip) }.by -1
+      
+      (@max_votes - 1).times { @vote.vote }
+
+      expect(Vote.votes_remaining(@vote.ip)).to eql 0
+    end
+  end
+
+  describe '#total_votes' do 
+    it 'starts at 0' do 
+      expect(@vote.total_votes).to be_zero
+    end
+
+    it 'increases with votes' do 
+      expect {
+        @max_votes.times { @vote.vote }
+      }.to change { @vote.total_votes }.by @max_votes
+    end
+
+    it 'sums votes and votes_today' do 
+      3.times { @vote.vote }
+
+      # implementation dependant
+      expect(Date).to receive(:today).exactly(3).times.and_return { 1.days.from_now }
+
+      3.times { @vote.vote }
+
+      expect(@vote.total_votes).to eql 6
     end
   end
 end

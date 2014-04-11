@@ -149,7 +149,7 @@ class PhotosController < ApplicationController
   def vote
     @photo = Photo.find(params[:id])
 
-    voter = Vote.first_or_initialize(request.remote_ip)
+    voter = Vote.first_or_initialize(request.ip)
 
     if voter.vote
       @photo.inc votes: 1

@@ -7,8 +7,6 @@ class Vote
   field :votes,       type: Integer, default: 0
   field :votes_today, type: Integer, default: 0
 
-  index({ ip: 1 }, { unique: true }) # unneccessary
-
   def vote?
     today = Date.today
     
@@ -35,10 +33,13 @@ class Vote
     vote? ? ContestRules::VOTES_PER_DAY_PER_IP - votes_today : 0
   end
 
+  def total_votes
+    votes_today + votes
+  end
+
   def self.votes_remaining ip
     begin
-      vote = Vote.find(ip)
-      vote.votes_remaining
+      Vote.find(ip).votes_remaining
     rescue
       ContestRules::VOTES_PER_DAY_PER_IP
     end
