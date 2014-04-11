@@ -103,7 +103,8 @@ class PhotosController < ApplicationController
 
     @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
                       desc(:created_at).
-                      limit(PHOTOS_PER_PAGE)
+                      limit(PHOTOS_PER_PAGE).
+                      only(:id, :title, :views, :votes, :thumbnail_sm_url)
 
     @params = {
       tag:      @tag,
@@ -121,7 +122,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js
+      format.js # needs work
     end
   end
 

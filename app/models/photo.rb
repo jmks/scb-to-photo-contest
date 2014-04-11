@@ -36,6 +36,9 @@ class Photo
   field :original_url
   field :original_filename # not useful
 
+  # want equiv of this, but this is too slow
+  #field :thumbnails, type: Boolean, default: false
+
   # thumbnail related -- will update
   field :thumbnail_url # not useful
 
