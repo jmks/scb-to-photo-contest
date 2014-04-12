@@ -10,6 +10,18 @@
     margin-bottom: 10px;
   }
 
+  span.photo-copyright {
+    display: none;
+    position: absolute;
+    width: 250px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 16px;
+    line-height: 18px;
+    z-index: 2000; /* higher than any bootstrap */
+  }
+
   .photo-field {
     text-transform: uppercase;
     font-weight: bold;

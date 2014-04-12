@@ -91,4 +91,21 @@ jQuery ->
 
   $('#photos #photo-wall').jscroll(jscrollOptions)
 
-  $('#photo-wrapper img').bind 'contextmenu', -> false
+  fadeCopyRight = ->
+    message$ = $('#photo-wrapper .photo-copyright')
+    message$.animate
+      opacity: 0
+    message$.css('display', 'none').removeClass('show')
+
+
+  $('#photo-wrapper img').bind 'contextmenu', (evt) ->
+    if $('#photo-wrapper .photo-copyright').hasClass('show') then return false;
+    offset = $(this).offset()
+    $('#photo-wrapper .photo-copyright').
+      addClass('show').
+      css('opacity', 1).
+      css('display', 'block').
+      css('left', evt.pageX).
+      css('top', evt.pageY)
+    setTimeout(fadeCopyRight, 1500)
+    false

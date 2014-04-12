@@ -23,6 +23,7 @@
     .col-xs-12.text-center
       - if @photo.thumbnail_lg_url?
         = image_tag @photo.thumbnail_lg_url, class: 'img-responsive'
+        %span.photo-copyright= "&copy; #{ @photo.owner.public_name }. Please respect copyright. Unauthorized use is prohibited.".html_safe
       - else
         %h2 Thumbnails pending...
 
