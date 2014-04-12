@@ -41,12 +41,12 @@ $navbar-border-radius: 0;
 
 $navbar-default-color: #777;
 $navbar-default-bg: #f8f8f8;
-$navbar-default-border: darken($navbar-default-bg, 6.5%);
+$navbar-default-border: #D7DEE8;
 $navbar-default-link-color: #777;
 $navbar-default-link-hover-color: #333;
 $navbar-default-link-hover-bg: transparent;
 $navbar-default-link-active-color: #555;
-$navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-active-bg: #D7DEE8;
 $navbar-default-toggle-border-color: #ddd;
 
 /* nearly transparent nav */
@@ -185,11 +185,11 @@ body.stjohnswart {
 }
 
 body.grey-bg {
-    background-color: #E6E6E6;
+    background-color: #D7DEE8;
 }
 
 body.light-grey-bg {
-    background-color: #F9F9F9;
+    background-color: #FFFFFF;
 }
 
 body.fieldsite {
@@ -207,17 +207,18 @@ body {
     padding-top: 70px;
 
     /* sticky footer */
-    margin-bottom: 95px;
+    padding-bottom: 95px;
+
+    @media screen and (max-width: 535px) {
+        padding-bottom: 255px;
+    }
 
     background-color: transparent;
 }
 
 body.home {
     padding-top: 0;
-}
-
-body > .container {
-    margin-bottom: 90px; /* sticky footer too?? */
+    background-color: #e3e3e3;
 }
 
 pre {
@@ -654,6 +655,16 @@ nav#navbar {
             display: inline-block;
             a img {
                 max-height: 70px;
+
+                @media screen and (max-width: 485px) {
+                    margin-top: 10px;
+                    height: 50px;
+                }
+
+                @media screen and (max-width: 360px) {
+                    height: 40px;
+                    margin-top: 15px;
+                }
             }
         }
     }
@@ -684,13 +695,6 @@ nav#navbar {
     }
 }
 
-@media (max-width: 485px) {
-    #navbar .scb-logo img {
-        margin-top: 10px;
-        height: 50px;
-    }
-}
-
 #mail-us, #mail-us:hover {
     i {
         font-size: 1.25em;
@@ -709,8 +713,6 @@ nav#navbar {
     width: 100%;
     background-color: #f8f8f8;
 
-    margin-top: 50px;
-
     .row {
         margin-left: 0;
         margin-right: 0;
@@ -726,6 +728,14 @@ nav#navbar {
 
     #social-media-footer {
         min-height: 65px;
+        border-top: 1px solid #D7DEE8;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+
+        img {
+            vertical-align: bottom;
+        }
     }
 
     #info-footer {

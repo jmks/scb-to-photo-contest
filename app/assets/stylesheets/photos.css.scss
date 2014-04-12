@@ -184,6 +184,7 @@
   background-color: #fff;
   max-width: 992px;
 
+  /* remove */
   .form-group div {
     padding-left: 0;
     padding-right: 0;
@@ -219,11 +220,17 @@
     padding: 5px;
     background-color: #F9BDA7;
   }
+
+  .made-in-canada {
+    img {
+      height: 20px;
+    }
+  }
 }
 
 #photo-filters {
   padding: 20px 0;
-  background-color: #e7e7e7;
+  background-color: #D7DEE8;
 
   .select-container {
     display: inline-block;

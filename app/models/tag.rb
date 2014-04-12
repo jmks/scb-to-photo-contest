@@ -6,25 +6,13 @@ class Tag
 
   index({ name: 1 }, { unique: true })
 
-  def self.exists? tag 
-    begin
-      Tag.find(name: tag)
-    rescue
-      false
-    end
-  end
-
   def self.get_tags
-    Tag.all.map { |t| t.name }
+    Tag.all.map &:name
   end
 
   def self.add_tags names
     names.each do |name|
-      begin
-        Tag.find(name: name)
-      rescue
-        Tag.create(name: name)
-      end
+      Tag.create(name: name) unless Tag.where(name: name).exists?
     end
   end
 end

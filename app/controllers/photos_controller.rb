@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment, :comments, :flora, :fauna, :landscapes]
   before_filter :preprocess_data, only: [:create, :update]
+  before_filter :contestant_owns_photo, only: [:edit, :update, :destroy]
 
   PHOTOS_PER_PAGE = 15
   COMMENTS_PER_PAGE = 25
@@ -193,9 +194,13 @@ class PhotosController < ApplicationController
   private
 
   def preprocess_data
-    params[:photo][:tags]       = params[:photo][:tags].split(',').map { |tag| tag.strip }
+    params[:photo][:tags]       = params[:photo][:tags].split(',').map(&:strip).uniq
     params[:photo][:category]   = params[:photo][:category].downcase.to_sym
     params[:photo][:photo_date] = "#{params[:photo_date_month]} #{params[:photo_date_year]}"
+  end
+
+  def contestant_owns_photo
+    
   end
 
   def photo_params

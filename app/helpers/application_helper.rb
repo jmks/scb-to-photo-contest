@@ -27,13 +27,13 @@ module ApplicationHelper
     if on_photo_step?
       'rouge2005'
     elsif current_page?(about_path) || current_page?(contest_path) || current_page?(rules_path)
-      'grey-bg'
+      'grey-bg' # light blue
     elsif contestant_admin_path?
       'fieldsite'
     elsif current_page?(judges_path) || current_page?(prizes_path)
       'fieldsite'
     elsif current_page?(photos_path) || current_page?(contestant_index_path)
-      'light-grey-bg'
+      'light-grey-bg' # light-white
     elsif current_page? root_path
       'home'
     else

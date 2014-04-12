@@ -40,6 +40,12 @@ jQuery ->
     minimumInputLength: 2
     multiple: true
     containerCssClass: 'tags-picker'
+    initSelection: (el, callback) -> 
+      data = []
+      values = $(el).val().split ','
+      $.each values, (i, val) ->
+        data.push id: val, text: val
+      callback data
     createSearchChoice: (term) ->
       id: term
       text: term
@@ -69,6 +75,8 @@ jQuery ->
     multiple: false
 
   select2QueryOptions = $.extend {}, select2Options, select2SearchOptions
+  # remove new/edit specifics
+  delete select2QueryOptions.initSelection
   
   $('#select2-query').select2 select2QueryOptions
 
