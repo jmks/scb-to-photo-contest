@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery.backstretch
 //= require jquery-scrollto
+//= require jquery.jscroll.min
 //= require bootstrap
 //= require turbolinks
 //= require s3_direct_upload

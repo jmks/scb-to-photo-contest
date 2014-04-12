@@ -15,5 +15,6 @@
     - if @page > 1
       = link_to page_photos_path(@prev_params), class: 'btn btn-default btn-lg btn-flat previous', title: 'Previous Page' do
         %i.fa.fa-backward
-    = link_to page_photos_path(@next_params), class: 'btn btn-default btn-lg btn-flat next', title: 'Next Page' do 
-      %i.fa.fa-forward
+    - if @page < @total_pages
+      = link_to page_photos_path(@next_params), class: 'btn btn-default btn-lg btn-flat next', title: 'Next Page' do 
+        %i.fa.fa-forward

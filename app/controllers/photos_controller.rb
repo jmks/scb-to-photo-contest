@@ -102,6 +102,8 @@ class PhotosController < ApplicationController
       @filter = :all
     end
 
+    photo_count  = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).count
+    @total_pages = (1.0 * photo_count / PHOTOS_PER_PAGE).ceil
     @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
                       desc(:created_at).
                       limit(PHOTOS_PER_PAGE).
