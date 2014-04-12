@@ -30,7 +30,7 @@
             %li{class: "#{'active' if current_page?(rules_path)}"}
               = link_to 'RULES', rules_path
         
-        %li.dropdown{:class => "#{'active' if current_page?(photos_path)}"}
+        %li.dropdown{ class: "#{'active' if gallery_path? }"}
           = link_to 'GALLERY', photos_path
         
         %li{class: "#{'active' if current_page?(prizes_path)}"}

@@ -15,6 +15,11 @@ module ApplicationHelper
     false
   end
 
+  # to higlight 'gallery' in navbar
+  def gallery_path?
+    current_page?(photos_path) || current_page?(page_photos_path)
+  end
+
   def navbar_class
     if current_page? root_path
       'navbar-inverse'
