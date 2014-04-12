@@ -275,6 +275,10 @@ body.home #alerts {
 
 /* BUTTONS */
 
+a.btn + a.btn {
+    margin-left: 10px;
+}
+
 a.btn.btn-inverse, button.btn.btn-inverse, input.btn.btn-inverse {
     @include nav-font;
     @include border-radius(0);

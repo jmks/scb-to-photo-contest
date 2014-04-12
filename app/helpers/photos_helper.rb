@@ -54,7 +54,6 @@ module PhotosHelper
       options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
       path = photos_path
     end
-    
 
     if block_given?
       link_to path, options do
