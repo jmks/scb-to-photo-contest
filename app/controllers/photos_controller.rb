@@ -1,7 +1,10 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_contestant!, except: [:show, :index, :vote, :report_comment, :comments, :flora, :fauna, :landscapes]
+  before_filter :authenticate_contestant!, only: [:new, :create, :edit, :update, :destroy, :comment]
+  
   before_filter :preprocess_data, only: [:create, :update]
-  before_filter :contestant_owns_photo, only: [:edit, :update, :destroy]
+  
+  before_filter :get_photo_by_id, only: [:edit, :update, :show, :destroy, :comments, :vote]
+  before_filter :contestant_owns_photo!, only: [:edit, :update, :destroy]
 
   PHOTOS_PER_PAGE = 15
   COMMENTS_PER_PAGE = 25
@@ -26,12 +29,9 @@ class PhotosController < ApplicationController
   end
 
   def edit
-    @photo = Photo.find params[:id]
   end
 
   def update
-    @photo = Photo.find params[:id]
-
     if @photo.update_attributes(photo_params)
       # update tags
       Tag.add_tags params[:photo][:tags]
@@ -43,7 +43,6 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id]) if params[:id]
     redirect_to(photos_path) and return unless @photo
     @photo.inc views: 1
   end
@@ -130,8 +129,6 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @photo = Photo.find params[:id]
-
     redirect_to contestant_index_path unless @photo.owner.id == current_contestant.id
 
     @photo.destroy
@@ -141,8 +138,7 @@ class PhotosController < ApplicationController
   end
 
   def comments
-    @photo = Photo.find params[:id]
-    page  = (params[:page] && params[:page].to_i) || 1
+    page = (params[:page] && params[:page].to_i) || 1
 
     @comments = @photo.comments.skip((page - 1) * COMMENTS_PER_PAGE).limit(COMMENTS_PER_PAGE)
 
@@ -160,8 +156,6 @@ class PhotosController < ApplicationController
   end
 
   def vote
-    @photo = Photo.find(params[:id])
-
     voter = Vote.first_or_initialize(request.ip)
 
     if voter.vote
@@ -199,8 +193,12 @@ class PhotosController < ApplicationController
     params[:photo][:photo_date] = "#{params[:photo_date_month]} #{params[:photo_date_year]}"
   end
 
-  def contestant_owns_photo
-    
+  def get_photo_by_id
+    @photo = Photo.find(params[:id])
+  end
+
+  def contestant_owns_photo!
+    redirect_to photos_path unless contestant_signed_in? && current_contestant.id == @photo.id
   end
 
   def photo_params

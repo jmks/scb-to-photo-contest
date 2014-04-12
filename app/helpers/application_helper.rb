@@ -17,7 +17,7 @@ module ApplicationHelper
 
   # to higlight 'gallery' in navbar
   def gallery_path?
-    current_page?(photos_path) || current_page?(page_photos_path)
+    params[:controller] == 'photos' && params[:action] == 'index'
   end
 
   def navbar_class
