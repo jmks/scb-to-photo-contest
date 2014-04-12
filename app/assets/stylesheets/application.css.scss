@@ -365,6 +365,20 @@ a.btn-flat.btn-logo:active {
     }
 }
 
+a.btn-filter {
+    background-color: #f8f8f8;
+    color: #777;
+    @include nav-font;
+    @include border-radius(0);
+}
+
+a.btn-filter:active,
+a.btn-filter:hover,
+a.btn-filter.active {
+    background-color: $brightblue;
+    color: #fff;
+}
+
 .btn-flow.btn-group {
     @include nav-font;
 

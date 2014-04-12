@@ -46,21 +46,21 @@ module PhotosHelper
   def filter_link_to *args, &block
     if block_given?
       filter, path, options = args
+    else
+      filter, name, path, options = args
+    end
 
-      if @filter == filter
-        options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
-      end
+    if @filter == filter
+      options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
+      path = photos_path
+    end
+    
 
+    if block_given?
       link_to path, options do
         yield
       end
     else
-      filter, name, path, options = args
-
-      if @filter == filter
-        options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
-      end
-
       link_to name, path, options
     end
   end
