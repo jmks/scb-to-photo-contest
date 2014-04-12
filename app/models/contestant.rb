@@ -96,6 +96,10 @@ class Contestant
     incomplete_entries.any?
   end
 
+  def entries_left?
+    entries.length < ContestRules::ENTRIES_PER_CONTESTANT
+  end
+
   protected
 
   def normalize_phone

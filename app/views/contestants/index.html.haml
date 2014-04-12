@@ -31,13 +31,14 @@
 #contestant-activity-wrapper
   .two-tone-title.text-center
     %span Activity Page
-    %span= current_contestant.first_name
+    %span= @contestant.first_name
 
   #entries-wrapper
     .row.text-center
-      %a.btn.btn-flat{ href: new_photo_path }
-        %i.fa.fa-camera.fa-2x
-        Begin Submission
+      - if @contestant.entries_left?
+        %a.btn.btn-flat{ href: new_photo_path }
+          %i.fa.fa-camera.fa-2x
+          Begin Submission
     
     - if @contestant.entries.any?
       %h3.text-center YOUR SUBMISSIONS

@@ -10,10 +10,14 @@ class PhotosController < ApplicationController
   COMMENTS_PER_PAGE = 25
 
   def new
+    can_add_entries
+
     @photo = Photo.new(params[:photo])
   end
 
   def create
+    can_add_entries
+
     @photo = Photo.new(photo_params)
     @photo.owner = current_contestant
     
@@ -195,6 +199,13 @@ class PhotosController < ApplicationController
 
   def get_photo_by_id
     @photo = Photo.find(params[:id])
+  end
+
+  def can_add_entries
+    unless current_contestant.entries_left?
+      flash[:danger] = "You have reached the contest's entry limit of #{ ContestRules::ENTRIES_PER_CONTESTANT }"
+      redirect_to contestant_index_path and return
+    end
   end
 
   def contestant_owns_photo!
