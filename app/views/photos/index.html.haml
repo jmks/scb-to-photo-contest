@@ -1,20 +1,20 @@
-= render 'photo_filters'
+#photos
+  = render 'photo_filters'
 
-.two-tone-title.text-center
-  %span Photos
-  %span= @title
+  .two-tone-title.text-center
+    %span Photos
+    %span= @title
 
-#photo-wall.row
-  .col-xs-12
-    %ul.text-center.list-inline
-      - @photos.each do |photo|
-        %li.photo= render 'photo_thumb', photo: photo
+  #photo-wall.row
+    .col-xs-12
+      %ul.text-center.list-inline
+        - @photos.each do |photo|
+          %li.photo= render 'photo_thumb', photo: photo
 
-#pagination.row.text-center
-  .col-xs-12
-    - if @page > 1
-      = link_to page_photos_path(@prev_params), class: 'btn btn-default btn-lg btn-flat previous', title: 'Previous Page' do
-        %i.fa.fa-backward
-    - if @page < @total_pages
-      = link_to page_photos_path(@next_params), class: 'btn btn-default btn-lg btn-flat next', title: 'Next Page' do 
-        %i.fa.fa-forward
+    #pagination.col-xs-12.text-center
+      - if @page > 1
+        = link_to page_photos_path(@prev_params), class: 'btn btn-default btn-lg btn-flat previous', title: 'Previous Page' do
+          %i.fa.fa-backward
+      - if @page < @total_pages
+        = link_to page_photos_path(@next_params), class: 'btn btn-default btn-lg btn-flat next', title: 'Next Page' do 
+          %i.fa.fa-forward

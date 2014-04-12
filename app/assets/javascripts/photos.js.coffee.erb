@@ -23,15 +23,15 @@ class Picker
     @picker$.find('.picker-val').html value
     @picker$.find('.picker-hidden-val').val value
 
+photoHoverOn = ->
+  $(this).find('.stats').stop().animate({'opacity': 0.6})
+  $(this).find('.thumb-title').stop().animate({'opacity': 0.6})
+photoHoverOff = ->
+  $(this).find('.stats').stop().animate({'opacity': 0})
+  $(this).find('.thumb-title').stop().animate({'opacity': 0})
+
 jQuery ->
-  $('.photo').hover(
-    ->
-      $(this).find('.stats').stop().animate({'opacity': 0.6})
-      $(this).find('.thumb-title').stop().animate({'opacity': 0.6})
-    -> 
-      $(this).find('.stats').stop().animate({'opacity': 0})
-      $(this).find('.thumb-title').stop().animate({'opacity': 0})
-  )
+  $('.photo').addClass('hover-enabled').hover photoHoverOn, photoHoverOff
 
   <% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
   select2Options = 
@@ -64,7 +64,6 @@ jQuery ->
   monthPicker = new Picker '#month-picker', months
   yearPicker  = new Picker '#year-picker', years
 
-
   select2SearchOptions =
     placeholder: 'Search by tag'
     multiple: false
@@ -74,8 +73,20 @@ jQuery ->
   $('#select2-query').select2 select2QueryOptions
 
   $('#select2-query').on 'change', ->
-    #alert 'selected ' + $(this).select2('data')[0].text
     tag = $(this).select2('data').text
     window.location = '/photos?tag=' + encodeURIComponent(tag)
 
-  
+  jscrollOptions = 
+    nextSelector: '#pagination a.next'
+    loadingHtml: '<i class="fa fa-spinner fa-spin"></i>'
+    contentSelector: 'li'
+    padding: 500
+    pagingSelector: '#pagination'
+    callback: ->
+      latest = $('.jscroll-added').html()
+      $('.jscroll-added').remove()
+      $('#photos #photo-wall ul').append $(latest)
+      $('#photo-wall .photo:not(.hover-enabled)').
+        addClass('hover-enabled').hover photoHoverOn, photoHoverOff
+
+  $('#photos #photo-wall').jscroll(jscrollOptions)

@@ -123,9 +123,8 @@ class PhotosController < ApplicationController
     @next_params = @params.dup
     @next_params[:page] += 1
 
-    respond_to do |format|
-      format.html
-      format.js # needs work
+    if request.xhr?
+      render partial: 'photos_only' and return
     end
   end
 
