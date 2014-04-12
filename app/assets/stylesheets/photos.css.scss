@@ -56,6 +56,12 @@
         z-index: auto;
     }
   }
+
+  .grey-box {
+    background: #fff;
+    padding: 15px;
+    color: #555;
+  }
 }
 
 #comments-container {
@@ -232,6 +238,12 @@
   padding: 20px 0;
   background-color: #D7DEE8;
   color: #777;
+
+  @media screen and (max-width: 905px) {
+    a, .select-container {
+      margin-bottom: 10px;
+    }
+  }
 
   .select-container {
     display: inline-block;
