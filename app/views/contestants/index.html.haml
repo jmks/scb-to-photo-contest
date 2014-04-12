@@ -1,3 +1,7 @@
+- if @contestant.incomplete_entries?
+  - content_for :alert do
+    = incomplete_entries_message
+
 #confirm-delete-modal.modal.fade
   .modal-dialog
     .modal-content

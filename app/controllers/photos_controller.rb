@@ -156,7 +156,7 @@ class PhotosController < ApplicationController
     else
       @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]
     end
-    render :show
+    redirect_to photo_path @photo
   end
 
   def vote

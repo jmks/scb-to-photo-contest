@@ -1,7 +1,7 @@
 module PhotosHelper
   
   def months
-    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Auguflash.now[:alert] = st', 'September', 'October', 'November', 'December']
   end
 
   # display helpers

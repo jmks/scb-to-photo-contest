@@ -1,4 +1,21 @@
 module ContestantsHelper
+
+  def incomplete_entries_message
+    incomplete_titles = capture do 
+      content_tag('ul') do 
+        @contestant.incomplete_entries.map do |entry|
+          concat content_tag('li', entry.title)
+        end
+      end
+    end
+
+    capture do
+      concat content_tag('h4', 'The following entries are incomplete:')
+      concat incomplete_titles
+      concat content_tag('h4', 'Please check the ACTIONS REQUIRED column in YOUR SUBMISSIONS')
+    end
+  end
+
   def next_action photo
     status  = photo.registration_status
     message = Photo::Registration_Message[status]

@@ -88,6 +88,14 @@ class Contestant
     first_name + ' ' + last_name
   end
 
+  def incomplete_entries
+    entries.select { |p| p.registration_status != :confirmed }
+  end
+
+  def incomplete_entries?
+    incomplete_entries.any?
+  end
+
   protected
 
   def normalize_phone

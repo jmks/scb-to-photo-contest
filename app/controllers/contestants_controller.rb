@@ -11,9 +11,5 @@ class ContestantsController < ApplicationController
       @invalid_photo_order_numbers = session[:invalid_photo_order_numbers]
       session.delete :invalid_photo_order_numbers
     end
-
-    if @contestant.entries.select { |p| p.registration_status != :confirmed }.any?
-      flash.now[:alert] = "You currently have photo entries that are not completed. Please check the ACTIONS REQUIRED column in YOUR SUBMISSIONS"
-    end
   end
 end
