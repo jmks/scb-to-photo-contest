@@ -90,3 +90,5 @@ jQuery ->
         addClass('hover-enabled').hover photoHoverOn, photoHoverOff
 
   $('#photos #photo-wall').jscroll(jscrollOptions)
+
+  $('#photo-wrapper img').bind 'contextmenu', -> false
