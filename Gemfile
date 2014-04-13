@@ -69,11 +69,6 @@ gem 'font-awesome-rails'
 gem 'modernizr-rails'
 
 # for uploading
-# gem 'carrierwave'
-# gem 'carrierwave_direct'
-# gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-
-# for better uploading
 gem 's3_direct_upload'
 
 # for background processing
@@ -94,11 +89,6 @@ gem 'foreman'
 
 # recapcha
 gem 'recaptcha', require: 'recaptcha/rails'
-
-# pagination and infinite scroll
-# gem 'will_paginate', '~>3.0.5'
-# gem 'bootstrap-will_paginate', '~>0.0.10'
-# gem 'kaminari'
 
 # Use RSpec and Cucumber for TDD
 group :development, :test do
