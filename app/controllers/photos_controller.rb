@@ -152,7 +152,7 @@ class PhotosController < ApplicationController
   def comment
     @photo = Photo.find(params[:photo_id])
     if params[:comment][:text].empty?
-      flash.now[:alert] = "Please fill in a comment before commenting"
+      flash.now[:alert] = 'Please fill in a comment before commenting'
     else
       @photo.comments.create name: current_contestant.public_name, text: params[:comment][:text]
     end
@@ -160,13 +160,14 @@ class PhotosController < ApplicationController
   end
 
   def vote
-    voter = Vote.first_or_initialize(request.ip)
+    ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
+    voter = Vote.first_or_initialize(ip)
 
     if voter.vote
       @photo.inc votes: 1
-      flash[:notice] = "Thank you for voting"
+      flash[:notice] = 'Thank you for voting'
     else
-      flash[:danger] = "You have reached your vote limit for today. Please try again tomorrow."
+      flash[:danger] = 'You have reached your vote limit for today. Please try again tomorrow.'
     end
 
     voter.save
