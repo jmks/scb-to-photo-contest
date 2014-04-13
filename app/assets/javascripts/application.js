@@ -33,7 +33,8 @@ $(function() {
     var message$ = $('#mail-us-modal #mail-message'),
         email$   = $('#mail-us-modal #mail-email'),
         email_re = /[^\s@]+@[^\s@]+\.[^\s@]+/,
-        error    = false;
+        error    = false,
+        form$    = $('#contact-form');
 
     if (message$.val().length == 0) {
       error = true;
@@ -50,8 +51,12 @@ $(function() {
     }
 
     if (error) {
-      evt.preventDefault();
+      return false;
     }
+
+    form$.submit();
+
+    $('#mail-us-modal').modal('close');
   })
 });
 

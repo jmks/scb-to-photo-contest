@@ -35,10 +35,14 @@ class RootController < ApplicationController
       ContactMailer.contact(email, message).deliver
       flash[:notice] = "Thank you contacting us. A representative from SCB-TO will respond shortly."
     rescue
-      # TODO log it
+      # TODO log it - email created in db
     end
 
-    redirect_to root_path
+    if request.xhr?
+      head :ok and return
+    else
+      redirect_to root_path
+    end
   end
 
   private

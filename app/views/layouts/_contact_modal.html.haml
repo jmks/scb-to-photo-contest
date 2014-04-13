@@ -8,7 +8,7 @@
             %span Email
             %span Us
       .modal-body
-        = form_tag contact_path, remote: true, class: 'form form-horizontal', id: 'contact-form' do
+        = form_tag contact_path, class: 'form form-horizontal', id: 'contact-form' do
           .form-group
             .col-xs-12
               = text_area_tag :message, nil, id: 'mail-message', class: 'form-control', rows: 5, placeholder: 'Your message'
