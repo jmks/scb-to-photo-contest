@@ -31,4 +31,8 @@
     content: ' (optional)';
     color: #999;
   }
+
+  .recaptcha > div {
+    display: inline-block;
+  }
 }

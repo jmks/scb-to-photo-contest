@@ -61,6 +61,10 @@
             = f.password_field :password_confirmation, :class => 'form-control'
 
         .form-group
+          .col-xs-12.recaptcha.text-center
+            = recaptcha_tags ajax: true
+
+        .form-group
           .col-md-offset-4.col-md-3
             = f.submit nil, :class => 'btn btn-flat btn-block btn-lg', :value => 'Sign up'
 

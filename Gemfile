@@ -92,6 +92,9 @@ gem 'select2-rails'
 # heroku startup
 gem 'foreman'
 
+# recapcha
+gem 'recaptcha', require: 'recaptcha/rails'
+
 # pagination and infinite scroll
 # gem 'will_paginate', '~>3.0.5'
 # gem 'bootstrap-will_paginate', '~>0.0.10'

@@ -168,6 +168,7 @@ GEM
     rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
+    recaptcha (0.3.6)
     redis (3.0.2)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
@@ -277,6 +278,7 @@ DEPENDENCIES
   pry
   rails (= 4.0.2)
   rails_12factor
+  recaptcha
   redis
   resque
   rmagick

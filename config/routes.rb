@@ -1,5 +1,5 @@
 PhotoContest::Application.routes.draw do
-  devise_for :contestants
+  devise_for :contestants, controllers: { registrations: 'registrations' }
 
   root to: 'root#index'
   get '/prizes',   to: 'root#prizes',  as: 'prizes'
