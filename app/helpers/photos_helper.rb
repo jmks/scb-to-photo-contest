@@ -39,7 +39,7 @@ module PhotosHelper
   end
 
   def tags_string photo
-    photo.tags? ? photo.tags.join(', ') : ''
+    photo.tags? ? photo.tags.join(',') : ''
   end
 
   # params: filter, name, path, options, filter_sym, &block
