@@ -233,6 +233,19 @@
       height: 20px;
     }
   }
+
+  .select2-container .select2-choices .select2-search-field input,
+  .select2-container .select2-choice,
+  .select2-container .select2-choices,
+  .select2-search input {
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0px;
+    color: #777;
+    font-family: "Open Sans", sans-serif;
+    background: #e3e3e3;
+  }
 }
 
 #photo-filters {
@@ -256,11 +269,25 @@
     }
   }
 
-  *:not(:last-child) {
+  /**:not(:last-child) {
     margin-right: 20px;
-  }
+  }*/
 
   .select2 {
     min-width: 250px;
+  }
+
+  .select2-container .select2-choices .select2-search-field input,
+  .select2-container .select2-choice,
+  .select2-container .select2-choices,
+  .select2-search input,
+  input.select2-input {
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0px;
+    color: #777;
+    font-family: "Open Sans", sans-serif;
+    background: #f8f8f8;
   }
 }
