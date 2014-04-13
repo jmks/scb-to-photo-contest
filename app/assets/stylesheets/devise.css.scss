@@ -27,6 +27,10 @@
   background-color: #fff;
   max-width: 750px;
 
+  .already-registered {
+    margin-bottom: 20px;
+  }
+
   .optional:after {
     content: ' (optional)';
     color: #999;

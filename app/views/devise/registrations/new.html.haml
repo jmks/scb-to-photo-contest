@@ -5,6 +5,12 @@
         %span Sign
         %span Up
 
+  .row.already-registered
+    .col-md-offset-4.col-md-5
+      %strong
+        %span Already registered?
+        = render "devise/shared/links"
+
   #submit-errors.row
     .col-xs-12.text-center
       - if @contestant.errors.any?
@@ -74,11 +80,6 @@
         .form-group
           .col-md-offset-4.col-md-3
             = f.submit nil, :class => 'btn btn-flat btn-block btn-lg', :value => 'Sign up'
-
-  .row
-    .col-md-offset-4.col-md-5
-      %small Already registered?
-      = render "devise/shared/links"
 
   .row
     .col-xs-12.text-center
