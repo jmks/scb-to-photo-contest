@@ -119,6 +119,15 @@ ul.judges-gallery li.judge:nth-child(odd) {
     margin-right: auto;
     max-width: 900px;
 
+    ul {
+        padding: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;    
+        }
+    }
+
     .category-header {
         font-size: 36px;
         color: #fff;
@@ -132,8 +141,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
     }
 
     .prize {
-        display: block;
-        float: left;
+        display: inline-block;
         padding: 10px 10px 10px 10px;
         margin: 10px 10px;
         background-color: #fff;
