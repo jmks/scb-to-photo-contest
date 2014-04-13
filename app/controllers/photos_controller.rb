@@ -209,7 +209,7 @@ class PhotosController < ApplicationController
   end
 
   def contestant_owns_photo!
-    redirect_to photos_path unless contestant_signed_in? && current_contestant.id == @photo.id
+    redirect_to photos_path unless signed_in? && current_contestant.entries.include?(@photo)
   end
 
   def photo_params

@@ -8,7 +8,7 @@
         .form-group
           = label_tag :email, nil, :class => 'control-label col-md-3'
           .col-sm-12.col-md-8
-            = email_field_tag :contestant_email, params[:email], :class => 'form-control', :name => 'contestant[email]'
+            = email_field_tag :contestant_email, params[:contestant][:email], :class => 'form-control', :name => 'contestant[email]'
         .form-group
           = label_tag 'Password', nil, :class => 'control-label col-md-3'
           .col-sm-12.col-md-8
