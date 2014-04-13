@@ -15,6 +15,19 @@ $lg: "only screen and (min-width: 1200px)";
 
     #quick-btns {
         margin-top: 70px;
+
+        li {
+            display: inline-block;
+            margin: 5px;
+
+            a.btn {
+                min-width: 280px;
+            }
+        }
+    }
+
+    @media #{$sm} {
+        min-height: 575px;
     }
 
     #sponsors-link {
@@ -33,30 +46,6 @@ $lg: "only screen and (min-width: 1200px)";
     background-color: #e3e3e3;
     min-height: 70px;
 }
-
-/* think these @media are deprecated */
-
-@media (max-width: 767px) {
-    #home-welcome {
-        min-height: 575px;
-
-        #quick-btns {
-            a {
-                margin: 10px 10px;
-                width: 280px;
-            }
-        }
-    }    
-}
-
-@media (min-width: 1200px) {
-    #quick-btns a {
-        margin: 0 10px;
-        min-width: 280px;
-    }
-}
-
-
 
 .judge {
   margin: 20px 20px;
@@ -80,20 +69,24 @@ $lg: "only screen and (min-width: 1200px)";
 
 #judges-wrapper {
     padding-top: 30px;
+
+
 }
 
 ul.judges-gallery {
     margin-left: auto;
     margin-right: auto;
     max-width: 900px;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 ul.judges-gallery li.judge {
-    float: left;
     padding: 10px 10px 10px 10px;
     margin: 5px 0px;
     background-color: #fff;
     cursor: pointer;
+    display: inline-block;
 
     -webkit-box-shadow: 7px 7px 10px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    7px 7px 10px 0px rgba(50, 50, 50, 0.75);

@@ -252,6 +252,12 @@ img {
   }
 }
 
+.two-tone-title.white {
+    span {
+        color: #fff;
+    }
+}
+
 /* /GENERAL */
 
 body.home #alerts {
@@ -457,9 +463,19 @@ a.btn-filter.active {
         margin-bottom: 15px;
 
         a {
+            margin: auto auto;
+
             img {
                 max-width: 80%;
                 max-height: 115px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 776px) {
+        .sponsor:not(#primary-sponsor) {
+            img {
+                max-width: 60%;
             }
         }
     }
