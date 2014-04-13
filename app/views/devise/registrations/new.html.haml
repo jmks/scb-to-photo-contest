@@ -62,7 +62,14 @@
 
         .form-group
           .col-xs-12.recaptcha.text-center
-            = recaptcha_tags ajax: true
+            = recaptcha_tags ajax: true, display: { theme: 'white' }
+
+        %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:terms_of_service)}"}
+          = f.label :terms_of_service, class: 'control-label col-md-offset-2 col-md-6 text-left' do 
+            %span I accept the
+            = link_to 'Terms of Service', terms_path, target: '_blank'
+          .col-md-1
+            = f.check_box :terms_of_service, class: 'form-control'
 
         .form-group
           .col-md-offset-4.col-md-3
@@ -77,4 +84,4 @@
     .col-xs-12.text-center
       .row
         .col-md-offset-2.col-md-7
-          %small If you are a minor, have a parent/legal guardian register for you.
+          %small If you are a minor, have a parent/legal guardian register.

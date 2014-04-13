@@ -15,5 +15,4 @@
   = render partial: 'photo_form', 
     locals: { form_opts: { url: photo_path(@photo.id, referrer: params[:referrer]), 
                            method: :patch, 
-                           html: { class: 'form-horizontal' }},
-              terms: false }
+                           html: { class: 'form-horizontal' }}}

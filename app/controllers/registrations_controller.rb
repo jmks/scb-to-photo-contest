@@ -15,6 +15,6 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def contestant_params
-    params.require(:contestant).permit(:first_name, :last_name, :public_name, :email, :phone, :password, :password_confirmation)
+    params.require(:contestant).permit(:first_name, :last_name, :public_name, :email, :phone, :password, :password_confirmation, :terms_of_service)
   end
 end

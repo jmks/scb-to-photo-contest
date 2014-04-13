@@ -75,6 +75,8 @@ class Contestant
   # votes
   field :voted_photo_ids, type: Array
 
+  validates :terms_of_service, acceptance: true
+
   # indexes
   index({ email: 1 }, { unique: true, background: true })
 

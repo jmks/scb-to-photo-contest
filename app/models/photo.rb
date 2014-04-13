@@ -27,8 +27,6 @@ class Photo
   field :camera_stats
   field :photo_date
   field :photo_location
-
-  validates :terms_of_service, acceptance: true
   
   embeds_many :comments
   field :tags, :type => Array, :default => []

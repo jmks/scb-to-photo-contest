@@ -59,14 +59,6 @@
       = svg_png_fallback asset_path('canada.svg'), {}
       %small Tag 'Canada' to be considered for 'Made in Canada' Prize
 
-  - if terms
-    %div{class: "form-group #{'error' if @photo.errors.messages.key?(:terms_of_service)}"}
-      = f.label :terms_of_service, class: 'control-label col-md-offset-3 col-md-4 text-left' do 
-        %span I accept the
-        = link_to 'Terms of Service', terms_path, target: '_blank'
-      .col-md-1
-        = f.check_box :terms_of_service, class: 'form-control'
-
   .form-group
     .col-xs-12.text-center
       = f.submit nil, :class => 'btn btn-flat', :value => 'Submit Details'
