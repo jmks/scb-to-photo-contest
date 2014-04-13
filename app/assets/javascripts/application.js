@@ -28,6 +28,31 @@ $(function() {
     $(this).attr('src', $(this).data('fallback'));
     });
   }
+
+  $('#mail-us-modal #send-mail').on('click', function(evt) {
+    var message$ = $('#mail-us-modal #mail-message'),
+        email$   = $('#mail-us-modal #mail-email'),
+        email_re = /[^\s@]+@[^\s@]+\.[^\s@]+/,
+        error    = false;
+
+    if (message$.val().length == 0) {
+      error = true;
+      message$.addClass('input-error');
+    } else {
+      message$.removeClass('input-error');
+    }
+
+    if (!email_re.test(email$.val())) {
+      error = true;
+      email$.addClass('input-error');
+    } else {
+      email$.removeClass('input-error');
+    }
+
+    if (error) {
+      evt.preventDefault();
+    }
+  })
 });
 
 addthis = function() {

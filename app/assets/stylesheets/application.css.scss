@@ -156,6 +156,12 @@ form select.form-control {
     box-shadow: none;
 }
 
+form input.form-control.input-error,
+form textarea.form-control.input-error,
+form select.form-control.input-error {
+    border: 2px solid red;
+}
+
 /* /FORMS */
 
 .modal-content {
