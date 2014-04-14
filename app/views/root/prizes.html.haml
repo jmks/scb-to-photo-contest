@@ -1,75 +1,162 @@
+#prize-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{ type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true' }
+          &times;
+        .prize-title
+      .modal-body
+
 #prizes-wrapper
   .row
     .col-xs-12
       %ul
         %li.prize.tilt-left
-          = link_to '#', class: 'prize-img' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Grand Prize
-        %li.prize.tilt-right
-          = link_to '#', class: 'prize-img' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Made in Canada
+          = image_tag asset_path('prizes/fujix-a1.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Grand Prize
+          .prize-detail.hidden
+            %p
+              %strong Item: 
+              Fujifilm X-A1 Mirrorless Digital Camera
+            %p 
+              %strong Awarded to: 
+              Best overall photo
+            %p 
+              %strong Description: 
+              This compact camera provides advanced performance in a small form-factor. Light enough to bring along on your next hike, but powerful enough to capture beautifully detailed images. Features a 16.3MP APS-C CMOS Sensor, 16-50mm Fujifilm XC lens, 3.0-inch Tilting LCD monitor, and is capable of shooting 1080p video. 
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/downtown-camera.png')
 
-  .row.category-header
-    .col-xs-12.text-center
-      = svg_png_fallback 'flora.svg', height: '60px'
-      %span Flora
-
-  .row
-    .col-xs-12
-      %ul
-        %li.prize.tilt-left
-          = link_to '#' do
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Flora - 1st Place
-        %li.prize.tilt-right
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Flora - 2nd Place
-        %li.prize.tilt-left
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Flora - 3rd Place
-
-  .row.category-header
-    .col-xs-12.text-center
-      = svg_png_fallback 'fauna.svg', height: '60px'
-      %span Fauna
+  / .row.category-header
+  /   .col-xs-12.text-center
+  /     = svg_png_fallback 'flora.svg', height: '60px'
+  /     %span Flora
 
   .row
     .col-xs-12
       %ul
         %li.prize.tilt-left
-          = link_to '#' do
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Fauna - 1st Place
-        %li.prize.tilt-right
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Fauna - 2nd Place
-        %li.prize.tilt-left
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Fauna - 3rd Place
+          = image_tag asset_path('prizes/gallery-exhibit.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Gallery Exhibition
+          .prize-detail.hidden
+            %p
+              %strong Item: 
+              Exhibition at Baka Gallery Cafe
+            %p 
+              %strong Awarded to: 
+              Judges picks plus top photos in each category by popular vote
+            %p 
+              %strong Description: 
+              SCB-TO is excited to offer participants the chance to have their photos publicly displayed for one week at the stylish Baka Gallery Cafe. Photos will hang from May 26th to May 30th 2014 and be part of our Silent Auction to raise funds for local conservation projects. 
 
-  .row.category-header
-    .col-xs-12.text-center
-      = svg_png_fallback 'mountains.svg', height: '50px'
-      %span Landscape
+        %li.prize.tilt-right
+          = image_tag asset_path('prizes/mec-tent.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font MEC Wanderer 2 Tent
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              The perfect tent for your next adventure! The MEC Wanderer 2 features generous floor, head and vestibule room, combined with rugged fabrics and a wind-stable dome shape. Easy to assemble and light enough to carry on backpacking trips.
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/mec-crop.png')
+
+
+  / .row.category-header
+  /   .col-xs-12.text-center
+  /     = svg_png_fallback 'fauna.svg', height: '60px'
+  /     %span Fauna
 
   .row
     .col-xs-12
       %ul
         %li.prize.tilt-left
-          = link_to '#' do
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Landscape - 1st
-        %li.prize.tilt-right
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Landscape - 2nd
+          = image_tag asset_path('prizes/patagonia-jackets.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Patagonia Jackets
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              Look great and stay dry next time you hit the trail! These Torrentshell jackets are both tough and waterproof, featuring a 2.5-layer H2No® Performance Standard shell, DWR treated zippers and self-stuff handwarmer pockets. We have one men's and one women's available to win.  
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/patagonia.png')
+
         %li.prize.tilt-left
-          = link_to '#' do 
-            = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
-          %p.cursive-font Landscape - 3rd
+          = image_tag asset_path('prizes/two-tix-ripleys.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Aquarium Passes
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              Spend the day at Toronto's latest attraction! Learn about the creatures that inhabit the Great Lakes and Canada's surrounding seas with tickets for two to the spectacular Ripley's Aquarium of Canada.
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/ripleys-aquarium.png')
+
+        %li.prize.tilt-right
+          = image_tag asset_path('prizes/grassroots-gift.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Bambu Cork iPad Case
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              Protect your tech when you get outside with this sleek and eco-friendly case. Made from sustainable cork fabric and lined with unbleached cotton, it not only fits most tablets, but it's naturally wear resistant and easy to clean. 
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/grassroots.png')
+
+  / .row.category-header
+  /   .col-xs-12.text-center
+  /     = svg_png_fallback 'mountains.svg', height: '50px'
+  /     %span Landscape
+
+  .row
+    .col-xs-12
+      %ul
+        %li.prize.tilt-left
+          = image_tag asset_path('prizes/tfn-membership.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font TFN Membership
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              Explore Toronto's hidden gems and learn more about local plants and animals with the Toronto Field Naturalists. This one year membership provides you with access to over 100 guided hikes per year, monthly Nature Arts outings, a subscription to the Toronto Field Naturalist magazine/newsletter and more.
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/torontofieldnaturalists.jpg')
+
+        %li.prize.tilt-left
+          = image_tag asset_path('prizes/bloor-cinema.jpg'), alt: 'Prize', height: '250px'
+          %p.prize-title.cursive-font Bloor Cinema Passes
+          .prize-detail.hidden
+            %p 
+              %strong Awarded to:
+              TBA
+            %p 
+              %strong Description: 
+              A one year membership and two movie passes to Bloor Hot Docs Cinema. Take in some of the world's best documentary films right here in Toronto at this historic, century-old cinema.
+            %p 
+              %strong Generously donated by:
+            = image_tag asset_path('sponsors/bloorhotdocs.jpg')
+
+
+        / %li.prize.tilt-right
+        /   = link_to '#' do 
+        /     = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        /   %p.cursive-font Landscape - 2nd
+        / %li.prize.tilt-left
+        /   = link_to '#' do 
+        /     = image_tag 'prize-placeholder.jpg', alt: 'Prize', height: '250px'
+        /   %p.cursive-font Landscape - 3rd

@@ -11,6 +11,15 @@ jQuery ->
       modal$.find('.modal-body').empty().html(bio)
       modal$.modal 'show'
 
+  if ($('#prizes-wrapper'))
+    $('li.prize').click ->
+      name = $(this).find('.prize-title').html()
+      desc = $(this).find('.prize-detail').html()
+      modal$ = $('#prize-modal')
+      modal$.find('.modal-header .prize-title').empty().html name
+      modal$.find('.modal-body').empty().html desc
+      modal$.modal 'show'
+
   $('a#mail-us').click (e) ->
     $('#mail-us-modal').modal('show')
     e.preventDefault()

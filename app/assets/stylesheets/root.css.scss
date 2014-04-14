@@ -182,6 +182,21 @@ ul.judges-gallery li.judge:nth-child(odd) {
     }
 }
 
+#prize-modal {
+    .prize-title {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 24px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+    img {
+        max-width: 300px;
+        max-height: 125px;
+    }
+}
+
 #rules-wrapper {
     text-align: center;
     
