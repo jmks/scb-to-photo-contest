@@ -45,13 +45,6 @@ class RootController < ApplicationController
     end
   end
 
-  def remote_ip
-  render :text => "REMOTE_ADDR: %s<br/>remote_ip: %s<br/>HTTP_X_FORWARDED_FOR: %s" % 
-                [ request.env['REMOTE_ADDR'],
-                  request.remote_ip,
-                  request.env['HTTP_X_FORWARDED_FOR'] ]
-  end
-
   private
 
   def valid_email email

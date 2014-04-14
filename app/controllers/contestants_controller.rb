@@ -4,7 +4,7 @@ class ContestantsController < ApplicationController
   def index
     @contestant       = current_contestant
     @favourites       = Photo.find(@contestant.voted_photo_ids || [])
-    @votes_left_today = Vote.votes_remaining(request.remote_ip)
+    @votes_left_today = Vote.votes_remaining(@contestant.current_sign_in_ip)
 
     # can be removed
     if session[:invalid_photo_order_numbers]

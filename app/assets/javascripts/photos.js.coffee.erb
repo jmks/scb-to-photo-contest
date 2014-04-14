@@ -30,6 +30,27 @@ photoHoverOff = ->
   $(this).find('.stats').stop().animate({'opacity': 0})
   $(this).find('.thumb-title').stop().animate({'opacity': 0})
 
+class window.AlertMessages
+  constructor: () ->
+    @container$ = $('#alerts')
+  attach: (html) =>
+    @container$.empty().html($(html))
+  template: (alertClass) ->
+    ret = $('<div class="alert alert-dismissible"><button class="close" type="close" data-dismiss="alert" aria-hidden=""> × </button>')
+    ret.addClass(alertClass)
+  notice: (msg) =>
+    notice = $(@template 'alert-success')
+    @attach notice.append(msg)
+  info:   (msg) =>
+    info = $(@template 'alert-info')
+    @attach info.append(msg)
+  alert:  (msg) =>
+    warning = $(@template 'alert-warning')
+    @attach warning.append(msg)
+  danger: (msg) =>
+    danger = $(@template 'alert-danger')
+    @attach danger.append(msg)
+
 jQuery ->
   $('.photo').addClass('hover-enabled').hover photoHoverOn, photoHoverOff
 
@@ -116,4 +137,36 @@ jQuery ->
       css('left', evt.pageX).
       css('top', evt.pageY)
     setTimeout(fadeCopyRight, 1500)
+    false
+
+  voteBtn$ = $('#photo-vote')
+
+  voteBtn$.on 'click', (evt) ->
+    $.ajax
+      url: 'http://jsonip.com/'
+      dataType: 'json'
+    .done (data) ->
+      voteByIp data.ip
+    .fail () ->
+      voteByIp false
+    false
+
+  voteByIp = (ip) ->
+    if (ip)
+      url = voteBtn$.closest('form').attr('action')
+      $.ajax
+        url: url
+        type: 'POST'
+        data:
+          remote_ip: ip
+      .done (data) ->
+        if data.success
+          new AlertMessages().notice(data.message)
+          $('#photo-votes').html(data.votes)
+        else
+          new AlertMessages().alert(data.message)
+      .fail (data) ->
+        new AlertMessages().danger(data.message)
+    else
+      new AlertMessages().danger('Voting did not succeed. Please try again later.')
     false

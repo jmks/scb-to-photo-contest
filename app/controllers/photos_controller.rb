@@ -160,21 +160,27 @@ class PhotosController < ApplicationController
   end
 
   def vote
-    voter = Vote.first_or_initialize(request.remote_ip)
+    voter = Vote.where(id: params[:remote_ip]).first || Vote.new(id: params[:remote_ip])
 
     if voter.vote
       @photo.inc votes: 1
-      flash[:notice] = 'Thank you for voting'
+      current_contestant.vote_for(@photo) if contestant_signed_in?
+
+      success = true
+      flash[:notice] = message = 'Thank you for voting'
     else
-      flash[:danger] = 'You have reached your vote limit for today. Please try again tomorrow.'
+      success = false
+      flash[:alert] = message = 'You have reached your vote limit for today. Please try again tomorrow.'
     end
 
     voter.save
     
-    # vote tracking for contestants
-    current_contestant.vote_for(@photo) if contestant_signed_in?
-
-    redirect_to @photo
+    if request.xhr?
+      flash.clear
+      render :json => { success: success, message: message, votes: @photo.votes }
+    else
+      redirect_to @photo
+    end
   end
 
   def report_comment
