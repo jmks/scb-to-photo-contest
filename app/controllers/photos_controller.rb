@@ -160,8 +160,7 @@ class PhotosController < ApplicationController
   end
 
   def vote
-    ip = env['HTTP_X_REAL_IP'] ||= env['REMOTE_ADDR']
-    voter = Vote.first_or_initialize(ip)
+    voter = Vote.first_or_initialize(request.remote_ip)
 
     if voter.vote
       @photo.inc votes: 1
