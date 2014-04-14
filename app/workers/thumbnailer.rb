@@ -61,6 +61,9 @@ class Thumbnailer
     # todo: move original to private location and delete uploaded
     
     photo.save
+
+  rescue Resque::TermException
+    Resque.enqueue(self, photo_id)
   end
 
   private
