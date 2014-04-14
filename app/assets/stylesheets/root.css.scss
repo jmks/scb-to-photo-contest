@@ -212,6 +212,10 @@ ul.judges-gallery li.judge:nth-child(odd) {
             fill: blue;
         }
     }
+
+    .row:last-child {
+        margin-bottom: 30px;
+    }
 }
 
 #about-wrapper {
@@ -466,5 +470,11 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
     .banner {
         text-align: justify;
+    }
+}
+
+#regulations-wrapper {
+    li {
+        margin-top: 10px;
     }
 }

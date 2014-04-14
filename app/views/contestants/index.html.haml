@@ -79,7 +79,7 @@
   #favorites-wrapper
     #photo-wall.row
       %h3.text-center YOU'VE VOTED FOR
-      %h4.text-center= @votes_left_today == 0 ? 'You are out of votes today. Please come back tomorrow to vote again!' : "You have #{ @votes_left_today } votes remaining today"
+      /%h4.text-center= @votes_left_today == 0 ? 'You are out of votes today. Please come back tomorrow to vote again!' : "You have #{ @votes_left_today } votes remaining today"
       .col-xs-12
         %ul.text-center.list-inline
           - @favourites.each do |photo|
