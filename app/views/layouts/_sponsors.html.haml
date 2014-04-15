@@ -6,9 +6,12 @@
         %span Sponsors
 
   .row.text-center
-    .col-xs-12.sponsor#primary-sponsor
+    .col-xs-12.col-md-6.sponsor.primary-sponsor
       = link_to 'http://www.downtowncamera.com/', target: '_blank' do 
         = image_tag asset_path('sponsors/downtown-camera.png'), alt: 'Downtown Camera'
+    .col-xs-12.col-md-6.sponsor.primary-sponsor
+      = link_to 'http://www.olympuscanada.com/', target: '_blank' do 
+        = image_tag asset_path('sponsors/olympus.png'), alt: 'Olympus'
 
     .col-xs-12.col-sm-6.col-md-4.sponsor
       = link_to 'http://www.patagonia.com/ca/home', target: '_blank' do 
@@ -27,4 +30,4 @@
         = image_tag 'sponsors/grassroots.png', alt: 'Grassroots'
     .col-xs-12.col-sm-6.col-md-4.sponsor
       = link_to 'http://bloorcinema.com/', target: '_blank' do 
-        = image_tag 'sponsors/bloorhotdocs.jpg', alt: 'Bloor Hot Docs Cinema'
+        = image_tag 'sponsors/bloorcinema.png', alt: 'Bloor Hot Docs Cinema'

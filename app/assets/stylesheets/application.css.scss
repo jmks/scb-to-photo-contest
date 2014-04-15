@@ -479,8 +479,12 @@ a.btn-filter.active {
         }
     }
 
+    .row.text-center .primary-sponsor {
+        margin-bottom: 30px;
+    }
+
     @media screen and (max-width: 776px) {
-        .sponsor:not(#primary-sponsor) {
+        .sponsor:not(.primary-sponsor) {
             img {
                 max-width: 60%;
             }
