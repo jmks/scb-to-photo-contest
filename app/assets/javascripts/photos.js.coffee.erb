@@ -108,15 +108,21 @@ jQuery ->
   jscrollOptions = 
     nextSelector: '#pagination a.next'
     loadingHtml: '<i class="fa fa-spinner fa-spin"></i>'
-    contentSelector: 'li'
+    #contentSelector: '#photo-wall'
     padding: 500
-    pagingSelector: '#pagination'
     callback: ->
-      latest = $('.jscroll-added').html()
+      added$ = $('.jscroll-added')
+      
+      latest = added$.find('li.photo')
+      pagination = added$.find('#pagination')
+
       $('.jscroll-added').remove()
       $('#photos #photo-wall ul').append $(latest)
       $('#photo-wall .photo:not(.hover-enabled)').
-        addClass('hover-enabled').hover photoHoverOn, photoHoverOff
+        addClass('hover-enabled').
+        hover photoHoverOn, photoHoverOff
+      if pagination.children().length > 1
+        $('#photo-wall').append $(pagination)
 
   $('#photos #photo-wall').jscroll(jscrollOptions)
 
@@ -128,7 +134,7 @@ jQuery ->
 
 
   $('#photo-wrapper img').bind 'contextmenu', (evt) ->
-    if $('#photo-wrapper .photo-copyright').hasClass('show') then return false;
+    return false if $('#photo-wrapper .photo-copyright').hasClass('show')
     offset = $(this).offset()
     $('#photo-wrapper .photo-copyright').
       addClass('show').
