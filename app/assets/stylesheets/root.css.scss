@@ -159,6 +159,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
         box-shadow:         7px 7px 10px 0px rgba(50, 50, 50, 0.75);
         position: relative;
         font-size: 1.2em;
+        cursor: pointer;
 
         .grand, .canada {
             display: absolute;
@@ -176,6 +177,10 @@ ul.judges-gallery li.judge:nth-child(odd) {
             text-align: center;
             font-size: 1.5em;
         }
+    }
+
+    .prize:hover {
+        color: #3366BB;
     }
 
     .prize.tilt-left {
