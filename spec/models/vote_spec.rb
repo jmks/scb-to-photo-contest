@@ -33,10 +33,10 @@ describe Vote do
       end
 
       it 'can vote multiple times' do 
-        valid_vote_amout = @max_votes > 1 ? @max_votes - 1 : 1
+        valid_vote_amount = @max_votes > 1 ? @max_votes - 1 : 1
         expect { 
-          valid_vote_amout.times { @vote.vote }
-        }.to change { @vote.votes_today }.by valid_vote_amout 
+          valid_vote_amount.times { @vote.vote }
+        }.to change { @vote.votes_today }.by valid_vote_amount 
       end
 
       it 'fails after maximum voting reached' do 
