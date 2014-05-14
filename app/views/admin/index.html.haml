@@ -1,0 +1,30 @@
+.container
+  %h4.text-center= "Welcome #{ @admin.email } (logged in as admin)"
+
+  %ul.nav.nav-tabs
+    %li.active= link_to 'Photo Administration', '#photo-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Comment Administration', '#comment-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Judge Alerts', '#photo-admin', 'data-toggle' => 'tab'
+
+  .tab-content
+    .tab-pane.active#photo-admin
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %td Photo
+            %td Contestant
+            %td Status
+            %td Status Options
+        %tbody
+          - @photos.each do |photo|
+            %tr
+              %td= photo_view(photo)
+              %td= link_to photo.owner.public_name, photos_path(contestant_id: photo.owner.id), target: '_blank'
+              %td= photo.registration_status
+              %td= status_options(photo)
+
+    .tab-pane#comment-admin
+      %h5 Comment Administration
+    .tab-pane#alert-judges
+      %h5 Judge Alerts

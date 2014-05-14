@@ -39,6 +39,9 @@ PhotoContest::Application.routes.draw do
 
   get '/tags', to: 'tag#index', as: 'tags'
 
+  get  '/admin',                   to: 'admin#index', as: 'admin_root'
+  post '/admin/confirm_photo/:id', to: 'admin#confirm_photo', as: 'admin_confirm_photo'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

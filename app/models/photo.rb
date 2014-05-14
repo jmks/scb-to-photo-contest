@@ -47,6 +47,8 @@ class Photo
   # registration details
   field :order_number
 
+  field :submission_complete, type: Boolean, default: ->{ registration_status == :confirmed || false }
+
   field :votes, type: Integer, default: 0
   field :views, type: Integer, default: 0
 
@@ -93,7 +95,7 @@ class Photo
   def registration_status
     if !original_url
       :submitted
-    elsif order_number
+    elsif order_number || submission_complete
       :confirmed
     else
       :uploaded
