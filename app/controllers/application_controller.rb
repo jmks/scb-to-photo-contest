@@ -26,4 +26,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  # redirects back or to home if the contest is no longer open
+  def only_contest_open!
+    unless ContestRules.contest_open?
+      flash[:alert] = "The submission period is now closed. You may not add or edit photo entries."
+      redirect_back_or_home
+    end
+  end
 end

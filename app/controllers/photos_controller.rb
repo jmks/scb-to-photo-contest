@@ -6,6 +6,8 @@ class PhotosController < ApplicationController
   before_filter :get_photo_by_id, only: [:edit, :update, :show, :destroy, :comments, :vote]
   before_filter :contestant_owns_photo!, only: [:edit, :update, :destroy]
 
+  before_filter :only_contest_open!, only: [:new, :create, :edit, :update, :destroy]
+
   PHOTOS_PER_PAGE = 15
   COMMENTS_PER_PAGE = 25
 

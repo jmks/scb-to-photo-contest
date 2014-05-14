@@ -1,6 +1,8 @@
 class PhotoEntryController < ApplicationController
   before_filter :authenticate_contestant!, except: [:workflow]
 
+  before_filter :only_contest_open!, except: [:verify, :order, :verify_orders]
+
   # photo submission step 0 - submission process
   def workflow
   end
@@ -41,7 +43,7 @@ class PhotoEntryController < ApplicationController
     Resque.enqueue(Thumbnailer, @photo.id.to_s)
 
     if request.xhr?
-      flash[:notice] = "Photo '#{@photo.title}' successfully received. It's thumbnails will be generated shortly."
+      flash[:notice] = "Photo '#{@photo.title}' successfully received. Its thumbnails will be generated shortly."
       flash.keep(:notice) # Keep flash notice around for the redirect.
       render :js => "window.location = #{ order_path.to_json }"
     else
