@@ -1,6 +1,6 @@
 class ContestRules
     CONTEST_OPENS  = DateTime.new(2014, 4, 14)
-    CONTEST_CLOSES = DateTime.new(2014, 5, 14, 23, 59)
+    CONTEST_CLOSES = DateTime.new(2014, 5, 15, 4)
 
     JUDGING_OPENS  = DateTime.new(2014, 5, 15)
     JUDGING_CLOSES = DateTime.new(2014, 5, 22, 23, 59)
