@@ -10,6 +10,8 @@ class ContestRules
     VOTES_PER_DAY_PER_IP   = 3
     ENTRIES_PER_CONTESTANT = 5
 
+    JUDGING_SHORTLIST_MAX_PER_CATEGORY = 5
+
     def self.contest_open?(today = nil)
         today ||= DateTime.now
         CONTEST_OPENS <= today && today <= CONTEST_CLOSES

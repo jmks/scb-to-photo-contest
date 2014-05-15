@@ -38,9 +38,41 @@ class Judge
   # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
   # field :locked_at,       :type => Time
 
+  # personal info
+
   field :first_name, type: String
   validates :first_name, presence: true
 
   field :last_name, type: String
   validates :last_name, presence: true
+
+  # juding actions
+
+  # short lists
+  field :flora_shortlist_ids,      type: Array, default: []
+  field :fauna_shortlist_ids,      type: Array, default: []
+  field :landscapes_shortlist_ids, type: Array, default: []
+  field :canada_shortlist_ids,     type: Array, default: []
+
+  def shortlist_photo photo, category=nil
+    category ||= photo.category
+
+    arr = case category
+    when :flora
+      flora_shortlist_ids
+    when :fauna
+      fauna_shortlist_ids
+    when :landscapes
+      landscapes_shortlist_ids
+    else # canada
+      canada_shortlist_ids
+    end
+
+    return false if arr.length >= ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY || arr.include?(photo.id)
+
+    arr << photo.id
+    true
+  end
+
+
 end
