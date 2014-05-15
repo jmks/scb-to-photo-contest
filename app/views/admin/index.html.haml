@@ -4,7 +4,7 @@
   %ul.nav.nav-tabs
     %li.active= link_to 'Photo Administration', '#photo-admin', 'data-toggle' => 'tab'
     %li= link_to 'Comment Administration', '#comment-admin', 'data-toggle' => 'tab'
-    %li= link_to 'Judge Alerts', '#photo-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Judge Administration', '#judges-admin', 'data-toggle' => 'tab'
 
   .tab-content
     .tab-pane.active#photo-admin
@@ -26,5 +26,6 @@
 
     .tab-pane#comment-admin
       %h5 Comment Administration
-    .tab-pane#alert-judges
+
+    .tab-pane#judges-admin
       %h5 Judge Alerts
