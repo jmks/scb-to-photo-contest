@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    contestant_index_path
+    if resource.is_a? Judge
+      judge_root_url
+    else
+      contestant_index_path
+    end
   end
 
   # redirect back to referrer or homepage

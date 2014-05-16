@@ -35,8 +35,14 @@
         
         %li{class: "#{'active' if current_page?(prizes_path)}"}
           = link_to 'PRIZES', prizes_path
-        
-        - if contestant_signed_in?
+
+        - if judge_signed_in?
+          %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
+            = link_to 'MY PAGE', judge_root_path
+          %li
+            = link_to destroy_judge_session_path, :method => :delete do
+              %i.fa.fa-sign-out
+        - elsif contestant_signed_in?
           %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
             = link_to 'MY PAGE', contestant_index_path
           %li

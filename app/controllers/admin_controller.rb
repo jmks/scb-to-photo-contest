@@ -2,10 +2,10 @@ class AdminController < ApplicationController
   before_filter :authenticate_contestant!
   before_filter :admins_only!
 
-  before_filter :get_admin
+  before_filter :get_admin_photos_judges_comments
 
   def index
-    @photos = Photo.all
+    @judge = Judge.new params[:judge]
   end
 
   def confirm_photo
@@ -18,6 +18,19 @@ class AdminController < ApplicationController
     redirect_to admin_root_path
   end
 
+  def add_judge
+    @judge = Judge.new judge_params
+    @judge.password = Devise.friendly_token.first(8)
+
+    if @judge.save
+      flash[:notice] = "Judge #{@judge.full_name} Successfully Added"
+      redirect_to :index
+    else
+      flash[:alert] = "There was an error adding new judge"
+      render :index
+    end
+  end
+
   private 
 
   def admins_only!
@@ -26,7 +39,14 @@ class AdminController < ApplicationController
     end
   end
 
-  def get_admin
+  def get_admin_photos_judges_comments
     @admin = current_contestant
+    @photos = Photo.all
+    @judges = Judge.all
+    @flagged_comments = Comment.where(reported: true)
+  end
+
+  def judge_params
+    params.require(:judge).permit(:first_name, :last_name, :email)
   end
 end

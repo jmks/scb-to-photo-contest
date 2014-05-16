@@ -1,6 +1,6 @@
 PhotoContest::Application.routes.draw do
   
-  devise_for :judges, skip: [:registrations]
+  devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
 
   devise_for :contestants, controllers: { registrations: 'registrations' }
 
@@ -44,8 +44,13 @@ PhotoContest::Application.routes.draw do
   get '/tags', to: 'tag#index', as: 'tags'
 
   # admin
-  get  '/admin',                   to: 'admin#index', as: 'admin_root'
+  get  '/admin',                   to: 'admin#index',         as: 'admin_root'
   post '/admin/confirm_photo/:id', to: 'admin#confirm_photo', as: 'admin_confirm_photo'
+  post '/admin',                   to: 'admin#add_judge',     as: 'admin_add_judge'
+
+  # judges
+
+  get '/judges/index', to: 'judges#index', as: 'judge_root'
 
 
 

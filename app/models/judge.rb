@@ -54,6 +54,13 @@ class Judge
   field :landscapes_shortlist_ids, type: Array, default: []
   field :canada_shortlist_ids,     type: Array, default: []
 
+  field :shortlist_complete, type: Boolean, default: false
+
+
+  # photo scoring
+
+  field :final_photo_scoring, type: Boolean, default: false
+
   def shortlist_photo photo, category=nil
     category ||= photo.category
 
@@ -74,5 +81,17 @@ class Judge
     true
   end
 
+  def status_message
+    if final_photo_scoring?
+      'Final scoring complete'
+    elsif shortlist_complete?
+      'Shortlist picks complete'
+    else
+      'Has not started'
+    end
+  end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
