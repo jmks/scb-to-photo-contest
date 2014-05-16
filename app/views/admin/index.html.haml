@@ -1,0 +1,75 @@
+.container
+  %h4.text-center= "Welcome #{ @admin.email } (logged in as admin)"
+
+  %ul.nav.nav-tabs
+    %li.active= link_to 'Photo Administration', '#photo-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Comment Administration', '#comment-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Judge Administration', '#judges-admin', 'data-toggle' => 'tab'
+
+  .tab-content
+    .tab-pane.active#photo-admin
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %td Photo
+            %td Contestant
+            %td Status
+            %td Status Options
+        %tbody
+          - @photos.each do |photo|
+            %tr
+              %td= photo_view(photo)
+              %td= link_to photo.owner.public_name, photos_path(contestant_id: photo.owner.id), target: '_blank'
+              %td= photo.registration_status
+              %td= status_options(photo)
+
+    .tab-pane#comment-admin
+      %h5 Flagged Comments
+      %ul
+        - @flagged_comments.each do |comment|
+          %li= "#{comment.name} said '#{comment.text}'"
+
+    .tab-pane#judges-admin
+      %h5 Judges
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %td Name
+            %td Email
+            %td Status
+        %tbody
+          - @judges.each do |judge|
+            %tr
+              %td= judge.full_name
+              %td= judge.email
+              %td= judge.status_message
+
+      %br
+      %h5 Add New Judge
+
+      - if @judge.errors.any?
+        %ul.errors
+          - @judge.errors.full_messages.each do |msg|
+            %li= msg
+
+      = form_for :judge, url: admin_add_judge_path, method: :post, html: { class: 'form-horizontal' } do |f|
+        .form-group
+          = f.label :first_name, class: 'col-sm-3 control-label'
+          .col-sm-5
+            = f.text_field :first_name, class: 'form-control', value: @judge.first_name
+
+        .form-group
+          = f.label :last_name, class: 'col-sm-3 control-label'
+          .col-sm-5
+            = f.text_field :last_name, class: 'form-control', value: @judge.last_name
+
+        .form-group
+          = f.label :email, class: 'col-sm-3 control-label'
+          .col-sm-5
+            = f.text_field :email, class: 'form-control', value: @judge.email
+
+        .form-group
+          .col-sm-offset-3.col-sm-5.text-center
+            = f.submit nil, class: 'btn btn-flat', value: 'Add Judge'

@@ -1,4 +1,7 @@
 PhotoContest::Application.routes.draw do
+  
+  devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
+
   devise_for :contestants, controllers: { registrations: 'registrations' }
 
   root to: 'root#index'
@@ -9,13 +12,14 @@ PhotoContest::Application.routes.draw do
   post '/contact', to: 'root#contact', as: 'contact'
   get '/terms',    to: 'root#terms',   as: 'terms'
   get '/contest',  to: 'root#contest', as: 'contest'
+  get '/photo_criteria', to: 'root#judging_criteria', as: 'photo_criteria'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
-  get '/photos',            :to => 'photos#index',      :as => 'photos'
-  get '/photos/flora',      :to => 'photos#flora',      :as => 'flora'
-  get '/photos/fauna',      :to => 'photos#fauna',      :as => 'fauna'
-  get '/photos/landscapes', :to => 'photos#landscapes', :as => 'landscapes'
+  get '/photos',            to: 'photos#index',      as: 'photos'
+  get '/photos/flora',      to: 'photos#flora',      as: 'flora'
+  get '/photos/fauna',      to: 'photos#fauna',      as: 'fauna'
+  get '/photos/landscapes', to: 'photos#landscapes', as: 'landscapes'
   
   post '/photos/:id/comment',   to: 'photos#comment',        as: 'new_comment'
   get '/photos/:id/comments(/:page)', to: 'photos#comments', as: 'photo_comments'
@@ -29,7 +33,7 @@ PhotoContest::Application.routes.draw do
   #dep
   get  '/photo_entry',        to: 'photo_entry#workflow', as: 'workflow_photo_entry'
 
-
+  # photo entry
   get  '/photo_entry/new',    to: 'photo_entry#new',      as: 'new_photo_entry'
   post '/photo_entry',        to: 'photo_entry#create',   as: 'photo_entry'
   get  '/photo_entry/order',  to: 'photo_entry#order',    as: 'order'
@@ -37,7 +41,20 @@ PhotoContest::Application.routes.draw do
   post '/photo_entry/verify_orders', to: 'photo_entry#verify_orders', as: 'verify_orders'
   get  '/photo_entry/share',  to: 'photo_entry#share',    as: 'share_photos'
 
+  # tags
   get '/tags', to: 'tag#index', as: 'tags'
+
+  # admin
+  get  '/admin',                   to: 'admin#index',         as: 'admin_root'
+  post '/admin/confirm_photo/:id', to: 'admin#confirm_photo', as: 'admin_confirm_photo'
+  post '/admin',                   to: 'admin#add_judge',     as: 'admin_add_judge'
+
+  # judges
+  get  '/judges/index',     to: 'judges#index',           as: 'judge_root'
+  post '/judges/shortlist', to: 'judges#shortlist_photo', as: 'judge_shortlist'
+  post '/judges/shortlist_remove', to: 'judges#remove_from_shortlist', as: 'judge_shortlist_remove'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

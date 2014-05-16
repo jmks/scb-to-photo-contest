@@ -3,7 +3,9 @@ class Photo
   include Mongoid::Timestamps
 
   # move to ContestRules
-  CATEGORIES = [ :flora, :fauna, :landscapes ]
+  # canada breaks photo submissions, but submissions are over now
+  # these ideally should be disjoint choices
+  CATEGORIES = [ :flora, :fauna, :landscapes, :canada ]
   
   Registration = [ :submitted, :uploaded, :printed, :confirmed ]
   Registration_Message = {
@@ -47,16 +49,24 @@ class Photo
   # registration details
   field :order_number
 
+  field :submission_complete, type: Boolean, default: ->{ registration_status == :confirmed || false }
+
   field :votes, type: Integer, default: 0
   field :views, type: Integer, default: 0
 
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates  :owner, presence: true
+
+  # belongs_to :flora_shortlisted, inverse_of: :flora_shortlist, class_name: 'Judge'
+  # belongs_to :fauna_shortlisted, inverse_of: :fauna_shortlist, class_name: 'Judge'
+  # belongs_to :landscapes_shortlisted, inverse_of: :landscapes_shortlist, class_name: 'Judge'
+  # belongs_to :canada_shortlisted, inverse_of: :canada_shortlist, class_name: 'Judge'
   
   # scopes
   scope :landscapes, ->{ where(:category => "landscapes") }
   scope :flora,      ->{ where(:category => "flora") }
   scope :fauna,      ->{ where(:category => "fauna") }
+  scope :canada,     ->{ where(tags: /canada/i) }
 
   # indexes
   index({ tags: 1 })
@@ -93,10 +103,20 @@ class Photo
   def registration_status
     if !original_url
       :submitted
-    elsif order_number
+    elsif order_number || submission_complete
       :confirmed
     else
       :uploaded
     end
+  end
+
+  CATEGORIES.each do |cat|
+    define_method(cat.to_s + '?') do
+      self.category == cat
+    end
+  end
+
+  def canada?
+    tags.select { |t| t =~ /canada/i }.any?
   end
 end

@@ -17,6 +17,9 @@ class RootController < ApplicationController
   def contest
   end
 
+  def judging_criteria
+  end
+
   def contact
     email, message = params[:email].strip, params[:message].strip
 
