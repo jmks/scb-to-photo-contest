@@ -3,7 +3,9 @@ class Photo
   include Mongoid::Timestamps
 
   # move to ContestRules
-  CATEGORIES = [ :flora, :fauna, :landscapes ]
+  # canada breaks photo submissions, but submissions are over now
+  # these ideally should be disjoint choices
+  CATEGORIES = [ :flora, :fauna, :landscapes, :canada ]
   
   Registration = [ :submitted, :uploaded, :printed, :confirmed ]
   Registration_Message = {

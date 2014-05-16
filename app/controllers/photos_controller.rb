@@ -83,7 +83,7 @@ class PhotosController < ApplicationController
       @title  = @tag
       @filter = :tag
     elsif @category
-      @photos = Photo.where(category: @category)
+      @photos = @category == :canada ? Photo.canada : Photo.where(category: @category)
       @title  = @category
       @filter = @category.to_sym
     elsif @popular
