@@ -60,6 +60,10 @@ class Judge
 
   field :final_photo_scoring, type: Boolean, default: false
 
+  ###
+  # Shortlist
+  ###
+
   def shortlist_photo photo, category=nil
     category ||= photo.category
     category = category.to_sym unless category.is_a?(Symbol)
@@ -104,6 +108,29 @@ class Judge
     end
   end
 
+  def shortlist?
+    !shortlist_complete
+  end
+
+  def shortlist_done? category
+    case category
+    when :flora
+      flora_shortlist
+    when :fauna 
+      fauna_shortlist
+    when :landscapes
+      landscapes_shortlist
+    when :canada
+      canada_shortlist
+    else
+      return false
+    end.length == ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
+  end
+
+  ###
+  # /Shortlist
+  ###
+
   def status_message
     if final_photo_scoring?
       'Final scoring complete'
@@ -116,9 +143,5 @@ class Judge
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def shortlist?
-    !shortlist_complete
   end
 end
