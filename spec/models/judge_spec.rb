@@ -2,10 +2,23 @@ require 'spec_helper'
 
 describe Judge do
 
+  describe 'multiple judges' do 
+    it 'can shortlist a photo' do 
+      photo = build(:photo, category: :canada)
+      a, b = build(:judge), build(:judge)
+
+      a.shortlist_photo(photo, :canada)
+      b.shortlist_photo(photo, :canada)
+
+      expect(a.canada_shortlist.include? photo).to eql true
+      expect(b.canada_shortlist.include? photo).to eql true
+    end
+  end
+
   describe '#shortlist_photo' do
     before :all do 
       @max_per_category = ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
-      @categories = Photo::CATEGORIES + [:canada]
+      @categories = Photo::CATEGORIES
     end
 
     before :each do 
@@ -61,7 +74,7 @@ describe Judge do
 
   describe '#remove_photo_from_shortlist' do 
     before :all do 
-      @categories = Photo::CATEGORIES + [:canada]
+      @categories = Photo::CATEGORIES
     end
 
     before :each do 
@@ -76,6 +89,7 @@ describe Judge do
 
     it 'only removes a single photo' do 
       @judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)
+      
       expect(
         @categories.map do |cat|
           @judge.send("#{ cat.to_s }_shortlist").length

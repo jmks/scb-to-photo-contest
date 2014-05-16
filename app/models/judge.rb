@@ -49,10 +49,10 @@ class Judge
   # juding actions
 
   # short lists
-  has_many :flora_shortlist, class_name: 'Photo', inverse_of: :flora_shortlisted
-  has_many :fauna_shortlist, class_name: 'Photo', inverse_of: :fauna_shortlisted
-  has_many :landscapes_shortlist, class_name: 'Photo', inverse_of: :landscapes_shortlisted
-  has_many :canada_shortlist, class_name: 'Photo', inverse_of: :canada_shortlisted
+  has_and_belongs_to_many :flora_shortlist, class_name: 'Photo', inverse_of: nil
+  has_and_belongs_to_many :fauna_shortlist, class_name: 'Photo', inverse_of: nil
+  has_and_belongs_to_many :landscapes_shortlist, class_name: 'Photo', inverse_of: nil
+  has_and_belongs_to_many :canada_shortlist, class_name: 'Photo', inverse_of: nil
 
   field :shortlist_complete, type: Boolean, default: false
 
@@ -132,7 +132,7 @@ class Judge
 
   def update_shortlist_status
     done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
-    puts "done? #{done}, shortlist_complete? #{shortlist_complete}"
+    #puts "done? #{done}, shortlist_complete? #{shortlist_complete}"
     set(shortlist_complete: done) if done != shortlist_complete
   end
 

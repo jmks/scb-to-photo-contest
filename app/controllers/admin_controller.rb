@@ -24,7 +24,7 @@ class AdminController < ApplicationController
 
     if @judge.save
       flash[:notice] = "Judge #{@judge.full_name} Successfully Added"
-      redirect_to :index
+      redirect_to admin_root_path
     else
       flash[:alert] = "There was an error adding new judge"
       render :index
