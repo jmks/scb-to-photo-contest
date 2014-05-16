@@ -38,7 +38,7 @@
 
         - if judge_signed_in?
           %li{:class => "#{'active' if current_page?(contestant_index_path)}"}
-            = link_to 'MY PAGE', judge_root_path
+            = link_to 'JUDGING', judge_root_path
           %li
             = link_to destroy_judge_session_path, :method => :delete do
               %i.fa.fa-sign-out

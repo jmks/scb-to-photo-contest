@@ -83,4 +83,6 @@ describe Judge do
       ).to eql (@photos.length - 1)
     end
   end
+
+  
 end

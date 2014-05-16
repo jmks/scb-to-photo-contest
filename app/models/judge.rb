@@ -80,6 +80,7 @@ class Judge
 
     if arr.length < ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY && !arr.include?(photo)
       arr << photo
+      update_shortlist_status
       true
     else
       false
@@ -102,12 +103,14 @@ class Judge
 
     if arr.include?(photo)
       arr.delete(photo)
+      update_shortlist_status
       true
     else
       false
     end
   end
 
+  # status, ie true if not completed shortlist
   def shortlist?
     !shortlist_complete
   end
@@ -125,6 +128,11 @@ class Judge
     else
       return false
     end.length == ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
+  end
+
+  def update_shortlist_status
+    done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
+    shortlist_complete = done if done != shortlist_complete
   end
 
   ###

@@ -24,10 +24,10 @@ class JudgesController < ApplicationController
     @judge   = current_judge
 
     if @judge.remove_photo_from_shortlist(photo, category.to_sym)
-        flash[:alert] = "Successfully added photo to #{category.capitalize} shortlist"
+        flash[:alert] = "Successfully removed photo from #{category.capitalize} shortlist"
     else
         # couldn't add - size or ??
-        flash[:warning] = "Could not add photo to #{category.capitalize} shortlist"
+        flash[:warning] = "Could not remove photo to #{category.capitalize} shortlist"
     end
     redirect_back_or_home judge_root_path
   end

@@ -12,7 +12,11 @@
             %i.fa.fa-check
         %ul.list-unstyled
           - @judge.flora_shortlist.each do |flo|
-            %li= image_tag flo.thumbnail_xs_url
+            %li
+              = link_to photo_path(flo) do
+                = image_tag flo.thumbnail_xs_url
+              = link_to judge_shortlist_remove_url(photo_id: flo.id, category: flo.category), method: :post do
+                %i.fa.fa-minus-circle
 
         - if @photo and @photo.flora? and not @judge.shortlist_done? :flora
           = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
@@ -24,7 +28,11 @@
             %i.fa.fa-check
         %ul.list-unstyled
           - @judge.fauna_shortlist.each do |fau|
-            %li= image_tag fau.thumbnail_xs_url
+            %li
+              = link_to photo_path(fau) do 
+                = image_tag fau.thumbnail_xs_url
+              = link_to judge_shortlist_remove_url(photo_id: fau.id, category: fau.category), method: :post do
+                %i.fa.fa-minus-circle
 
         - if @photo and @photo.fauna? and not @judge.shortlist_done? :fauna
           = link_to 'Fauna Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
@@ -36,7 +44,11 @@
             %i.fa.fa-check
         %ul.list-unstyled
           - @judge.landscapes_shortlist.each do |land|
-            %li= image_tag land.thumbnail_xs_url
+            %li
+              = link_to photo_path(land) do 
+                = image_tag land.thumbnail_xs_url
+              = link_to judge_shortlist_remove_url(photo_id: land.id, category: land.category), method: :post do
+                %i.fa.fa-minus-circle
 
         - if @photo and @photo.landscapes? and not @judge.shortlist_done? :landscapes
           = link_to 'Landscape Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
@@ -48,7 +60,11 @@
             %i.fa.fa-check
         %ul.list-unstyled
           - @judge.canada_shortlist.each do |can|
-            %li= image_tag can.thumbnail_xs_url
+            %li
+              = link_to photo_path(can) do 
+                = image_tag can.thumbnail_xs_url
+              = link_to judge_shortlist_remove_url(photo_id: can.id, category: :canada), method: :post do
+                %i.fa.fa-minus-circle
 
         - if @photo and @photo.canada? and not @judge.shortlist_done? :canada
           = link_to 'Canada Shortlist', judge_shortlist_url(photo_id: @photo.id, category: :canada), class: 'btn btn-flat', method: :post
