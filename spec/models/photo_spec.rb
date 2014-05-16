@@ -106,6 +106,19 @@ describe Photo do
     end
   end
 
+  context 'category predicates' do 
+    it 'canada?' do 
+      expect(build(:photo, tags: ['moose', 'Canada'])).to be_canada
+      expect(build(:photo, tags: ['beavers', 'canada'])).to be_canada
+    end
+
+    it 'for categories' do 
+      expect(build(:photo, category: :flora)).to be_flora
+      expect(build(:photo, category: :fauna)).to be_fauna
+      expect(build(:photo, category: :landscapes)).to be_landscapes
+    end
+  end
+
   context "index on" do
 
     # before :each do 

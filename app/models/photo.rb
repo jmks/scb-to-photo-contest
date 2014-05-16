@@ -54,11 +54,17 @@ class Photo
 
   belongs_to :owner, :class_name => 'Contestant', :inverse_of => :entries
   validates  :owner, presence: true
+
+  belongs_to :flora_shortlisted, inverse_of: :flora_shortlist, class_name: 'Judge'
+  belongs_to :fauna_shortlisted, inverse_of: :fauna_shortlist, class_name: 'Judge'
+  belongs_to :landscapes_shortlisted, inverse_of: :landscapes_shortlist, class_name: 'Judge'
+  belongs_to :canada_shortlisted, inverse_of: :canada_shortlist, class_name: 'Judge'
   
   # scopes
   scope :landscapes, ->{ where(:category => "landscapes") }
   scope :flora,      ->{ where(:category => "flora") }
   scope :fauna,      ->{ where(:category => "fauna") }
+  scope :canada,     ->{ where(tags: /canada/i) }
 
   # indexes
   index({ tags: 1 })
@@ -100,5 +106,15 @@ class Photo
     else
       :uploaded
     end
+  end
+
+  CATEGORIES.each do |cat|
+    define_method(cat.to_s + '?') do
+      self.category == cat
+    end
+  end
+
+  def canada?
+    tags.select { |t| t =~ /canada/i }.any?
   end
 end

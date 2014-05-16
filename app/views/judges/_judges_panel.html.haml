@@ -1,0 +1,42 @@
+.container#judges-panel
+
+  - if current_judge.shortlist?
+    .row
+      .col-xs-12
+        %h3= "Judging Shortlist (#{current_judge.first_name})"
+    .row
+      .col-xs-3.text-center
+        %h4 Flora
+        %ul.list-unstyled
+          - @judge.flora_shortlist.each do |flo|
+            %li= image_tag flo.thumbnail_xs_url
+
+        - if @photo && @photo.flora?
+          = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+
+      .col-xs-3.text-center
+        %h4 Fauna
+        %ul.list-unstyled
+          - @judge.fauna_shortlist.each do |fau|
+            %li= image_tag fau.thumbnail_xs_url
+
+        - if @photo && @photo.fauna?
+          = link_to 'Fauna Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+
+      .col-xs-3.text-center
+        %h4 Landscape
+        %ul.list-unstyled
+          - @judge.landscapes_shortlist.each do |land|
+            %li= image_tag land.thumbnail_xs_url
+
+        - if @photo && @photo.landscapes?
+          = link_to 'Landscape Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+
+      .col-xs-3.text-center
+        %h4 Made in Canada
+        %ul.list-unstyled
+          - @judge.canada_shortlist.each do |can|
+            %li= image_tag can.thumbnail_xs_url
+
+        - if @photo && @photo.canada?
+          = link_to 'Canada Shortlist', judge_shortlist_url(photo_id: @photo.id, category: :canada), class: 'btn btn-flat', method: :post

@@ -49,13 +49,12 @@ class Judge
   # juding actions
 
   # short lists
-  field :flora_shortlist_ids,      type: Array, default: []
-  field :fauna_shortlist_ids,      type: Array, default: []
-  field :landscapes_shortlist_ids, type: Array, default: []
-  field :canada_shortlist_ids,     type: Array, default: []
+  has_many :flora_shortlist, class_name: 'Photo', inverse_of: :flora_shortlisted
+  has_many :fauna_shortlist, class_name: 'Photo', inverse_of: :fauna_shortlisted
+  has_many :landscapes_shortlist, class_name: 'Photo', inverse_of: :landscapes_shortlisted
+  has_many :canada_shortlist, class_name: 'Photo', inverse_of: :canada_shortlisted
 
   field :shortlist_complete, type: Boolean, default: false
-
 
   # photo scoring
 
@@ -63,22 +62,46 @@ class Judge
 
   def shortlist_photo photo, category=nil
     category ||= photo.category
+    category = category.to_sym unless category.is_a?(Symbol)
 
-    arr = case category
-    when :flora
-      flora_shortlist_ids
-    when :fauna
-      fauna_shortlist_ids
-    when :landscapes
-      landscapes_shortlist_ids
+    arr = if category == :flora 
+      flora_shortlist
+    elsif category == :fauna
+      fauna_shortlist
+    elsif category == :landscapes
+      landscapes_shortlist
     else # canada
-      canada_shortlist_ids
+      canada_shortlist
     end
 
-    return false if arr.length >= ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY || arr.include?(photo.id)
+    if arr.length < ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY && !arr.include?(photo)
+      arr << photo
+      true
+    else
+      false
+    end
+  end
 
-    arr << photo.id
-    true
+  def remove_photo_from_shortlist photo, category=nil
+    category ||= photo.category
+    category = category.to_sym unless category.is_a?(Symbol)
+
+    arr = if category == :flora 
+      flora_shortlist
+    elsif category == :fauna
+      fauna_shortlist
+    elsif category == :landscapes
+      landscapes_shortlist
+    else # canada
+      canada_shortlist
+    end
+
+    if arr.include?(photo)
+      arr.delete(photo)
+      true
+    else
+      false
+    end
   end
 
   def status_message
@@ -93,5 +116,9 @@ class Judge
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def shortlist?
+    !shortlist_complete
   end
 end

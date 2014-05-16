@@ -49,8 +49,9 @@ PhotoContest::Application.routes.draw do
   post '/admin',                   to: 'admin#add_judge',     as: 'admin_add_judge'
 
   # judges
-
-  get '/judges/index', to: 'judges#index', as: 'judge_root'
+  get  '/judges/index',     to: 'judges#index',           as: 'judge_root'
+  post '/judges/shortlist', to: 'judges#shortlist_photo', as: 'judge_shortlist'
+  post '/judges/shortlist_remove', to: 'judges#remove_from_shortlist', as: 'judge_shortlist_remove'
 
 
 

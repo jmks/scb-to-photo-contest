@@ -111,3 +111,6 @@
               %a{href: new_contestant_registration_path }
                 Sign up
               %span to leave a comment
+
+- if judge_signed_in?
+  = render './judges/judges_panel'

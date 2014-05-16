@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :get_judge
 
   protected
 
@@ -23,11 +24,11 @@ class ApplicationController < ActionController::Base
   end
 
   # redirect back to referrer or homepage
-  def redirect_back_or_home
+  def redirect_back_or_home home=nil
     if !request.env["HTTP_REFERER"].blank? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
       redirect_to :back
     else
-      redirect_to root_path
+      redirect_to (home || root_path)
     end
   end
 
@@ -36,6 +37,12 @@ class ApplicationController < ActionController::Base
     unless ContestRules.contest_open?
       flash[:alert] = "The submission period is now closed. You may not add or edit photo entries."
       redirect_back_or_home
+    end
+  end
+
+  def get_judge
+    if judge_signed_in?
+      @judge = current_judge
     end
   end
 end

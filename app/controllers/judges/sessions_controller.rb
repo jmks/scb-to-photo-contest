@@ -1,9 +1,9 @@
 class Judges::SessionsController < Devise::SessionsController
-  
+
   def resource_name
     :judge
   end
-
+  
   def resource
     @resource ||= Judge.new
   end
