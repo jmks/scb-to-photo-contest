@@ -20,10 +20,13 @@ class AdminController < ApplicationController
 
   def add_judge
     @judge = Judge.new judge_params
-    @judge.password = Devise.friendly_token.first(8)
+    @judge.password = pass = Devise.friendly_token.first(8)
 
     if @judge.save
       flash[:notice] = "Judge #{@judge.full_name} Successfully Added"
+      
+      ContactMailer.judge_init(@judge.email, @judge.first_name, pass).deliver
+
       redirect_to admin_root_path
     else
       flash[:alert] = "There was an error adding new judge"
