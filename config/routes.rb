@@ -12,6 +12,7 @@ PhotoContest::Application.routes.draw do
   post '/contact', to: 'root#contact', as: 'contact'
   get '/terms',    to: 'root#terms',   as: 'terms'
   get '/contest',  to: 'root#contest', as: 'contest'
+  get '/photo_criteria', to: 'root#judging_criteria', as: 'photo_criteria'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 

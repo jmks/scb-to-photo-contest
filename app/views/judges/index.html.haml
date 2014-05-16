@@ -1,18 +1,29 @@
-.container
+.container#judge-page
   %section
-    %h3= "Welcome Judge #{ current_judge.first_name }"
+    %h3.title= "Welcome #{ current_judge.first_name }"
     %p
       This page will allow you to review your selections for judging stages.
     %p
-      %span Judging will consist of 2 rounds. The first round will consist of judges nominating 
-      %span= ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
-      %span  photos for each category: flora, fauna, landscape, and 'Made in Canada' (i.e. Canadian content).
-    %p
-      After nominations, the second round of judging will have judges assign numerical scores to nominated photos based on technial excellence, subject matter, composition, and overall impact.
-    %p
-      After judging has completed, the top scoring photo will be overall winner, the highest scoring Canadian content will win 'Made in Canada,' and the remaining photos will be ranked by score, and awarded first through third in their respective categories.
+      %span Judging will consist of 2 rounds. 
+
+    %ol
+      %li
+        %strong Select your shortlist
+        %ul
+          %li= "#{ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY} photos for each category: flora, fauna, landscape, and 'Made in Canada' (i.e. Canadian content)."
+          %li 
+            Consider the following 
+            %span
+              %strong= link_to 'critera', photo_criteria_path, target: '_blank'
+            %span when making your selection.
+          %li Please select from a variety of contestants.
+      %li
+        %strong Scoring
+        %ul
+          %li Assign numerical scores to shortlisted photos (Max 24 images) 
+          %li Socred out of 50 points based on technial excellence, subject matter, composition, and overall impact.
+          %li The SCB-TO Committee will average the scores from the judges
+          %li The top scoring photo will be overall winner, the highest scoring Canadian content will win 'Made in Canada,' and the remaining photos will be ranked by score, and awarded first through third in their respective categories.
 
   %section
-    %h3 Shortlist Selections
-
     = render 'judges_panel'

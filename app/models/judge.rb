@@ -132,7 +132,8 @@ class Judge
 
   def update_shortlist_status
     done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
-    shortlist_complete = done if done != shortlist_complete
+    puts "done? #{done}, shortlist_complete? #{shortlist_complete}"
+    set(shortlist_complete: done) if done != shortlist_complete
   end
 
   ###

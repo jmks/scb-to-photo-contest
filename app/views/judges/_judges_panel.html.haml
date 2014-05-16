@@ -1,70 +1,81 @@
 .container#judges-panel
 
-  - if current_judge.shortlist?
-    .row
-      .col-xs-12
-        %h3= "Judging Shortlist (#{current_judge.first_name})"
-    .row
-      .col-xs-3.text-center
-        %h4
-          Flora
-          - if @judge.shortlist_done? :flora
-            %i.fa.fa-check
-        %ul.list-unstyled
-          - @judge.flora_shortlist.each do |flo|
-            %li
-              = link_to photo_path(flo) do
-                = image_tag flo.thumbnail_xs_url
-              = link_to judge_shortlist_remove_url(photo_id: flo.id, category: flo.category), method: :post do
-                %i.fa.fa-minus-circle
+  .row
+    .col-xs-12
+      %h3.text-center
+        = "#{current_judge.first_name}'s Shortlist"
+        - if @judge.shortlist_complete?
+          %i.fa.fa-check-circle.green
 
-        - if @photo and @photo.flora? and not @judge.shortlist_done? :flora
-          = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+  .row
+    .col-xs-3.text-center
+      %h4
+        = link_to 'Flora', photos_path(category: :flora), class: 'btn btn-default'
+        - if @judge.shortlist_done? :flora
+          %i.fa.fa-check
+      %ul.list-unstyled
+        - @judge.flora_shortlist.each do |flo|
+          %li
+            = link_to photo_path(flo) do
+              = image_tag flo.thumbnail_xs_url
+            = link_to judge_shortlist_remove_url(photo_id: flo.id, category: flo.category), method: :post do
+              %i.fa.fa-minus-circle
+            .user-name
+              %small= "by: #{flo.owner.public_name}"
 
-      .col-xs-3.text-center
-        %h4 
-          Fauna
-          - if @judge.shortlist_done? :fauna
-            %i.fa.fa-check
-        %ul.list-unstyled
-          - @judge.fauna_shortlist.each do |fau|
-            %li
-              = link_to photo_path(fau) do 
-                = image_tag fau.thumbnail_xs_url
-              = link_to judge_shortlist_remove_url(photo_id: fau.id, category: fau.category), method: :post do
-                %i.fa.fa-minus-circle
+      - if @photo and @photo.flora? and not @judge.shortlist_done? :flora
+        = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
 
-        - if @photo and @photo.fauna? and not @judge.shortlist_done? :fauna
-          = link_to 'Fauna Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+    .col-xs-3.text-center
+      %h4 
+        = link_to 'Fauna', photos_path(category: :fauna), class: 'btn btn-default'
+        - if @judge.shortlist_done? :fauna
+          %i.fa.fa-check
+      %ul.list-unstyled
+        - @judge.fauna_shortlist.each do |fau|
+          %li
+            = link_to photo_path(fau) do 
+              = image_tag fau.thumbnail_xs_url
+            = link_to judge_shortlist_remove_url(photo_id: fau.id, category: fau.category), method: :post do
+              %i.fa.fa-minus-circle
+            .user-name
+              %small= "by: #{fau.owner.public_name}"
 
-      .col-xs-3.text-center
-        %h4 
-          Landscape
-          - if @judge.shortlist_done? :landscapes
-            %i.fa.fa-check
-        %ul.list-unstyled
-          - @judge.landscapes_shortlist.each do |land|
-            %li
-              = link_to photo_path(land) do 
-                = image_tag land.thumbnail_xs_url
-              = link_to judge_shortlist_remove_url(photo_id: land.id, category: land.category), method: :post do
-                %i.fa.fa-minus-circle
+      - if @photo and @photo.fauna? and not @judge.shortlist_done? :fauna
+        = link_to 'Fauna Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
 
-        - if @photo and @photo.landscapes? and not @judge.shortlist_done? :landscapes
-          = link_to 'Landscape Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+    .col-xs-3.text-center
+      %h4 
+        = link_to 'Landscapes', photos_path(category: :landscapes), class: 'btn btn-default'
+        - if @judge.shortlist_done? :landscapes
+          %i.fa.fa-check
+      %ul.list-unstyled
+        - @judge.landscapes_shortlist.each do |land|
+          %li
+            = link_to photo_path(land) do 
+              = image_tag land.thumbnail_xs_url
+            = link_to judge_shortlist_remove_url(photo_id: land.id, category: land.category), method: :post do
+              %i.fa.fa-minus-circle
+            .user-name
+              %small= "by: #{land.owner.public_name}"
 
-      .col-xs-3.text-center
-        %h4 
-          Made in Canada
-          - if @judge.shortlist_done? :canada
-            %i.fa.fa-check
-        %ul.list-unstyled
-          - @judge.canada_shortlist.each do |can|
-            %li
-              = link_to photo_path(can) do 
-                = image_tag can.thumbnail_xs_url
-              = link_to judge_shortlist_remove_url(photo_id: can.id, category: :canada), method: :post do
-                %i.fa.fa-minus-circle
+      - if @photo and @photo.landscapes? and not @judge.shortlist_done? :landscapes
+        = link_to 'Landscape Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
 
-        - if @photo and @photo.canada? and not @judge.shortlist_done? :canada
-          = link_to 'Canada Shortlist', judge_shortlist_url(photo_id: @photo.id, category: :canada), class: 'btn btn-flat', method: :post
+    .col-xs-3.text-center
+      %h4 
+        = link_to 'Made in Canada', photos_path(category: :canada), class: 'btn btn-default'
+        - if @judge.shortlist_done? :canada
+          %i.fa.fa-check
+      %ul.list-unstyled
+        - @judge.canada_shortlist.each do |can|
+          %li
+            = link_to photo_path(can) do 
+              = image_tag can.thumbnail_xs_url
+            = link_to judge_shortlist_remove_url(photo_id: can.id, category: :canada), method: :post do
+              %i.fa.fa-minus-circle
+            .user-name
+              %small= "by: #{can.owner.public_name}"
+
+      - if @photo and @photo.canada? and not @judge.shortlist_done? :canada
+        = link_to 'Canada Shortlist', judge_shortlist_url(photo_id: @photo.id, category: :canada), class: 'btn btn-flat', method: :post
