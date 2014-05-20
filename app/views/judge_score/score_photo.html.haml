@@ -1,0 +1,73 @@
+#photo-score-wrapper.container
+  .row
+    .col-xs-12.text-center
+      - if @photo.thumbnail_lg_url?
+        = image_tag @photo.thumbnail_lg_url, class: 'img-responsive'
+      - else
+        %h2 Thumbnails pending...
+
+  .row
+    .col-xs-12
+      %h2.photo-title= @photo.title
+
+  .row
+    .col-xs-12.col-sm-6.grey-box
+      %p
+        %span.photo-field Photographed By
+        %span.photo-value= photographer_link
+      %p
+        %span.photo-field Description
+        %span.photo-value= display_description 'None.'
+      %p
+        %span.photo-field Location
+        %span.photo-value= display_photo_location 'None.'
+      %p
+        %span.photo-field Date
+        %span.photo-value= display_photo_date 'None.'
+      %p
+        %span.photo-field Camera Stats
+        %span.photo-value= display_camera_stats 'None.'
+
+    .col-xs-12.col-sm-6
+      %ul#tags-container.list-inline
+        - @photo.tags.each do |tag|
+          %li.tag= link_to tag, photos_path(tag: tag)
+
+  %section.scoring-section
+    .row
+      .col-xs-12
+        %h2.text-center Photo Scores
+
+        - if @photo_score.errors.any?
+          %ul
+            - @photo_score.errors.full_messages.each do |msg|
+              %li= msg
+
+        = form_for :photo_score, url: save_photo_score_path, html: { id: 'photo-score-form', class: 'form-horizontal' } do |f|
+          = f.hidden_field :photo_id, value: @photo.id
+          = f.hidden_field :judge_id, value: @judge.id
+
+          .form-group
+            = f.label 'Technical Excellence', class: 'control-label col-xs-6'
+            .col-xs-6
+              = f.select :technical_excellence, (1..10).to_a, class: 'form-control', selected: @photo_score.technical_excellence
+
+          .form-group
+            = f.label 'Subject Matter', class: 'control-label col-xs-6'
+            .col-xs-6
+              = f.select :subject_matter, (1..10).to_a, class: 'form-control', selected: @photo_score.subject_matter
+
+          .form-group
+            = f.label 'Composition', class: 'control-label col-xs-6'
+            .col-xs-6
+              = f.select :composition, (1..10).to_a, class: 'form-control', selected: @photo_score.composition
+
+          .form-group
+            = f.label 'Overall Impact', class: 'control-label col-xs-6'
+            .col-xs-6
+              = f.select :overall_impact, (1..20).to_a, class: 'form-control', selected: @photo_score.overall_impact
+
+          .form-group.text-center
+            = f.button type: 'submit', class: 'btn btn-flat' do 
+              %i.fa.fa-share.fa-2x
+              %span Save and Continue

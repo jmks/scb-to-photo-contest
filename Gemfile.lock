@@ -36,6 +36,8 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
+    bootstrap-slider-rails (1.9.0)
+      railties (>= 3.2, < 5.0)
     bson (2.0.0)
     bson_ext (1.5.1)
     builder (3.1.4)
@@ -260,6 +262,7 @@ DEPENDENCIES
   backstretch-rails
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (~> 3.0.3.0)
+  bootstrap-slider-rails
   bson
   bson_ext
   capybara

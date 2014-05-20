@@ -65,6 +65,7 @@ gem 'haml'
 # Use Twitter Bootstrap
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'font-awesome-rails'
+gem 'bootstrap-slider-rails'
 
 gem 'modernizr-rails'
 

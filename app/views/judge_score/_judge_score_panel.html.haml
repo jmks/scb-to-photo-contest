@@ -1,0 +1,40 @@
+.container#judge-score-panel
+  .row
+    .col-xs-12
+      %h3.title
+        Scoring Photos
+        - if @judge.photo_scoring_complete?
+          %i.fa.fa-check-circle.green
+        - else
+          - if @judge.final_score_complete?
+            = link_to 'Submit final scores', finalize_photo_scores_path, class: 'btn btn-flat', method: :post
+      %h5.text-center Click on a photo in the list to get started
+ 
+  .row
+    .col-xs-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %td Photo
+            %td Technical Excellence
+            %td Subject Matter
+            %td Composition
+            %td Overall Impact
+            %td Total
+        %tbody
+          - PhotoScore.get_scorecard(@judge).each_pair do |photo, score|
+            %tr
+              %td
+                = link_to image_tag(photo.thumbnail_xs_url), photo_score_path(id: photo.id)
+                %br
+                %span= truncated_title(photo.title)
+                %br
+                %span= "by: #{ photo.owner.public_name }"
+              - if score and score.any_scores?
+                %td= score.technical_excellence
+                %td= score.subject_matter
+                %td= score.composition
+                %td= score.overall_impact
+                %td= score.total_score
+              - else
+                %td{ colspan: 5 } Not scored

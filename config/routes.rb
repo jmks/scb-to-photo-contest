@@ -54,7 +54,10 @@ PhotoContest::Application.routes.draw do
   post '/judges/shortlist', to: 'judges#shortlist_photo', as: 'judge_shortlist'
   post '/judges/shortlist_remove', to: 'judges#remove_from_shortlist', as: 'judge_shortlist_remove'
 
-
+  # judge scoring
+  get  '/judges/photo_score/:id', to: 'judge_score#score_photo',           as: 'photo_score'
+  post '/judges/photo_score/:id', to: 'judge_score#save_photo_score',      as: 'save_photo_score'
+  post '/judges/photo_score',     to: 'judge_score#finalize_photo_scores', as: 'finalize_photo_scores'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

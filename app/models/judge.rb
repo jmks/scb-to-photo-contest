@@ -54,11 +54,13 @@ class Judge
   has_and_belongs_to_many :landscapes_shortlist, class_name: 'Photo', inverse_of: nil
   has_and_belongs_to_many :canada_shortlist, class_name: 'Photo', inverse_of: nil
 
+  # flag that shortlist was completed / accepted
   field :shortlist_complete, type: Boolean, default: false
 
   # photo scoring
 
-  field :final_photo_scoring, type: Boolean, default: false
+  # flag that photo scoring is complete
+  field :photo_scoring_complete, type: Boolean, default: false
 
   ###
   # Shortlist
@@ -80,7 +82,7 @@ class Judge
 
     if arr.length < ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY && !arr.include?(photo)
       arr << photo
-      update_shortlist_status
+      #update_shortlist_status
       true
     else
       false
@@ -103,7 +105,7 @@ class Judge
 
     if arr.include?(photo)
       arr.delete(photo)
-      update_shortlist_status
+      #update_shortlist_status
       true
     else
       false
@@ -116,6 +118,7 @@ class Judge
   end
 
   def shortlist_done? category
+    # categories short enough for this
     case category
     when :flora
       flora_shortlist
@@ -130,18 +133,46 @@ class Judge
     end.length == ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
   end
 
+  # deprecated - shortlist_complete flag now expected to be manually set
   def update_shortlist_status
     done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
     #puts "done? #{done}, shortlist_complete? #{shortlist_complete}"
     set(shortlist_complete: done) if done != shortlist_complete
   end
 
+  def shortlist category
+    # categories short enough for this
+    case category
+    when :flora
+      flora_shortlist
+    when :fauna 
+      fauna_shortlist
+    when :landscapes
+      landscapes_shortlist
+    when :canada
+      canada_shortlist
+    end
+  end
+
+  def self.shortlist category
+    # vs aggregation?
+    Judge.where(shortlist_complete: true).map {|j| j.shortlist(category) }.flatten.uniq
+  end
+
   ###
   # /Shortlist
   ###
 
+
+  def final_score_complete?
+    Photo::CATEGORIES.map { |cat| Judge.shortlist(cat) }.
+                      flatten.
+                      map { |pho| PhotoScore.where(judge_id: id.to_s, photo_id: pho.id.to_s).first }.
+                      all?
+  end
+
   def status_message
-    if final_photo_scoring?
+    if photo_scoring_complete?
       'Final scoring complete'
     elsif shortlist_complete?
       'Shortlist picks complete'
