@@ -1,6 +1,8 @@
 FactoryGirl.define do 
   factory :photo do 
-    title 'Walk in the park'
+    sequence :title do |n|
+      "Photo title #{n}"
+    end
     category { Photo::CATEGORIES.sample }
     association :owner, factory: :contestant
   end

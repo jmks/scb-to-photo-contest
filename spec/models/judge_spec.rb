@@ -78,25 +78,36 @@ describe Judge do
     end
 
     before :each do 
-      @photos = build_list :photo, 5
+      @photos = build_list(:photo, 5).uniq # TODO: make photos unique!
       @judge = build :judge
       @photos.each { |p| @judge.shortlist_photo(p, p.category) }
     end
 
-    it 'removes a photo from it category shortlist' do 
+    it 'removes a photo' do 
       expect(@judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)).to eql true
     end
 
     it 'only removes a single photo' do 
-      @judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)
-      
-      expect(
-        @categories.map do |cat|
-          @judge.send("#{ cat.to_s }_shortlist").length
-        end.inject(0, :+)
-      ).to eql (@photos.length - 1)
+      expect {
+        @judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)
+        }.to change { 
+          @categories.map do |cat|
+            @judge.send("#{ cat.to_s }_shortlist").length
+          end.inject(0, :+)
+        }.by(-1)
     end
   end
 
-  
+  describe '#shortlist_complete' do 
+    it 'is true when full photo selection complete' do 
+      photo_count = ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
+      judge = build(:judge)
+
+      Photo::CATEGORIES.each do |cat|
+        photo_count.times { judge.shortlist_photo(build(:photo, category: cat), cat) }
+      end
+
+      expect(judge.shortlist_complete).to eql true
+    end
+  end
 end
