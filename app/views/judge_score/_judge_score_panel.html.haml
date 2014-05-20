@@ -22,19 +22,25 @@
             %td Overall Impact
             %td Total
         %tbody
-          - PhotoScore.get_scorecard(@judge).each_pair do |photo, score|
+          - scorecard = PhotoScore.get_scorecard(@judge)#.each_pair do |photo, score|
+          - Photo::CATEGORIES.each do |category|
             %tr
-              %td
-                = link_to image_tag(photo.thumbnail_xs_url), photo_score_path(id: photo.id)
-                %br
-                %span= truncated_title(photo.title)
-                %br
-                %span= "by: #{ photo.owner.public_name }"
-              - if score and score.any_scores?
-                %td= score.technical_excellence
-                %td= score.subject_matter
-                %td= score.composition
-                %td= score.overall_impact
-                %td= score.total_score
-              - else
-                %td{ colspan: 5 } Not scored
+              %td{ colspan: 6}
+                %h4.title= category.capitalize
+            - Judge.shortlist(category).each do |photo|
+              - score = scorecard[photo]
+              %tr
+                %td
+                  = link_to image_tag(photo.thumbnail_xs_url), photo_score_path(id: photo.id)
+                  %br
+                  %span= truncated_title(photo.title)
+                  %br
+                  %span= "by: #{ photo.owner.public_name }"
+                - if score and score.any_scores?
+                  %td= score.technical_excellence
+                  %td= score.subject_matter
+                  %td= score.composition
+                  %td= score.overall_impact
+                  %td= score.total_score
+                - else
+                  %td{ colspan: 5 } Not scored

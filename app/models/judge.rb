@@ -159,6 +159,14 @@ class Judge
     Judge.where(shortlist_complete: true).map {|j| j.shortlist(category) }.flatten.uniq
   end
 
+  def self.shortlist_by_category
+    shortlist = {}
+    Photo::CATEGORIES.each do |cat|
+      shortlist[cat] = Judge.shortlist(cat)
+    end
+    shortlist
+  end
+
   ###
   # /Shortlist
   ###

@@ -41,28 +41,53 @@ class JudgeScoreController < ApplicationController
   # returns path
   def score_next_photo_path current_photo=nil
 
-    category_photos = Judge.shortlist(current_photo.category)
-    photo_index = category_photos.index(current_photo)
-    if photo_index.nil? # photo was in canada category, but not specific category
-      Judge.shortlist(:canada).each do |photo|
-        if PhotoScore.where(judge_id: @judge.id.to_s, photo_id: photo.id.to_s).first.nil?
-          return photo_score_path(id: photo.id)
-        end
-      end
-      # canada done as well
-      return judge_root_path
-    elsif photo_index == (category_photos.length - 1)
-      next_photo = category_photos[photo_index + 1]
-      return photo_score_path(id: next_photo.id)
+    return judge_root_path if current_photo.nil?
+
+    shortlist = Judge.shortlist_by_category
+
+    photo_index   = shortlist[current_photo.category].index(current_photo)
+    category      = photo_index.nil? ? :canada : current_photo.category
+    photo_index ||= shortlist[:canada].index(current_photo)
+
+    if photo_index == shortlist[category].length - 1
+      # next category
+      next_category_index = Photo::CATEGORIES.index(category) + 1
+
+      # no more categories
+      return judge_root_path if next_category_index == Photo::CATEGORIES.length
+
+      return photo_score_path(id: shortlist[Photo::CATEGORIES[next_category_index]].first.id)
     end
 
-    category_index = Photo::CATEGORIES.index(@photo.category)
-    if category_index == (Photo::CATEGORIES.length - 1)
-      judge_root_path
-    else
-      next_photo = Judge.shortlist(Photo::CATEGORIES[category_index + 1]).first
-      photo_score_path(id: next_photo.id)
-    end
+    # next photo
+    return photo_score_path(id: shortlist[category][photo_index + 1].id)
+
+    # if photo_index.nil? # photo was in canada category
+    #   Judge.shortlist(:canada).each do |photo|
+    #     if PhotoScore.where(judge_id: @judge.id.to_s, photo_id: photo.id.to_s).first.nil?
+    #       return photo_score_path(id: photo.id)
+    #     end
+    #   end
+    #   # canada done as well
+    #   return judge_root_path
+    # elsif photo_index == (category_photos.length - 1)
+    #   next_category_index = Photo::CATEGORIES.index(@photo.category) + 1
+
+    #   if next_category_index == Photo::CATEGORIES.length
+    #     return judge_root_path
+    #   else
+    #     next_photo = Judge.shortlist(Photo::CATEGORIES[next_category_index]).first
+    #     return photo_score_path(id: next_photo.id)
+    #   end
+    # end
+
+    # category_index = Photo::CATEGORIES.index(@photo.category)
+    # if category_index == (Photo::CATEGORIES.length - 1)
+    #   judge_root_path
+    # else
+    #   next_photo = Judge.shortlist(Photo::CATEGORIES[category_index + 1]).first
+    #   photo_score_path(id: next_photo.id)
+    # end
   end
 
   def get_judge_photo
