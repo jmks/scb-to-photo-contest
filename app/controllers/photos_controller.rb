@@ -162,6 +162,11 @@ class PhotosController < ApplicationController
   end
 
   def vote
+    unless ContestRules.voting_open?
+      flash[:alert] = 'Voting is now closed'
+      redirect_back_or_home and return
+    end
+
     voter = Vote.where(id: params[:remote_ip]).first || Vote.new(id: params[:remote_ip])
 
     if voter.vote

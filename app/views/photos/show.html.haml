@@ -69,11 +69,14 @@
 
         .row
           .col-xs-12.col-md-6
-            = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
-              = hidden_field_tag :id, @photo.id
-              = button_tag type: 'submit', id: 'photo-vote', class: 'vote-btn btn btn-block btn-lg btn-flat' do
-                %i.fa.fa-plus
-                Vote
+            - if ContestRules.voting_open?
+              = form_tag vote_photo_path, id: 'vote-form', class: 'form form-inline' do
+                = hidden_field_tag :id, @photo.id
+                = button_tag type: 'submit', id: 'photo-vote', class: 'vote-btn btn btn-block btn-lg btn-flat' do
+                  %i.fa.fa-plus
+                  Vote
+            - else
+              %p Voting is now closed
 
         %div.text-center
           = render './addthis'
