@@ -51,6 +51,44 @@ class PhotoScore
     scorecard
   end
 
+  def self.photo_scores
+    photo_scores = []
+    judge_names_by_id = Hash[Judge.all.map { |j| [j.id.to_s, j.full_name] }]
+
+    Judge.shortlist_by_category.each_pair do |category, photos|
+      photos.each do |photo|
+        photo_score = {}
+
+        photo_score[:thumbnail_url] = photo.thumbnail_xs_url
+        photo_score[:title]         = photo.title
+        photo_score[:photographer]  = photo.owner.full_name
+        photo_score[:category]      = category.to_s.capitalize
+
+        photo_score[:scores] = PhotoScore.where(photo_id: photo.id.to_s).to_a.map do |photoscore|
+          {
+            judge:       judge_names_by_id[photoscore.judge_id],
+            total_score: photoscore.total_score,
+            
+            technical_excellence: photoscore.technical_excellence,
+            composition:          photoscore.composition,
+            subject_matter:       photoscore.subject_matter,
+            overall_impact:       photoscore.overall_impact
+          }
+        end
+
+        photo_score[:total_score] = photo_score[:scores].map { |ps| ps[:total_score] }.sum
+
+        photo_scores << photo_score
+      end
+    end
+    
+    if photo_scores.empty?
+      nil
+    else
+      ContestRules.apply_winners(photo_scores.sort { |a, b| b[:total_score] <=> a[:total_score] })
+    end
+  end
+
   private
 
   def score_fields

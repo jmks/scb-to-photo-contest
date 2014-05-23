@@ -6,6 +6,8 @@ class AdminController < ApplicationController
 
   def index
     @judge = Judge.new params[:judge]
+
+    @photo_scores = PhotoScore.photo_scores
   end
 
   def confirm_photo

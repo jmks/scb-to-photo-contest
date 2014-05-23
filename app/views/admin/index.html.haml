@@ -5,6 +5,7 @@
     %li.active= link_to 'Photo Administration', '#photo-admin', 'data-toggle' => 'tab'
     %li= link_to 'Comment Administration', '#comment-admin', 'data-toggle' => 'tab'
     %li= link_to 'Judge Administration', '#judges-admin', 'data-toggle' => 'tab'
+    %li= link_to 'Photo Scores', '#photo-scores', 'data-toggle' => 'tab'
 
   .tab-content
     .tab-pane.active#photo-admin
@@ -73,3 +74,30 @@
         .form-group
           .col-sm-offset-3.col-sm-5.text-center
             = f.submit nil, class: 'btn btn-flat', value: 'Add Judge'
+
+    .tab-pane#photo-scores
+      - if @photo_scores
+        - judges = Judge.get_judges.map { |j| j.full_name }
+        %h4= "#{ judges.length } of #{ Judge.count } reporting"
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Photo
+              %th Photographer
+              %th Category
+              - judges.each do |judge|
+                %th= "#{judge}'s Score"
+              %th Total Score
+              %th Prize
+          %tbody
+            - @photo_scores.each do |photo_score|
+              %tr
+                %td= image_tag photo_score[:thumbnail_url]
+                %td= photo_score[:photographer]
+                %td= photo_score[:category]
+                - judges.each do |judge|
+                  %td= photo_score[:scores].select { |ps| ps[:judge] == judge }.first[:total_score]
+                %td= photo_score[:total_score]
+                %td= photo_score[:winner].to_s.split('_').map(&:capitalize).join(' ')
+      - else
+        %h4 No final scores are complete

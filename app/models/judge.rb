@@ -171,12 +171,15 @@ class Judge
   # /Shortlist
   ###
 
-
   def final_score_complete?
     Photo::CATEGORIES.map { |cat| Judge.shortlist(cat) }.
                       flatten.
                       map { |pho| PhotoScore.where(judge_id: id.to_s, photo_id: pho.id.to_s).first }.
                       all?
+  end
+
+  def self.get_judges
+    Judge.where(photo_scoring_complete: true).to_a
   end
 
   def status_message

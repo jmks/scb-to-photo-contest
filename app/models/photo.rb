@@ -39,9 +39,7 @@ class Photo
   # want equiv of this, but this is too slow
   #field :thumbnails, type: Boolean, default: false
 
-  # thumbnail related -- will update
-  field :thumbnail_url # not useful
-
+  # thumbnail related
   field :thumbnail_xs_url
   field :thumbnail_sm_url
   field :thumbnail_lg_url
