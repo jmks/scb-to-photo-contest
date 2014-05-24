@@ -78,7 +78,7 @@
     .tab-pane#photo-scores
       - if @photo_scores
         - judges = Judge.get_judges.map { |j| j.full_name }
-        %h4= "#{ judges.length } of #{ Judge.count } reporting"
+        %h4= "#{ judges.length } of #{ Judge.count } Judges reporting"
         %table.table.table-hover
           %thead
             %tr
