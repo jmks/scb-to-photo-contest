@@ -38,6 +38,8 @@ class Judge
   # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
   # field :locked_at,       :type => Time
 
+  scope :completed_scoring, ->{ where(photo_scoring_complete: true) }
+
   # personal info
 
   field :first_name, type: String

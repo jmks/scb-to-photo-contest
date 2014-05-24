@@ -53,7 +53,7 @@ class PhotoScore
 
   def self.photo_scores
     photo_scores = []
-    judge_names_by_id = Hash[Judge.all.map { |j| [j.id.to_s, j.full_name] }]
+    judge_names_by_id = Hash[Judge.completed_scoring.map { |j| [j.id.to_s, j.full_name] }]
 
     Judge.shortlist_by_category.each_pair do |category, photos|
       photos.each do |photo|
@@ -64,7 +64,7 @@ class PhotoScore
         photo_score[:photographer]  = photo.owner.full_name
         photo_score[:category]      = category.to_s.capitalize
 
-        photo_score[:scores] = PhotoScore.where(photo_id: photo.id.to_s).to_a.map do |photoscore|
+        photo_score[:scores] = PhotoScore.where(photo_id: photo.id.to_s).in(judge_id: judge_names_by_id.keys).to_a.map do |photoscore|
           {
             judge:       judge_names_by_id[photoscore.judge_id],
             total_score: photoscore.total_score,
