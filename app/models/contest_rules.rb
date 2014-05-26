@@ -17,7 +17,6 @@ class ContestRules
         :grand_prize,
         :made_in_canada,
         :peoples_choice,
-        :highest_bid,
         :flora_1st,
         :flora_2nd,
         :flora_3rd,
@@ -30,8 +29,26 @@ class ContestRules
     ]
 
     OPTIONAL_PRIZES = [
+        :highest_bid,
         :honourable_mention
     ]
+
+    # TODO: prize model
+    PRIZE_DESCRIPTIONS = {
+        grand_prize: "",
+        made_in_canada:"",
+        peoples_choice:"",
+        highest_bid:"",
+        flora_1st:"",
+        flora_2nd:"",
+        flora_3rd:"",
+        fauna_1st:"",
+        fauna_2nd:"",
+        fauna_3rd:"",
+        landscapes_1st:"",
+        landscapes_2nd:"",
+        landscapes_3rd:""
+    }
 
     def self.contest_open?(today = nil)
         today ||= DateTime.now

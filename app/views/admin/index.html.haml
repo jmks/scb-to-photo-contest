@@ -79,6 +79,8 @@
       - if @photo_scores
         - judges = Judge.get_judges.map { |j| j.full_name }
         %h4= "#{ judges.length } of #{ Judge.count } Judges reporting"
+        - if Winner.assignments_complete? and not @admin.email_winners?
+          = link_to 'Notifiy Winners', admin_notify_winners_path, method: :post
         %table.table.table-hover
           %thead
             %tr

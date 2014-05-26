@@ -24,6 +24,10 @@ class Winner
     !assignments_remaining?
   end
 
+  def prize_description
+    ContestRules::PRIZE_DESCRIPTIONS[prize]
+  end
+
   private
 
   def assignment_validation

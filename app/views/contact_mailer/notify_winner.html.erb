@@ -1,0 +1,8 @@
+<h2>Congratulations, <%= @contestant.first_name %>!</h2>
+
+<p>We are happy to inform you that your photo '<%= link_to @photo.title, photo_path(@photo) %>' has been awarded the prize of <%= pp_prize(@winner.prize) %>!</p>
+
+<p>You can see further details of prizes <%= link_to 'here', prizes_path %></p>
+
+<p>All the best,</p>
+<p>SCB-TO Photo Contest Committee</p>
