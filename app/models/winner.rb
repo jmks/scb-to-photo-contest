@@ -16,12 +16,12 @@ class Winner
     (ContestRules::REQUIRED_PRIZES - assigned).any?
   end
 
-  def self.selection_complete?
-    !assignments_remaining?
-  end
-
   def self.assignments_remaining
     ContestRules::REQUIRED_PRIZES - Winner.all.map { |w| w.prize }
+  end
+
+  def self.assignments_complete?
+    !assignments_remaining?
   end
 
   private
