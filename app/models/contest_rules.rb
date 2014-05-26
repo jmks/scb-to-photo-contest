@@ -13,7 +13,7 @@ class ContestRules
     JUDGING_SHORTLIST_MAX_PER_CATEGORY = 2
 
     # prize keys
-    PRIZES = [
+    REQUIRED_PRIZES = [
         :grand_prize,
         :made_in_canada,
         :peoples_choice,
@@ -27,6 +27,10 @@ class ContestRules
         :landscapes_1st,
         :landscapes_2nd,
         :landscapes_3rd
+    ]
+
+    OPTIONAL_PRIZES = [
+        :honourable_mention
     ]
 
     def self.contest_open?(today = nil)
@@ -57,5 +61,9 @@ class ContestRules
         end
 
         photo_scores
+    end
+
+    def self.prizes
+        REQUIRED_PRIZES + OPTIONAL_PRIZES
     end
 end

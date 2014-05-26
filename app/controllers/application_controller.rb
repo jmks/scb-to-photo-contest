@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_judge
 
+  helper_method :pp_prize
+
   protected
 
   def configure_permitted_parameters
@@ -44,5 +46,16 @@ class ApplicationController < ActionController::Base
     if judge_signed_in?
       @judge = current_judge
     end
+  end
+
+  # redirect unless contestant is an admin
+  def admins_only!
+    unless current_contestant.admin?
+      redirect_to root_path
+    end
+  end
+
+  def pp_prize prize
+    prize.to_s.split('_').map(&:capitalize).join(' ')
   end
 end

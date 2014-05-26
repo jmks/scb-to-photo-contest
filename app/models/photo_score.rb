@@ -63,6 +63,7 @@ class PhotoScore
         photo_score[:title]         = photo.title
         photo_score[:photographer]  = photo.owner.full_name
         photo_score[:category]      = category.to_s.capitalize
+        photo_score[:id]            = photo.id.to_s
 
         photo_score[:scores] = PhotoScore.where(photo_id: photo.id.to_s).in(judge_id: judge_names_by_id.keys).to_a.map do |photoscore|
           {

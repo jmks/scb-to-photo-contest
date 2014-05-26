@@ -9,16 +9,20 @@
       .col-xs-12
         %ul#quick-btns.list-inline.text-center
           %li
-            %a.btn.btn-lg.btn-inverse{href: new_photo_path }
+            %a.btn.btn-lg.btn-inverse{ href: new_photo_path }
               %i.fa.fa-camera.fa-2x
               Submit a Photo
           %li
-            %a.btn.btn-lg.btn-inverse{href: photos_path }
+            %a.btn.btn-lg.btn-inverse{ href: photos_path }
               %i.fa.fa-picture-o.fa-2x
               View Photos
     .row.text-center.date
       .col-xs-12
-        %p Contest closes May 14, 2014
+        - if ContestRules.contest_open?
+          %p Contest closes May 14, 2014
+        - else
+          %span Contest is now closed. Check out our winners
+          %span= link_to 'here!', winners_path
 
   .row.text-center
     .col-xs-12

@@ -1,0 +1,11 @@
+= form_tag assign_winner_path, class: 'form-horizontal' do
+  = hidden_field_tag :photo_id, photo
+  = hidden_field_tag :category, category
+
+  .form-group
+    .col-xs-12
+      = select nil, :prize, winner_select_choices, include_blank: true, default: nil, class: 'form-control'
+  .form-group
+    .col-xs-12
+      = submit_tag 'Allocate Prize', class: 'btn btn-flat'
+  

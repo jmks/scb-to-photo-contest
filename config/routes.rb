@@ -12,6 +12,7 @@ PhotoContest::Application.routes.draw do
   post '/contact', to: 'root#contact', as: 'contact'
   get '/terms',    to: 'root#terms',   as: 'terms'
   get '/contest',  to: 'root#contest', as: 'contest'
+  get '/winners',  to: 'root#winners', as: 'winners'
   get '/photo_criteria', to: 'root#judging_criteria', as: 'photo_criteria'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
@@ -58,6 +59,10 @@ PhotoContest::Application.routes.draw do
   get  '/judges/photo_score/:id', to: 'judge_score#score_photo',           as: 'photo_score'
   post '/judges/photo_score/:id', to: 'judge_score#save_photo_score',      as: 'save_photo_score'
   post '/judges/photo_score',     to: 'judge_score#finalize_photo_scores', as: 'finalize_photo_scores'
+
+  # winner
+  post   '/winners/assign_winner',        to: 'winners#assign_winner', as: 'assign_winner'
+  delete '/winners/remove_winner/:prize', to: 'winners#remove_winner', as: 'remove_winner'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

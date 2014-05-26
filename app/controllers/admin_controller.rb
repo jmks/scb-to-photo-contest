@@ -8,6 +8,7 @@ class AdminController < ApplicationController
     @judge = Judge.new params[:judge]
 
     @photo_scores = PhotoScore.photo_scores
+    @winners_by_id = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
   end
 
   def confirm_photo

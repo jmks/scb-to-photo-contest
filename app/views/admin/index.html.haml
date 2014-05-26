@@ -88,7 +88,8 @@
               - judges.each do |judge|
                 %th= "#{judge}'s Score"
               %th Total Score
-              %th Prize
+              %th Suggested Prizes
+              %th Prize Assignment
           %tbody
             - @photo_scores.each do |photo_score|
               %tr
@@ -98,6 +99,13 @@
                 - judges.each do |judge|
                   %td= photo_score[:scores].select { |ps| ps[:judge] == judge }.first[:total_score]
                 %td= photo_score[:total_score]
-                %td= photo_score[:winner].to_s.split('_').map(&:capitalize).join(' ')
+                %td= pp_prize(photo_score[:winner])
+                %td
+                  - if @winners_by_id.include? photo_score[:id]
+                    - prize = @winners_by_id[photo_score[:id]]
+                    %h5= pp_prize(prize)
+                    = link_to 'Cancel', remove_winner_path(prize), method: :delete, class: 'btn btn-xs btn-flat'
+                  - else
+                    = render '/winners/winner_picker', photo: photo_score[:id], category: photo_score[:category]
       - else
         %h4 No final scores are complete
