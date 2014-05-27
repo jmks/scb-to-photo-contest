@@ -78,8 +78,8 @@ class Contestant
   validates :terms_of_service, acceptance: true
 
   # admin
-  field :admin,         type: Boolean, default: false
-  field :email_winners, type: Boolean, default: false
+  field :admin,          type: Boolean, default: false
+  field :notify_winners, type: Boolean, default: false
 
   # indexes
   index({ email: 1 }, { unique: true, background: true })

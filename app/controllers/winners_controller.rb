@@ -4,12 +4,14 @@ class WinnersController < ApplicationController
   before_filter :get_admin
 
   def assign_winner
+    pry
+    
     @photo = Photo.find params[:photo_id]
 
-    @winner = Winner.new category: params[:category].to_sym, prize: params[:prize].to_sym, photo: @photo
+    @winner = Winner.new category: params[:category].downcase.to_sym, prize: params[:prize].to_sym, photo: @photo
 
     if @winner.save
-      flash[:notice] = "Assigned #{ params[:prize] } to #{ @photo.title }"
+      flash[:notice] = "Assigned #{ pp_prize(params[:prize]) } to #{ @photo.title }"
     else
       flash.now[:alert] = "Could not assign prize: <ul>#{ @winner.errors.full_messages.map {|m| '<li>#{m}</li>'}.join }<ul>"
     end
@@ -34,7 +36,7 @@ class WinnersController < ApplicationController
       flash[:alert] = "The winners have already been notified."
     else
       Winner.all.each do |winner|
-        ContactMailer.notifiy_winner(winner).deliver
+        ContactMailer.notify_winner(winner).deliver
       end
 
       @admin.set notify_winners: true

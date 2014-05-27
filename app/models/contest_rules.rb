@@ -16,7 +16,6 @@ class ContestRules
     REQUIRED_PRIZES = [
         :grand_prize,
         :made_in_canada,
-        :peoples_choice,
         :flora_1st,
         :flora_2nd,
         :flora_3rd,
@@ -30,24 +29,25 @@ class ContestRules
 
     OPTIONAL_PRIZES = [
         :highest_bid,
+        :peoples_choice,
         :honourable_mention
     ]
 
     # TODO: prize model
     PRIZE_DESCRIPTIONS = {
-        grand_prize: "",
-        made_in_canada:"",
-        peoples_choice:"",
-        highest_bid:"",
-        flora_1st:"",
-        flora_2nd:"",
-        flora_3rd:"",
-        fauna_1st:"",
-        fauna_2nd:"",
-        fauna_3rd:"",
-        landscapes_1st:"",
-        landscapes_2nd:"",
-        landscapes_3rd:""
+        grand_prize: "Grand",
+        made_in_canada: "Made in Canada",
+        peoples_choice: "People's Choice",
+        highest_bid: "Highest Bid",
+        flora_1st:"Flora, 1st Place",
+        flora_2nd:"Flora, 2nd Place",
+        flora_3rd:"Flora, 3rd Place",
+        fauna_1st:"Fauna, 1st Place",
+        fauna_2nd:"Fauna, 2nd Place",
+        fauna_3rd:"Fauna, 3rd Place",
+        landscapes_1st:"Landscapes, 1st Place",
+        landscapes_2nd:"Landscapes, 2nd Place",
+        landscapes_3rd:"Landscapes, 3rd Place"
     }
 
     def self.contest_open?(today = nil)

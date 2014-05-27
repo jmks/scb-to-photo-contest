@@ -1,12 +1,12 @@
 <h2>Congratulations, <%= @contestant.first_name %>!</h2>
 
-<p>We are happy to inform you that your photo '<%= link_to @photo.title, photo_path(@photo) %>' has been awarded the prize of <%= pp_prize(@winner.prize) %>!</p>
+<p>We are happy to inform you that your photo '<%= link_to @photo.title, photo_url(@photo) %>' has been awarded the <%= @winner.prize_description %> Prize!</p>
 
-<p>Details about the prizes can be found here <%= link_to 'here', prizes_path %></p>
+<p>Details about the prizes can be found <%= link_to 'here', prizes_url %></p>
 
-You Photo is now on display from May 26-30th at Baka Gallery Cafe (2256 Bloor St. West) as part of our exhibit and Silent Auction fundraiser. We encourage you, your friends and family to check it out, and bid on your favourites. 
+<p>Your photo is now on display from May 26-30th at Baka Gallery Cafe (2256 Bloor St. West) as part of our exhibit and Silent Auction fundraiser. We encourage you, your friends and family to check it out, and bid on your favourites.</p>
 
-To accept your award and recieve your prize please attend our closing ceremony on May 30th at 7:00pm, also at Baka Gallery Cafe. You will recieve an invitattion via email shortly. 
+<p>To accept your award and recieve your prize please attend our closing ceremony on May 30th at 7:00pm, also at Baka Gallery Cafe. You will recieve an invitation via email shortly.</p>
 
 We look forward to seeing you soon!
 
