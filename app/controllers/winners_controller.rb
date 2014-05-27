@@ -4,8 +4,6 @@ class WinnersController < ApplicationController
   before_filter :get_admin
 
   def assign_winner
-    pry
-    
     @photo = Photo.find params[:photo_id]
 
     @winner = Winner.new category: params[:category].downcase.to_sym, prize: params[:prize].to_sym, photo: @photo

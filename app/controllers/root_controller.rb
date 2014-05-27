@@ -21,6 +21,7 @@ class RootController < ApplicationController
   end
 
   def winners
+    @winner_by_award = Winner.winners_by_award
   end
 
   def contact

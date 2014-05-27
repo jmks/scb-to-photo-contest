@@ -28,6 +28,10 @@ class Winner
     ContestRules::PRIZE_DESCRIPTIONS[prize]
   end
 
+  def self.winners_by_award
+    Hash[Winner.all.map { |win| [win.prize, win.photo] }]
+  end
+
   private
 
   def assignment_validation

@@ -51,6 +51,8 @@ class PhotosController < ApplicationController
   def show
     redirect_to(photos_path) and return unless @photo
     @photo.inc views: 1
+
+    @winner = Winner.where(photo: @photo).first
   end
 
   def flora
