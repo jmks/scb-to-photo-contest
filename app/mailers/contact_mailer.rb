@@ -20,4 +20,11 @@ class ContactMailer < ActionMailer::Base
 
     mail to: @contestant.email, subject: 'SCB-TO Photo Contest Prize'
   end
+
+  def notify_exhibitor photo
+    @photo      = photo
+    @contestant = @photo.owner
+
+    mail to: @contestant.email, subject: 'SCB-TO Photo Contest Exhibitor'
+  end
 end

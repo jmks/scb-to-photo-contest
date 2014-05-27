@@ -49,6 +49,7 @@ PhotoContest::Application.routes.draw do
   get  '/admin',                   to: 'admin#index',           as: 'admin_root'
   post '/admin/confirm_photo/:id', to: 'admin#confirm_photo',   as: 'admin_confirm_photo'
   post '/admin',                   to: 'admin#add_judge',       as: 'admin_add_judge'
+  post '/admin/mark_exhibitor',    to: 'admin#mark_exhibitor',  as: 'admin_mark_as_exhibitor'
 
   # judges
   get  '/judges/index',     to: 'judges#index',           as: 'judge_root'

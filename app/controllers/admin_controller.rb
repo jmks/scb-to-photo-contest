@@ -37,6 +37,18 @@ class AdminController < ApplicationController
     end
   end
 
+  def mark_exhibitor
+    @photo = Photo.find params[:photo_id]
+
+    if @photo.set(exhibitor: true)
+      ContactMailer.notify_exhibitor(@photo).deliver
+
+      flash[:notice] = "Photo '#{@photo.title}' has been marked as an exhibitor"
+    end
+
+    redirect_to admin_root_path
+  end
+
   private 
 
   def admins_only!
