@@ -5,10 +5,10 @@ class AdminController < ApplicationController
   before_filter :get_admin_photos_judges_comments
 
   def index
-    @judge = Judge.new params[:judge]
-
-    @photo_scores = PhotoScore.photo_scores
-    @winners_by_id = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
+    @judge            = Judge.new params[:judge]
+    @flagged_comments = Photo.where('comments.reported' => true).map { |p| p.comments.dup.keep_if { |c| c.reported? }}.flatten
+    @photo_scores     = PhotoScore.photo_scores
+    @winners_by_id    = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
   end
 
   def confirm_photo
