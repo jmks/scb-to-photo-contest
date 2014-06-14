@@ -50,9 +50,9 @@
               %i.fa.fa-sign-out
         - else
           %li{:class => "#{'active' if current_page?(new_contestant_registration_path)}"}
-            = link_to 'SIGN UP', new_contestant_registration_path
+            = link_to 'SIGN UP', new_contestant_registration_path, class: 'signup-link'
           %li{:class => "#{'active' if current_page?(new_contestant_session_path)}"}
-            = link_to new_contestant_session_path do
+            = link_to new_contestant_session_path, class: 'signin-link' do
               %i.fa.fa-sign-in
         
         %li.hidden-xs

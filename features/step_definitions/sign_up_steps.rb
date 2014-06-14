@@ -11,8 +11,7 @@ When /^I enter my details and submit$/ do
         fill_in "contestant[#{field}]", with: @unregistered[field]
     end
 
-    # 2 confirmations
-    fill_in 'contestant[email_confirmation]', with: @unregistered.email
+    # confirmations
     fill_in 'contestant[password_confirmation]', with: @unregistered[:password]
 
     click_button "Sign up"
