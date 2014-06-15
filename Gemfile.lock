@@ -85,6 +85,7 @@ GEM
     factory_girl_rails (4.3.0)
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
+    fakeweb (1.3.0)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     foreman (0.63.0)
@@ -270,6 +271,7 @@ DEPENDENCIES
   cucumber-rails
   devise
   factory_girl_rails
+  fakeweb
   font-awesome-rails
   foreman
   haml

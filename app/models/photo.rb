@@ -105,6 +105,8 @@ class Photo
     end
   end
 
+  # category?
+
   CATEGORIES.each do |cat|
     define_method(cat.to_s + '?') do
       self.category == cat

@@ -27,14 +27,20 @@ Before '@registered_and_signed_in' do
 
     click_button 'Sign in'
 
-    @current_contestant = Contestant.where(email: @registered.email).first
-
     # go back home to start
     visit root_path
 end
 
 Before '@photo_details' do 
-    @photo = FactoryGirl.create(:photo, owner: @current_contestant)
+    @photo = FactoryGirl.create(:photo, owner: @registered)
+end
+
+Before '@photo_uploaded' do
+    @photo = FactoryGirl.create(:photo, owner: @registered)
+
+    @photo.original_url = "http://notrealurl.butnotablank.string"
+    @photo.save
+    # @photo should be :uploaded
 end
 
 Before '@unregistered' do 
@@ -48,4 +54,10 @@ end
 
 Before '@photos' do 
   @photos = FactoryGirl.create_list :photo, 5
+end
+
+Before '@photo_upload' do 
+    FakeWeb.register_uri(:post, 'https://s3.amazonaws.com/scbto-photos-originals',
+        :status => [303, 'See Other'],
+        :location => "http://example.com/upload_complete")
 end
