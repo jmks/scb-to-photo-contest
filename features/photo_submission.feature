@@ -29,12 +29,12 @@ Scenario: Users can edit their photos
 
 @registered_and_signed_in
 @photo_details
+@photo_upload
 Scenario: Step 2 - users can upload a photo
-    Given I am on the photo details page
-    When I save the details
-    Then I am on the upload photo page
+    Given I am on the upload photo page
     When I upload a photo
-    Then I am on the confirmation page
+    Then my photo is uploaded
+    And I am on the order page
 
 
 @registered_and_signed_in
@@ -46,9 +46,3 @@ Scenario: step 3 - users can confirm they printed their photo
     And I go to the confirmation step
     When I enter a valid confirmation code
     Then my submission is completed
-
-@registered_and_signed_in
-@photo_complete
-Scenario: Users see their completed submissions
-    When I am on the user page
-    Then I see my completed submissions

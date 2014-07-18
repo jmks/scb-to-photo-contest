@@ -56,13 +56,29 @@ class Judge
   has_and_belongs_to_many :landscapes_shortlist, class_name: 'Photo', inverse_of: nil
   has_and_belongs_to_many :canada_shortlist, class_name: 'Photo', inverse_of: nil
 
+  ############
+  ## Status related
+  ############
+
   # flag that shortlist was completed / accepted
   field :shortlist_complete, type: Boolean, default: false
 
-  # photo scoring
-
   # flag that photo scoring is complete
   field :photo_scoring_complete, type: Boolean, default: false
+
+  # status, ie true if not completed shortlist
+  def shortlist?
+    !shortlist_complete
+  end
+
+  def shortlist_done? category
+    shortlist(category).length == ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
+  end
+
+  def update_shortlist_status
+    done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
+    set(shortlist_complete: done) if done != shortlist_complete
+  end
 
   ###
   # Shortlist
@@ -70,21 +86,12 @@ class Judge
 
   def shortlist_photo photo, category=nil
     category ||= photo.category
-    category = category.to_sym unless category.is_a?(Symbol)
 
-    arr = if category == :flora 
-      flora_shortlist
-    elsif category == :fauna
-      fauna_shortlist
-    elsif category == :landscapes
-      landscapes_shortlist
-    else # canada
-      canada_shortlist
-    end
+    arr = shortlist(category)
 
     if arr.length < ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY && !arr.include?(photo)
       arr << photo
-      #update_shortlist_status
+      update_shortlist_status
       true
     else
       false
@@ -93,53 +100,16 @@ class Judge
 
   def remove_photo_from_shortlist photo, category=nil
     category ||= photo.category
-    category = category.to_sym unless category.is_a?(Symbol)
 
-    arr = if category == :flora 
-      flora_shortlist
-    elsif category == :fauna
-      fauna_shortlist
-    elsif category == :landscapes
-      landscapes_shortlist
-    else # canada
-      canada_shortlist
-    end
+    arr = shortlist(category)
 
     if arr.include?(photo)
       arr.delete(photo)
-      #update_shortlist_status
+      update_shortlist_status
       true
     else
       false
     end
-  end
-
-  # status, ie true if not completed shortlist
-  def shortlist?
-    !shortlist_complete
-  end
-
-  def shortlist_done? category
-    # categories short enough for this
-    case category
-    when :flora
-      flora_shortlist
-    when :fauna 
-      fauna_shortlist
-    when :landscapes
-      landscapes_shortlist
-    when :canada
-      canada_shortlist
-    else
-      return false
-    end.length == ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
-  end
-
-  # deprecated - shortlist_complete flag now expected to be manually set
-  def update_shortlist_status
-    done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
-    #puts "done? #{done}, shortlist_complete? #{shortlist_complete}"
-    set(shortlist_complete: done) if done != shortlist_complete
   end
 
   def shortlist category
@@ -158,15 +128,12 @@ class Judge
 
   def self.shortlist category
     # vs aggregation?
-    Judge.where(shortlist_complete: true).map {|j| j.shortlist(category) }.flatten.uniq
+    Judge.all.map {|j| j.shortlist(category) }.flatten.uniq
   end
 
   def self.shortlist_by_category
-    shortlist = {}
-    Photo::CATEGORIES.each do |cat|
-      shortlist[cat] = Judge.shortlist(cat)
-    end
-    shortlist
+    categories = Photo::CATEGORIES
+    Hash[categories.zip(categories.map{ |c| Judge.shortlist(c) })]
   end
 
   ###
@@ -180,6 +147,7 @@ class Judge
                       all?
   end
 
+  # TODO: this is very poorly named
   def self.get_judges
     Judge.where(photo_scoring_complete: true).to_a
   end
@@ -197,4 +165,8 @@ class Judge
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  private
+
+
 end

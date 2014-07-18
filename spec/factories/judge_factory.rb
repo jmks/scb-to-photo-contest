@@ -6,6 +6,7 @@ FactoryGirl.define do
   factory :judge do
     first_name 'Judge'
     last_name  'Dredd'
+    password   'djjazzyjeff'
     email
   end
 end
