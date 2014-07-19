@@ -161,9 +161,18 @@ describe Judge do
           judges[i].shortlist_photo(photos[i])
         end
 
-        binding.pry
+        expected = photos.group_by{ |p| p.category }
+        # augment will possibly missing categories
+        @categories.each do |cat|
+          expected[cat] = [] unless expected[cat]
+        end
+        actual = Judge.shortlist_by_category
 
-        expect(Judge.shortlist_by_category).to eql photos.group_by{ |p| p.category }
+        # match keys and element ids
+        expect(expected.keys).to match_array actual.keys
+        expected.each_key do |category|
+          expect(expected[category].map(&:id)).to match_array actual[category].map(&:id)
+        end
       end
     end
   end
