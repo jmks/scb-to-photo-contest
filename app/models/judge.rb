@@ -72,6 +72,11 @@ class Judge
     Hash[categories.zip(categories.map{ |c| Judge.shortlist(c) })]
   end
 
+  # TODO: this is very poorly named
+  def self.get_judges
+    Judge.where(photo_scoring_complete: true).to_a
+  end
+
   # status, ie true if not completed shortlist
   def shortlist?
     !shortlist_complete
@@ -85,10 +90,6 @@ class Judge
     done = Photo::CATEGORIES.map {|c| shortlist_done? c }.all?
     set(shortlist_complete: done) if done != shortlist_complete
   end
-
-  ###
-  # Shortlist
-  ###
 
   def shortlist_photo photo, category=nil
     category ||= photo.category
@@ -131,20 +132,11 @@ class Judge
     end
   end
 
-  ###
-  # /Shortlist
-  ###
-
   def final_score_complete?
     Photo::CATEGORIES.map { |cat| Judge.shortlist(cat) }.
                       flatten.
                       map { |pho| PhotoScore.where(judge_id: id.to_s, photo_id: pho.id.to_s).first }.
                       all?
-  end
-
-  # TODO: this is very poorly named
-  def self.get_judges
-    Judge.where(photo_scoring_complete: true).to_a
   end
 
   # TODO: rewrite as state machine
