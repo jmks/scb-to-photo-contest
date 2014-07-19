@@ -56,15 +56,21 @@ class Judge
   has_and_belongs_to_many :landscapes_shortlist, class_name: 'Photo', inverse_of: nil
   has_and_belongs_to_many :canada_shortlist, class_name: 'Photo', inverse_of: nil
 
-  ############
-  ## Status related
-  ############
-
   # flag that shortlist was completed / accepted
   field :shortlist_complete, type: Boolean, default: false
 
   # flag that photo scoring is complete
   field :photo_scoring_complete, type: Boolean, default: false
+
+  def self.shortlist category
+    # vs aggregation?
+    Judge.all.map {|j| j.shortlist(category) }.flatten.uniq
+  end
+
+  def self.shortlist_by_category
+    categories = Photo::CATEGORIES
+    Hash[categories.zip(categories.map{ |c| Judge.shortlist(c) })]
+  end
 
   # status, ie true if not completed shortlist
   def shortlist?
@@ -113,7 +119,6 @@ class Judge
   end
 
   def shortlist category
-    # categories short enough for this
     case category
     when :flora
       flora_shortlist
@@ -124,16 +129,6 @@ class Judge
     when :canada
       canada_shortlist
     end
-  end
-
-  def self.shortlist category
-    # vs aggregation?
-    Judge.all.map {|j| j.shortlist(category) }.flatten.uniq
-  end
-
-  def self.shortlist_by_category
-    categories = Photo::CATEGORIES
-    Hash[categories.zip(categories.map{ |c| Judge.shortlist(c) })]
   end
 
   ###
@@ -152,6 +147,7 @@ class Judge
     Judge.where(photo_scoring_complete: true).to_a
   end
 
+  # TODO: rewrite as state machine
   def status_message
     if photo_scoring_complete?
       'Final scoring complete'
@@ -165,8 +161,4 @@ class Judge
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  private
-
-
 end

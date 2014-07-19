@@ -35,14 +35,24 @@ class Winner
   private
 
   def assignment_validation
-    if ContestRules::REQUIRED_PRIZES.include?(prize)
-      unless Winner.where(prize: prize).empty?
-        errors.add(:prize, "#{prize} already assigned!")
-      end
-    else
-      unless ContestRules::OPTIONAL_PRIZES.include?(prize)
-        errors.add(:prize, "#{prize} not found!")
-      end
+    unless prize_required? or prize_optional?
+      errors.add(:prize, "#{prize} not found!")
     end
+
+    if prize_required? and prize_assigned?
+      errors.add(:prize, "#{prize} already assigned!")
+    end
+  end
+
+  def prize_required?
+    ContestRules::REQUIRED_PRIZES.include?(prize)
+  end
+
+  def prize_assigned?
+    Winner.where(prize: prize).exists?
+  end
+
+  def prize_optional?
+    ContestRules::OPTIONAL_PRIZES.include?(prize)
   end
 end
