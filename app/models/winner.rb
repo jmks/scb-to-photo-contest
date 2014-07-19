@@ -12,7 +12,7 @@ class Winner
   validates :photo, presence: true
 
   def self.assignments_remaining?
-    assigned = Winner.all.map { |w| w.prize }
+    assigned = Winner.all.map &:prize
     (ContestRules::REQUIRED_PRIZES - assigned).any?
   end
 
