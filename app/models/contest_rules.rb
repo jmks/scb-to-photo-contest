@@ -53,6 +53,8 @@ class ContestRules
     def self.contest_open?(today = nil)
         today ||= DateTime.now
         CONTEST_OPENS <= today && today <= CONTEST_CLOSES
+        # debug
+        true
     end
 
     def self.voting_open?(today = nil)
