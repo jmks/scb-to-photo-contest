@@ -64,6 +64,7 @@ class Judge
 
   def self.shortlist category
     # vs aggregation?
+    return nil unless Photo::CATEGORIES.include? category
     Judge.all.map {|j| j.shortlist(category) }.flatten.uniq
   end
 

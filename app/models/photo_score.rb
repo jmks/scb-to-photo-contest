@@ -28,24 +28,11 @@ class PhotoScore
                              numericality: { greater_than_or_equal_to: 0 }, 
                              numericality: { less_than_or_equal_to: 20 }
 
-  def total_score
-    score_fields.inject(0, :+)
-  end
-
-  def any_scores?
-    score_fields.compact.any?
-  end
-
-  def self.get_scores judge
-    PhotoScore.where(judge_id: judge.id.to_s).to_a
-  end
-
   def self.get_scorecard judge
     scorecard = {}
     Photo::CATEGORIES.each do |category|
       Judge.shortlist(category).each do |photo|
-        score = PhotoScore.where(judge_id: judge.id.to_s, photo_id: photo.id.to_s).first
-        scorecard[photo] = score
+        scorecard[photo] = PhotoScore.where(judge_id: judge.id, photo_id: photo.id).first
       end
     end
     scorecard
@@ -88,6 +75,14 @@ class PhotoScore
     else
       ContestRules.apply_winners(photo_scores.sort { |a, b| b[:total_score] <=> a[:total_score] })
     end
+  end
+
+  def total_score
+    score_fields.inject(0, :+)
+  end
+
+  def any_scores?
+    score_fields.compact.any?
   end
 
   private
