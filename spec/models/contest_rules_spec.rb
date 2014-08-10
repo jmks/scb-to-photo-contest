@@ -3,15 +3,12 @@ require 'spec_helper'
 describe ContestRules do 
 
   before :all do 
-    @before = DateTime.new(2013, 1, 1)
-    @during = ContestRules::CONTEST_OPENS + 1.days
+    @before = ContestRules::CONTEST_OPENS - 1.day
+    @during = ContestRules::CONTEST_OPENS + 1.day
+    @after  = ContestRules::CONTEST_CLOSES + 1.day
   end
 
   describe '#contest_open?' do 
-
-    before :all do 
-      @after  = ContestRules::CONTEST_CLOSES + 1.days
-    end
     
     it 'is false if date is before contest opens' do 
       expect(ContestRules.contest_open?(@before)).to eql false
@@ -26,7 +23,7 @@ describe ContestRules do
     end
 
     it 'is true if date is day of contest close' do 
-      expect(ContestRules.contest_open?(DateTime.new(2014, 5, 14))).to eql true
+      expect(ContestRules.contest_open?(ContestRules::CONTEST_CLOSES)).to eql true
     end
     
     it 'is false if date is after contest closes' do
