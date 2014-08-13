@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Winner' do 
 
   before :all do 
-    @prizes = ContestRules::REQUIRED_PRIZES
+    @prizes = Prize::REQUIRED_PRIZES
   end
 
   def fully_assign_prizes

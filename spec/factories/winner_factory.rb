@@ -1,6 +1,6 @@
 FactoryGirl.define do 
   factory :winner do 
-    prize       ContestRules::REQUIRED_PRIZES.sample
+    prize       Prize::REQUIRED_PRIZES.sample
     category    Photo::CATEGORIES.sample
     association :photo, factory: :photo
   end

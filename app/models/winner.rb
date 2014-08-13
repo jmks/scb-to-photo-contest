@@ -13,11 +13,11 @@ class Winner
 
   def self.assignments_remaining?
     assigned = Winner.all.map &:prize
-    (ContestRules::REQUIRED_PRIZES - assigned).any?
+    (Prize::REQUIRED_PRIZES - assigned).any?
   end
 
   def self.assignments_remaining
-    ContestRules::REQUIRED_PRIZES - Winner.all.map { |w| w.prize }
+    Prize::REQUIRED_PRIZES - Winner.all.map { |w| w.prize }
   end
 
   def self.assignments_complete?
@@ -25,7 +25,7 @@ class Winner
   end
 
   def prize_description
-    ContestRules::PRIZE_DESCRIPTIONS[prize]
+    Prize::PRIZE_DESCRIPTIONS[prize]
   end
 
   def self.winners_by_award
@@ -45,7 +45,7 @@ class Winner
   end
 
   def prize_required?
-    ContestRules::REQUIRED_PRIZES.include?(prize)
+    Prize::REQUIRED_PRIZES.include?(prize)
   end
 
   def prize_assigned?
@@ -53,6 +53,6 @@ class Winner
   end
 
   def prize_optional?
-    ContestRules::OPTIONAL_PRIZES.include?(prize)
+    Prize::OPTIONAL_PRIZES.include?(prize)
   end
 end

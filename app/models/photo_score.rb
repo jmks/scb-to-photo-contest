@@ -52,6 +52,7 @@ class PhotoScore
         photo_score[:category]      = category.to_s.capitalize
         photo_score[:id]            = photo.id.to_s
 
+        # PhotoScore.attributes
         photo_score[:scores] = PhotoScore.where(photo_id: photo.id.to_s).in(judge_id: judge_names_by_id.keys).to_a.map do |photoscore|
           {
             judge:       judge_names_by_id[photoscore.judge_id],
@@ -73,7 +74,7 @@ class PhotoScore
     if photo_scores.empty?
       nil
     else
-      ContestRules.apply_winners(photo_scores.sort { |a, b| b[:total_score] <=> a[:total_score] })
+      Prize.apply_winners(photo_scores.sort { |a, b| b[:total_score] <=> a[:total_score] })
     end
   end
 
