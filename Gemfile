@@ -94,6 +94,8 @@ gem 'recaptcha', require: 'recaptcha/rails'
 # monitoring
 gem 'newrelic_rpm'
 
+gem 'state_machine'
+
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'
