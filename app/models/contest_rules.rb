@@ -21,31 +21,4 @@ class ContestRules
     today ||= DateTime.now
     CONTEST_OPENS <= today && today <= VOTING_CLOSES
   end
-
-  # state_machine based contest state
-
-  state_machine :state, initial: :configuration do 
-
-    # metadata setup
-    event :finalize_configuration do 
-      transition :configuration => :closed
-    end
-
-    # contest opened on opening date
-    event :open_contest do
-      transition :closed => :open
-    end
-
-    # contest closed on closing date, move to prize assigment
-    event :close_contest do
-      transition all => :prize_assignment
-    end
-
-    # prize assignment strategy can alter this?
-
-    # finalize contest is completed
-    event :finalize_contest do 
-      transition all => :complete
-    end
-  end
 end

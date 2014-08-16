@@ -8,7 +8,7 @@ describe ContestRules do
     @after  = ContestRules::CONTEST_CLOSES + 1.day
   end
 
-  describe '#contest_open?' do 
+  describe 'self.contest_open?' do 
     
     it 'is false if date is before contest opens' do 
       expect(ContestRules.contest_open?(@before)).to eql false
@@ -31,7 +31,7 @@ describe ContestRules do
     end
   end
 
-  describe '#voting_open?' do 
+  describe 'self.voting_open?' do 
 
     before :all do 
       @after = ContestRules::JUDGING_CLOSES + 1.days
