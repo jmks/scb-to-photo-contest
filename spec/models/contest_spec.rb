@@ -4,12 +4,18 @@ describe Contest do
   describe "state transitions" do 
 
     context "when new" do 
-      it "contests are in configuration state" do 
-        expect(Contest.new.state_name).to eql :configuration
+      before :each do 
+        @contest = Contest.new
       end
 
-      xit "does not transition to another state" do 
+      it "contests are in configuration state" do 
+        expect(@contest.state_name).to eql :configuration
+      end
 
+      it "does not transition to another state" do 
+        @contest.finalize_configuration
+
+        expect(@contest.state_name).to eql :configuration
       end
     end
 
@@ -18,14 +24,26 @@ describe Contest do
         @contest = build :configured_contest
       end
 
-      xit "transitions to another state" do 
+      it "transitions to another state" do 
+        @contest.finalize_configuration
+
+        expect(@contest.state_name).to eql :closed
       end
     end
   end
 
   describe "#configured?" do 
-    it "is false when all variables are not set" do 
-      expect(Contest.new.configured?).to be false
+    context "is false" do 
+      it "when new" do 
+        expect(Contest.new.configured?).to be false
+      end
+
+      it "when all variables are not set" do 
+        contest = Contest.new
+        contest.open_date = 1.day.ago
+
+        expect(contest).to_not be_configured
+      end
     end
 
     it "is true when all variables are set" do 

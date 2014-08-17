@@ -14,6 +14,7 @@ class Contest
 
     # metadata setup
     event :finalize_configuration do 
+      # check contest open_date
       transition :configuration => :closed
     end
 
@@ -24,15 +25,23 @@ class Contest
 
     # contest closed on closing date, move to prize assigment
     event :close_contest do
+      transition all => :closed
+    end
+
+    event :assign_prizes do 
       transition all => :prize_assignment
     end
 
     # prize assignment strategy can alter this?
+    # eg prize_assignment => judging_shortlist_assignment => judging_numerical_assignment =>
+    #    admin_required_assigment => admin_optional_assigment => finalize_contest
 
     # finalize contest is completed
     event :finalize_contest do 
       transition all => :complete
     end
+
+    before_transition :configuration => any, :do => :contest_configured?
   end
 
   def initialize properties={}
@@ -40,16 +49,16 @@ class Contest
     # TODO: will X-able be able to add more properties when mixed in?
     @configuration_variables = [:open_date, :close_date, :entries_per_contestant]
 
-    super()
+    super() # alternatively, initialize_state_machines
   end
 
   def configured?
     configuration_variables.map { |v| "@#{v}"}.all? {|v| instance_variable_get(v) }
   end
 
-  private
+  private 
 
-  def add_configuration_variables config_variables
-    config_variables += config_variables
+  def contest_configured?
+    throw :halt unless configured?
   end
 end
