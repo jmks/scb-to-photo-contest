@@ -12,6 +12,8 @@ class Contest
 
   state_machine :state, initial: :configuration do 
 
+    # Events
+
     # metadata setup
     event :finalize_configuration do 
       # check contest open_date
@@ -40,6 +42,8 @@ class Contest
     event :finalize_contest do 
       transition all => :complete
     end
+
+    # Transitions
 
     before_transition :configuration => any, :do => :contest_configured?
   end

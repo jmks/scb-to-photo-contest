@@ -30,6 +30,62 @@ describe Contest do
         expect(@contest.state_name).to eql :closed
       end
     end
+
+    describe "#open_contest" do
+      before :each do 
+        @contest = build :configured_contest
+      end
+
+      it "opens the contest from closed" do
+        @contest.finalize_configuration
+
+        @contest.open_contest
+
+        expect(@contest.state_name).to eql :open
+      end
+
+      it "fails for other states" do 
+        @contest.open_contest
+
+        expect(@contest.state_name).to_not eql :open
+      end
+    end
+
+    describe "#close_contest" do
+      before :each do 
+        @contest = build :running_contest
+      end
+
+      it "closes the contest" do
+        @contest.close_contest
+
+        expect(@contest.state_name).to eql :closed
+      end
+    end
+
+    describe "#assign_prizes" do
+      before :each do 
+        @contest = build :configured_contest
+      end
+
+      it "changes state" do
+        @contest.assign_prizes
+
+        expect(@contest.state_name).to eql :prize_assignment
+      end
+    end
+
+    describe "#finalize_contest" do
+      before :each do 
+        @contest = build :configured_contest
+      end
+
+      it "completes the contest" do
+        @contest.finalize_contest
+
+        expect(@contest.state_name).to eql :complete
+      end
+    end
   end
 
   describe "#configured?" do 
@@ -54,8 +110,10 @@ describe Contest do
       end
     end
 
-    it "is true when all variables are set" do 
+    it "is true when all variables are set and are valid" do 
       expect(build(:configured_contest).configured?).to be true
     end
   end
+
+
 end
