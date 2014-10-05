@@ -44,6 +44,14 @@ describe Contest do
 
         expect(contest).to_not be_configured
       end
+
+      it "when dates do not make sense" do 
+        contest = build :configured_contest
+        contest.open_date  = 1.day.ago
+        contest.close_date = 2.days.ago
+
+        expect(contest).to_not be_configured
+      end
     end
 
     it "is true when all variables are set" do 

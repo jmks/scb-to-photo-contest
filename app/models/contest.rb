@@ -5,7 +5,7 @@ class Contest
   # Judgeable?
   attr_accessor :judging_open, :judging_close, :shortlist_size_per_category
 
-  # Voteable
+  # Voteable?
   attr_accessor :voting_close, :votes_per_day_per_ip
 
   # state_machine based contest state
@@ -36,7 +36,7 @@ class Contest
     # eg prize_assignment => judging_shortlist_assignment => judging_numerical_assignment =>
     #    admin_required_assigment => admin_optional_assigment => finalize_contest
 
-    # finalize contest is completed
+    # finalized contest is completed
     event :finalize_contest do 
       transition all => :complete
     end
@@ -53,7 +53,10 @@ class Contest
   end
 
   def configured?
-    configuration_variables.map { |v| "@#{v}"}.all? {|v| instance_variable_get(v) }
+    variables_set  = configuration_variables.map { |v| "@#{v}"}.all? {|v| instance_variable_get(v) }
+    sensical_dates = open_date < close_date if variables_set
+
+    [variables_set, sensical_dates].all?
   end
 
   private 
