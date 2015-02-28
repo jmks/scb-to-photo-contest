@@ -4,7 +4,7 @@
     %br
     Photography Contest
 
-  %section
+  %section.container
     .row
       .col-xs-12
         %ul#quick-btns.list-inline.text-center
@@ -23,7 +23,6 @@
                 %i.fa.fa-trophy.fa-2x
                 View Winners
 
-        
     .row.text-center.date
       .col-xs-12
         - if ContestRules.contest_open?
@@ -34,12 +33,13 @@
         - else
           %p We are currently allocating prizes and contacting winners. Contest winners will be updated shortly!
 
-  .row.text-center
-    .col-xs-12
-      #sponsors-link
-        %span OUR SPONSORS
-        %br
-        %i.fa.fa-chevron-circle-down.fa-2x
+    .row.text-center
+      .col-xs-12
+        #sponsors-link
+          %span OUR SPONSORS
+          %br
+          %i.fa.fa-chevron-circle-down.fa-2x
 
-.row.light-grey-separator
-  .col-xs-12
+.container
+  .row.light-grey-separator
+    .col-xs-12

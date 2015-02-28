@@ -7,7 +7,7 @@
         .prize-title
       .modal-body
 
-#prizes-wrapper
+#prizes-wrapper.container
   .row
     .col-xs-12
       %ul
@@ -27,11 +27,6 @@
             %p 
               %strong Generously donated by:
             = image_tag asset_path('sponsors/olympus-general.png')
-
-  / .row.category-header
-  /   .col-xs-12.text-center
-  /     = svg_png_fallback 'flora.svg', height: '60px'
-  /     %span Flora
 
   .row
     .col-xs-12
@@ -168,11 +163,6 @@
               %strong Generously donated by:
             = image_tag asset_path('sponsors/torontofieldnaturalists.jpg')
 
-  / .row.category-header
-  /   .col-xs-12.text-center
-  /     = svg_png_fallback 'fauna.svg', height: '60px'
-  /     %span Fauna
-
   .row
     .col-xs-12
       %ul
@@ -217,11 +207,6 @@
             %p 
               %strong Generously donated by:
             = image_tag asset_path('sponsors/bloorhotdocs.jpg')
-
-  / .row.category-header
-  /   .col-xs-12.text-center
-  /     = svg_png_fallback 'mountains.svg', height: '50px'
-  /     %span Landscape
 
   .row
     .col-xs-12

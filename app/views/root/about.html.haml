@@ -35,10 +35,11 @@
         = image_tag asset_path('research6.jpg'), class: 'panel-photo'
         %p For the past two years over a hundred SCB-TO volunteers have worked to conduct a baseline pollinator biodiversity survey at sites across Rouge Park, soon to be Canada’s first urban national park.
 
-.row.text-center
-  = link_to 'http://conbio.org/membership/become-a-member', target: '_blank', class: 'btn btn-lg btn-flat btn-logo' do 
-    /= image_tag asset_path('bird-darkblue.svg'), class: 'blue'
-    /= image_tag asset_path('bird-white.svg'), class: 'white'
-    = svg_png_fallback 'bird-darkblue.svg', class: 'blue'
-    = svg_png_fallback 'bird-white.svg', class: 'white'
-    %span Join Today!
+.container
+  .row.text-center
+    = link_to 'http://conbio.org/membership/become-a-member', target: '_blank', class: 'btn btn-lg btn-flat btn-logo' do 
+      /= image_tag asset_path('bird-darkblue.svg'), class: 'blue'
+      /= image_tag asset_path('bird-white.svg'), class: 'white'
+      = svg_png_fallback 'bird-darkblue.svg', class: 'blue'
+      = svg_png_fallback 'bird-white.svg', class: 'white'
+      %span Join Today!
