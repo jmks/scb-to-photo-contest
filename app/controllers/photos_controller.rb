@@ -1,24 +1,21 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_contestant!, only: [:new, :create, :edit, :update, :destroy, :comment]
-  
-  before_filter :preprocess_data, only: [:create, :update]
-  
+  before_filter :sanitize_photo_params, only: [:create, :update]
   before_filter :get_photo_by_id, only: [:edit, :update, :show, :destroy, :comments, :vote]
   before_filter :contestant_owns_photo!, only: [:edit, :update, :destroy]
-
   before_filter :only_contest_open!, only: [:new, :create, :edit, :update, :destroy]
 
   PHOTOS_PER_PAGE = 15
   COMMENTS_PER_PAGE = 25
 
   def new
-    can_add_entries
+    can_add_entries!
 
     @photo = Photo.new(params[:photo])
   end
 
   def create
-    can_add_entries
+    can_add_entries!
 
     @photo = Photo.new(photo_params)
     @photo.owner = current_contestant
@@ -39,7 +36,6 @@ class PhotosController < ApplicationController
 
   def update
     if @photo.update_attributes(photo_params)
-      # update tags
       Tag.add_tags params[:photo][:tags]
       
       redirect_to new_photo_entry_path(referrer: params[:referrer], photo_id: @photo.id)
@@ -68,69 +64,17 @@ class PhotosController < ApplicationController
   end
 
   def index
-    @category   = params[:category] || 'all'
-    @category   = (Photo::CATEGORIES.include?(@category.to_sym) && @category.to_sym) || nil
+    filter = FilterPhotos.new(params).call
+    @viewmodel = PhotoGallery.new(params, filter.title, filter.photos)
 
-    @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
-    @tag        = params[:tag]
-    @popular    = params[:popular]
-    @page       = params.key?(:page) ? params[:page].to_i : 1
+    # old view instance variables
+    @title, @photos = @viewmodel.title, @viewmodel.photos
+    @page        = @viewmodel.page
+    @total_pages = @viewmodel.total_pages
+    @prev_params = @viewmodel.previous_params
+    @next_params = @viewmodel.next_params
 
-    if @contestant
-      @photos = @contestant.entries
-      @title  = @contestant.public_name
-      @filter = :contestant
-    elsif @tag
-      @photos = Photo.any_in(tags: [@tag])
-      @title  = @tag
-      @filter = :tag
-    elsif @category
-      @photos = @category == :canada ? Photo.canada : Photo.where(category: @category)
-      @title  = @category
-      @filter = @category.to_sym
-    elsif @popular
-      case @popular
-      when 'votes'
-        @photos = Photo.desc(:votes)
-        @title  = @popular
-        @filter = :votes
-      when 'views'
-        @photos = Photo.desc(:views)
-        @title  = @popular
-        @filter = :views
-      else
-        # params :popular => junk
-        @photos = Photo.all
-        @title  = "All"
-        @filter = :all
-      end
-    else
-      @photos = Photo.all
-      @title  = "All"
-      @filter = :all
-    end
-
-    photo_count  = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).count
-    @total_pages = (1.0 * photo_count / PHOTOS_PER_PAGE).ceil
-    @photos = @photos.skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
-                      desc(:created_at).
-                      limit(PHOTOS_PER_PAGE).
-                      only(:id, :title, :views, :votes, :thumbnail_sm_url)
-
-    @params = {
-      tag:      @tag,
-      category: @category,
-      page:     @page,
-      contestant_id: @contestant && @contestant.id,
-      popular: @popular
-    }.reject { |key, val| val.nil? }
-
-    @prev_params = @params.dup
-    @prev_params[:page] -= 1
-
-    @next_params = @params.dup
-    @next_params[:page] += 1
-
+    # FIXME: change to respond_to (check ajax calls use .format)
     if request.xhr?
       render partial: 'photos_only' and return
     end
@@ -206,7 +150,7 @@ class PhotosController < ApplicationController
 
   private
 
-  def preprocess_data
+  def sanitize_photo_params
     params[:photo][:tags]       = params[:photo][:tags].split(',').map(&:strip).uniq
     params[:photo][:category]   = params[:photo][:category].downcase.to_sym
     params[:photo][:photo_date] = "#{params[:photo_date_month]} #{params[:photo_date_year]}"
@@ -216,7 +160,11 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
   end
 
-  def can_add_entries
+  def get_contestant
+    Contestant.find(params[:contestant_id])
+  end
+
+  def can_add_entries!
     unless current_contestant.entries_left?
       flash[:danger] = "You have reached the contest's entry limit of #{ ContestRules::ENTRIES_PER_CONTESTANT }"
       redirect_to contestant_index_path and return

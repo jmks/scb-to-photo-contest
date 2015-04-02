@@ -58,17 +58,27 @@ class Photo
   field :exhibitor, type: Boolean, default: false
   
   # scopes
-  scope :landscapes, ->{ where(:category => "landscapes") }
-  scope :flora,      ->{ where(:category => "flora") }
-  scope :fauna,      ->{ where(:category => "fauna") }
-  scope :canada,     ->{ where(tags: /canada/i) }
-  scope :recent,     ->{ desc(:created_at) }
-  scope :tagged,     ->(tag) { where(tags: tag) }
+  scope :landscapes,  ->{ where(category: "landscapes") }
+  scope :flora,       ->{ where(category: "flora") }
+  scope :fauna,       ->{ where(category: "fauna") }
+  scope :category,    ->(cat) { cat == "canada" ? canada : where(category: cat) }
+  scope :canada,      ->{ where(tags: /canada/i) }
+  scope :recent,      ->{ desc(:created_at) }
+  scope :tagged,      ->(tag) { where(tags: tag) }
+  scope :most_viewed, ->{ desc(:views) }
+  scope :most_voted,  ->{ desc(:votes) }
 
   # indexes
   index({ tags: 1 })
   index({ category: 1})
   index({ created_at: -1 })
+
+  # TODO: category? implicitly downcases but category scope does not!
+  def self.category? category
+    return false if category.nil?
+    category.downcase!
+    category == "canada" || Photo::CATEGORIES.map(&:to_s).include?(category)
+  end
 
   def add_tag tag
     push tags: tag unless tagged? tag

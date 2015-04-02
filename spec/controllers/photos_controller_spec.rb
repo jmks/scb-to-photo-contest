@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe PhotosController do
 
-  before :each do 
-    build_list :photo, 50
-    @page_size = PhotosController::PHOTOS_PER_PAGE
-  end
-
   describe "GET index" do 
+    before :all do 
+      build_list :photo, 50
+      @page_size = PhotosController::PHOTOS_PER_PAGE
+    end
+
     it "assigns @photos" do 
       get :index
 
