@@ -62,6 +62,8 @@ class Photo
   scope :flora,      ->{ where(:category => "flora") }
   scope :fauna,      ->{ where(:category => "fauna") }
   scope :canada,     ->{ where(tags: /canada/i) }
+  scope :recent,     ->{ desc(:created_at) }
+  scope :tagged,     ->(tag) { where(tags: tag) }
 
   # indexes
   index({ tags: 1 })
