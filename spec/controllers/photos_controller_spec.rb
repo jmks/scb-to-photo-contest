@@ -4,7 +4,7 @@ describe PhotosController do
 
   describe "GET index" do 
     before :all do 
-      build_list :photo, 50
+      @photos = build_list :photo, 50
       @page_size = PhotosController::PHOTOS_PER_PAGE
     end
 
@@ -59,13 +59,37 @@ describe PhotosController do
       end
     end
 
-    context "when filtering by popularity"
+    context "when filtering by popularity" do 
+      it "shows most highly viewed photos" do 
+        get :index, popular: :views
+
+        expected = Photo.most_viewed.recent.limit(@page_size).to_a
+        expect(assigns(:photos).to_a).to eql expected 
+      end
+
+      it "shows most highly voted photos" do
+        get :index, popular: :votes
+
+        expected = Photo.most_voted.recent.limit(@page_size).to_a
+        expect(assigns(:photos).to_a).to eql expected
+      end
+    end
+
     context "when filtering by tags" do 
       it "shows the most recent tagged photos" do
         tag = "canada"
         get :index, tag: tag
 
         expected = Photo.tagged(tag).limit(@page_size).to_a
+        expect(assigns(:photos).to_a).to eql expected
+      end
+    end
+
+    context "when filtering by contestant" do 
+      it "shows the contestant's photos" do 
+        contestant = @photos.to_a.sample.owner
+
+        expected = contestant.entries.desc(:created_at).to_a
         expect(assigns(:photos).to_a).to eql expected
       end
     end

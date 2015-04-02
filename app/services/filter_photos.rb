@@ -20,7 +20,7 @@ class FilterPhotos
 
   def by_contestant
     return false unless @params[:contestant_id]
-    contestant = Contestants.find(@params[:contestant_id])
+    contestant = Contestant.find(@params[:contestant_id])
     # TODO: eager loading with find?
     [contestant, contestant.entries, :contestant]
   end
