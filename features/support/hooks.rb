@@ -2,11 +2,11 @@
 Before do |scenario|
   Mongoid.purge!
 
-  # some black magic to get the current "state" of the contest
-  # to be open
-  ContestRules::CONTEST_OPENS  = 1.day.ago
-  ContestRules::CONTEST_CLOSES = ContestRules::JUDGING_OPENS = 1.day.from_now
-  ContestRules::JUDGING_CLOSES = ContestRules::VOTING_CLOSES = 2.days.from_now
+  ContestRules.redefine_const("CONTEST_OPENS", 1.day.ago)
+  ContestRules.redefine_const("CONTEST_CLOSES", 1.day.from_now)
+  ContestRules.redefine_const("JUDGING_OPENS", 1.day.from_now)
+  ContestRules.redefine_const("JUDGING_CLOSES", 2.day.from_now)
+  ContestRules.redefine_const("VOTING_CLOSES", 2.days.from_now)
 end
 
 Before '@registered' do 
