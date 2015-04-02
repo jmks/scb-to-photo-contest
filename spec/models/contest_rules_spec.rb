@@ -10,23 +10,23 @@ describe ContestRules do
 
   describe 'self.contest_open?' do 
     
-    it 'is false if date is before contest opens' do 
+    it 'is false before contest opens' do 
       expect(ContestRules.contest_open?(@before)).to eql false
     end
 
-    it 'is true if date is on contest opens date' do 
+    it 'is true on contest opens date' do 
       expect(ContestRules.contest_open?(ContestRules::CONTEST_OPENS)).to eql true
     end
 
-    it 'is true if date is during the contest' do
+    it 'is true during the contest' do
       expect(ContestRules.contest_open?(@during)).to eql true
     end
 
-    it 'is true if date is day of contest close' do 
+    it 'is true day of contest close' do 
       expect(ContestRules.contest_open?(ContestRules::CONTEST_CLOSES)).to eql true
     end
     
-    it 'is false if date is after contest closes' do
+    it 'is false after contest closes' do
       expect(ContestRules.contest_open?(@after)).to eql false
     end
   end
@@ -41,11 +41,11 @@ describe ContestRules do
       expect(ContestRules.voting_open?(@before)).to eql false
     end
 
-    it 'is true if date is on contest opens date' do 
+    it 'is true on contest opens date' do 
       expect(ContestRules.voting_open?(ContestRules::CONTEST_OPENS)).to eql true
     end
 
-    it 'is true if date is during the contest' do
+    it 'is true during the contest' do
       expect(ContestRules.voting_open?(@during)).to eql true
     end
 

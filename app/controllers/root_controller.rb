@@ -25,36 +25,12 @@ class RootController < ApplicationController
   end
 
   def contact
-    email, message = params[:email].strip, params[:message].strip
-
-    if !valid_email(email) or message.empty?
-      if request.xhr?
-        head :bad_request and return
-      else
-        flash[:warning] = 'Your email or message was invalid.'
-        redirect_to root_path and return
-      end
-    end
-    
-    Email.create(email: email, message: message)
-
-    begin
-      ContactMailer.contact(email, message).deliver
+    if ContactUs.new(params).call
       flash[:notice] = "Thank you contacting us. A representative from SCB-TO will respond shortly."
-    rescue
-      # TODO log it - email created in db
-    end
-
-    if request.xhr?
-      head :ok and return
     else
-      redirect_to root_path
+      flash[:warning] = "Your email or message was invalid."
     end
-  end
 
-  private
-
-  def valid_email email
-    email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+    redirect_to root_path
   end
 end

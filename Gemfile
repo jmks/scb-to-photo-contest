@@ -53,9 +53,6 @@ gem 'thin'
 
 gem 'rails_12factor', group: :production
 
-# Use pry for debugging
-gem 'pry'
-
 # Use devise for authentication
 gem 'devise'
 
@@ -99,6 +96,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 # rails panel
