@@ -14,8 +14,6 @@ Scenario: Unregistered users can view photos
     Given I am on the photos page
     Then I can see the photos
 
-Scenario: Unregistered users can not vote
-
 @photo
 Scenario: Unregistered users can not leave comments
     Given I am on a photo page

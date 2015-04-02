@@ -69,17 +69,11 @@ class Photo
   index({ created_at: -1 })
 
   def add_tag tag
-    unless tagged? tag
-      push tags: tag
-    end
+    push tags: tag unless tagged? tag
   end
 
   def tagged? tag
-    if tags?
-      tags.include? tag
-    else
-      false
-    end
+    tags.include? tag
   end
 
   def original_key
@@ -95,6 +89,7 @@ class Photo
     id.to_s + "-#{size.to_s}"
   end
 
+  # move to event machine
   def registration_status
     if !original_url
       :submitted
@@ -105,6 +100,7 @@ class Photo
     end
   end
 
+  # category?
   CATEGORIES.each do |cat|
     define_method(cat.to_s + '?') do
       self.category == cat
@@ -112,6 +108,6 @@ class Photo
   end
 
   def canada?
-    tags.select { |t| t =~ /canada/i }.any?
+    tags.any?{ |t| t =~ /canada/i }
   end
 end

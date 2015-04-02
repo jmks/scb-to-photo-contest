@@ -7,9 +7,7 @@ class Vote
   field :votes,       type: Integer, default: 0
   field :votes_today, type: Integer, default: 0
 
-  def vote?
-    today = Date.today
-    
+  def vote?(today=Date.today)
     # update votes_today
     if date != today
       inc votes: votes_today
@@ -20,8 +18,8 @@ class Vote
     votes_today < ContestRules::VOTES_PER_DAY_PER_IP
   end
 
-  def vote
-    if vote?
+  def vote(today=Date.today)
+    if vote?(today)
       inc votes_today: 1
       true
     else
