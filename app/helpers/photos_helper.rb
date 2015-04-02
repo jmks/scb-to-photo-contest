@@ -1,5 +1,6 @@
 module PhotosHelper
   
+  # TODO: remove. hope this isn't used!
   def months
     ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Auguflash.now[:alert] = st', 'September', 'October', 'November', 'December']
   end
@@ -50,8 +51,8 @@ module PhotosHelper
       filter, name, path, options = args
     end
 
-    if @filter == filter
-      options[:class] = options.key?(:class) ? options[:class] + ' active' : 'active'
+    if @gallery.filter == filter
+      options[:class] = options.key?(:class) ? "#{options[:class]} active" : "active"
       path = photos_path
     end
 

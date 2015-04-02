@@ -1,14 +1,25 @@
 class PhotoGallery
-  attr_reader :title, :photos, :page, :total_pages
+  attr_reader :title, :photos, :filter, :page, :total_pages
 
-  def initialize(params, title, photos)
-    @title  = title
-    @photos = photos
+  def initialize(params, photo_filter=nil)
+    if photo_filter
+      @title  = photo_filter.title
+      @photos = photo_filter.photos
+      @filter = photo_filter.filter
+    end
 
     # TODO: fix this
     @page_size = PhotosController::PHOTOS_PER_PAGE
 
     extract_params(params)
+  end
+
+  def more_pages?
+    page < total_pages
+  end
+
+  def previous_pages?
+    page > 1
   end
 
   def previous_params
@@ -21,6 +32,10 @@ class PhotoGallery
     nparams = @params.dup
     nparams[:page] += 1
     nparams
+  end
+
+  def tag
+    @params[:tag]
   end
 
   private

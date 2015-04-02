@@ -65,14 +65,14 @@ class PhotosController < ApplicationController
 
   def index
     filter = FilterPhotos.new(params).call
-    @viewmodel = PhotoGallery.new(params, filter.title, filter.photos)
+    @gallery = PhotoGallery.new(params, filter)
 
-    # old view instance variables
-    @title, @photos = @viewmodel.title, @viewmodel.photos
-    @page        = @viewmodel.page
-    @total_pages = @viewmodel.total_pages
-    @prev_params = @viewmodel.previous_params
-    @next_params = @viewmodel.next_params
+    # TODO: old view instance variables. replace with gallery
+    @title, @photos = @gallery.title, @gallery.photos
+    @page        = @gallery.page
+    @total_pages = @gallery.total_pages
+    @prev_params = @gallery.previous_params
+    @next_params = @gallery.next_params
 
     # FIXME: change to respond_to (check ajax calls use .format)
     if request.xhr?
