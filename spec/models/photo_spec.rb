@@ -100,7 +100,7 @@ describe Photo do
         expect {
           @photo.add_tag "stupendous"
           @photo.add_tag "snowy"
-        }.to change { @photo.tags.length }.from(0).to(2)
+        }.to change { @photo.tags.length }.by 2
       end
     end
   end

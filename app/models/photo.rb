@@ -2,7 +2,7 @@ class Photo
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # move to ContestRules
+  # TODO: move to ContestRules
   # canada breaks photo submissions, but submissions are over now
   # these ideally should be disjoint choices
   CATEGORIES = [ :flora, :fauna, :landscapes, :canada ]
@@ -77,7 +77,7 @@ class Photo
   def self.category? category
     return false if category.nil?
     category.downcase!
-    category == "canada" || Photo::CATEGORIES.map(&:to_s).include?(category)
+    category == "canada" || Photo::CATEGORIES.map(&:to_s).map(&:downcase).include?(category)
   end
 
   def add_tag tag

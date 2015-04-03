@@ -5,21 +5,14 @@ class ContactUs
   end
 
   def call
-    return false unless valid?
+    return false unless Email.create(email: @email, message: @message).valid?
 
     begin
-      Email.create(email: @email, message: @message)
       ContactMailer.contact(@email, @message).deliver
     rescue
       # log?
     end
 
     true
-  end
-
-  private
-
-  def valid?
-    Email.new(email: @email, message: @message).valid?
   end
 end

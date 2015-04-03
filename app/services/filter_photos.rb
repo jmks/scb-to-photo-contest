@@ -20,13 +20,17 @@ class FilterPhotos
 
   def by_contestant
     return false unless @params[:contestant_id]
+
     contestant = Contestant.find(@params[:contestant_id])
+    return false unless contestant
+
     # TODO: eager loading with find?
-    [contestant, contestant.entries, :contestant]
+    [contestant.public_name, contestant.entries, :contestant]
   end
 
   def by_tag
     return false unless @params[:tag]
+    
     [@params[:tag].titleize, Photo.tagged(@params[:tag]), :tag]
   end
 
@@ -38,7 +42,9 @@ class FilterPhotos
   end
 
   def by_popularity
-    case @params[:popular].try(:downcase)
+    return false unless @params[:popular]
+
+    case @params[:popular].downcase
     when "votes"
       ["Votes", Photo.most_voted, :votes]
     when "views"
