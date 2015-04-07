@@ -1,5 +1,5 @@
 class PhotoGallery
-  attr_reader :title, :photos, :filter, :page, :total_pages
+  attr_reader :title, :photos, :filter, :page, :tag, :total_pages
 
   def initialize(params, photo_filter=nil)
     if photo_filter
@@ -40,26 +40,24 @@ class PhotoGallery
 
   private
 
-  # TODO: extraction needs tidying up
   def extract_params params
     @params = params.except(:controller, :action)
 
     @page = @params[:page] = @params[:page] ? params[:page].to_i : 1
+    @total_pages           = (1.0 * @photos.count / @page_size).ceil
 
-    photo_count  = @photos.count
-    @total_pages = (1.0 * photo_count / @page_size).ceil
+    @photos = @photos.
+                recent.
+                skip([@page - 1, 0].max * @page_size).
+                limit(@page_size).
+                only(:id, :title, :views, :votes, :thumbnail_sm_url)
 
-    @photos = @photos.recent.
-                      skip([@page - 1, 0].max * @page_size).
-                      limit(@page_size).
-                      only(:id, :title, :views, :votes, :thumbnail_sm_url)
-
-    @tag        = @params[:tag]     = params[:tag]
-    @popular    = @params[:popular] = params[:popular]
-    @contestant = Contestant.find(params[:contestant_id]) if params[:contestant_id]
+    @tag        = @params[:tag]      = params[:tag]
+    @popular    = @params[:popular]  = params[:popular]
     @category   = @params[:category] = params[:category].downcase if Photo.category?(params[:category])
 
-    @params[:contestant_id] = @contestant.id if @contestant
+    @contestant             = Contestant.find(params[:contestant_id]) if params[:contestant_id]
+    @params[:contestant_id] = @contestant.id                          if @contestant
 
     @params.keep_if { |key, val| val }
   end
