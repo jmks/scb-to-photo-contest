@@ -128,25 +128,6 @@ describe Photo do
     end
   end
 
-  context "index on" do
-
-    # before :each do 
-    #   Mongoid.create_indexes
-    # end
-
-    xit "tags asc" do 
-      expect(Photo.any_in(tags: "some tag").explain["cursor"].starts_with?('BtreeCursor')).to be_true
-    end
-
-    xit "category asc" do 
-      expect(@indexes[category: 1]).to be_true
-    end
-
-    xit "created_at desc" do 
-      expect(@indexes[created_at: -1]).to be_true
-    end
-  end
-
   describe '#original_key' do 
     it 'extracts the key of the photo from the AWS bucket url' do 
       @photo.original_url = 'https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG'

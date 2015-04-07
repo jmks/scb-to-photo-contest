@@ -7,24 +7,47 @@ describe Contestant do
     @photo = build(:photo)
   end
 
-  context "validations" do 
+  context "when validating" do 
     it "must have an email address" do 
       @contestant.unset :email
-      expect { @contestant.save! }.to raise_error Mongoid::Errors::Validations
+
+      expect(@contestant).to_not be_valid
+      expect(@contestant).to have_error :email
+      expect(@contestant).to have_error_message_for(:email, "blank")
     end
 
     it "must have unique email address" do
       @contestant.save
       # same fields but new _id generated
       another = @contestant.dup
-      expect { another.save! }.to raise_error Mongoid::Errors::Validations
-    end 
+      
+      expect(another).to_not be_valid
+      expect(another).to have_error :email
+      expect(another).to have_error_message_for(:email, "already taken")
+    end
 
-    it "must have email in format (\w\.?)+@(\w.?)\.\w{2,4}" do
-      @contestant.email = 'bademail.com'
-      expect(@contestant).to be_invalid
-      @contestant.email = 'chunkeymonkey@gmail'
-      expect(@contestant).to be_invalid
+    context "email address format" do 
+      it "should be invalid for malformed email addresses" do 
+        bad_emails = %w{bademail.com chunkeymonkey@gmail @tenderlove.io eg@.com}
+      
+        bad_emails.each do |email|
+          @contestant.email = email
+
+          expect(@contestant).to_not be_valid
+        expect(@contestant).to have_error :email
+        expect(@contestant).to have_error_message_for(:email, "valid")
+        end
+      end
+
+      it "should be valid for common email address formats" do 
+        good_emails = %w{jason@exapmle.com j.m.k.s@j.km.s.ca}
+
+        good_emails.each do |email|
+          @contestant.email = email
+
+          expect(@contestant).to be_valid
+        end
+      end
     end
 
     it "must have first name" do 
@@ -44,7 +67,7 @@ describe Contestant do
   end
 
   describe '#phone?' do 
-    it 'is true if data is given' do 
+    it 'is true if phone number is given' do 
       expect(@contestant).to be_phone
     end
 
@@ -90,9 +113,5 @@ describe Contestant do
         expect(@contestant.voted_photo_ids.length).to eql 2
       end
     end
-  end
-
-  context 'index' do 
-    xit 'on email'
   end
 end
