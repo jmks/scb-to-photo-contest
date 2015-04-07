@@ -1,8 +1,8 @@
 class FilterPhotos
   attr_reader :title, :photos, :filter
 
-  def initialize(params)
-    @params = params
+  def initialize(params = nil)
+    @params = params || Hash.new
   end
 
   def call

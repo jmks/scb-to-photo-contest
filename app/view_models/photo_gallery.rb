@@ -46,10 +46,11 @@ class PhotoGallery
 
     @page = @params[:page] = @params[:page] ? params[:page].to_i : 1
 
-    photo_count  = @photos.recent.skip([@page - 1, 0].max * @page_size).count
+    photo_count  = @photos.count
     @total_pages = (1.0 * photo_count / @page_size).ceil
 
     @photos = @photos.recent.
+                      skip([@page - 1, 0].max * @page_size).
                       limit(@page_size).
                       only(:id, :title, :views, :votes, :thumbnail_sm_url)
 

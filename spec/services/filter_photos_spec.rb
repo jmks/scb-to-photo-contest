@@ -70,7 +70,7 @@ describe FilterPhotos do
   end
 
   it "by default users all photos" do 
-    photo_filter = FilterPhotos.new(Hash.new).call
+    photo_filter = FilterPhotos.new().call
 
     expect(photo_filter.filter).to eql :all
     expect(photo_filter.title).to eql "All"
