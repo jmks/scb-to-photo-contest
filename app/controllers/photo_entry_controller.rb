@@ -83,9 +83,6 @@ class PhotoEntryController < ApplicationController
       render :verify and return
     end
 
-    # remove
-    session[:invalid_photo_order_numbers] = invalid_photo_order_numbers
-
     flash[:notice] = 'Order Numbers successfully verified. Thank you.'
     redirect_to share_photos_path
   end
