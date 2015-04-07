@@ -11,10 +11,4 @@
         - @gallery.photos.each do |photo|
           %li.photo= render 'photo_thumb', photo: photo
 
-    #pagination.col-xs-12.text-center
-      - if @gallery.previous_pages?
-        = link_to page_photos_path(@gallery.previous_params), class: 'btn btn-default btn-lg btn-flat previous', title: 'Previous Page' do
-          %i.fa.fa-backward
-      - if @gallery.more_pages?
-        = link_to page_photos_path(@gallery.next_params), class: 'btn btn-default btn-lg btn-flat next', title: 'Next Page' do 
-          %i.fa.fa-forward
+    = render "photos_pagination"
