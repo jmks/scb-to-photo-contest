@@ -1,9 +1,9 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_contestant!, only: [:new, :create, :edit, :update, :destroy, :comment]
-  before_filter :sanitize_photo_params, only: [:create, :update]
-  before_filter :get_photo_by_id, only: [:edit, :update, :show, :destroy, :comments, :vote]
-  before_filter :contestant_owns_photo!, only: [:edit, :update, :destroy]
-  before_filter :only_contest_open!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :sanitize_photo_params,    only: [:create, :update]
+  before_filter :get_photo_by_id,          only: [:edit, :update, :show, :destroy, :comments, :vote]
+  before_filter :contestant_owns_photo!,   only: [:edit, :update, :destroy]
+  before_filter :only_contest_open!,       only: [:new, :create, :edit, :update, :destroy]
 
   PHOTOS_PER_PAGE = 15
   COMMENTS_PER_PAGE = 25
@@ -66,13 +66,6 @@ class PhotosController < ApplicationController
   def index
     filter = FilterPhotos.new(params).call
     @gallery = PhotoGallery.new(params, filter)
-
-    # TODO: old view instance variables. replace with gallery
-    @title, @photos = @gallery.title, @gallery.photos
-    @page        = @gallery.page
-    @total_pages = @gallery.total_pages
-    @prev_params = @gallery.previous_params
-    @next_params = @gallery.next_params
 
     # FIXME: change to respond_to (check ajax calls use .format)
     if request.xhr?
