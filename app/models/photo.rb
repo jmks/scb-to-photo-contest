@@ -76,7 +76,7 @@ class Photo
   # TODO: category? implicitly downcases but category scope does not!
   def self.category? category
     return false if category.nil?
-    category.downcase!
+    category = category.to_s.downcase
     category == "canada" || Photo::CATEGORIES.map(&:to_s).map(&:downcase).include?(category)
   end
 

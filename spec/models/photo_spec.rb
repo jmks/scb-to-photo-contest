@@ -6,6 +6,24 @@ describe Photo do
     @photo = build(:photo, owner: @contestant)
   end
 
+  describe "self.category?" do 
+    it "returns true for category in Photo::CATEGORIES and 'canada'" do 
+      %w{Flora FaUNa landscapes}.push(:Canada).each do |category|
+        expect(Photo.category?(category)).to be true
+      end
+    end
+
+    it "returns false for nils" do 
+      expect(Photo.category?(nil)).to be false
+    end
+
+    it "returns false for any other string" do 
+      %w{portmanteau sparrow tree spring}.each do |non_categories|
+        expect(Photo.category?(non_categories)).to be false
+      end
+    end
+  end
+
   context "fail validations" do 
     it 'must have a title' do
       @photo.unset :title
