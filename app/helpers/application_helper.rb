@@ -1,7 +1,8 @@
 module ApplicationHelper
+
   def truncated_title title
-        title.length > 25 ? "#{title[0..25]}..." : title
-    end
+    title.length > 25 ? "#{title[0..25]}..." : title
+  end
     
   def display_sponsors?
     [root_path, prizes_path].map { |path| current_page? path }.any?

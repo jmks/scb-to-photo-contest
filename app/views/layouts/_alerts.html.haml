@@ -1,24 +1,7 @@
-#alerts
-  - if flash[:notice] || content_for?(:notice)
-    .alert.alert-success.alert-dismissable
-      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-        &times;
-      = flash[:notice] || content_for(:notice)
-
-  - if flash[:info] || content_for?(:info)
-    .alert.alert-info.alert-dismissable
-      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-        &times;
-      = flash[:info] || content_for(:info)
-
-  - if flash[:alert] || content_for?(:alert)
-    .alert.alert-warning.alert-dismissable
-      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-        &times;
-      = flash[:alert] || content_for(:alert)
-
-  - if flash[:danger] || content_for?(:danger)
-    .alert.alert-danger.alert-dismissable
-      %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
-        &times;
-      = flash[:danger] || content_for(:danger)
+- if alerts?
+  #alerts
+    - current_alerts.each do |alert|
+      .alert.alert-dismissable{ class: alert_class(alert) }
+        %button.close{:type => 'close', 'data-dismiss' => 'alert', 'aria-hidden' => true}
+          &times;
+        = alert_message(alert)
