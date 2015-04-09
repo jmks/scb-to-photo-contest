@@ -99,7 +99,7 @@
     #new-comment-wrapper
       .row
         - if contestant_signed_in?
-          = form_for :comment, url: new_comment_path, html: { id: 'leave-comment-form' } do |f|
+          = form_for :comment, url: new_comment_photo_path, html: { id: 'leave-comment-form' } do |f|
             = csrf_meta_tags
             = hidden_field_tag :photo_id, @photo.id
             .form-group

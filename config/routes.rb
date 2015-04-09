@@ -1,46 +1,43 @@
 PhotoContest::Application.routes.draw do
-  
-  devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
+  root to: 'root#index'
 
+  devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
   devise_for :contestants, controllers: { registrations: 'registrations' }
 
-  root to: 'root#index'
-  get '/prizes',   to: 'root#prizes',  as: 'prizes'
-  get '/judges',   to: 'root#judges',  as: 'judges'
-  get '/rules',    to: 'root#rules',   as: 'rules'
-  get '/about',    to: 'root#about',   as: 'about'
+  static_pages = %w{ prizes judges rules about terms contest winners photo_criteria }
+  static_pages.each do |page|
+    get "/#{page}", to: "root#".concat(page), as: page
+  end
   post '/contact', to: 'root#contact', as: 'contact'
-  get '/terms',    to: 'root#terms',   as: 'terms'
-  get '/contest',  to: 'root#contest', as: 'contest'
-  get '/winners',  to: 'root#winners', as: 'winners'
-  get '/photo_criteria', to: 'root#judging_criteria', as: 'photo_criteria'
 
   get '/contestant', to: 'contestants#index', as: 'contestant_index'
 
-  get '/photos',            to: 'photos#index',      as: 'photos'
+  # TODO: move to photos collection, but keep path helper name?
   get '/photos/flora',      to: 'photos#flora',      as: 'flora'
   get '/photos/fauna',      to: 'photos#fauna',      as: 'fauna'
   get '/photos/landscapes', to: 'photos#landscapes', as: 'landscapes'
-  
-  post '/photos/:id/comment',   to: 'photos#comment',        as: 'new_comment'
-  get '/photos/:id/comments(/:page)', to: 'photos#comments', as: 'photo_comments'
-  post '/photos/:id/vote',      to: 'photos#vote',           as: 'vote_photo'
-  post '/photo/report_comment', to: 'photos#report_comment', as: 'report_comment'
 
   resources :photos do
-    get 'page/:page', action: 'index', on: :collection, as: 'page'
+    collection do 
+      get 'page/:page', action: 'index', as: 'page'
+    end
+
+    member do 
+      post "/comment",        action: "comment",        as: "new_comment"
+      post "/vote",           action: "vote",           as: "vote"
+      post "/report_comment", action: "report_comment", as: "report_comment"
+    end
   end
 
-  #dep
-  get  '/photo_entry',        to: 'photo_entry#workflow', as: 'workflow_photo_entry'
-
-  # photo entry
-  get  '/photo_entry/new',    to: 'photo_entry#new',      as: 'new_photo_entry'
-  post '/photo_entry',        to: 'photo_entry#create',   as: 'photo_entry'
-  get  '/photo_entry/order',  to: 'photo_entry#order',    as: 'order'
-  get  '/photo_entry/verify', to: 'photo_entry#verify',   as: 'verify'
-  post '/photo_entry/verify_orders', to: 'photo_entry#verify_orders', as: 'verify_orders'
-  get  '/photo_entry/share',  to: 'photo_entry#share',    as: 'share_photos'
+  scope "/photo_entry" do 
+    get  '/',       to: 'photo_entry#workflow', as: 'workflow_photo_entry'
+    get  '/new',    to: 'photo_entry#new',      as: 'new_photo_entry'
+    post '/',       to: 'photo_entry#create',   as: 'photo_entry'
+    get  '/order',  to: 'photo_entry#order',    as: 'order'
+    get  '/verify', to: 'photo_entry#verify',   as: 'verify'
+    post '/verify_orders', to: 'photo_entry#verify_orders', as: 'verify_orders'
+    get  '/share',  to: 'photo_entry#share',    as: 'share_photos'
+  end
 
   # tags
   get '/tags', to: 'tag#index', as: 'tags'
