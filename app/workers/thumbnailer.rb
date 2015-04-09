@@ -8,29 +8,22 @@ class Thumbnailer
   
   def self.perform photo_id
     photo = Photo.find(photo_id)
-    
-    # s3
+
     s3 = AWS::S3.new
 
     # make sure thumbs bucket available
-    # nb uploads bucket must exist at this point
     s3.buckets.create(Thumbnail_Bucket, :acl => :public_read) unless s3.buckets[Thumbnail_Bucket].exists?
     
     uploads = s3.buckets[Original_Bucket]
     thumbs = s3.buckets[Thumbnail_Bucket]
 
-    # fetch file from s3
     original_img = uploads.objects[photo.original_key].read
 
     # open as image
     img = Magick::Image::from_blob(original_img).first
-    #img.format = 'JPG'
 
     # strip metadata
     img.strip!
-
-    # watermark image
-    # img = get_watermarked(thumb, photo.owner.full_name)
 
     # composite for large image
     img_lg = img.resize_to_fit 1000
@@ -57,27 +50,10 @@ class Thumbnailer
     img_sm.format = 'JPG'
     aws_sm.write(img_sm.to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_sm_url = aws_sm.public_url.to_s
-
-    # todo: move original to private location and delete uploaded
     
     photo.save
 
   rescue Resque::TermException
     Resque.enqueue(self, photo_id)
   end
-
-  private
-
-  def self.get_watermarked(image, copyright_name)
-    image
-  end
-
-  # def self.composite image, size=1000, res=96
-  #   img  = image.resize_to_fit(size, size)
-  #   comp = Magick::Image.new(img.columns, img.rows) do 
-  #     self.background_color = 'none'
-  #     self.density = "#{res}x#{res}" unless res
-  #   end
-  #   comp.composite(img, Magick::CenterGravity, Magick::OverCompositeOp)
-  # end
 end
