@@ -9,4 +9,22 @@ FactoryGirl.define do
     public_name 'jenny from the block'
     phone '5558675309'
   end
+
+  factory :admin, class: Contestant do
+    sequence :email do |n|
+      "admin#{n}@example.com"
+    end
+    
+    password "iwilljudgeyou"
+    first_name "Judge"
+    sequence :last_name do |n|
+      "the #{ActiveSupport::Inflector.ordinalize(n)}"
+    end
+
+    sequence :public_name do |n|
+      "Judge the #{ActiveSupport::Inflector.ordinalize(n)}"
+    end
+    
+    admin true
+  end
 end
