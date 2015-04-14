@@ -8,6 +8,8 @@ class Winner
   validates :prize, presence: true
   validate :assignment_validation
 
+  field :notified, type: Boolean, default: false
+
   belongs_to :photo, class_name: 'Photo', inverse_of: nil
   validates :photo, presence: true
 
@@ -32,6 +34,10 @@ class Winner
     Hash[Winner.all.map { |win| [win.prize, win.photo] }]
   end
 
+  def self.all_notified?
+    Winner.all.all? { |w| w.notified }
+  end
+
   private
 
   def assignment_validation
@@ -48,11 +54,11 @@ class Winner
     Prize::REQUIRED_PRIZES.include?(prize)
   end
 
-  def prize_assigned?
-    Winner.where(prize: prize).exists?
-  end
-
   def prize_optional?
     Prize::OPTIONAL_PRIZES.include?(prize)
+  end
+
+  def prize_assigned?
+    Winner.where(prize: prize).exists?
   end
 end

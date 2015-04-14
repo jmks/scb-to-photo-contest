@@ -1,0 +1,20 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %td Photo
+      %td Contestant
+      %td Status
+      %td Status Options
+      %td Exhibitor
+  %tbody
+    - @model.photos.each do |photo|
+      %tr
+        %td= photo_view(photo)
+        %td= link_to photo.owner.public_name, photos_path(contestant_id: photo.owner.id), target: '_blank'
+        %td= photo.registration_status
+        %td= status_options(photo)
+        %td
+          - if photo.exhibitor?
+            Exhibitor
+          - else
+            = link_to 'Mark as Exhibitor', admin_mark_as_exhibitor_path(photo_id: photo.id), class: 'btn btn-flat', method: :post, data: { confirm: "Mark #{photo.title} as exhibitor?" }

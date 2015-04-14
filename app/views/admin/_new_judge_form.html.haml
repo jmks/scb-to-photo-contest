@@ -1,0 +1,26 @@
+%h4 Add New Judge
+
+- if @judge.errors.any?
+  %ul.errors
+    - @judge.errors.full_messages.each do |msg|
+      %li= msg
+
+= form_for :judge, url: admin_add_judge_path, method: :post, html: { id: "new-judge-form", class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :first_name, class: 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_field :first_name, class: 'form-control', value: @judge.first_name
+
+  .form-group
+    = f.label :last_name, class: 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_field :last_name, class: 'form-control', value: @judge.last_name
+
+  .form-group
+    = f.label :email, class: 'col-sm-3 control-label'
+    .col-sm-5
+      = f.text_field :email, class: 'form-control', value: @judge.email
+
+  .form-group
+    .col-sm-offset-3.col-sm-5.text-center
+      = f.submit nil, class: 'btn btn-flat', value: 'Add Judge'

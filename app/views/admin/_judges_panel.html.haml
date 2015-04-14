@@ -1,0 +1,16 @@
+%h4 Judges
+
+%table.table.table-hover
+  %thead
+    %tr
+      %td Name
+      %td Email
+      %td Status
+  %tbody
+    - @model.judges.each do |judge|
+      %tr
+        %td= judge.full_name
+        %td= judge.email
+        %td= judge.status_message
+
+= render "new_judge_form"

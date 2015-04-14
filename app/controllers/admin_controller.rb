@@ -1,14 +1,12 @@
 class AdminController < ApplicationController
   before_filter :authenticate_contestant!
   before_filter :admins_only!
-
-  before_filter :get_admin_photos_judges_comments
+  before_filter :build_admin_panel_viewmodel
 
   def index
-    @judge            = Judge.new params[:judge]
-    @flagged_comments = Photo.where('comments.reported' => true).map { |p| p.comments.dup.keep_if { |c| c.reported? }}.flatten
-    @photo_scores     = PhotoScore.photo_scores
-    @winners_by_id    = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
+    @judge         = Judge.new params[:judge]
+    @photo_scores  = PhotoScore.photo_scores
+    @winners_by_id = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
   end
 
   def confirm_photo
@@ -57,11 +55,13 @@ class AdminController < ApplicationController
     end
   end
 
-  def get_admin_photos_judges_comments
-    @admin = current_contestant
-    @photos = Photo.all
-    @judges = Judge.all
-    @flagged_comments = Comment.where(reported: true)
+  def build_admin_panel_viewmodel
+    @model = AdminPanel.new do |ap|
+      ap.admin            = current_contestant
+      ap.photos           = Photo.all
+      ap.judges           = Judge.all
+      ap.flagged_comments = Photo.where('comments.reported' => true).map { |p| p.comments.dup.keep_if { |c| c.reported? }}.flatten
+    end
   end
 
   def judge_params

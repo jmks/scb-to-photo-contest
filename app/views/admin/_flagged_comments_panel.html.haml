@@ -1,0 +1,4 @@
+%h5 Flagged Comments
+%ul
+  - @model.flagged_comments.each do |comment|
+    %li= "#{comment.name} said '#{comment.text}'"

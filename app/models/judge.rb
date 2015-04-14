@@ -73,11 +73,6 @@ class Judge
     Hash[categories.zip(categories.map{ |c| Judge.shortlist(c) })]
   end
 
-  # TODO: this is very poorly named
-  def self.get_judges
-    Judge.where(photo_scoring_complete: true).to_a
-  end
-
   # status, ie true if not completed shortlist
   def shortlist?
     !shortlist_complete
