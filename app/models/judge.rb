@@ -135,7 +135,6 @@ class Judge
                       all?
   end
 
-  # TODO: rewrite as state machine
   def status_message
     if photo_scoring_complete?
       'Final scoring complete'

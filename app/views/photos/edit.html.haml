@@ -1,6 +1,6 @@
 #photo-details-wrapper.container
   - if params[:referrer] == 'new'
-    = render './photo_steps_tabbed', step: :details
+    = render 'photo_entry/photo_steps_tabbed', step: :details
 
   .two-tone-title.text-center
     %span Photo
