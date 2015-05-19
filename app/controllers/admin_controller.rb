@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_filter :authenticate_contestant!
   before_filter :admins_only!
-  before_filter :build_admin_panel_viewmodel
+  before_filter :build_admin_panel
 
   def index
     @judge         = Judge.new params[:judge]
@@ -49,13 +49,7 @@ class AdminController < ApplicationController
 
   private
 
-  def admins_only!
-    unless current_contestant.admin?
-      redirect_to root_path
-    end
-  end
-
-  def build_admin_panel_viewmodel
+  def build_admin_panel
     @model = AdminPanel.new do |ap|
       ap.admin            = current_contestant
       ap.photos           = Photo.all

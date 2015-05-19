@@ -11,7 +11,7 @@ class AdminPanel
 
   def notify_winners?
     return false if Winner.all_notified?
-    
+
     Winner.assignments_complete?
   end
 end

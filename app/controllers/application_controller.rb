@@ -50,9 +50,7 @@ class ApplicationController < ActionController::Base
 
   # redirect unless contestant is an admin
   def admins_only!
-    unless current_contestant.admin?
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_contestant.admin?
   end
 
   def pp_prize prize
