@@ -25,7 +25,7 @@ class AdminController < ApplicationController
 
     if @judge.save
       flash[:notice] = "Judge #{@judge.full_name} Successfully Added"
-      
+
       ContactMailer.judge_init(@judge.email, @judge.first_name, pass).deliver
 
       redirect_to admin_root_path
@@ -47,7 +47,7 @@ class AdminController < ApplicationController
     redirect_to admin_root_path
   end
 
-  private 
+  private
 
   def admins_only!
     unless current_contestant.admin?
@@ -60,7 +60,7 @@ class AdminController < ApplicationController
       ap.admin            = current_contestant
       ap.photos           = Photo.all
       ap.judges           = Judge.all
-      ap.flagged_comments = Photo.where('comments.reported' => true).map { |p| p.comments.dup.keep_if { |c| c.reported? }}.flatten
+      ap.flagged_comments = Comment.reported
     end
   end
 
