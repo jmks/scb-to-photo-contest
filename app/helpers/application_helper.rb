@@ -3,7 +3,7 @@ module ApplicationHelper
   def truncated_title title
     title.length > 25 ? "#{title[0..25]}..." : title
   end
-    
+
   def display_sponsors?
     [root_path, prizes_path].map { |path| current_page? path }.any?
   end
@@ -62,5 +62,9 @@ module ApplicationHelper
   def svg_png_fallback svg_path, html_attrs, fallback_data_attr='fallback'
     attributes = html_attrs.merge 'src' => asset_path(svg_path), 'data' => { fallback_data_attr => asset_path(svg_path.gsub(/svg\Z/, 'png')) }
     tag('img', attributes)
+  end
+
+  def long_date date
+    date.strftime('%b %-d, %Y')
   end
 end

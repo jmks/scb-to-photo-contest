@@ -26,7 +26,7 @@
     .row.text-center.date
       .col-xs-12
         - if ContestRules.contest_open?
-          %p Contest closes May 14, 2014
+          %p Contest closes #{ long_date ContestRules::CONTEST_CLOSES }
         - elsif Winner.assignments_complete?
           %span Contest is now closed. Check out our winners
           %span= link_to 'here!', winners_path
