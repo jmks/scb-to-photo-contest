@@ -36,6 +36,7 @@ $lg: "only screen and (min-width: 1200px)";
     }
 
     #sponsors-link {
+        display: inline-block;
         margin-top: 40px;
 
         font-family: 'Montserrat', sans-serif;
@@ -137,7 +138,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
         text-align: center;
 
         li {
-            display: inline-block;    
+            display: inline-block;
         }
     }
 
@@ -217,7 +218,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
 #rules-wrapper {
     text-align: center;
-    
+
     .rule {
         height: 310px;
         width: 400px;
@@ -276,7 +277,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
     .photo-panel {
         cursor: pointer;
         padding: 10px;
-        
+
         .wrapper{
             background-color: #19b2d9;
         }
@@ -354,7 +355,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
     .photo-panel {
         cursor: pointer;
         padding: 10px;
-        
+
         .wrapper{
             background-color: #19b2d9;
         }
@@ -371,7 +372,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
             font-size: 24px;
             text-transform: uppercase;
             font-weight: bold;
-            
+
             text-shadow: 0px 0px 5px rgba(60,60,60,1);
 
             position: absolute;
@@ -536,7 +537,7 @@ ul.judges-gallery li.judge:nth-child(odd) {
 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;
-  
+
     .thumb-title {
       position: absolute;
       bottom: 0;
