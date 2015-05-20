@@ -25,6 +25,7 @@
 
     .row.text-center.date
       .col-xs-12
+        -# TODO not all contest states covered
         - if ContestRules.contest_open?
           %p Contest closes #{ long_date ContestRules::CONTEST_CLOSES }
         - elsif Winner.assignments_complete?

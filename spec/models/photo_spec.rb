@@ -1,41 +1,41 @@
 require 'spec_helper'
 
-describe Photo do 
+describe Photo do
   before :each do
     @contestant = build(:contestant)
     @photo = build(:photo, owner: @contestant)
   end
 
-  describe "self.category?" do 
-    it "returns true for category in Photo::CATEGORIES and 'canada'" do 
+  describe "self.category?" do
+    it "returns true for category in Photo::CATEGORIES and 'canada'" do
       %w{Flora FaUNa landscapes}.push(:Canada).each do |category|
         expect(Photo.category?(category)).to be true
       end
     end
 
-    it "returns false for nils" do 
+    it "returns false for nils" do
       expect(Photo.category?(nil)).to be false
     end
 
-    it "returns false for any other string" do 
+    it "returns false for any other string" do
       %w{portmanteau sparrow tree spring}.each do |non_categories|
         expect(Photo.category?(non_categories)).to be false
       end
     end
   end
 
-  context "fail validations" do 
+  context "fail validations" do
     it 'must have a title' do
       @photo.unset :title
       expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
     end
 
-    it 'must be in a category' do 
+    it 'must be in a category' do
       @photo.unset :category
       expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
     end
 
-    it 'must be owned by a contestant' do 
+    it 'must be owned by a contestant' do
       @photo.save
       @photo.unset :owner
       expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
@@ -43,52 +43,52 @@ describe Photo do
   end
 
   context "pass validations" do
-    it 'has optional description' do 
+    it 'has optional description' do
       expect { @photo.save! }.to_not raise_error
       @photo.description = "So a clown walks into a bar..."
       expect { @photo.save! }.to_not raise_error
     end
 
-    it 'creates a photo' do 
+    it 'creates a photo' do
       expect(Photo.new).to be_an_instance_of Photo
     end
 
-    it 'creates a valid photo' do 
+    it 'creates a valid photo' do
       expect { @photo.save! }.to_not raise_error
     end
   end
 
-  context 'ownership' do 
-    it 'has one owner' do 
+  context 'ownership' do
+    it 'has one owner' do
       expect(@photo.owner).to be_an_instance_of Contestant
     end
 
-    it 'has correct owner' do 
+    it 'has correct owner' do
       expect(@photo.owner).to be @contestant
     end
 
-    it 'is owned by the contestant' do 
+    it 'is owned by the contestant' do
       expect(@photo.owner.entries).to include @photo
     end
   end
 
-  context '#comments' do 
-    it "creates comments" do 
+  context '#comments' do
+    it "creates comments" do
       @photo.save
       expect(@photo.comments.create name: "Quagmire", text: "Giggity!").to be_an_instance_of Comment
     end
 
-    it "has many comments" do 
+    it "has many comments" do
       @photo.save
       @photo.comments.create name: "Quagmire", text: "Giggity, giggity!"
       @photo.comments.create name: "Pea tear griffin", text: "Do you know the word?"
-      
+
       expect(@photo.comments.length).to be 2
     end
   end
 
   context 'tags' do
-    describe '#tagged?' do 
+    describe '#tagged?' do
       it 'is false for tags not present' do
         expect(@photo.tagged? "pretty").to eql false
       end
@@ -99,13 +99,13 @@ describe Photo do
       end
     end
 
-    describe '#add_tag' do 
-      it 'adds a tag' do 
+    describe '#add_tag' do
+      it 'adds a tag' do
         @photo.add_tag "super-duper"
         expect(@photo.tags).to include("super-duper")
       end
 
-      it 'adds a tag only once' do 
+      it 'adds a tag only once' do
         legendary_tag = 'legen-waitforit-dary'
         2.times { @photo.add_tag legendary_tag }
 
@@ -114,7 +114,7 @@ describe Photo do
         expect(legendary_tags.length).to eql 1
       end
 
-      it 'adds many tags' do 
+      it 'adds many tags' do
         expect {
           @photo.add_tag "stupendous"
           @photo.add_tag "snowy"
@@ -123,39 +123,39 @@ describe Photo do
     end
   end
 
-  context "counts" do 
-    it "has 0 votes by default" do 
+  context "counts" do
+    it "has 0 votes by default" do
       expect(@photo.votes).to eql 0
     end
 
-    it "has 0 views by default" do 
+    it "has 0 views by default" do
       expect(@photo.views).to eql 0
     end
   end
 
-  context 'category predicates' do 
-    it 'canada?' do 
+  context 'category predicates' do
+    it 'canada?' do
       expect(build(:photo, tags: ['moose', 'Canada'])).to be_canada
       expect(build(:photo, tags: ['beavers', 'canada'])).to be_canada
     end
 
-    it 'for categories' do 
+    it 'for categories' do
       expect(build(:photo, category: :flora)).to be_flora
       expect(build(:photo, category: :fauna)).to be_fauna
       expect(build(:photo, category: :landscapes)).to be_landscapes
     end
   end
 
-  describe '#original_key' do 
-    it 'extracts the key of the photo from the AWS bucket url' do 
+  describe '#original_key' do
+    it 'extracts the key of the photo from the AWS bucket url' do
       @photo.original_url = 'https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG'
 
       expect(@photo.original_key).to eql 'uploads/1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f/100_1358.JPG'
     end
   end
 
-  describe '#awk_key' do 
-    it 'returns a key for aws storage for different file sizes' do 
+  describe '#aws_key' do
+    it 'returns a key for aws storage for different file sizes' do
       xs_key = @photo.id.to_s + '-xs'
       sm_key = @photo.id.to_s + '-sm'
       lg_key = @photo.id.to_s + '-lg'
@@ -166,25 +166,25 @@ describe Photo do
     end
   end
 
-  describe '#registration_status' do 
-    it 'is :submitted if it only has photo details' do 
+  describe '#registration_status' do
+    it 'is :submitted if it only has photo details' do
       expect(@photo.registration_status).to eql :submitted
     end
 
-    it 'is :uploaded if it has an AWS original url' do 
+    it 'is :uploaded if it has an AWS original url' do
       @photo.original_url = 'https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG'
 
       expect(@photo.registration_status).to eql :uploaded
     end
 
-    it 'is :confirmed if it has an Downtown Camera order number' do 
+    it 'is :printed if it has an Downtown Camera order number' do
       @photo.original_url = 'https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG'
       @photo.order_number = 12345678
 
-      expect(@photo.registration_status).to eql :confirmed
+      expect(@photo.registration_status).to eql :printed
     end
 
-    it 'is :confirmed if it has been uploaded and marked as completed by an admin' do 
+    it 'is :confirmed if it has been uploaded and marked as completed by an admin' do
       @photo.original_url = 'https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG'
       @photo.submission_complete = true
 
@@ -192,8 +192,8 @@ describe Photo do
     end
   end
 
-  describe 'category predicate methods' do 
-    it "returns photo's inclusion in a category" do 
+  describe 'category predicate methods' do
+    it "returns photo's inclusion in a category" do
       Photo::CATEGORIES.each do |category|
         next if category == :canada # canada determined by tags
         if @photo.category == category
@@ -204,12 +204,12 @@ describe Photo do
       end
     end
 
-    describe '#canada?' do 
-      it 'returns false if photo does not have tag named Canada/canada' do 
+    describe '#canada?' do
+      it 'returns false if photo does not have tag named Canada/canada' do
         expect(@photo.canada?).to eql false
       end
 
-      it 'returns true if the photo has a tag named Canada/canada' do 
+      it 'returns true if the photo has a tag named Canada/canada' do
         @photo.add_tag 'canada'
 
         expect(@photo.canada?).to eql true

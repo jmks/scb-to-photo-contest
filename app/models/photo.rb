@@ -6,7 +6,7 @@ class Photo
   # canada breaks photo submissions, but submissions are over now
   # these ideally should be disjoint choices
   CATEGORIES = [ :flora, :fauna, :landscapes, :canada ]
-  
+
   Registration = [ :submitted, :uploaded, :printed, :confirmed ]
   Registration_Message = {
     :submitted => 'Upload Your Photo',
@@ -20,16 +20,16 @@ class Photo
   validates :title, presence: true
 
   field :category
-  validates :category, presence:  true, 
-                       inclusion: { in: CATEGORIES, 
+  validates :category, presence:  true,
+                       inclusion: { in: CATEGORIES,
                                     message: "%{value} is not a valid category" }
 
   field :description
-  
+
   field :camera_stats
   field :photo_date
   field :photo_location
-  
+
   embeds_many :comments
   field :tags, :type => Array, :default => []
 
@@ -56,7 +56,7 @@ class Photo
   validates  :owner, presence: true
 
   field :exhibitor, type: Boolean, default: false
-  
+
   # scopes
   scope :landscapes,  ->{ where(category: "landscapes") }
   scope :flora,       ->{ where(category: "flora") }
@@ -105,13 +105,15 @@ class Photo
   def registration_status
     if !original_url
       :submitted
-    elsif order_number || submission_complete
+    elsif submission_complete
       :confirmed
+    elsif order_number
+      :printed
     else
       :uploaded
     end
   end
-  
+
   CATEGORIES.each do |cat|
     define_method(cat.to_s + '?') do
       self.category == cat
