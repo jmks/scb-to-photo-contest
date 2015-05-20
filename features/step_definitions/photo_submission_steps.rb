@@ -49,7 +49,7 @@ Then(/^I should be on the details edit page$/) do
 end
 
 When(/^I change the photo details$/) do
-  within '#edit-photo-form' do 
+  within '#edit-photo-form' do
     fill_in "Description", with: "A new bolder description"
   end
 
@@ -60,7 +60,7 @@ Then(/^the details should be changed$/) do
   Photo.first.description.should_not eql @photo.description
 end
 
-Given(/^I am on the upload photo page$/) do 
+Given(/^I am on the upload photo page$/) do
   visit new_photo_entry_path(photo_id: @photo.id)
 end
 
@@ -103,5 +103,5 @@ end
 Then(/^my submission is completed$/) do
   visit contestant_index_path
 
-  page.assert_selector("tr[data-id=\"#{@photo.id.to_s}\"]", text: 'Registration Complete')  
+  page.assert_selector("tr[data-id=\"#{@photo.id.to_s}\"]", text: Photo::Registration_Message[:printed])
 end
