@@ -39,10 +39,10 @@
         %a.btn.btn-flat{ href: new_photo_path }
           %i.fa.fa-camera.fa-2x
           Begin Submission
-    
+
     - if @contestant.entries.any?
       %h3.text-center YOUR SUBMISSIONS
-          
+
       .table-responsive
         %table#entry-table.table.table-striped.table-hover
           %thead
@@ -56,7 +56,7 @@
               %td STATUS
               %td.hidden-xs VOTES
               %td.hidden-xs VIEWS
-              
+
           %tbody
             - @contestant.entries.each do |entry|
               %tr{ 'data-id' => entry.id }
@@ -68,7 +68,7 @@
                     %i.fa.fa-trash-o.fa-2x
                 %td.text-center= photo_link entry
                 %td.photo-title.hidden-xs= truncated_title(entry.title)
-                %td.hidden-xs= human_date(entry.created_at)
+                %td.hidden-xs= long_date(entry.created_at)
                 %td= next_action entry
                 %td= entry.registration_status.to_s.capitalize
                 %td.hidden-xs= entry.votes

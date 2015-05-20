@@ -1,8 +1,8 @@
 module ContestantsHelper
 
   def incomplete_entries_message
-    incomplete_titles = capture do 
-      content_tag('ul') do 
+    incomplete_titles = capture do
+      content_tag('ul') do
         @contestant.incomplete_entries.map do |entry|
           concat content_tag('li', entry.title)
         end
@@ -38,9 +38,5 @@ module ContestantsHelper
     else
       link_to photo.id, photo_path(photo)
     end
-  end
-
-  def human_date date
-    date.strftime('%b %-d, %Y')
   end
 end
