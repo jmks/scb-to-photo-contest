@@ -22,7 +22,7 @@ module ContestantsHelper
 
     case status
     when :submitted
-      "<a href='#{ new_photo_entry_path photo_id: photo.id }'>#{message}</a>".html_safe
+      content_tag(:a, message, href: new_photo_entry_path(photo_id: photo.id))
     when :uploaded
       link_to message, order_path
     when :printed
