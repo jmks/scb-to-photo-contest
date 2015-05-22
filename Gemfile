@@ -98,14 +98,15 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'quiet_assets'
+  gem 'spring-commands-rspec'
 end
 
 # rails panel
-group :development do 
+group :development do
   gem 'meta_request'
 end
 
-group :test do 
+group :test do
   gem 'cucumber-rails', :require => false
   gem 'shoulda-matchers'
   gem 'fakeweb'
