@@ -28,6 +28,11 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
 
+  # force FactoryGirl to load definitions before suite runs
+  config.before :suite do
+      FactoryGirl.reload
+    end
+
   config.before :each do
     Mongoid.purge!
   end
