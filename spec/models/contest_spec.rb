@@ -19,12 +19,10 @@ describe Contest do
 
     context "when querying by date" do
       it "returns false if no contest open on date" do
-        open_contest
         expect(Contest.any?(open_contest.open_date - 1.day)).to be false
       end
 
       it "returns true if a contest was open on that date" do
-        past_contest
         expect(Contest.any?(past_contest.open_date + 1.day)).to be true
       end
     end
