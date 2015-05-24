@@ -67,4 +67,50 @@ describe Contest do
       expect(contest.errors[:open_date]).to be_present
     end
   end
+
+  describe "#open?" do
+    context "when contest is open" do
+      it "returns true" do
+        expect(open_contest).to be_open
+      end
+    end
+
+    context "when contest is not open" do
+      it "returns false" do
+        expect(past_contest).to_not be_open
+      end
+    end
+  end
+
+  describe "#judging?" do
+    context "when contest can be judged" do
+      it "returns true" do
+        Timecop.freeze(open_contest.judge_open_date + 1.hour)
+
+        expect(open_contest).to be_judging
+      end
+    end
+
+    context "when contest can not be judged" do
+      it "returns false" do
+        expect(open_contest).to_not be_judging
+      end
+    end
+  end
+
+  describe "#voting?" do
+    context "when voting can occur" do
+      it "returns true" do
+        expect(open_contest).to be_voting
+      end
+    end
+
+    context "when voting can not occur" do
+      it "returns false" do
+        Timecop.freeze(open_contest.voting_close_date)
+
+        expect(open_contest).to_not be_voting
+      end
+    end
+  end
 end

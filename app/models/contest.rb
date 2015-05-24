@@ -36,6 +36,20 @@ class Contest
       first
   end
 
+  # TODO: replace open?, judging?, and voting? with status enum after upgrading to rails 4.1
+
+  def open?
+    (open_date..close_date).cover? DateTime.current
+  end
+
+  def judging?
+    (judge_open_date..judge_close_date).cover? DateTime.current
+  end
+
+  def voting?
+    (open_date..voting_close_date).cover? DateTime.current
+  end
+
   private
 
   # validates that open dates must occur before their respective close dates
