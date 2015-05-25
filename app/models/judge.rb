@@ -8,7 +8,7 @@ class Judge
   ## Database authenticatable
   field :email, type: String
   validates :email, presence: true, uniqueness: true,
-                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
+                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/,
                            message: "%{value} is not a valid email" }
 
   field :encrypted_password, :type => String, :default => ""
@@ -49,6 +49,8 @@ class Judge
   validates :last_name, presence: true
 
   # juding actions
+
+  has_many :photo_scores
 
   # short lists
   has_and_belongs_to_many :flora_shortlist, class_name: 'Photo', inverse_of: nil
@@ -119,7 +121,7 @@ class Judge
     case category
     when :flora
       flora_shortlist
-    when :fauna 
+    when :fauna
       fauna_shortlist
     when :landscapes
       landscapes_shortlist

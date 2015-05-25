@@ -1,6 +1,9 @@
 class Contest
   include Mongoid::Document
 
+  # associations
+  has_many :photos
+
   field :open_date, type: DateTime
   validates :open_date, presence: true
 

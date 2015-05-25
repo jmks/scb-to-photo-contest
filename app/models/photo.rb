@@ -15,6 +15,12 @@ class Photo
     :confirmed => 'Registration Complete'
   }
 
+  # associations
+  belongs_to :contest
+  validates :contest_id, presence: true
+
+  has_many :photo_scores
+
   # photo details fields
   field :title
   validates :title, presence: true
@@ -114,6 +120,7 @@ class Photo
     end
   end
 
+  # category predicates eg landscape?
   CATEGORIES.each do |cat|
     define_method(cat.to_s + '?') do
       self.category == cat

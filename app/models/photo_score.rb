@@ -2,30 +2,30 @@ class PhotoScore
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :photo_id
+  belongs_to :photo
   validates :photo_id, presence: true
 
-  field :judge_id
+  belongs_to :judge
   validates :judge_id, presence: true
 
   field :technical_excellence, type: Integer
-  validates :technical_excellence, presence: true, 
-                                   numericality: { greater_than_or_equal_to: 0 }, 
+  validates :technical_excellence, presence: true,
+                                   numericality: { greater_than_or_equal_to: 0 },
                                    numericality: { less_than_or_equal_to: 10 }
 
   field :subject_matter, type: Integer
-  validates :subject_matter, presence: true, 
-                             numericality: { greater_than_or_equal_to: 0 }, 
+  validates :subject_matter, presence: true,
+                             numericality: { greater_than_or_equal_to: 0 },
                              numericality: { less_than_or_equal_to: 10 }
 
   field :composition, type: Integer
-  validates :composition, presence: true, 
-                          numericality: { greater_than_or_equal_to: 0 }, 
+  validates :composition, presence: true,
+                          numericality: { greater_than_or_equal_to: 0 },
                           numericality: { less_than_or_equal_to: 10 }
 
   field :overall_impact, type: Integer
-  validates :overall_impact, presence: true, 
-                             numericality: { greater_than_or_equal_to: 0 }, 
+  validates :overall_impact, presence: true,
+                             numericality: { greater_than_or_equal_to: 0 },
                              numericality: { less_than_or_equal_to: 20 }
 
   def self.get_scorecard judge
@@ -57,7 +57,7 @@ class PhotoScore
           {
             judge:       judge_names_by_id[photoscore.judge_id],
             total_score: photoscore.total_score,
-            
+
             technical_excellence: photoscore.technical_excellence,
             composition:          photoscore.composition,
             subject_matter:       photoscore.subject_matter,
@@ -70,7 +70,7 @@ class PhotoScore
         photo_scores << photo_score
       end
     end
-    
+
     if photo_scores.empty?
       nil
     else
