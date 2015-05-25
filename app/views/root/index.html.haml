@@ -6,33 +6,10 @@
 
   %section.container
     .row
-      .col-xs-12
-        %ul#quick-btns.list-inline.text-center
-          - if ContestRules.contest_open?
-            %li
-              %a.btn.btn-lg.btn-inverse{ href: new_photo_path }
-                %i.fa.fa-camera.fa-2x
-                Submit a Photo
-            %li
-              %a.btn.btn-lg.btn-inverse{ href: photos_path }
-                %i.fa.fa-picture-o.fa-2x
-                View Photos
-          - elsif Winner.assignments_complete?
-            %li
-              %a.btn.btn-lg.btn-inverse{ href: winners_path }
-                %i.fa.fa-trophy.fa-2x
-                View Winners
-
-    .row.text-center.date
-      .col-xs-12
-        -# TODO not all contest states covered
-        - if ContestRules.contest_open?
-          %p Contest closes #{ long_date ContestRules::CONTEST_CLOSES }
-        - elsif Winner.assignments_complete?
-          %span Contest is now closed. Check out our winners
-          %span= link_to 'here!', winners_path
-        - else
-          %p We are currently allocating prizes and contacting winners. Contest winners will be updated shortly!
+      - if current_contest?
+        = render "current_contest_splash_actions"
+      - else
+        = render "no_contest_splash_actions"
 
     .row.text-center
       .col-xs-12

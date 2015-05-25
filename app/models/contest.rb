@@ -24,6 +24,8 @@ class Contest
   field :votes_per_day, type: Integer
   field :entries_per_contestant, type: Integer
 
+  scope :previous, ->{ where(:close_date.lte => DateTime.current).desc(:close_date) }
+
   def self.any?(now = DateTime.current)
     Contest.
       where(:open_date.lte => now).

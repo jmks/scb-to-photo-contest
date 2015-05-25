@@ -6,7 +6,16 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_judge
 
-  helper_method :pp_prize
+  # expose methods to views as helpers
+  helper_method :pp_prize, :current_contest, :current_contest?
+
+  def current_contest
+    @current_contest ||= Contest.current
+  end
+
+  def current_contest?
+    !!current_contest
+  end
 
   protected
 
