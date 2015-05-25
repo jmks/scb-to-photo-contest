@@ -9,11 +9,15 @@ Before do |scenario|
   ContestRules.redefine_const("VOTING_CLOSES", 2.days.from_now)
 end
 
-Before '@registered' do 
+Before do
+  FactoryGirl.create :contest
+end
+
+Before '@registered' do
   @registered = registered_user
 end
 
-Before '@registered_and_signed_in' do 
+Before '@registered_and_signed_in' do
   @registered = registered_user
 
   log_in_as @registered
@@ -22,7 +26,7 @@ Before '@registered_and_signed_in' do
   visit root_path
 end
 
-Before '@photo_details' do 
+Before '@photo_details' do
     @photo = FactoryGirl.create(:photo, owner: @registered)
 end
 
@@ -34,7 +38,7 @@ Before '@photo_uploaded' do
   # @photo should be :uploaded
 end
 
-Before '@unregistered' do 
+Before '@unregistered' do
   @unregistered = FactoryGirl.build(:contestant)
   @unregistered[:password] = "password123"
 end
@@ -43,16 +47,16 @@ Before '@photo' do
   @photo = FactoryGirl.create(:photo)
 end
 
-Before "@admin" do 
+Before "@admin" do
   @admin = FactoryGirl.create :admin
   log_in_as @admin
 end
 
-Before '@photos' do 
+Before '@photos' do
   @photos = FactoryGirl.create_list :photo, 5
 end
 
-Before '@photo_upload' do 
+Before '@photo_upload' do
   FakeWeb.register_uri(:post, 'https://s3.amazonaws.com/scbto-photos-originals',
       :status => [303, 'See Other'],
       :location => "http://example.com/upload_complete")

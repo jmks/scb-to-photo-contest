@@ -18,8 +18,9 @@ class PhotosController < ApplicationController
     can_add_entries!
 
     @photo = Photo.new(photo_params)
-    @photo.owner = current_contestant
-    
+    @photo.owner   = current_contestant
+    @photo.contest = current_contest
+
     if @photo.save
       # update tags
       Tag.add_tags params[:photo][:tags]
@@ -37,7 +38,7 @@ class PhotosController < ApplicationController
   def update
     if @photo.update_attributes(photo_params)
       Tag.add_tags params[:photo][:tags]
-      
+
       redirect_to new_photo_entry_path(referrer: params[:referrer], photo_id: @photo.id)
     else
       render :edit
@@ -120,7 +121,7 @@ class PhotosController < ApplicationController
     end
 
     voter.save
-    
+
     if request.xhr?
       flash.clear
       render :json => { success: success, message: message, votes: @photo.votes }
@@ -158,6 +159,11 @@ class PhotosController < ApplicationController
   end
 
   def can_add_entries!
+    unless current_contest?
+      flash[:danger] = "There is currently no contest running!"
+      redirect_to contestant_index_path and return
+    end
+
     unless current_contestant.entries_left?
       flash[:danger] = "You have reached the contest's entry limit of #{ ContestRules::ENTRIES_PER_CONTESTANT }"
       redirect_to contestant_index_path and return
