@@ -26,15 +26,24 @@ class Contest
 
   scope :previous, ->{ where(:close_date.lte => DateTime.current).desc(:close_date) }
 
-  def self.any?(now = DateTime.current)
+  def self.any?
+    now = DateTime.current
+
     Contest.
       where(:open_date.lte => now).
       where(:close_date.gte => now).
       any?
   end
 
+  def self.pending?
+    Contest.
+      where(:open_date.gte => DateTime.current).
+      any?
+  end
+
   def self.current
     now = DateTime.current
+
     Contest.
       where(:open_date.lte => now).
       where(:close_date.gte => now).

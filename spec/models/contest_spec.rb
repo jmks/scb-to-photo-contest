@@ -1,44 +1,70 @@
 require 'spec_helper'
 
 describe Contest do
-  let(:past_contest) { create :past_contest }
-  let(:open_contest) { create :contest }
+  let(:open_contest)   { create :contest }
+  let(:past_contest)   { create :past_contest }
+  let(:future_contest) { create :contest, open_date: 1.week.from_now, close_date: 2.weeks.from_now }
 
   describe "self.any?" do
+    subject { Contest }
+
     context "when default date used" do
       it "returns false if no open contests" do
         past_contest
-        expect(Contest.any?).to be false
+        expect(subject).to_not be_any
       end
 
       it "returns true with an open contest" do
         open_contest
-        expect(Contest.any?).to be true
+        expect(subject).to be_any
       end
     end
 
     context "when querying by date" do
       it "returns false if no contest open on date" do
-        expect(Contest.any?(open_contest.open_date - 1.day)).to be false
+        Timecop.freeze(open_contest.open_date - 1.hour)
+
+        expect(subject).to_not be_any
       end
 
       it "returns true if a contest was open on that date" do
-        expect(Contest.any?(past_contest.open_date + 1.day)).to be true
+        Timecop.freeze(past_contest.open_date + 1.hour)
+
+        expect(subject).to be_any
+      end
+    end
+  end
+
+  describe "self.pending?" do
+    subject { Contest }
+
+    context "when a contest will start in the future" do
+      it "returns true" do
+        future_contest
+        expect(subject).to be_pending
+      end
+    end
+
+    context "when no contest is in the future" do
+      it "returns false" do
+        expect(subject).to_not be_pending
       end
     end
   end
 
   describe "self.current" do
+    subject { Contest }
+
     context "when no current open contest" do
       it "returns nil" do
-        expect(Contest.current).to be nil
+        expect(subject.current).to be nil
       end
     end
 
     context "when there is an open contest" do
       it "returns that contest" do
         open_contest
-        expect(Contest.current).to eql open_contest
+        expect(subject.current).to eql open_contest
       end
     end
   end
