@@ -9,7 +9,7 @@
           - if @judge.final_score_complete?
             = link_to 'Submit final scores', finalize_photo_scores_path, class: 'btn btn-flat', method: :post
       %h5.text-center Click on a photo in the list to get started
- 
+
   .row
     .col-xs-12
       %table.table.table-hover
@@ -36,7 +36,7 @@
                   %span= truncated_title(photo.title)
                   %br
                   %span= "by: #{ photo.owner.public_name }"
-                - if score and score.any_scores?
+                - if score
                   %td= score.technical_excellence
                   %td= score.subject_matter
                   %td= score.composition

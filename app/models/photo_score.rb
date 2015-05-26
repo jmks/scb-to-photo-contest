@@ -2,28 +2,35 @@ class PhotoScore
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  SCORE_CRITERIA = [
+    :technical_excellence,
+    :subject_matter,
+    :composition,
+    :overall_impact
+  ].freeze
+
   belongs_to :photo
   validates :photo_id, presence: true
 
   belongs_to :judge
   validates :judge_id, presence: true
 
-  field :technical_excellence, type: Integer
+  field :technical_excellence, type: Integer, default: 0
   validates :technical_excellence, presence: true,
                                    numericality: { greater_than_or_equal_to: 0 },
                                    numericality: { less_than_or_equal_to: 10 }
 
-  field :subject_matter, type: Integer
+  field :subject_matter, type: Integer, default: 0
   validates :subject_matter, presence: true,
                              numericality: { greater_than_or_equal_to: 0 },
                              numericality: { less_than_or_equal_to: 10 }
 
-  field :composition, type: Integer
+  field :composition, type: Integer, default: 0
   validates :composition, presence: true,
                           numericality: { greater_than_or_equal_to: 0 },
                           numericality: { less_than_or_equal_to: 10 }
 
-  field :overall_impact, type: Integer
+  field :overall_impact, type: Integer, default: 0
   validates :overall_impact, presence: true,
                              numericality: { greater_than_or_equal_to: 0 },
                              numericality: { less_than_or_equal_to: 20 }
@@ -79,16 +86,6 @@ class PhotoScore
   end
 
   def total_score
-    score_fields.inject(0, :+)
-  end
-
-  def any_scores?
-    score_fields.compact.any?
-  end
-
-  private
-
-  def score_fields
-    [technical_excellence, subject_matter, composition, overall_impact]
+    [technical_excellence, subject_matter, composition, overall_impact].inject(0, :+)
   end
 end

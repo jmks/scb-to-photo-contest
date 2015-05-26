@@ -1,13 +1,16 @@
 require 'spec_helper'
 
-describe 'PhotoScore' do 
-  before :all do 
+describe 'PhotoScore' do
+
+  let(:photo_score) { build :photo_score }
+
+  before :all do
     SCORES_CREATED = 3
   end
-  
-  before :each do 
+
+  before :each do
     @judge = create(:judge)
-    
+
     SCORES_CREATED.times do
       score = build(:photo_score, judge_id: @judge.id)
       score.judge_id = @judge.id
@@ -18,16 +21,16 @@ describe 'PhotoScore' do
     Photo.all.each do |photo|
       @judge.shortlist_photo photo
     end
-    
+
     @judge.save
   end
 
-  describe 'self.get_scorecard' do 
-    it "returns all photo scores by a judge by photo" do 
+  describe 'self.get_scorecard' do
+    it "returns all photo scores by a judge by photo" do
       scorecard = PhotoScore.get_scorecard @judge
 
       expected_scorecard_ids = Hash[ PhotoScore.all.map{ |ps| [ ps.photo_id, ps.id ] } ]
-      
+
       # same keys
       expect(scorecard.keys.map(&:id)).to match_array expected_scorecard_ids.keys
 
@@ -38,31 +41,17 @@ describe 'PhotoScore' do
     end
   end
 
-  describe 'self.photo_scores' do 
-    xit "returns hashified photo scores with expected winners applied" do 
-
-    end
-  end
-
-  describe '#total_score' do 
-    it 'sums up the scores' do 
-      photo_score = build :photo_score
-
-      expected_score = photo_score.technical_excellence + photo_score.subject_matter + photo_score.composition + photo_score.overall_impact
-      expect(photo_score.total_score).to eql expected_score
-    end
-  end
-
-  describe '#any_scores?' do 
-    it 'is false when all scores are empty' do 
-      expect(build(:photo_score_unscored)).to_not be_any_scores
+  describe '#total_score' do
+    it "is initially zero" do
+      expect(PhotoScore.new.total_score).to be 0
     end
 
-    it 'is true for photos that have at least 1 score' do 
-      photo_score = build :photo_score_unscored
-      photo_score.technical_excellence = 10
+    it 'sums up the scores' do
+      expected = PhotoScore::SCORE_CRITERIA.
+        map { |score| photo_score.public_send(score) }.
+        inject(0, &:+)
 
-      expect(photo_score).to be_any_scores
+      expect(photo_score.total_score).to eql expected
     end
   end
 end
