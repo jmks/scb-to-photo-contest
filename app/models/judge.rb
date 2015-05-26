@@ -51,6 +51,7 @@ class Judge
   # juding actions
 
   has_many :photo_scores
+  has_many :nominees
 
   # short lists
   has_and_belongs_to_many :flora_shortlist, class_name: 'Photo', inverse_of: nil

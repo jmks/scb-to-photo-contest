@@ -20,6 +20,7 @@ class Photo
   validates :contest_id, presence: true
 
   has_many :photo_scores
+  has_one :nominee
 
   # photo details fields
   field :title
