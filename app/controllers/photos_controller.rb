@@ -68,9 +68,9 @@ class PhotosController < ApplicationController
     filter = FilterPhotos.new(params).call
     @gallery = PhotoGallery.new(params, filter)
 
-    # FIXME: change to respond_to (check ajax calls use .format)
-    if request.xhr?
-      render partial: 'photos_only' and return
+    respond_to do |format|
+      format.html { render partial: "photos_only", layout: false } if request.xhr?
+      format.html
     end
   end
 
