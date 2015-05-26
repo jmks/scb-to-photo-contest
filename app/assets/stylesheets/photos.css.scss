@@ -37,11 +37,11 @@
       -moz-border-radius: 0px;
       border-radius: 0px;
       border: none;
-      
+
       text-transform: uppercase;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      
+
       font-size: 24px;
       color: #777;
       cursor: default;
@@ -89,7 +89,7 @@
   table.table {
 
     tr.comment {
-    
+
       td.name {
         width: 20%;
 
@@ -134,7 +134,7 @@
 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;
-  
+
     .thumb-title {
       position: absolute;
       bottom: 0;
@@ -162,7 +162,7 @@
       top: 5px;
       right: 10px;
       background-color: #000;
-      
+
       opacity: 0; /* fade to 0.6 */
 
       padding-left:  5px;
@@ -188,6 +188,11 @@
   .previous {
     margin-right: 15px;
   }
+}
+
+.jscroll-added {
+  text-align: center;
+  font-size:  3em;
 }
 
 #photo-details-wrapper {
