@@ -52,6 +52,7 @@ class Judge
 
   has_many :photo_scores
   has_many :nominees
+  has_and_belongs_to_many :contests
 
   # short lists
   has_and_belongs_to_many :flora_shortlist, class_name: 'Photo', inverse_of: nil
@@ -128,6 +129,20 @@ class Judge
       landscapes_shortlist
     when :canada
       canada_shortlist
+    end
+  end
+
+  def current_contest
+    return nil unless Contest.current
+    (contests.include?(Contest.current) && Contest.current) || nil
+  end
+
+  # TODO raise exception if judge isn't part of current contest?
+  def nominations_complete?(category=nil)
+    if category
+      nominees.where(category: category).count == current_contest.nominees_per_category
+    else
+      Photo::CATEGORIES.map {|cat| nominations_complete?(cat) }.all?
     end
   end
 

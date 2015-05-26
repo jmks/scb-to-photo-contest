@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Judge do
-  before :all do 
+  before :all do
     @max_per_category = ContestRules::JUDGING_SHORTLIST_MAX_PER_CATEGORY
     @categories       = Photo::CATEGORIES
   end
 
-  describe 'multiple judges' do 
-    it 'can shortlist the same photo' do 
+  describe 'multiple judges' do
+    it 'can shortlist the same photo' do
       photo  = build :photo, category: :canada
       judges = build_list :judge, 3
 
@@ -21,12 +21,12 @@ describe Judge do
   end
 
   describe '#shortlist_photo' do
-    before :each do 
+    before :each do
       @photos = build_list :photo, 5
       @judge  = build :judge
     end
 
-    it 'adds a photo' do 
+    it 'adds a photo' do
       photo = @photos.first
 
       @judge.shortlist_photo photo
@@ -34,7 +34,7 @@ describe Judge do
       expect(@judge.send("#{ photo.category.to_s }_shortlist").length).to eql 1
     end
 
-    it 'adds a photo to only one category' do 
+    it 'adds a photo to only one category' do
       @judge.shortlist_photo @photos.first
 
       expect(
@@ -44,19 +44,19 @@ describe Judge do
       ).to eql 1
     end
 
-    it 'does not add same photo twice' do 
+    it 'does not add same photo twice' do
       2.times { @judge.shortlist_photo @photos.first }
       expect(@judge.send("#{ @photos.first.category.to_s }_shortlist").length).to eql 1
     end
 
     # this is too category-specific
-    it 'adds canada photo' do 
+    it 'adds canada photo' do
       expect {
         @judge.shortlist_photo(@photos.first, :canada)
       }.to change { @judge.canada_shortlist.length }.by(1)
     end
 
-    it 'adds many photos' do 
+    it 'adds many photos' do
       @photos.each { |photo| @judge.shortlist_photo photo }
 
       expected_photos = @photos.map(&:category)
@@ -71,8 +71,8 @@ describe Judge do
       ).to eql expected_photos
     end
 
-    it "doesn't add photos beyond the maximum per category" do 
-      build_list(:photo, @max_per_category, category: :flora).each do |p| 
+    it "doesn't add photos beyond the maximum per category" do
+      build_list(:photo, @max_per_category, category: :flora).each do |p|
         @judge.shortlist_photo p
       end
 
@@ -80,21 +80,21 @@ describe Judge do
     end
   end
 
-  describe '#remove_photo_from_shortlist' do 
-    before :each do 
+  describe '#remove_photo_from_shortlist' do
+    before :each do
       @photos = build_list(:photo, 5).uniq
       @judge = build :judge
       @photos.each { |p| @judge.shortlist_photo(p) }
     end
 
-    it 'removes a photo' do 
+    it 'removes a photo' do
       expect(@judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)).to eql true
     end
 
-    it 'only removes a single photo' do 
+    it 'only removes a single photo' do
       expect {
         @judge.remove_photo_from_shortlist(@photos.first, @photos.first.category)
-        }.to change { 
+        }.to change {
           @categories.map do |cat|
             @judge.send("#{ cat.to_s }_shortlist").length
           end.inject(0, :+)
@@ -102,19 +102,19 @@ describe Judge do
     end
   end
 
-  describe '#shortlist_done?' do 
+  describe '#shortlist_done?' do
 
   end
 
   # this isn't a method...
-  describe '#shortlist_complete' do 
-    it 'is false for new judges' do 
+  describe '#shortlist_complete' do
+    it 'is false for new judges' do
       judge = build :judge
 
       expect(judge.shortlist_complete).to eql false
     end
 
-    it 'is false when each category does not have length JUDGING_SHORTLIST_MAX_PER_CATEGORY' do 
+    it 'is false when each category does not have length JUDGING_SHORTLIST_MAX_PER_CATEGORY' do
       # otherwise test could not pass with non-empty shortlist_photos
       expect(@categories.length).to be > 1
       expect(@max_per_category).to be > 1
@@ -127,11 +127,11 @@ describe Judge do
       expect(judge.shortlist_complete).to eql false
     end
 
-    it 'is true when each category shortlist is full' do 
+    it 'is true when each category shortlist is full' do
       judge = build(:judge)
 
       @categories.each do |cat|
-        @max_per_category.times do 
+        @max_per_category.times do
           category_photo = build(:photo, category: cat)
 
           judge.shortlist_photo(category_photo, cat)
@@ -142,9 +142,9 @@ describe Judge do
     end
   end
 
-  describe 'self.shortlist_by_category' do 
-    context 'when no shortlisted photos' do 
-      it 'returns hash of categories to empty lists' do 
+  describe 'self.shortlist_by_category' do
+    context 'when no shortlisted photos' do
+      it 'returns hash of categories to empty lists' do
         empty_arrs = Photo::CATEGORIES.map{ |c| Array.new }
         empty_category_hash = Hash[Photo::CATEGORIES.zip(empty_arrs)]
 
@@ -153,7 +153,7 @@ describe Judge do
     end
 
     context 'when some photos shortlisted' do
-      it 'returns a map of category to photos shortlisted in that category' do 
+      it 'returns a map of category to photos shortlisted in that category' do
         photos = build_list :photo, 5
         judges = create_list :judge, 5
 
@@ -172,6 +172,71 @@ describe Judge do
         expect(expected.keys).to match_array actual.keys
         expected.each_key do |category|
           expect(expected[category].map(&:id)).to match_array actual[category].map(&:id)
+        end
+      end
+    end
+  end
+
+  describe "#current_contest" do
+    let(:contest) { create :contest }
+    let(:judge)   { create :judge }
+
+    subject { judge }
+
+    context "when judge is not assigned the current contest" do
+      it "returns nil" do
+        expect(subject.current_contest).to be_nil
+      end
+    end
+
+    context "when judge is assigned to the current contest" do
+      it "returns true" do
+        judge.contests << contest
+        expect(subject.current_contest).to eql contest
+      end
+    end
+  end
+
+  describe "#nominations_complete?" do
+    let! (:contest)  { create :contest }
+    let! (:judge)    { create :judge, contests: [contest] }
+    let  (:category) { Photo::CATEGORIES.sample }
+
+    subject { judge }
+
+    context "when nominations are not complete" do
+      it "returns false" do
+        expect(subject).to_not be_nominations_complete
+      end
+
+      it "returns false for specific categories" do
+        expect(subject.nominations_complete?(category)).to be false
+      end
+    end
+
+    context "when nominations are partially complete" do
+      it "returns true for nominee filled categories" do
+        contest.nominees_per_category.times do
+          photo = create(:photo, contest: contest)
+          judge.nominees.create(photo: photo, judge: judge, category: category)
+        end
+
+        expect(subject.nominations_complete?(category)).to be true
+      end
+    end
+
+    context "when nominations are complete" do
+      it "returns true" do
+        Photo::CATEGORIES.each do |category|
+          contest.nominees_per_category.times do
+            photo = create(:photo, contest: contest)
+            judge.nominees.create(photo: photo, judge: judge, category: category)
+          end
+        end
+
+        expect(subject).to be_nominations_complete
+        Photo::CATEGORIES.each do |category|
+          expect(subject.nominations_complete?(category)).to be true
         end
       end
     end

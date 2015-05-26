@@ -1,8 +1,8 @@
 class Contest
   include Mongoid::Document
 
-  # associations
   has_many :photos
+  has_and_belongs_to_many :judges
 
   field :open_date, type: DateTime
   validates :open_date, presence: true
@@ -21,8 +21,9 @@ class Contest
 
   validate :dates_validation
 
-  field :votes_per_day, type: Integer
-  field :entries_per_contestant, type: Integer
+  field :votes_per_day,          type: Integer, default: 3
+  field :entries_per_contestant, type: Integer, default: 5
+  field :nominees_per_category,  type: Integer, default: 2
 
   scope :previous, ->{ where(:close_date.lte => DateTime.current).desc(:close_date) }
 

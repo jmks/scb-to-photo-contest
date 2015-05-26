@@ -1,0 +1,23 @@
+%p
+  This page will allow you to review your selections for judging stages.
+%p
+  %span Judging will consist of 2 rounds.
+
+%ol
+  %li
+    %strong Select your shortlist
+    %ul
+      %li= "#{current_contest.nominees_per_category} photos for each category: flora, fauna, landscape, and 'Made in Canada' (i.e. Canadian content)."
+      %li
+        Consider the following
+        %span
+          %strong= link_to 'critera', photo_criteria_path, target: '_blank'
+        %span when making your selection.
+      %li Please select from a variety of contestants.
+  %li
+    %strong Scoring
+    %ul
+      %li Assign numerical scores to shortlisted photos (Max 24 images)
+      %li Scored out of 50 points based on technical excellence, subject matter, composition, and overall impact.
+      %li The SCB-TO Committee will average the scores from the judges
+      %li The top scoring photo will be overall winner, the highest scoring Canadian content will win 'Made in Canada,' and the remaining photos will be ranked by score, and awarded first through third in their respective categories.

@@ -1,5 +1,5 @@
 .container#judges-panel
-  - editable = @judge.shortlist_complete?
+  - editable = current_judge.shortlist_complete?
 
   .row
     .col-xs-12
@@ -15,11 +15,11 @@
       .col-xs-3.text-center
         %h4
           = link_to category.to_s.capitalize, photos_path(category: category), class: 'btn btn-default'
-          - if @judge.shortlist_done? category
+          - if current_judge.shortlist_done? category
             %i.fa.fa-check
 
         %ul.list-unstyled
-          - @judge.shortlist(category).each do |pho|
+          - current_judge.shortlist(category).each do |pho|
             %li
               = link_to photo_path(pho) do
                 = image_tag pho.thumbnail_xs_url
@@ -29,5 +29,5 @@
               .user-name
                 %small= "by: #{ pho.owner.public_name }"
 
-      - if @photo and @photo.flora? and not @judge.shortlist_done?(:flora) and not editable
+      - if @photo and @photo.flora? and not current_judge.shortlist_done?(:flora) and not editable
         = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post

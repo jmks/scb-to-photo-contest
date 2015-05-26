@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :get_judge
 
   # expose methods to views as helpers
   helper_method :pp_prize, :current_contest, :current_contest?
@@ -48,12 +47,6 @@ class ApplicationController < ActionController::Base
     unless ContestRules.contest_open?
       flash[:alert] = "The submission period is now closed. You may not add or edit photo entries."
       redirect_back_or_home
-    end
-  end
-
-  def get_judge
-    if judge_signed_in?
-      @judge = current_judge
     end
   end
 

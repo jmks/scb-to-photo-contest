@@ -16,7 +16,7 @@ jay = Contestant.create!({
   last_name:    "Schweier",
   public_name:  "Squirrel Charmer",
   email:        "jason@somemail.com",
-  password:     "monkey123",
+  password:     "password",
   admin:        true
 })
 
@@ -25,7 +25,7 @@ kay = Contestant.create!({
   last_name:     "NotHerName",
   public_name:   "Pony Lady",
   email:         "kat@catmail.com",
-  password:      "ponyponypony"
+  password:      "password"
 })
 
 Photo.create!({
@@ -53,6 +53,9 @@ dredd = Judge.create!({
   password:   "iamthelaw",
   email:      "dredd@judgejuryexecutioner.com"
 })
+
+contest.judges << dredd
+contest.save!
 
 PhotoScore.create!({
   photo: Photo.first,

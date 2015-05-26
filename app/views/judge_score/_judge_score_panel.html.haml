@@ -3,10 +3,10 @@
     .col-xs-12
       %h3.title
         Scoring Photos
-        - if @judge.photo_scoring_complete?
+        - if current_judge.photo_scoring_complete?
           %i.fa.fa-check-circle.green
         - else
-          - if @judge.final_score_complete?
+          - if current_judge.final_score_complete?
             = link_to 'Submit final scores', finalize_photo_scores_path, class: 'btn btn-flat', method: :post
       %h5.text-center Click on a photo in the list to get started
 
@@ -22,7 +22,7 @@
             %td Overall Impact
             %td Total
         %tbody
-          - scorecard = PhotoScore.get_scorecard(@judge)#.each_pair do |photo, score|
+          - scorecard = PhotoScore.get_scorecard(current_judge)#.each_pair do |photo, score|
           - Photo::CATEGORIES.each do |category|
             %tr
               %td{ colspan: 6}
