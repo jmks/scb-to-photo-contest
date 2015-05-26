@@ -4,7 +4,7 @@ PhotoContest::Application.routes.draw do
   devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
   devise_for :contestants, controllers: { registrations: 'registrations' }
 
-  static_pages = %w{ prizes judges rules about terms contest winners photo_criteria }
+  static_pages = %w{ prizes judges rules about terms contest photo_criteria }
   static_pages.each do |page|
     get "/#{page}", to: "root#".concat(page), as: page
   end
@@ -18,18 +18,18 @@ PhotoContest::Application.routes.draw do
   get '/photos/landscapes', to: 'photos#landscapes', as: 'landscapes'
 
   resources :photos do
-    collection do 
+    collection do
       get 'page/:page', action: 'index', as: 'page'
     end
 
-    member do 
+    member do
       post "/comment",        action: "comment",        as: "new_comment"
       post "/vote",           action: "vote",           as: "vote"
       post "/report_comment", action: "report_comment", as: "report_comment"
     end
   end
 
-  scope "/photo_entry" do 
+  scope "/photo_entry" do
     get  '/',       to: 'photo_entry#workflow', as: 'workflow_photo_entry'
     get  '/new',    to: 'photo_entry#new',      as: 'new_photo_entry'
     post '/',       to: 'photo_entry#create',   as: 'photo_entry'
@@ -59,6 +59,7 @@ PhotoContest::Application.routes.draw do
   post '/judges/photo_score',     to: 'judge_score#finalize_photo_scores', as: 'finalize_photo_scores'
 
   # winner
+  get    "/winners",                      to: "winners#index",          as: "winners"
   post   '/winners/assign_winner',        to: 'winners#assign_winner',  as: 'assign_winner'
   delete '/winners/remove_winner/:prize', to: 'winners#remove_winner',  as: 'remove_winner'
   post   '/winners/notify_winners',       to: 'winners#notify_winners', as: 'admin_notify_winners'

@@ -20,10 +20,6 @@ class RootController < ApplicationController
   def judging_criteria
   end
 
-  def winners
-    @winner_by_award = Winner.winners_by_award
-  end
-
   def contact
     if ContactUs.new(params).call
       flash[:notice] = "Thank you contacting us. A representative from SCB-TO will respond shortly."

@@ -1,0 +1,6 @@
+- if current_contest?
+  %h3.text-center Winners for our current contest will be annouced after the contest closes #{long_date current_contest.close_date}
+
+- if Contest.previous.any?
+  - Contest.previous.each do |contest|
+    = render "contest_winners", contest: contest

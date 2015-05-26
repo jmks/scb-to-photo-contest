@@ -1,7 +1,11 @@
 class WinnersController < ApplicationController
-  before_filter :authenticate_contestant!
-  before_filter :admins_only!
-  before_filter :get_admin
+  before_filter :authenticate_contestant!, except: :index
+  before_filter :admins_only!,             except: :index
+  before_filter :get_admin,                except: :index
+
+  def index
+    @winner_by_award = Winner.winners_by_award
+  end
 
   def assign_winner
     @photo = Photo.find params[:photo_id]
