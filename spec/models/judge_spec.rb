@@ -241,4 +241,25 @@ describe Judge do
       end
     end
   end
+
+  describe "#category_nominees" do
+    let(:judge)    { create :judge }
+    let(:category) { Photo::CATEGORIES.sample }
+
+    context "when no nominees" do
+      it "returns an empty relation" do
+        expect(subject.category_nominees(category)).to be_empty
+      end
+    end
+
+    context "when there are nominees" do
+      it "returns nominees in a given category" do
+        nominating_judge = judge
+        nominee          = build(:nominee, judge: nominating_judge, category: category)
+        nominating_judge.nominees << nominee
+
+        expect(nominating_judge.category_nominees(category)).to eql [nominee]
+      end
+    end
+  end
 end

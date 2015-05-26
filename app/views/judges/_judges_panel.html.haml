@@ -1,11 +1,11 @@
 .container#judges-panel
-  - editable = current_judge.shortlist_complete?
+  - editable = current_judge.nominations_complete?
 
   .row
     .col-xs-12
       %h3.text-center
         = "#{current_judge.first_name}'s Shortlist"
-        - if editable
+        - if current_judge.nominations_complete?
           %i.fa.fa-check-circle.green
       %h5.text-center
         Click on a Category to get started!
@@ -15,19 +15,25 @@
       .col-xs-3.text-center
         %h4
           = link_to category.to_s.capitalize, photos_path(category: category), class: 'btn btn-default'
-          - if current_judge.shortlist_done? category
+          - if current_judge.nominations_complete? category
             %i.fa.fa-check
 
         %ul.list-unstyled
-          - current_judge.shortlist(category).each do |pho|
+          - current_judge.category_nominees(category).each do |nominee|
             %li
-              = link_to photo_path(pho) do
-                = image_tag pho.thumbnail_xs_url
-              - if !editable
-                = link_to judge_shortlist_remove_url(photo_id: pho.id, category: pho.category), method: :post do
-                  %i.fa.fa-minus-circle
-              .user-name
-                %small= "by: #{ pho.owner.public_name }"
+              = link_to photo_path(nominee.photo) do
+                = image_tag nominee.photo.thumbnail_xs_url
 
-      - if @photo and @photo.flora? and not current_judge.shortlist_done?(:flora) and not editable
-        = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post
+
+          -# - current_judge.shortlist(category).each do |pho|
+          -#   %li
+          -#     = link_to photo_path(pho) do
+          -#       = image_tag pho.thumbnail_xs_url
+          -#     - if !editable
+          -#       = link_to judge_shortlist_remove_url(photo_id: pho.id, category: pho.category), method: :post do
+          -#         %i.fa.fa-minus-circle
+          -#     .user-name
+          -#       %small= "by: #{ pho.owner.public_name }"
+
+      -# - if @photo and @photo.flora? and not current_judge.shortlist_done?(:flora) and not editable
+      -#   = link_to 'Flora Shortlist', judge_shortlist_url(photo_id: @photo.id, category: @photo.category), class: 'btn btn-flat', method: :post

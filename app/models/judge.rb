@@ -146,6 +146,10 @@ class Judge
     end
   end
 
+  def category_nominees category
+    nominees.select { |nom| nom.category == category }
+  end
+
   def final_score_complete?
     Photo::CATEGORIES.map { |cat| Judge.shortlist(cat) }.
                       flatten.

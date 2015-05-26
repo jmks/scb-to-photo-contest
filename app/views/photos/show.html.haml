@@ -54,15 +54,15 @@
         %ul#tags-container.list-inline
           - @photo.tags.each do |tag|
             %li.tag= link_to tag, photos_path(tag: tag)
-        
+
         #photo-stats.row
           .col-xs-12.col-md-6
-            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do 
+            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do
               %i.fa.fa-eye
               %span Views
               %span= display_views 0
           .col-xs-12.col-md-6
-            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do 
+            = button_tag nil, type: 'button', class: 'btn btn-default btn-block' do
               %i.fa.fa-thumbs-up
               %span Votes
               %span#photo-votes= display_votes 0
@@ -107,7 +107,7 @@
                 = f.text_area :text, class: "form-control", rows: 3
             .form-group
               .col-xs-12.col-sm-offset-1.col-sm-10.col-md-offset-2.col-md-8
-                = f.button type: 'submit', class: "btn btn-flat btn-block pull-right" do 
+                = f.button type: 'submit', class: "btn btn-flat btn-block pull-right" do
                   %span.fa-stack.fa-lg
                     %i.fa.fa-comment-o.fa-stack-2x
                     %i.fa.fa-plus.fa-stack-1x
@@ -123,4 +123,4 @@
               %span to leave a comment
 
 - if judge_signed_in?
-  = render './judges/judges_panel'
+  = render '/judges/judges_panel'
