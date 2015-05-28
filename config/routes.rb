@@ -4,7 +4,7 @@ PhotoContest::Application.routes.draw do
   devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
   devise_for :contestants, controllers: { registrations: 'registrations' }
 
-  static_pages = %w{ prizes judges rules about terms contest photo_criteria }
+  static_pages = %w{ prizes judges rules about terms contest judging_criteria }
   static_pages.each do |page|
     get "/#{page}", to: "root#".concat(page), as: page
   end
