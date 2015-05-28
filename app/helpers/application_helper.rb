@@ -65,6 +65,6 @@ module ApplicationHelper
   end
 
   def long_date date
-    date.strftime('%b %-d, %Y')
+    date.strftime('%B %-d, %Y')
   end
 end
