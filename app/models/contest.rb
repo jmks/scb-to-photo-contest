@@ -1,5 +1,7 @@
 class Contest
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include AASM
 
   has_many :photos
   has_and_belongs_to_many :judges
@@ -51,7 +53,42 @@ class Contest
       first
   end
 
-  # TODO: replace open?, judging?, and voting? with status enum after upgrading to rails 4.1
+  ###
+  # Contest state
+  ##
+
+  field :aasm_state
+  aasm do
+    state :configuration, initial: true
+    state :running
+    state :nominating
+    state :scoring
+    state :prize_allocation
+    state :complete
+
+    event :configured! do
+      transitions from: :configuration, to: :running
+    end
+
+    event :closed! do
+      transitions from: :running, to: :nominating
+    end
+
+    event :nominations_completed! do
+      transitions to: :scoring
+    end
+
+    event :scored! do
+      transitions from: :nominating, to: :prize_allocation
+    end
+
+    event :prizes_allocated! do
+      transitions from: :prize_allocation, to: :complete
+    end
+  end
+
+  before_create { |contest| contest.configured! }
+  after_find :update_state!
 
   def open?
     (open_date..close_date).cover? DateTime.current
@@ -71,6 +108,11 @@ class Contest
   end
 
   private
+
+  def update_state!
+    closed! if running? && !open?
+    nominations_completed! if judges.map { |judge| judge.nominations_locked_for?(self) }.all?
+  end
 
   # validates that open dates must occur before their respective close dates
   def dates_validation

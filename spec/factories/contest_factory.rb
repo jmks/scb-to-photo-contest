@@ -7,6 +7,7 @@ FactoryGirl.define do
     voting_close_date { 1.week.from_now }
     votes_per_day 3
     entries_per_contestant 5
+    nominees_per_category 2
   end
 
   factory :past_contest, class: Contest do

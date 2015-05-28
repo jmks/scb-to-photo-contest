@@ -49,6 +49,8 @@ gem 'mongoid', '~> 4.0.0.beta1'
 gem 'bson'
 gem 'bson_ext'
 
+gem 'aasm'
+
 gem 'thin'
 
 gem 'rails_12factor', group: :production

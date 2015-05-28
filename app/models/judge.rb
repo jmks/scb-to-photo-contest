@@ -60,6 +60,8 @@ class Judge
   has_and_belongs_to_many :landscapes_shortlist, class_name: 'Photo', inverse_of: nil
   has_and_belongs_to_many :canada_shortlist, class_name: 'Photo', inverse_of: nil
 
+  field :nominations_submitted, type: Hash, default: ->{ Hash.new(false) }
+
   # flag that shortlist was completed / accepted
   field :shortlist_complete, type: Boolean, default: false
 
@@ -80,6 +82,15 @@ class Judge
   # status, ie true if not completed shortlist
   def shortlist?
     !shortlist_complete
+  end
+
+  def lock_nominations_for! contest
+    nominations_submitted[contest.id.to_s] = true
+    save
+  end
+
+  def nominations_locked_for? contest
+    nominations_submitted[contest.id.to_s]
   end
 
   def shortlist_done? category

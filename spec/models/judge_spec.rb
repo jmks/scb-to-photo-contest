@@ -263,6 +263,35 @@ describe Judge do
     end
   end
 
+  context "when locking nominations" do
+    let!(:contest) { create :contest }
+    let!(:judge)   { create :judge, contests: [contest]}
+
+    describe "#nominations_locked_for?" do
+      context "by default" do
+        it "is false" do
+          expect(judge.nominations_locked_for?(contest)).to be false
+        end
+      end
+
+      context "after locking" do
+        it "is true" do
+          judge.lock_nominations_for!(contest)
+
+          expect(judge.reload.nominations_locked_for?(contest)).to be true
+        end
+      end
+    end
+
+    describe "#lock_nominations_for!" do
+      it "locks judge nominations for a contest" do
+        judge.lock_nominations_for!(contest)
+
+        expect(judge.nominations_locked_for?(contest)).to be true
+      end
+    end
+  end
+
   describe "is_judging?" do
     let!(:contest) { build :contest }
 

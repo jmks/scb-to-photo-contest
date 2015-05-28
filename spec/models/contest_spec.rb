@@ -92,6 +92,66 @@ describe Contest do
     end
   end
 
+  describe "aasm states" do
+    let(:contest) { create :contest, nominees_per_category: 1 }
+
+    context "when new" do
+      it "is in configuration" do
+        expect(Contest.new).to be_configuration
+      end
+    end
+
+    context "when created" do
+      it "transitions to running" do
+        contest.save!
+
+        expect(contest).to be_running
+      end
+    end
+
+    context "after submissions close" do
+      it "transitions to nominations" do
+        contest.save!
+        # a judge with incomplete nominations prevents
+        # contest from transitioning from config to scoring
+        create(:judge, contests: [contest])
+        contest.save # save link to judges
+
+        Timecop.freeze(contest.close_date + 1.second)
+
+        expect(contest.reload).to be_nominating
+      end
+    end
+
+    context "after all nominations received" do
+      it "transitions to scoring" do
+        contest.closed!
+        judge = create(:judge, contests: [contest])
+        contest.categories.each do |category|
+          photo = create(:photo, contest: contest, category: category)
+          judge.nominees.create photo: photo, category: category
+        end
+        contest.save
+
+        judge.lock_nominations_for! contest
+
+        expect(contest.reload).to be_scoring
+      end
+    end
+
+    context "after scores received" do
+      it "transitions to prize_allocation" do
+        pending
+      end
+    end
+
+    context "after prizes allocated" do
+      it "transitions to complete" do
+        pending
+      end
+    end
+  end
+
   describe "#open?" do
     context "when contest is open" do
       it "returns true" do
@@ -131,7 +191,7 @@ describe Contest do
 
     context "when voting can not occur" do
       it "returns false" do
-        Timecop.freeze(open_contest.voting_close_date)
+        Timecop.freeze(open_contest.voting_close_date + 1.hour)
 
         expect(open_contest).to_not be_voting
       end
