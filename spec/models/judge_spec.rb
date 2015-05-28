@@ -178,8 +178,8 @@ describe Judge do
   end
 
   describe "#current_contest" do
-    let(:contest) { create :contest }
-    let(:judge)   { create :judge }
+    let!(:contest) { create :contest }
+    let(:judge)    { build :judge }
 
     subject { judge }
 
@@ -191,74 +191,92 @@ describe Judge do
 
     context "when judge is assigned to the current contest" do
       it "returns true" do
-        judge.contests << contest
+        subject.contests << contest
         expect(subject.current_contest).to eql contest
       end
     end
   end
 
-  describe "#nominations_complete?" do
-    let! (:contest)  { create :contest }
-    let! (:judge)    { create :judge, contests: [contest] }
-    let  (:category) { Photo::CATEGORIES.sample }
+  describe "#nominees_for" do
+    let(:contest)   { build :contest }
+    let(:photo)     { build :photo, contest: contest }
+    let(:judge)     { build :judge, contests: [contest] }
+    let!(:nominees) { build_list(:nominee, 3, judge: judge, photo: photo) }
+
+    subject { judge }
+
+    it "returns all nominees for a contest" do
+      expect(subject.nominees_for(contest)).to eql nominees
+    end
+
+    it "returns nominees in a given category" do
+      category = nominees.map(&:category).sample
+
+      expected = nominees.select {|nominee| nominee.category == category }
+
+      expect(subject.nominees_for(contest, category)).to eql expected
+    end
+  end
+
+  describe "#nominations_completed_for?" do
+    let!(:contest)     { build :contest }
+    let!(:old_contest) { build :past_contest }
+    let!(:judge)       { build :judge, contests: [contest] }
+    let(:category)     { contest.categories.sample }
 
     subject { judge }
 
     context "when nominations are not complete" do
       it "returns false" do
-        expect(subject).to_not be_nominations_complete
+        expect(subject.nominations_completed_for?(contest)).to be false
       end
 
       it "returns false for specific categories" do
-        expect(subject.nominations_complete?(category)).to be false
+        contest.categories do |category|
+          expect(subject.nominations_completed_for?(contest, category)).to be false
+        end
       end
     end
 
     context "when nominations are partially complete" do
       it "returns true for nominee filled categories" do
         contest.nominees_per_category.times do
-          photo = create(:photo, contest: contest)
-          judge.nominees.create(photo: photo, judge: judge, category: category)
+          photo = build(:photo, contest: contest)
+          judge.nominees.build(photo: photo, category: category)
         end
 
-        expect(subject.nominations_complete?(category)).to be true
+        expect(subject.nominations_completed_for?(contest, category)).to be true
       end
     end
 
     context "when nominations are complete" do
       it "returns true" do
-        Photo::CATEGORIES.each do |category|
+        contest.categories.each do |category|
           contest.nominees_per_category.times do
-            photo = create(:photo, contest: contest)
-            judge.nominees.create(photo: photo, judge: judge, category: category)
+            photo = build(:photo, contest: contest)
+            judge.nominees.build(photo: photo, category: category)
           end
         end
 
-        expect(subject).to be_nominations_complete
-        Photo::CATEGORIES.each do |category|
-          expect(subject.nominations_complete?(category)).to be true
-        end
+        expect(subject.nominations_completed_for?(contest)).to be true
       end
     end
   end
 
-  describe "#category_nominees" do
-    let(:judge)    { create :judge }
-    let(:category) { Photo::CATEGORIES.sample }
+  describe "is_judging?" do
+    let!(:contest) { build :contest }
 
-    context "when no nominees" do
-      it "returns an empty relation" do
-        expect(subject.category_nominees(category)).to be_empty
+    context "when judging the contest" do
+      it "returns true" do
+        judge = build(:judge, contests: [contest])
+
+        expect(judge.is_judging?(contest)).to be true
       end
     end
 
-    context "when there are nominees" do
-      it "returns nominees in a given category" do
-        nominating_judge = judge
-        nominee          = build(:nominee, judge: nominating_judge, category: category)
-        nominating_judge.nominees << nominee
-
-        expect(nominating_judge.category_nominees(category)).to eql [nominee]
+    context "when not judging the contest" do
+      it "returns false" do
+        expect(build(:judge).is_judging?(contest)).to be false
       end
     end
   end

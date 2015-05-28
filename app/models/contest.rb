@@ -65,6 +65,11 @@ class Contest
     (open_date..voting_close_date).cover? DateTime.current
   end
 
+  # TODO categories as configuration
+  def categories
+    Photo::CATEGORIES
+  end
+
   private
 
   # validates that open dates must occur before their respective close dates

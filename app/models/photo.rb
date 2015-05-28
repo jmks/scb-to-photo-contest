@@ -5,15 +5,15 @@ class Photo
   # TODO: move to ContestRules
   # canada breaks photo submissions, but submissions are over now
   # these ideally should be disjoint choices
-  CATEGORIES = [ :flora, :fauna, :landscapes, :canada ]
+  CATEGORIES = [ :flora, :fauna, :landscapes, :canada ].freeze
 
-  Registration = [ :submitted, :uploaded, :printed, :confirmed ]
+  Registration = [ :submitted, :uploaded, :printed, :confirmed ].freeze
   Registration_Message = {
     :submitted => 'Upload Your Photo',
     :uploaded  => 'Print & Verify',
     :printed   => 'Awaiting Printed Copy',
     :confirmed => 'Registration Complete'
-  }
+  }.freeze
 
   # associations
   belongs_to :contest
@@ -84,7 +84,7 @@ class Photo
   def self.category? category
     return false if category.nil?
     category = category.to_s.downcase
-    category == "canada" || Photo::CATEGORIES.map(&:to_s).map(&:downcase).include?(category)
+    category == "canada" || CATEGORIES.map(&:to_s).map(&:downcase).include?(category)
   end
 
   def add_tag tag

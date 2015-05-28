@@ -134,20 +134,25 @@ class Judge
 
   def current_contest
     return nil unless Contest.current
-    (contests.include?(Contest.current) && Contest.current) || nil
+    @current_contest ||= (contests.include?(Contest.current) && Contest.current) || nil
   end
 
-  # TODO raise exception if judge isn't part of current contest?
-  def nominations_complete?(category=nil)
+  def nominees_for(contest, category=nil)
+    contest_nominees = nominees.select {|nominee| nominee.photo.contest == contest }
+    contest_nominees.select! {|nominee| nominee.category == category } if category
+    contest_nominees
+  end
+
+  def nominations_completed_for?(contest, category=nil)
     if category
-      nominees.where(category: category).count == current_contest.nominees_per_category
+      nominees_for(contest, category).length == contest.nominees_per_category
     else
-      Photo::CATEGORIES.map {|cat| nominations_complete?(cat) }.all?
+      contest.categories.map {|category| nominations_completed_for?(contest, category) }.all?
     end
   end
 
-  def category_nominees category
-    nominees.select { |nom| nom.category == category }
+  def is_judging? contest
+    contests.include? contest
   end
 
   def final_score_complete?

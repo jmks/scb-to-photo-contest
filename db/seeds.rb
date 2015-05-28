@@ -57,6 +57,8 @@ dredd = Judge.create!({
 contest.judges << dredd
 contest.save!
 
+dredd.nominees.create photo: Photo.first, category: Photo.first.category
+
 PhotoScore.create!({
   photo: Photo.first,
   judge: dredd,

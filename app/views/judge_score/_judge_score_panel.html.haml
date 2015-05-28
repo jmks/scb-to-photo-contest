@@ -23,7 +23,7 @@
             %td Total
         %tbody
           - scorecard = PhotoScore.get_scorecard(current_judge)#.each_pair do |photo, score|
-          - Photo::CATEGORIES.each do |category|
+          - current_judge.current_contest.categories.each do |category|
             %tr
               %td{ colspan: 6}
                 %h4.title= category.capitalize

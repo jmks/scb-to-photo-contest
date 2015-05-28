@@ -3,8 +3,9 @@
     %h3.title Welcome #{ current_judge.first_name }
     = render "judging_process"
 
-  %section
-    = render "judges_panel"
+  - if current_judge.is_judging? current_contest
+    %section
+      = render "judges_panel"
 
-  %section
-    = render "./judge_score/judge_score_panel"
+    %section
+      = render "./judge_score/judge_score_panel"
