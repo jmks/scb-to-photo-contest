@@ -88,9 +88,6 @@ gem 'foreman'
 # recapcha
 gem 'recaptcha', require: 'recaptcha/rails'
 
-# monitoring
-gem 'newrelic_rpm'
-
 # Use RSpec and Cucumber for TDD
 group :development, :test do
   gem 'capybara'
