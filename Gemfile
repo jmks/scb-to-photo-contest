@@ -98,7 +98,7 @@ group :development, :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'factory_girl_rails'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'quiet_assets'
   gem 'spring-commands-rspec'
 end
