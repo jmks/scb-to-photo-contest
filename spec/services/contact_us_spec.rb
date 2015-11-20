@@ -2,6 +2,13 @@ require "spec_helper"
 
 describe ContactUs do
 
+  before :each do
+    # sending email requires env var GMAIL_USERNAME
+    unless ENV["GMAIL_USERNAME"]
+      ENV["GMAIL_USERNAME"] = "sample@example.com"
+    end
+  end
+
   context "when invalid input" do
     it "returns false for blank email" do
       expect(ContactUs.new({ message: "Yo dawg" }).call).to be false
