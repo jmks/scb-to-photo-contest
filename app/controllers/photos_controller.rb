@@ -17,9 +17,10 @@ class PhotosController < ApplicationController
   def create
     can_add_entries!
 
-    @photo = Photo.new(photo_params)
-    @photo.owner   = current_contestant
-    @photo.contest = current_contest
+    @photo = Photo.new(photo_params).tap do |p|
+      p.contest = current_contest
+      p.owner   = current_contestant
+    end
 
     if @photo.save
       # update tags
