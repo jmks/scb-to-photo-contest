@@ -7,7 +7,7 @@ class ContactMailer < ActionMailer::Base
     mail :to => ENV["GMAIL_USERNAME"], :subject => "Photo Contest Inquiry"
   end
 
-  def judge_init email, first_name, password 
+  def judge_init email, first_name, password
     @email, @first_name, @password = email, first_name, password
 
     mail to: @email, subject: 'SCB-TO Photo Contest Login'

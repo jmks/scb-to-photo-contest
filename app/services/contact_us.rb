@@ -9,8 +9,8 @@ class ContactUs
 
     begin
       ContactMailer.contact(@email, @message).deliver
-    rescue
-      # log?
+    rescue => e
+      Rails.logger.error "ContactMailer error #{e.message}"
     end
 
     true

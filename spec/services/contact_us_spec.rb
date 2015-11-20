@@ -2,20 +2,20 @@ require "spec_helper"
 
 describe ContactUs do
 
-  context "when invalid input" do 
-    it "returns false for blank email" do 
+  context "when invalid input" do
+    it "returns false for blank email" do
       expect(ContactUs.new({ message: "Yo dawg" }).call).to be false
     end
 
-    it "returns false for blank messages" do 
+    it "returns false for blank messages" do
       expect(ContactUs.new({ email: "xibit@example.com" }).call).to be false
     end
 
-    it "returns false for invalid emails" do 
+    it "returns false for invalid emails" do
       expect(ContactUs.new({ email: "xibit@example", message: "Yo dawg" }).call).to be false
     end
 
-    it "does not create Email in database" do 
+    it "does not create Email in database" do
       expect {
         ContactUs.new({ email: "xibit@example", message: "" }).call
       }.to_not change {
@@ -23,7 +23,7 @@ describe ContactUs do
       }
     end
 
-    it "does not send an email" do 
+    it "does not send an email" do
       expect {
         ContactUs.new({ email: "xibit@example", message: "" }).call
       }.to_not change {
@@ -32,7 +32,7 @@ describe ContactUs do
     end
   end
 
-  it "creates an Email with valid input" do 
+  it "creates an Email with valid input" do
     expect {
       ContactUs.new({ email: "xibit@example.com", message: "Yo dawg" }).call
     }.to change {
@@ -40,11 +40,19 @@ describe ContactUs do
     }.by(1)
   end
 
-  it "sends an email with valid input" do 
+  it "sends an email with valid input" do
     expect {
       ContactUs.new({ email: "xibit@example.com", message: "Yo dawg" }).call
     }.to change {
       ActionMailer::Base.deliveries.length
     }.by(1)
+  end
+
+  it "logs errors" do
+    allow(ContactMailer).to receive(:contact).and_raise StandardError
+
+    expect(Rails.logger).to receive(:error)
+
+    ContactUs.new({ email: "xibit@example.com", message: "Yo dawg" }).call
   end
 end
