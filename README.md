@@ -21,11 +21,13 @@
 - `REDISTOGO_URL` url to Redis for Resque. If blank, defaults to local redis on default port
 
 ### AWS ###
-S3 used to allow user to upload directly to S3 bucket
+S3 used to allow user to upload directly to S3 bucket (C)
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_FOG_DIRECTORY` S3 bucket name
 
 ### Recaptcha ###
 - `RECAPTCHA_PRIVATE`
-- `RECAPTCHA_PUBLIC`
+- `RECAPTCHA_PUBLIC` (C)
+
+(C) Required for Cucumber features

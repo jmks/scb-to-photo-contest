@@ -9,11 +9,13 @@ Scenario: Unregistered user can sign up
   Then I should be signed up
   And I should be on my personal home page
 
+@unregistered
 @photos
 Scenario: Unregistered users can view photos
     Given I am on the photos page
     Then I can see the photos
 
+@unregistered
 @photo
 Scenario: Unregistered users can not leave comments
     Given I am on a photo page
