@@ -4,7 +4,7 @@
   - else
     = image_tag 'place-holder-smthumb.jpg'
   .thumb-title
-    %p= truncated_title(photo.title)
+    %p= truncate(photo.title)
   .stats
     %span
       %i.fa.fa-thumbs-up

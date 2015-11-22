@@ -33,7 +33,7 @@
                 %td
                   = link_to image_tag(photo.thumbnail_xs_url), photo_score_path(id: photo.id)
                   %br
-                  %span= truncated_title(photo.title)
+                  %span= truncate(photo.title)
                   %br
                   %span= "by: #{ photo.owner.public_name }"
                 - if score

@@ -1,9 +1,9 @@
 module AdminHelper
   def photo_view photo
     if photo.thumbnail_xs_url?
-      image_tag photo.thumbnail_xs_url, title: truncated_title(photo.title)
+      image_tag photo.thumbnail_xs_url, title: truncate(photo.title)
     else
-      truncated_title photo.title
+      truncate photo.title
     end
   end
 

@@ -14,7 +14,7 @@
       .col-xs-12.error-message.text-center
         %p
           %i.fa.fa-warning
-          %span Some ORDER NUMBERs could not be verified. Please correct and re-enter your ORDER NUMBER. 
+          %span Some ORDER NUMBERs could not be verified. Please correct and re-enter your ORDER NUMBER.
 
   .row
     .col-xs-12
@@ -24,7 +24,7 @@
         - @entries.each do |entry|
           - error = (@errors && @errors.member?(entry.id.to_s)) || nil
           %div{ class: error ? 'form-group error' : 'form-group' }
-            = label_tag entry.id, truncated_title(entry.title), class: 'control-label col-xs-12 col-sm-4 col-md-4'
+            = label_tag entry.id, truncate(entry.title), class: 'control-label col-xs-12 col-sm-4 col-md-4'
             .col-xs-12.col-sm-8.col-md-4
               = text_field_tag entry.id, entry.order_number, placeholder: 'Order Number', class: 'form-control'
 
