@@ -1,37 +1,43 @@
 module ApplicationHelper
 
-  def truncate(string, options = {})
-    options = {
-      max_length: 25,
-      postfix: "..."
-    }.merge(options)
-
-    return string if string.length <= options[:max_length]
-
-    prefix_length = options[:max_length] - options[:postfix].length
-    if prefix_length > 0
-      prefix = string[0...prefix_length]
-      prefix.concat options[:postfix]
-    else
-      options[:postfix][0...options[:max_length]]
-    end
-  end
-
   def display_sponsors?
-    [root_path, prizes_path].map { |path| current_page? path }.any?
+    [
+      root_path,
+      prizes_path
+    ].any? { |path| current_page? path }
   end
 
-  # to highlight "about" dropdown in navbar
+  # highlight "about" dropdown in navbar
   def about_page?
-    [about_path, contest_path, judges_path, rules_path].each do |path|
+    [
+      about_path,
+      contest_path,
+      judges_path,
+      rules_path
+    ].any? { |path| current_page? path }
+  end
+
+  # highlight "gallery" in navbar
+  def gallery_path?
+    params["controller"] == "photos" && params["action"] == "index"
+  end
+
+  def on_photo_step?
+    [
+      new_photo_path,
+      new_photo_entry_path,
+      order_path,
+      verify_path,
+      share_photos_path
+    ].each do |path|
       return true if current_page? path
     end
-    false
+
+    params[:controller] == "photos" && params[:action] == "create"
   end
 
-  # to highlight "gallery" in navbar
-  def gallery_path?
-    params[:controller] == "photos" && params[:action] == "index"
+  def contestant_admin_path?
+    devise_controller? && params["action"] != "index"
   end
 
   def navbar_class
@@ -60,24 +66,8 @@ module ApplicationHelper
     end
   end
 
-  def on_photo_step?
-    [new_photo_path, new_photo_entry_path, order_path, verify_path, share_photos_path].each do |path|
-      return true if current_page? path
-    end
-    # photo#create post path
-    params[:controller] == "photos" && params[:action] == "create"
-  end
-
-  def contestant_admin_path?
-    devise_controller? && params[:action] != :index
-  end
-
-  def svg_png_fallback svg_path, html_attrs, fallback_data_attr="fallback"
+  def svg_png_fallback(svg_path, html_attrs, fallback_data_attr="fallback")
     attributes = html_attrs.merge "src" => asset_path(svg_path), "data" => { fallback_data_attr => asset_path(svg_path.gsub(/svg\Z/, "png")) }
     tag("img", attributes)
-  end
-
-  def long_date date
-    date.strftime("%B %-d, %Y")
   end
 end

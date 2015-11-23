@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AlertHelper, type: :helper do
+describe ContestantsHelper, type: :helper do
   describe "#next_action" do
     def photo_stub status
       photo = Photo.new
