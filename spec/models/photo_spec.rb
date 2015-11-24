@@ -133,19 +133,6 @@ describe Photo do
     end
   end
 
-  context "category predicates" do
-    it "canada?" do
-      expect(build(:photo, tags: ["moose", "Canada"])).to be_canada
-      expect(build(:photo, tags: ["beavers", "canada"])).to be_canada
-    end
-
-    it "for categories" do
-      expect(build(:photo, category: :flora)).to be_flora
-      expect(build(:photo, category: :fauna)).to be_fauna
-      expect(build(:photo, category: :landscapes)).to be_landscapes
-    end
-  end
-
   describe "#original_key" do
     it "extracts the key of the photo from the AWS bucket url" do
       @photo.original_url = "https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG"
@@ -209,40 +196,45 @@ describe Photo do
   end
 
   describe "category predicate methods" do
-    it "returns photo's inclusion in a category" do
-      Photo::CATEGORIES.each do |category|
-        next if category == :canada # canada determined by tags
-        if @photo.category == category
-          expect(@photo.send "#{category}?").to eql true
-        else
-          expect(@photo.send "#{category}?").to eql false
-        end
+    context "when photo in category" do
+      it "returns true" do
+        expect(build(:photo, category: :flora)).to be_flora
+        expect(build(:photo, category: :fauna)).to be_fauna
+        expect(build(:photo, category: :landscapes)).to be_landscapes
       end
     end
 
-    describe "#canada?" do
-      context "when photo tagged 'Canada'" do
-        let(:photo) { build :photo, tags: %w{Canada} }
-
-        it "returns true" do
-          expect(photo.canada?).to be true
-        end
+    context "when photo not in category" do
+      it "returns false" do
+        expect(build(:photo, category: :fauna)).to_not be_flora
+        expect(build(:photo, category: :landscapes)).to_not be_fauna
+        expect(build(:photo, category: :flora)).to_not be_landscapes
       end
+    end
+  end
 
-      context "when photo tagged 'canada'" do
-        let(:photo) { build :photo, tags: %w{canada} }
+  describe "#canada?" do
+    context "when photo tagged 'Canada'" do
+      let(:photo) { build :photo, tags: %w{Canada} }
 
-        it "returns true" do
-          expect(photo.canada?).to be true
-        end
+      it "returns true" do
+        expect(photo.canada?).to be true
       end
+    end
 
-      context "when photo not tagged 'Canada' or 'canada'" do
-        let(:photo) { build :photo, tags: [] }
+    context "when photo tagged 'canada'" do
+      let(:photo) { build :photo, tags: %w{canada} }
 
-        it "returns false" do
-          expect(photo.canada?).to be false
-        end
+      it "returns true" do
+        expect(photo.canada?).to be true
+      end
+    end
+
+    context "when photo not tagged 'Canada' or 'canada'" do
+      let(:photo) { build :photo, tags: [] }
+
+      it "returns false" do
+        expect(photo.canada?).to be false
       end
     end
   end
