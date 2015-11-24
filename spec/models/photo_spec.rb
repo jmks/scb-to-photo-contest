@@ -217,14 +217,28 @@ describe Photo do
     end
 
     describe "#canada?" do
-      it "returns false if photo does not have tag named Canada/canada" do
-        expect(@photo.canada?).to eql false
+      context "when photo tagged 'Canada'" do
+        let(:photo) { build :photo, tags: %w{Canada} }
+
+        it "returns true" do
+          expect(photo.canada?).to be true
+        end
       end
 
-      it "returns true if the photo has a tag named Canada/canada" do
-        @photo.add_tag "canada"
+      context "when photo tagged 'canada'" do
+        let(:photo) { build :photo, tags: %w{canada} }
 
-        expect(@photo.canada?).to eql true
+        it "returns true" do
+          expect(photo.canada?).to be true
+        end
+      end
+
+      context "when photo not tagged 'Canada' or 'canada'" do
+        let(:photo) { build :photo, tags: [] }
+
+        it "returns false" do
+          expect(photo.canada?).to be false
+        end
       end
     end
   end

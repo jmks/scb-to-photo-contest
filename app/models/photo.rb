@@ -129,6 +129,6 @@ class Photo
   end
 
   def canada?
-    tags.any?{ |t| t =~ /canada/i }
+    tags.any? { |tag| tag =~ /canada/i }
   end
 end
