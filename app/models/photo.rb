@@ -104,8 +104,9 @@ class Photo
   end
 
   # sizes: [:xs, :sm, :lg]
+  # TODO contest identifier will have to be incorporated into key
   def aws_key size
-    id.to_s + "-#{size.to_s}"
+    "#{id}-#{size}"
   end
 
   # move to event machine

@@ -155,14 +155,18 @@ describe Photo do
   end
 
   describe "#aws_key" do
-    it "returns a key for aws storage for different file sizes" do
-      xs_key = @photo.id.to_s + "-xs"
-      sm_key = @photo.id.to_s + "-sm"
-      lg_key = @photo.id.to_s + "-lg"
+    let(:photo) { build :photo }
 
-      expect(@photo.aws_key(:xs)).to eql xs_key
-      expect(@photo.aws_key(:sm)).to eql sm_key
-      expect(@photo.aws_key(:lg)).to eql lg_key
+    it "returns '<photo.id>-xs' for :xs" do
+      expect(photo.aws_key(:xs)).to eql "#{photo.id}-xs"
+    end
+
+    it "returns '<photo.id>-sm' for :sm" do
+      expect(photo.aws_key(:sm)).to eql "#{photo.id}-sm"
+    end
+
+    it "returns '<photo.id>-lg' for :lg" do
+      expect(photo.aws_key(:lg)).to eql "#{photo.id}-lg"
     end
   end
 
