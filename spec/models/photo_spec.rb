@@ -6,69 +6,104 @@ describe Photo do
     @photo = build(:photo, owner: @contestant)
   end
 
-  describe "self.category?" do
-    it "returns true for category in Photo::CATEGORIES and 'canada'" do
-      %w{Flora FaUNa landscapes}.push(:Canada).each do |category|
-        expect(Photo.category?(category)).to be true
+  describe ".category?" do
+    context "when a category" do
+      it "returns true" do
+        %w{Flora FaUNa landscapes}.each do |category|
+          expect(Photo.category?(category)).to be true
+        end
       end
     end
 
-    it "returns false for nils" do
-      expect(Photo.category?(nil)).to be false
+    context "when 'canada'" do
+      it "returns true" do
+        expect(Photo.category?("Canada")).to be true
+      end
     end
 
-    it "returns false for any other string" do
-      %w{portmanteau sparrow tree spring}.each do |non_categories|
-        expect(Photo.category?(non_categories)).to be false
+    context "when anything else" do
+      it "returns false" do
+        %w{portmanteau sparrow tree spring}.each do |non_category|
+          expect(Photo.category?(non_category)).to be false
+        end
+
+        expect(Photo.category?(nil)).to be false
       end
     end
   end
 
-  context "fail validations" do
-    it "must have a title" do
-      @photo.unset :title
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
+  describe "validations" do
+    context "without a title" do
+      let(:photo) { build :photo, title: nil }
+
+      it "is not valid" do
+        expect(photo).to_not be_valid
+      end
+
+      it "has title error" do
+        photo.valid?
+
+        expect(photo.errors).to include :title
+      end
     end
 
-    it "must be in a category" do
-      @photo.unset :category
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
+    context "without a category" do
+      let(:photo) { build :photo, category: nil }
+
+      it "is not valid" do
+        expect(photo).to_not be_valid
+      end
+
+      it "has category error" do
+        photo.valid?
+
+        expect(photo.errors).to include :category
+      end
     end
 
-    it "must be owned by a contestant" do
-      @photo.save
-      @photo.unset :owner
-      expect { @photo.save! }.to raise_error Mongoid::Errors::Validations
+    context "without a category" do
+      let(:photo) { build :photo, owner: nil }
+
+      it "is not valid" do
+        expect(photo).to_not be_valid
+      end
+
+      it "has owner error" do
+        photo.valid?
+
+        expect(photo.errors).to include :owner
+      end
+    end
+
+    describe "optional description" do
+      context "with description present" do
+        let(:photo) { build :photo }
+
+        it "is valid" do
+          expect(photo).to be_valid
+        end
+      end
+
+      context "with blank description" do
+        let(:photo) { build :photo, description: "" }
+
+        it "is valid" do
+          expect(photo).to be_valid
+        end
+      end
     end
   end
 
-  context "pass validations" do
-    it "has optional description" do
-      expect { @photo.save! }.to_not raise_error
-      @photo.description = "So a clown walks into a bar..."
-      expect { @photo.save! }.to_not raise_error
-    end
+  context "#owner" do
+    let(:contestant) { build :contestant }
+    let(:photo)      { build :photo, owner: contestant }
 
-    it "creates a photo" do
-      expect(Photo.new).to be_an_instance_of Photo
-    end
-
-    it "creates a valid photo" do
-      expect { @photo.save! }.to_not raise_error
-    end
-  end
-
-  context "ownership" do
-    it "has one owner" do
-      expect(@photo.owner).to be_an_instance_of Contestant
+    it "is a contestant" do
+      expect(photo.owner).to be_an_instance_of Contestant
     end
 
     it "has correct owner" do
-      expect(@photo.owner).to be @contestant
-    end
-
-    it "is owned by the contestant" do
-      expect(@photo.owner.entries).to include @photo
+      expect(photo.owner).to be contestant
     end
   end
 
