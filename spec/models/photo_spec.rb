@@ -36,9 +36,7 @@ describe Photo do
       end
 
       it "has title error" do
-        photo.valid?
-
-        expect(photo.errors).to include :title
+        expect(photo).to have_error :title
       end
     end
 
@@ -50,9 +48,7 @@ describe Photo do
       end
 
       it "has category error" do
-        photo.valid?
-
-        expect(photo.errors).to include :category
+        expect(photo).to have_error :category
       end
     end
 
@@ -64,9 +60,7 @@ describe Photo do
       end
 
       it "has owner error" do
-        photo.valid?
-
-        expect(photo.errors).to include :owner
+        expect(photo).to have_error :owner
       end
     end
 

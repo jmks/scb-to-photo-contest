@@ -2,9 +2,8 @@
 
 RSpec::Matchers.define :have_error do |error|
   match do |resource|
-    error = error.to_sym
-
-    resource.errors.has_key?(error)
+    resource.valid?
+    resource.errors.has_key? error.to_sym
   end
 end
 
