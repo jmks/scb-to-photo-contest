@@ -1,0 +1,10 @@
+- if current_contest.open?
+  %p Our current contest closes #{long_date current_contest.close_date}
+- elsif current_contest.judging?
+  %p We are currently allocating prizes and contacting winners. Contest winners will be updated shortly!
+- else
+  %p
+    %span Our latest contest is over. Check out the
+    %a.btn.btn-lg.btn-inverse{ href: winners_path }
+      %i.fa.fa-trophy.fa-2x
+      winners!

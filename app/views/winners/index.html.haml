@@ -1,6 +1,10 @@
-- if current_contest?
+- if current_contest.open?
   %h3.text-center Winners for our current contest will be annouced after the contest closes #{long_date current_contest.close_date}
+- elsif current_contest.try(:complete?)
+  = render "current_winners_wall"
 
-- if Contest.previous.any?
-  - Contest.previous.each do |contest|
-    = render "contest_winners", contest: contest
+-# TODO wishful code
+-# - if Contest.previous.any?
+-#   %li.unstyled
+-#     - Contest.previous.each do |contest|
+-#       %li= link_to contest.abbreviated_title, winners_contest_path(contest)

@@ -17,10 +17,10 @@
 
 .row.text-center.date
   .col-xs-12
-    - if current_contest.open?
-      %p Contest closes #{ long_date current_contest.close_date }
-    - elsif current_contest.judging?
-      %p We are currently allocating prizes and contacting winners. Contest winners will be updated shortly!
+    - if current_contest
+      = render "current_contest_messages"
     - else
-      %span Contest is now closed. Check out our winners
-      %span= link_to 'here!', winners_path
+      %span We have no open contests. Check back soon!
+
+    %span Check out our
+    %span= link_to "past winners", winners_path
