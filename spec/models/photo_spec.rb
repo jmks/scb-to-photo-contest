@@ -1,11 +1,6 @@
 require "spec_helper"
 
 describe Photo do
-  before :each do
-    @contestant = build(:contestant)
-    @photo = build(:photo, owner: @contestant)
-  end
-
   describe ".category?" do
     context "when a category" do
       it "returns true" do
@@ -107,72 +102,90 @@ describe Photo do
     end
   end
 
-  context "#comments" do
-    it "creates comments" do
-      @photo.save
-      expect(@photo.comments.create name: "Quagmire", text: "Giggity!").to be_an_instance_of Comment
-    end
+  describe "#tagged?" do
+    context "when photo tagged 'awesomesauce'" do
+      let(:photo) { build :photo, tags: ["awesomesauce"] }
 
-    it "has many comments" do
-      @photo.save
-      @photo.comments.create name: "Quagmire", text: "Giggity, giggity!"
-      @photo.comments.create name: "Pea tear griffin", text: "Do you know the word?"
-
-      expect(@photo.comments.length).to be 2
-    end
-  end
-
-  context "tags" do
-    describe "#tagged?" do
-      it "is false for tags not present" do
-        expect(@photo.tagged? "pretty").to eql false
-      end
-
-      it "is true for present tags" do
-        @photo.push tags: "silly"
-        expect(@photo.tagged?("silly")).to eql true
+      it "returns true" do
+        expect(photo.tagged?("awesomesauce")).to be true
       end
     end
 
-    describe "#add_tag" do
-      it "adds a tag" do
-        @photo.add_tag "super-duper"
-        expect(@photo.tags).to include("super-duper")
-      end
+    context "when photo not tagged 'awesomesauce'" do
+      let(:photo) { build :photo }
 
-      it "adds a tag only once" do
-        legendary_tag = "legen-waitforit-dary"
-        2.times { @photo.add_tag legendary_tag }
-
-        legendary_tags = @photo.tags.select{ |t| t ==  legendary_tag }
-
-        expect(legendary_tags.length).to eql 1
-      end
-
-      it "adds many tags" do
-        expect {
-          @photo.add_tag "stupendous"
-          @photo.add_tag "snowy"
-        }.to change { @photo.tags.length }.by 2
+      it "returns false" do
+        expect(photo.tagged?("awesomesauce")).to be false
       end
     end
   end
 
-  context "counts" do
-    it "has 0 votes by default" do
-      expect(@photo.votes).to eql 0
+  describe "#add_tag" do
+    let(:photo) { build :photo }
+
+    it "adds a tag" do
+      photo.add_tag "super-duper"
+      expect(photo.tags).to include("super-duper")
     end
 
-    it "has 0 views by default" do
-      expect(@photo.views).to eql 0
+    it "adds a tag only once" do
+      legendary_tag = "legen-waitforit-dary"
+
+      photo.add_tag legendary_tag
+
+      expect {
+        photo.add_tag legendary_tag
+      }.to_not change {
+        photo.tags.count { |tag| tag == legendary_tag }
+      }
+    end
+
+    it "adds many tags" do
+      expect {
+        photo.add_tag "stupendous"
+        photo.add_tag "snowy"
+      }.to change { photo.tags.length }.by 2
+    end
+  end
+
+  describe "#votes" do
+    let(:photo) { build :photo }
+
+    context "when new" do
+      it "is 0" do
+        expect(photo.votes).to eql 0
+      end
+    end
+  end
+
+  describe "#views" do
+    let(:photo) { build :photo }
+
+    context "when new" do
+      it "is 0" do
+        expect(photo.views).to eql 0
+      end
     end
   end
 
   describe "#original_key" do
-    it "extracts the key of the photo from the AWS bucket url" do
-      @photo.original_url = "https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG"
 
-      expect(@photo.original_key).to eql "uploads/1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f/100_1358.JPG"
+    context "when empty" do
+      let(:photo) { build :photo }
+
+      it "returns blank string" do
+        expect(photo.original_key).to be_blank
+      end
+    end
+
+    context "with an original url" do
+      let(:photo) { build :photo, original_url: "https://s3.amazonaws.com/scbto-photos-originals/uploads%2F1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f%2F100_1358.JPG" }
+
+      it "returns the AWS bucket key" do
+        bucket_key = "uploads/1397480083655-xr6m8ve8dajlwhfr-4cb837014b3c54440c778a3e47ed781f/100_1358.JPG"
+
+        expect(photo.original_key).to eql bucket_key
+      end
     end
   end
 
