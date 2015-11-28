@@ -8,15 +8,15 @@ class Contestant
     # :token_authenticatable, :encryptable,
     # :confirmable, :lockable, :timeoutable and
     # :omniauthable
-  devise :database_authenticatable, :registerable, 
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
   field :email
   validates :email, presence: true, uniqueness: true,
-                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/, 
+                 format: { with:    /\A.+@(.+\.)+\w{2,4}\Z/,
                            message: "%{value} is not a valid email" }
-                           
+
   field :encrypted_password
   validates :encrypted_password, presence: true
 
@@ -86,7 +86,7 @@ class Contestant
 
 
   # track voted for photos
-  def vote_for photo 
+  def vote_for photo
     add_to_set voted_photo_ids: photo.id
   end
 
@@ -102,6 +102,7 @@ class Contestant
     incomplete_entries.any?
   end
 
+  # TODO A contestant is not related to a particular Contest
   def entries_left?
     entries.length < ContestRules::ENTRIES_PER_CONTESTANT
   end

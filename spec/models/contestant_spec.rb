@@ -1,116 +1,129 @@
 require 'spec_helper'
 
-describe Contestant do 
+describe Contestant do
+  describe "validations" do
+    context "without an email address" do
+      let(:contestant) { build :contestant, email: nil }
 
-  before :each do 
-    @contestant = build(:contestant)
-    @photo = build(:photo)
-  end
+      it "is not valid" do
+        expect(contestant).to_not be_valid
+      end
 
-  context "when validating" do 
-    it "must have an email address" do 
-      @contestant.unset :email
+      it "has email error" do
+        contestant.valid?
 
-      expect(@contestant).to_not be_valid
-      expect(@contestant).to have_error :email
-      expect(@contestant).to have_error_message_for(:email, "blank")
+        expect(contestant).to have_error :email
+      end
     end
 
-    it "must have unique email address" do
-      @contestant.save
-      # same fields but new _id generated
-      another = @contestant.dup
-      
-      expect(another).to_not be_valid
-      expect(another).to have_error :email
-      expect(another).to have_error_message_for(:email, "already taken")
+    context "with duplicate email address" do
+      let!(:other)     { create :contestant }
+      let(:contestant) { build :contestant, email: other.email }
+
+      it "is not valid" do
+        expect(contestant).to_not be_valid
+      end
+
+      it "has email error" do
+        contestant.valid?
+        expect(contestant).to have_error :email
+      end
     end
 
-    context "email address format" do 
-      it "should be invalid for malformed email addresses" do 
+    context "with bad email format" do
+      let(:contestant) { build :contestant }
+
+      it "is not valid" do
         bad_emails = %w{bademail.com chunkeymonkey@gmail @tenderlove.io eg@.com}
-      
+
         bad_emails.each do |email|
-          @contestant.email = email
+          contestant.email = email
 
-          expect(@contestant).to_not be_valid
-        expect(@contestant).to have_error :email
-        expect(@contestant).to have_error_message_for(:email, "valid")
-        end
-      end
-
-      it "should be valid for common email address formats" do 
-        good_emails = %w{jason@exapmle.com j.m.k.s@j.km.s.ca}
-
-        good_emails.each do |email|
-          @contestant.email = email
-
-          expect(@contestant).to be_valid
+          expect(contestant).to_not be_valid
+          expect(contestant).to have_error :email
         end
       end
     end
 
-    it "must have first name" do 
-      @contestant.unset :first_name
-      expect {@contestant.save! }.to raise_error Mongoid::Errors::Validations
-    end
+    context "without first name" do
+      let(:contestant) { build :contestant, first_name: nil }
 
-    it "must have last name" do 
-      @contestant.unset :last_name
-      expect {@contestant.save! }.to raise_error Mongoid::Errors::Validations
-    end
+      it "is not valid" do
+        expect(contestant).to_not be_valid
+      end
 
-    it 'has phone number in format ddd-ddd-dddd[xd+]?' do 
-      @contestant.phone = '234-567-91011'
-      expect(@contestant).to_not be_valid
-    end
-  end
+      it "is not valid" do
+        contestant.valid?
 
-  describe '#phone?' do 
-    it 'is true if phone number is given' do 
-      expect(@contestant).to be_phone
-    end
-
-    it 'is false for nil or empty' do 
-      @contestant.phone = ''
-      expect(@contestant).to_not be_phone
-
-      @contestant.unset :phone
-      expect(@contestant).to_not be_phone
-    end
-  end
-
-  context 'before_validation' do 
-    
-    describe '#normalize_phone' do 
-      it 'reformats phone numbers to \d{3}-\d{3}-\d{4}(?:x\d+)?' do 
-        expect(@contestant).to be_valid
-        expect(build(:contestant, phone: "1-(555)-867-5309ext.123")).to be_valid
-        expect(build(:contestant, phone: "555.867.5309")).to be_valid
+        expect(contestant).to have_error :first_name
       end
     end
 
+    context "without last name" do
+      let(:contestant) { build :contestant, last_name: nil }
+
+      it "is not valid" do
+        expect(contestant).to_not be_valid
+      end
+
+      it "is not valid" do
+        contestant.valid?
+
+        expect(contestant).to have_error :last_name
+      end
+    end
   end
 
-  context 'voting' do 
-    describe '#vote_for' do 
-      it 'votes for a photo' do 
-        @contestant.vote_for @photo
-        expect(@contestant.voted_photo_ids).to include(@photo.id)
+  describe '#vote_for' do
+    let(:contestant) { create :contestant }
+    let(:photo)      { create :photo }
+
+    before do
+      contestant.vote_for photo
+    end
+
+    it "tracks photos voted for" do
+      expect(contestant.voted_photo_ids).to include(photo.id)
+    end
+
+    it "tracks photos voted for once" do
+      2.times { contestant.vote_for photo }
+
+      expect(contestant.voted_photo_ids.select { |id| id == photo.id }.length).to eql 1
+    end
+
+    it "tracks multiple photos" do
+      contestant.vote_for build(:photo)
+
+      expect(contestant.voted_photo_ids.length).to eql 2
+    end
+  end
+
+  describe "#entries_left?" do
+    let(:contest) { build :contest, entries_per_contestant: 3 }
+
+    context "with fewer entries than contest allows" do
+      let(:contestant) do
+        contestant = create :contestant
+        build_list :photo, 2, owner: contestant
+        contestant
       end
 
-      it 'does not double vote for same photo' do 
-        3.times { @contestant.vote_for @photo }
-        expect(@contestant.voted_photo_ids.reject { |id| id != @photo.id }.length).to eql 1
+      it "returns true" do
+        expect(contestant.entries_left?).to be true
+      end
+    end
+
+    context "with equal entries that contest allows" do
+      let(:contestant) do
+        contestant = create :contestant
+        build_list :photo, contest.entries_per_contestant, owner: contestant
+        contestant
       end
 
-      it 'votes for many photos' do
-        another = build(:photo)
-
-        @contestant.vote_for @photo
-        @contestant.vote_for another 
-
-        expect(@contestant.voted_photo_ids.length).to eql 2
+      it "returns false" do
+        pending("A contestant is not associated with a particular contest yet")
+        expect(contestant.entries_left?).to be false
       end
     end
   end
