@@ -6,6 +6,11 @@ namespace :dev do
 
   desc "added 10 additional photos to test database"
   task add_photos: [:set_development_env, :environment] do
-    FactoryGirl.create_list :photo, 15
+    FactoryGirl.create_list :photo, 10
+  end
+
+  desc "loads data for testing into database"
+  task load_test: [:set_development_env, :environment] do
+    require Rails.root.join("db", "test.rb")
   end
 end
