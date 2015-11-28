@@ -7,7 +7,7 @@ class Tag
   index({ name: 1 }, { unique: true })
 
   def self.get_tags
-    Tag.all.map &:name
+    Tag.all.map(&:name)
   end
 
   def self.add_tags names

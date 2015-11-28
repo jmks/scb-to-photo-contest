@@ -1,10 +1,16 @@
 class TagController < ApplicationController
-
   def index
-    if params[:q]
-        render :json => Tag.where(name: /#{Regexp.escape(params[:q])}/i).map(&:name)
+    if params.has_key?("q")
+      tags = Tag.where(name: escaped_query)
+      render json: tags.map(&:name)
     else
-        render :json => Tag.get_tags
+      render json: Tag.get_tags
     end
+  end
+
+  private
+
+  def escaped_query
+    /#{Regexp.escape(params["q"])}/i
   end
 end
