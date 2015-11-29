@@ -2,13 +2,17 @@
   %h4.text-center= "Welcome #{ @model.admin.email } (logged in as admin)"
 
   %ul.nav.nav-tabs
-    %li.active= link_to 'Photo Administration',   '#photos-admin',  'data-toggle' => 'tab'
-    %li= link_to        'Comment Administration', '#comment-admin', 'data-toggle' => 'tab'
-    %li= link_to        'Judge Administration',   '#judges-admin',  'data-toggle' => 'tab'
-    %li= link_to        'Photo Scores',           '#photo-scores',  'data-toggle' => 'tab'
+    %li.active= link_to "My Photos",              "#my-photos",     "data-toggle" => "tab"
+    %li= link_to        "Photo Administration",   "#photos-admin",  "data-toggle" => "tab"
+    %li= link_to        "Comment Administration", "#comment-admin", "data-toggle" => "tab"
+    %li= link_to        "Judge Administration",   "#judges-admin",  "data-toggle" => "tab"
+    %li= link_to        "Photo Scores",           "#photo-scores",  "data-toggle" => "tab"
 
   .tab-content
-    .tab-pane.active#photos-admin
+    .tab-pane.active#my-photos
+      = render template: "contestants/index"
+
+    .tab-pane#photos-admin
       = render "contest_photos_panel"
 
     .tab-pane#comment-admin

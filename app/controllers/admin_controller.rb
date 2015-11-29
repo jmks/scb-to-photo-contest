@@ -7,6 +7,11 @@ class AdminController < ApplicationController
     @judge         = Judge.new params[:judge]
     @photo_scores  = PhotoScore.photo_scores
     @winners_by_id = Hash[Winner.all.map { |w| [w.photo.id.to_s, w.prize] }]
+
+    # for contestants/index
+    @contestant       = current_contestant
+    @favourites       = Photo.find(@contestant.voted_photo_ids || [])
+    @votes_left_today = Vote.votes_remaining(@contestant.current_sign_in_ip)
   end
 
   def confirm_photo

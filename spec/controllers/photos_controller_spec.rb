@@ -4,7 +4,7 @@ describe PhotosController do
 
   describe "GET index" do
     before :each do
-      @photos = create_list :photo, 50
+      @photos = create_list :photo, 15
       @page_size = PhotosController::PHOTOS_PER_PAGE
     end
 
