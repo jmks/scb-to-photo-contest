@@ -108,4 +108,36 @@ describe PhotosController do
       end
     end
   end
+
+  describe "GET new" do
+    context "with no current contest" do
+      it "redirects to home page"
+      it "displays error message"
+    end
+
+    context "with current contest" do
+      context "when contest is open" do
+        context "when contestant can add entries" do
+          it "renders :new"
+        end
+
+        context "when contestant can not add entries" do
+          it "redirects to contesant#index"
+          it "displays error message"
+        end
+      end
+
+      context "when contest is closed" do
+        it "redirects to contestant#index"
+        it "displays error message"
+      end
+    end
+  end
+
+  describe "POST create" do
+    context "when photo valid" do
+      it "creates the entry"
+      it "associates photo to the current contest"
+    end
+  end
 end
