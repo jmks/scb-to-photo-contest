@@ -47,11 +47,6 @@ Before "@photo" do
   @photo = FactoryGirl.create(:photo)
 end
 
-Before "@admin" do
-  @admin = FactoryGirl.create :admin
-  log_in_as @admin
-end
-
 Before "@photos" do
   @photos = FactoryGirl.create_list :photo, 5
 end
