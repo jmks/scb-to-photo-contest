@@ -1,4 +1,6 @@
 class PhotoGallery
+  PHOTOS_PER_PAGE = 15
+
   attr_reader :title, :photos, :filter, :page, :tag, :total_pages
 
   def initialize(params, photo_filter=nil)
@@ -7,9 +9,6 @@ class PhotoGallery
       @photos = photo_filter.photos
       @filter = photo_filter.filter
     end
-
-    # TODO: fix this
-    @page_size = PhotosController::PHOTOS_PER_PAGE
 
     extract_params(params)
   end
@@ -44,12 +43,12 @@ class PhotoGallery
     @params = params.except(:controller, :action)
 
     @page = @params[:page] = @params[:page] ? params[:page].to_i : 1
-    @total_pages           = (1.0 * @photos.count / @page_size).ceil
+    @total_pages           = (1.0 * @photos.count / PHOTOS_PER_PAGE).ceil
 
     @photos = @photos.
                 recent.
-                skip([@page - 1, 0].max * @page_size).
-                limit(@page_size).
+                skip([@page - 1, 0].max * PHOTOS_PER_PAGE).
+                limit(PHOTOS_PER_PAGE).
                 only(:id, :title, :views, :votes, :thumbnail_sm_url)
 
     @tag        = @params[:tag]      = params[:tag]
