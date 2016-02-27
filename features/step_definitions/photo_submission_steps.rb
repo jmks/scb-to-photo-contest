@@ -1,11 +1,21 @@
-When(/^I try to submit a photo$/) do
-  # the view depends on contest "state" ie open or closed
-  #find("a[href*=photo/new]").click
+Given(/^a running contest$/) do
+  FactoryGirl.create :contest
+end
 
+Given(/^I am a registered user and signed in$/) do
+  @current_user = FactoryGirl.create :contestant
+  log_in_as @current_user
+end
+
+Given(/^I am on the homepage$/) do
+  visit root_path
+end
+
+When(/^I try to submit a photo$/) do
   visit new_photo_path
 end
 
-Then(/^I am on the signup page$/) do
+Then(/^I am sent to the signup page$/) do
   page.current_path.should eql new_contestant_registration_path
 end
 
@@ -13,8 +23,8 @@ Then(/^I am on the photo details page$/) do
   page.current_path.should eql new_photo_path
 end
 
-When(/^I fill in the details$/) do
-  @photo = FactoryGirl.build :photo, owner: @registered
+When(/^I submit the photo details$/) do
+  @photo = FactoryGirl.build :photo, owner: @current_user
 
   within '#new-photo-form' do
     fill_in 'Title',       with: @photo.title
@@ -26,10 +36,10 @@ When(/^I fill in the details$/) do
 end
 
 Then(/^I have started a submission$/) do
-  Photo.count.should eql 1
-  Photo.first.owner.should eql @registered
-  # matching exact photos is difficult with various fields
-  Photo.first.title.should eql @photo.title
+  photo = Photo.last
+
+  expect(photo.owner).to eql @current_user
+  expect(photo.title).to eql @photo.title
 end
 
 Given(/^I am on the user page$/) do

@@ -3,18 +3,18 @@ Feature: Photo submission process
     As a registered user
     I want to win great prizes!
 
-@unregistered
-Scenario: unregistered users are told to signup
-    Given I am on the homepage
-    When I try to submit a photo
-    Then I am on the signup page
+Background:
+  Given a running contest
 
-@registered_and_signed_in
+Scenario: unregistered users are told to signup
+    When I try to submit a photo
+    Then I am sent to the signup page
+
 Scenario: Step 1 - users can enter photo details
-    Given I am on the homepage
+    Given I am a registered user and signed in
     When I try to submit a photo
     Then I am on the photo details page
-    When I fill in the details
+    When I submit the photo details
     Then I have started a submission
 
 @registered_and_signed_in
