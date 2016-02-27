@@ -5,13 +5,14 @@ describe PhotosController do
   describe "GET index" do
     before :each do
       @photos = create_list :photo, 15
-      @page_size = PhotosController::PHOTOS_PER_PAGE
+      @page_size = PhotoGallery::PHOTOS_PER_PAGE
     end
 
-    it "assigns @gallery" do
+    it "assigns a photo gallery" do
       get :index
 
-      expect(assigns(:gallery)).to_not be_nil
+      expect(assigns[:gallery]).not_to be_nil
+      expect(assigns[:gallery]).to be_an_instance_of PhotoGallery
     end
 
     context "when not filtering" do

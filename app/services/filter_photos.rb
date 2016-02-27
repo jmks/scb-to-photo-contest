@@ -30,7 +30,7 @@ class FilterPhotos
 
   def by_tag
     return false unless @params[:tag]
-    
+
     [@params[:tag].titleize, Photo.tagged(@params[:tag]), :tag]
   end
 
