@@ -1,7 +1,7 @@
 .row.text-center.date
   .col-xs-12
-    %span There is no contest currently running. Check out our previous contests
-    %ul.list-unstyled
-      - Contest.previous.each do |contest|
-        %li
-          %a{ href: contest_path }= contest.close_date.year
+    %span#no-contest-message There is no contest currently running. Check out our previous contests
+    - if Contest.previous.any?
+      %ul.list-unstyled#past-contests
+        - Contest.previous.each do |contest|
+          %li= link_to(contest.close_date.year, contest_path)

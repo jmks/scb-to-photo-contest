@@ -9,10 +9,6 @@ Before do |scenario|
   ContestRules.redefine_const("VOTING_CLOSES", 2.days.from_now)
 end
 
-Before do
-  FactoryGirl.create :contest
-end
-
 Before "@registered" do
   @registered = registered_user
 end
