@@ -13,27 +13,6 @@ Before "@registered" do
   @registered = registered_user
 end
 
-Before "@registered_and_signed_in" do
-  @registered = registered_user
-
-  log_in_as @registered
-
-  # go back home to start
-  visit root_path
-end
-
-Before "@photo_details" do
-    @photo = FactoryGirl.create(:photo, owner: @registered)
-end
-
-Before "@photo_uploaded" do
-  @photo = FactoryGirl.create(:photo, owner: @registered)
-
-  @photo.original_url = "http://notrealurl.butnotablank.string"
-  @photo.save
-  # @photo should be :uploaded
-end
-
 Before "@unregistered" do
   @unregistered = FactoryGirl.build(:contestant)
   @unregistered[:password] = "password123"

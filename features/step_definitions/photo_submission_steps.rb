@@ -3,8 +3,18 @@ Given(/^a running contest$/) do
 end
 
 Given(/^I am a registered user and signed in$/) do
-  @current_user = FactoryGirl.create :contestant
-  log_in_as @current_user
+  @current_contestant = FactoryGirl.create :contestant
+  log_in_as @current_contestant
+end
+
+Given(/^I have entered a photo's details$/) do
+  step "I am a registered user and signed in"
+  @photo = FactoryGirl.create :photo, owner: @current_contestant
+end
+
+Given(/^I have uploaded a photo$/) do
+  step "I am a registered user and signed in"
+  @photo = FactoryGirl.create :photo, owner: @current_contestant, original_url: "http://exapmle.com"
 end
 
 Given(/^I am on the homepage$/) do
@@ -24,7 +34,7 @@ Then(/^I am on the photo details page$/) do
 end
 
 When(/^I submit the photo details$/) do
-  @photo = FactoryGirl.build :photo, owner: @current_user
+  @photo = FactoryGirl.build :photo, owner: @current_contestant
 
   within '#new-photo-form' do
     fill_in 'Title',       with: @photo.title
@@ -38,7 +48,7 @@ end
 Then(/^I have started a submission$/) do
   photo = Photo.last
 
-  expect(photo.owner).to eql @current_user
+  expect(photo.owner).to eql @current_contestant
   expect(photo.title).to eql @photo.title
 end
 
