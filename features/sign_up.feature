@@ -12,11 +12,11 @@ Scenario: Unregistered user can sign up
 @unregistered
 @photos
 Scenario: Unregistered users can view photos
-    Given I am on the photos page
-    Then I can see the photos
+  Given I am on the photos page
+  Then I can see the photos
 
 @unregistered
 @photo
 Scenario: Unregistered users can not leave comments
-    Given I am on a photo page
-    Then I can not leave a comment
+  Given I am on a photo page
+  Then I can not leave a comment

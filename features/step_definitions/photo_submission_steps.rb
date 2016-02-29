@@ -77,7 +77,7 @@ When(/^I change the photo details$/) do
 end
 
 Then(/^the details should be changed$/) do
-  Photo.first.description.should_not eql @photo.description
+  expect(@photo.reload.description).not_to be_nil
 end
 
 Given(/^I am on the upload photo page$/) do
