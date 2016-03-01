@@ -1,5 +1,5 @@
 PhotoContest::Application.routes.draw do
-  root to: 'root#index'
+  root to: "root#index"
 
   devise_for :judges, controllers: { sessions: 'judges/sessions' }, skip: [:registrations]
   devise_for :contestants, controllers: { registrations: 'registrations' }
@@ -16,6 +16,8 @@ PhotoContest::Application.routes.draw do
   get '/photos/flora',      to: 'photos#flora',      as: 'flora'
   get '/photos/fauna',      to: 'photos#fauna',      as: 'fauna'
   get '/photos/landscapes', to: 'photos#landscapes', as: 'landscapes'
+
+  resources :contests, only: [:new, :create]
 
   resources :photos do
     collection do

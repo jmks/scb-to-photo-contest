@@ -1,0 +1,12 @@
+%h1 Create a new contest
+
+= form_for @contest do |f|
+  = f.datetime_field :open_date
+  = f.datetime_field :close_date
+  = f.datetime_field :judge_open_date
+  = f.datetime_field :judge_close_date
+  = f.datetime_field :voting_close_date
+  = f.number_field :votes_per_day, min: 0, step: 1
+  = f.number_field :entries_per_contestant, min: 0, step: 1
+  = f.number_field :nominees_per_category, min: 0, step: 1
+  = f.submit class: "btn btn-flat"

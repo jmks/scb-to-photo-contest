@@ -60,6 +60,9 @@ class AdminController < ApplicationController
       ap.photos           = Photo.all
       ap.judges           = Judge.all
       ap.flagged_comments = Comment.reported
+      ap.new_contest      = Contest.new
+      ap.current_contest  = current_contest
+      ap.contests         = Contest.all
     end
   end
 

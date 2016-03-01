@@ -1,0 +1,18 @@
+- unless @model.current_contest?
+  = link_to "Setup a new contest", new_contest_path, id: "new-contest"
+
+- if @model.contests.any?
+  %table.table.table-hover
+    %thead
+      %tr
+        %td Start Date
+        %td End Date
+        %td Status
+    %tbody
+      - @model.contests.each do |contest|
+        %tr
+          %td= long_date contest.open_date
+          %td= long_date contest.close_date
+          %td= contest.aasm_state
+- else
+  %h4 No contests. You can %{ link_to "start one", new_contest_path }

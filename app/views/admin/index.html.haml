@@ -3,6 +3,7 @@
 
   %ul.nav.nav-tabs
     %li.active= link_to "My Photos",              "#my-photos",     "data-toggle" => "tab"
+    %li= link_to        "Contest Administration", "#contest-admin", "data-toggle" => "tab"
     %li= link_to        "Photo Administration",   "#photos-admin",  "data-toggle" => "tab"
     %li= link_to        "Comment Administration", "#comment-admin", "data-toggle" => "tab"
     %li= link_to        "Judge Administration",   "#judges-admin",  "data-toggle" => "tab"
@@ -11,15 +12,13 @@
   .tab-content
     .tab-pane.active#my-photos
       = render template: "contestants/index"
-
+    .tab-pane#contest-admin
+      = render "contests_panel"
     .tab-pane#photos-admin
       = render "contest_photos_panel"
-
     .tab-pane#comment-admin
       = render "flagged_comments_panel"
-
     .tab-pane#judges-admin
       = render "judges_panel"
-
     .tab-pane#photo-scores
       = render "photo_scores_panel"
