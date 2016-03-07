@@ -7,12 +7,5 @@
         %span Photo
         %span Details
 
-      #submit-errors
-        - if @photo.errors.any?
-          %ul.errors-list.list.list-unstyled
-            - @photo.errors.full_messages.each do |msg|
-              %li.error.text-center
-                %i.fa.fa-warning
-                %span= msg
-
+      = render partial: "layouts/resource_errors", locals: { resource: @photo }
       = render partial: 'photo_form', locals: { form_opts: { url: photos_path, html: { id: 'new-photo-form', class: 'form-horizontal' }}}

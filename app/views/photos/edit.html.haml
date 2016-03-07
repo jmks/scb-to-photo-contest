@@ -6,13 +6,9 @@
     %span Photo
     %span Edit Details
 
-  #submit-errors
-    - if @photo.errors.any?
-      %ul.errors-list
-        - @photo.errors.full_messages.each do |msg|
-          %li= msg
+  = render partial: "layout/resource_errors", locals: { resource: @photo }
 
-  = render partial: 'photo_form', 
-    locals: { form_opts: { url: photo_path(@photo.id, referrer: params[:referrer]), 
-                           method: :patch, 
+  = render partial: 'photo_form',
+    locals: { form_opts: { url: photo_path(@photo.id, referrer: params[:referrer]),
+                           method: :patch,
                            html: { id: 'edit-photo-form', class: 'form-horizontal' }}}

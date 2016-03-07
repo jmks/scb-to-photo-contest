@@ -17,6 +17,7 @@ class ContestsController < ApplicationController
   private
 
   def contest_params
+    return {} unless params[:contest]
     params[:contest].permit!
   end
 end

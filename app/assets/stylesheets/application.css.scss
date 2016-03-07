@@ -60,69 +60,10 @@ $navbar-inverse-link-hover-color: #555;
 $navbar-inverse-toggle-hover-bg: #888;
 $navbar-inverse-toggle-border-color: #555;
 
-/* screwing around */
-/*$navbar-default-color: #fff;
-$navbar-default-bg: $darkblue;*/
-
-
 @import "bootstrap";
 
-
-
-/* FONTS */
-
-@import url(http://fonts.googleapis.com/css?family=La+Belle+Aurore|Open+Sans:400,300,700);
-
-/* Serve our own fonts for better rendering in Chrome */
-@font-face {
-  font-family: 'Montserrat';
-  src:font-url('/assets/montserrat-regular-webfont.eot');
-  src:font-url('/assets/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    font-url('/assets/montserrat-regular-webfont.svg#montserrat') format('svg'),
-    font-url('/assets/montserrat-regular-webfont.woff') format('woff'),
-    font-url('/assets/Montserrat-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src:font-url('/assets/montserrat-bold-webfont.eot');
-  src:font-url('/assets/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
-    font-url('/assets/montserrat-bold-webfont.svg#montserrat') format('svg'),
-    font-url('/assets/montserrat-bold-webfont.woff') format('woff'),
-    font-url('/assets/Montserrat-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: bold;
-}
-
-/*@font-face {
-  font-family: 'Raleway';
-  src:font-url('/assets/raleway-regular-webfont.eot');
-  src:font-url('/assets/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    font-url('/assets/raleway-regular-webfont.svg#raleway') format('svg'),
-    font-url('/assets/raleway-regular-webfont.woff') format('woff'),
-    font-url('/assets/raleway-regular-webfont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src:font-url('/assets/raleway-bold-webfont.eot');
-  src:font-url('/assets/raleway-bold-webfont.eot?#iefix') format('embedded-opentype'),
-    font-url('/assets/raleway-bold-webfont.svg#raleway') format('svg'),
-    font-url('/assets/raleway-bold-webfont.woff') format('woff'),
-    font-url('/assets/raleway-bold-webfont.ttf') format('truetype');
-  font-weight: 700;
-  font-style: bold;
-}*/
-
-.cursive-font {
-    font-family: La Belle Aurore, sans-serif;
-}
-
-/* /FONTS */
+@import "fonts";
+@import "components/**/*";
 
 /* GENERAL */
 
@@ -177,7 +118,7 @@ html {
 /* Backgrounds */
 
 body.rouge2005 {
-    background: url(image-path('green blurry.jpg')) no-repeat top center fixed; 
+    background: url(image-path('green blurry.jpg')) no-repeat top center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -185,7 +126,7 @@ body.rouge2005 {
 }
 
 body.stjohnswart {
-    background: url(image-path('yellow blurry.jpg')) no-repeat top center fixed; 
+    background: url(image-path('yellow blurry.jpg')) no-repeat top center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -201,7 +142,7 @@ body.light-grey-bg {
 }
 
 body.fieldsite {
-    background: url(image-path('field-site-bkg.jpg')) no-repeat top center fixed; 
+    background: url(image-path('field-site-bkg.jpg')) no-repeat top center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -210,7 +151,7 @@ body.fieldsite {
 
 /* /Backgrounds */
 
-body { 
+body {
     /* for fixed header */
     padding-top: 70px;
 
@@ -247,7 +188,7 @@ img {
   font-size: 24px;
 
   margin: 20px 0;
-  
+
   span:first-child {
     font-weight: 700;
   }
@@ -320,7 +261,7 @@ a.btn.btn-flat, button.btn.btn-flat, input.btn.btn-flat, span.btn.btn-flat {
 
     border: 3px solid #135870;
     background: transparent;
-    
+
     color: #135870;
     margin: 10px 0;
 
@@ -609,7 +550,7 @@ a.btn-filter.active {
         button {
             @include border-radius(0);
             @include nav-font;
-            
+
             border-left: none;
             border-top: none;
             box-shadow: none;
@@ -652,21 +593,6 @@ a.btn-filter.active {
 
 /* /Photo Steps */
 
-/* Form Error Messages */
-
-#submit-errors {
-    ul.errors-list {
-        color: red;
-    }
-}
-
-.form-group.error {
-    padding: 5px;
-    background-color: #F9BDA7;
-}
-
-/* /Form Error Messages */
-
 #navbar.navbar-inverse {
     .nav.navbar-nav {
         .dropdown-menu {
@@ -688,7 +614,7 @@ nav#navbar {
         font-size: 20px;
         line-height: 19px;
     }
-    
+
     a {
         @include nav-font;
         letter-spacing: 0.1em;
@@ -806,7 +732,7 @@ nav#navbar {
 
 .picker {
     display: inline-block;
-    
+
     .btn-group-vertical > button.btn,
     .btn-group-vertical > .btn:first-child:not(:last-child),
     .btn-group-vertical > .btn:last-child:not(:first-child) {

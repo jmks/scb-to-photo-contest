@@ -1,5 +1,9 @@
 %h1 Create a new contest
 
+.row
+  .col-xs-12
+    = render partial: "layouts/resource_errors", locals: { resource: @contest }
+
 = form_for @contest do |f|
   = f.datetime_field :open_date
   = f.datetime_field :close_date

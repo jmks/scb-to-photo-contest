@@ -11,19 +11,13 @@
         %span Already registered?
         = render "devise/shared/links"
 
-  #submit-errors.row
+  .row
     .col-xs-12.text-center
-      - if @contestant.errors.any?
-        %ul.errors-list.list.list-unstyled
-          - @contestant.errors.full_messages.each do |msg|
-            %li.error.text-center
-              %i.fa.fa-warning
-              %span= msg
+      = render partial: "layouts/resource_errors", locals: { resource: @contestant }
 
   .row
     .col-xs-12
       = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
-        /= devise_error_messages!
 
         %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:first_name)}"}
           = f.label :first_name, :class => 'control-label col-md-4'
@@ -71,7 +65,7 @@
             = recaptcha_tags ajax: true, display: { theme: 'white' }
 
         %div{class: "form-group #{'error' if @contestant.errors.messages.key?(:terms_of_service)}"}
-          = f.label :terms_of_service, class: 'control-label col-xs-6 col-md-offset-2 col-md-6 text-left' do 
+          = f.label :terms_of_service, class: 'control-label col-xs-6 col-md-offset-2 col-md-6 text-left' do
             %span I accept the
             = link_to 'Terms of Service', terms_path, target: '_blank'
           .col-xs-2.col-md-1

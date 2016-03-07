@@ -1,0 +1,7 @@
+#resource-errors
+  - if resource.errors.any?
+    %ul.errors-list.list.list-unstyled
+      - resource.errors.full_messages.each do |msg|
+        %li.error.text-center
+          %i.fa.fa-warning
+          %span= msg
