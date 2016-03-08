@@ -1,4 +1,6 @@
 class ContestsController < ApplicationController
+  before_action :admins_only!
+
   def new
     @contest = Contest.new
   end

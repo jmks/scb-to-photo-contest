@@ -22,12 +22,14 @@ class Contest
   validates :voting_close_date, presence: true
 
   validate :dates_validation
+  validate :only_one_open_contest_at_a_time
 
   field :votes_per_day,          type: Integer, default: 3
   field :entries_per_contestant, type: Integer, default: 5
   field :nominees_per_category,  type: Integer, default: 2
 
   scope :previous, ->{ where(:close_date.lte => DateTime.current).desc(:close_date) }
+  scope :open_contests, ->(open_date, close_date) { any_of({:close_date => open_date..close_date}, {:open_date =>  open_date..close_date}) }
 
   def self.any?
     now = DateTime.current
@@ -127,5 +129,12 @@ class Contest
         errors.add(start, "must occur before #{finish}")
       end
     end
+  end
+
+  def only_one_open_contest_at_a_time
+    return unless open_date && close_date
+    return if Contest.open_contests(open_date, close_date).empty?
+
+    errors.add(:base, "there must not be open contests between the start date and close date")
   end
 end
