@@ -10,9 +10,9 @@ Scenario: Unregistered user can sign up
   And I should be on my personal home page
 
 @unregistered
-@photos
 Scenario: Unregistered users can view photos
-  Given I am on the photos page
+  Given a running contest with photos
+  And I am on the photos page
   Then I can see the photos
 
 @unregistered

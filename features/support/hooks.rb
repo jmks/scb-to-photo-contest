@@ -22,10 +22,6 @@ Before "@photo" do
   @photo = FactoryGirl.create(:photo)
 end
 
-Before "@photos" do
-  @photos = FactoryGirl.create_list :photo, 5
-end
-
 Before "@photo_upload" do
   FakeWeb.register_uri(:post, "https://s3.amazonaws.com/scbto-photos-originals",
       :status => [303, "See Other"],

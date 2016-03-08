@@ -1,3 +1,8 @@
+Given(/^a running contest with photos$/) do
+  step "a running contest"
+  @photos = FactoryGirl.create_list :photo, 3, contest: Contest.current
+end
+
 And /^I try to sign up$/ do
   click_link "SIGN UP"
 end
@@ -9,10 +14,8 @@ end
 When /^I enter my details and submit$/ do
   %w{first_name last_name public_name email phone password}.each do |field|
     fill_in "contestant[#{field}]", with: @unregistered[field]
+    fill_in "contestant[password_confirmation]", with: @unregistered[:password] if field == "password"
   end
-
-  # confirmations
-  fill_in 'contestant[password_confirmation]', with: @unregistered[:password]
 
   click_button "Sign up"
 end
