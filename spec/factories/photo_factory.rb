@@ -5,7 +5,7 @@ FactoryGirl.define do
     end
     category { Photo::CATEGORIES.sample }
     association :owner, factory: :contestant
-    association :contest, factory: :contest
+    contest { Contest.current || create(:contest) }
     tags %w{tag1 tag2 tag3 tag4}.sample(2)
   end
 end

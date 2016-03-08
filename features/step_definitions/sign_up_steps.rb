@@ -1,6 +1,6 @@
 Given(/^a running contest with photos$/) do
   step "a running contest"
-  @photos = FactoryGirl.create_list :photo, 3, contest: Contest.current
+  @photos = FactoryGirl.create_list :photo, 3
 end
 
 And /^I try to sign up$/ do

@@ -2,7 +2,8 @@ Given(/^there is no current contest$/) do
 end
 
 Given(/^there are past contests$/) do
-  FactoryGirl.create_list(:past_contest, 2)
+  FactoryGirl.create(:past_contest)
+  FactoryGirl.create(:past_contest, open_date: 26.weeks.ago, close_date: 25.weeks.ago, voting_close_date: 25.weeks.ago)
 end
 
 When(/^I view the home page$/) do
