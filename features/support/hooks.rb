@@ -9,10 +9,6 @@ Before do |scenario|
   ContestRules.redefine_const("VOTING_CLOSES", 2.days.from_now)
 end
 
-Before "@registered" do
-  @registered = registered_user
-end
-
 Before "@unregistered" do
   @unregistered = FactoryGirl.build(:contestant)
   @unregistered[:password] = "password123"
@@ -28,12 +24,11 @@ Before "@photo_upload" do
       :location => "http://example.com/upload_complete")
 end
 
-def registered_user
-  user = FactoryGirl.build(:contestant)
-  user[:password] = "password123"
-  user.save!
-
-  user
+def registered_contestant
+  FactoryGirl.build(:contestant).tap do |c|
+    c[:password] = "password123"
+    c.save!
+  end
 end
 
 def log_in_as user

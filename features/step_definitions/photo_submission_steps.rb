@@ -3,7 +3,7 @@ Given(/^a running contest$/) do
 end
 
 Given(/^I am a registered user and signed in$/) do
-  @current_contestant = FactoryGirl.create :contestant
+  @current_contestant = registered_contestant
   log_in_as @current_contestant
 end
 
