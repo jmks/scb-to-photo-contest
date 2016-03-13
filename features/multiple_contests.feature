@@ -3,19 +3,20 @@ Feature: Host multiple contests
   As an administrator
   I want create multiple contests
 
+Background:
+  Given I am an admin
+
 Scenario: create new contests
-  Given I am on the admin page
-  And there is no current contest
-  Then I can create a new contest
+  Given there is no current contest
+  And I am on the admin page
+  Then I can see the create contest button
 
-@current_contest
 Scenario: can not create a contest with current
-  Given I am on the admin page
-  And there is a current contest
-  Then I see no option to create a contest
+  Given there is a current contest
+  And I am on the admin page
+  Then I should not see the create contest button
 
-@past_contest
 Scenario: create new contest after current is complete
-  Given I am on the admin page
-  And there is a past contest
-  Then I can create a new contest
+  Given a past contest
+  And I am on the admin page
+  Then I can see the create contest button
