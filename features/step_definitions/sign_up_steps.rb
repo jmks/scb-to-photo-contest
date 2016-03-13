@@ -1,3 +1,8 @@
+Given(/^an unregistered contestant$/) do
+  @unregistered_contestant = FactoryGirl.build(:contestant)
+  @unregistered_contestant[:password] = "password123"
+end
+
 Given(/^a running contest with photos$/) do
   step "a running contest"
   @photos = FactoryGirl.create_list :photo, 3
@@ -13,8 +18,8 @@ end
 
 When /^I enter my details and submit$/ do
   %w{first_name last_name public_name email phone password}.each do |field|
-    fill_in "contestant[#{field}]", with: @unregistered[field]
-    fill_in "contestant[password_confirmation]", with: @unregistered[:password] if field == "password"
+    fill_in "contestant[#{field}]", with: @unregistered_contestant[field]
+    fill_in "contestant[password_confirmation]", with: @unregistered_contestant[:password] if field == "password"
   end
 
   click_button "Sign up"
@@ -29,8 +34,9 @@ And /^I should be on my personal home page$/ do
   page.current_path.should eql contestant_index_path
 end
 
-Given /^I am on a photo page$/ do
-  visit photo_path(@photo.id)
+Given /^I am on a photo's page$/ do
+  @photo = FactoryGirl.create(:photo)
+  visit photo_path(@photo)
 end
 
 Given /^I am on the photos page$/ do

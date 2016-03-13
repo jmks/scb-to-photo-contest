@@ -9,15 +9,6 @@ Before do |scenario|
   ContestRules.redefine_const("VOTING_CLOSES", 2.days.from_now)
 end
 
-Before "@unregistered" do
-  @unregistered = FactoryGirl.build(:contestant)
-  @unregistered[:password] = "password123"
-end
-
-Before "@photo" do
-  @photo = FactoryGirl.create(:photo)
-end
-
 Before "@photo_upload" do
   FakeWeb.register_uri(:post, "https://s3.amazonaws.com/scbto-photos-originals",
       :status => [303, "See Other"],
