@@ -21,3 +21,8 @@
 
 # RubyMine
 .idea/*
+
+# database backups
+db/backups/*
+
+.env
