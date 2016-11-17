@@ -1,11 +1,11 @@
-require 'RMagick'
+require 'rmagick'
 
 class Thumbnailer
   @queue = :thumbnails_queue
 
   Original_Bucket  = 'scbto-photos-originals'
   Thumbnail_Bucket = 'scbto-photos-thumbs'
-  
+
   def self.perform photo_id
     photo = Photo.find(photo_id)
 
@@ -13,7 +13,7 @@ class Thumbnailer
 
     # make sure thumbs bucket available
     s3.buckets.create(Thumbnail_Bucket, :acl => :public_read) unless s3.buckets[Thumbnail_Bucket].exists?
-    
+
     uploads = s3.buckets[Original_Bucket]
     thumbs = s3.buckets[Thumbnail_Bucket]
 
@@ -27,7 +27,7 @@ class Thumbnailer
 
     # composite for large image
     img_lg = img.resize_to_fit 1000
-    comp   = Magick::Image.new(img_lg.columns, img_lg.rows) do 
+    comp   = Magick::Image.new(img_lg.columns, img_lg.rows) do
       self.background_color = 'none'
       self.density = '96x96'
     end
@@ -50,7 +50,7 @@ class Thumbnailer
     img_sm.format = 'JPG'
     aws_sm.write(img_sm.to_blob { self.quality = 90 }, acl: :public_read)
     photo.thumbnail_sm_url = aws_sm.public_url.to_s
-    
+
     photo.save
 
   rescue Resque::TermException
