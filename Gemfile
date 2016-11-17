@@ -45,9 +45,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # gem 'debugger', group: [:development, :test]
 
 # Use MongoDB as database
-gem 'mongoid', '~> 4.0.0.beta1'
-gem 'bson'
-gem 'bson_ext'
+gem 'mongoid', '~> 4.0'
+gem 'bson', "2.2"
 
 gem 'thin'
 
@@ -77,7 +76,7 @@ gem 'redis'
 gem 'aws-sdk', '~> 1.0'
 
 # generating thumbnails
-gem 'rmagick'
+gem 'rmagick', '2.16'
 
 # typeahead picker
 gem 'select2-rails'
@@ -98,11 +97,11 @@ group :development, :test do
 end
 
 # rails panel
-group :development do 
+group :development do
   gem 'meta_request'
 end
 
-group :test do 
+group :test do
   gem 'cucumber-rails', :require => false
   gem 'shoulda-matchers'
   gem 'fakeweb'
