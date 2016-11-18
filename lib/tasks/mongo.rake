@@ -16,12 +16,36 @@ namespace :mongo do
     end
   end
 
-  desc "backup a database to db/backups"
+  desc "backup a database to #{BACKUP_PATH}"
   task :backup, [:provider] => :mongo_tools do |t, args|
     abort("Required param :provider") unless args[:provider]
 
     uri = resolve_mongo_provider(args[:provider])
     `mongodump -v -p #{uri.password} -h #{uri.host}:#{uri.port} -u #{uri.user} -d #{uri.path.sub("/", "")} -o #{backup_dest(uri)}`
+  end
+
+  desc "restores a backup from the given source to the given destination"
+  task :restore, [:source, :destination] do |t, args|
+    abort("Required param :source") unless args[:source]
+    abort("Required param :destination") unless args[:destination]
+
+    src  = resolve_mongo_provider(args[:source])
+    dest = resolve_mongo_provider(args[:destination])
+
+    # generalized this command:
+    # mongorestore -v -u #{dest.user} -p #{dest.password} -h #{dest.host}:#{dest.port} -d #{dest.path.sub("/", "")} #{backup_src(src)}
+    # ignores user and password options if not present in destination uri (e.g. localhost)
+    cmd = [
+      "mongorestore",
+      "-v",
+      "-h #{dest.host}:#{dest.port}",
+      "-d #{dest.path.sub("/", "")}"
+    ]
+    cmd << "-u #{dest.user}" if dest.user
+    cmd << "-p #{dest.password}" if dest.password
+    cmd << backup_src(src)
+
+    `#{cmd.join(' ')}`
   end
 end
 
@@ -39,5 +63,8 @@ def backup_dest(uri)
   Pathname
     .new(BACKUP_PATH)
     .join("#{uri.user}@#{uri.host}")
-    .to_s
+end
+
+def backup_src(uri)
+  backup_dest(uri).join(uri.path.sub("/", ""))
 end
