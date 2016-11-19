@@ -16,6 +16,14 @@ namespace :mongo do
     end
   end
 
+  desc "opens the mongo shell to the given mongodb provider"
+  task :shell, [:provider] => [:mongo_tools] do |t, args|
+    abort("Required param :provider") unless args[:provider]
+
+    provider_uri = resolve_mongo_provider(args[:provider])
+    exec("mongo #{provider_uri.to_s}")
+  end
+
   desc "backup a database to #{BACKUP_PATH}"
   task :backup, [:provider] => :mongo_tools do |t, args|
     abort("Required param :provider") unless args[:provider]
