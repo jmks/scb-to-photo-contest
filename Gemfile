@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -49,6 +49,7 @@ gem 'mongoid', '~> 5.0'
 gem 'bson', "~> 3.0"
 
 gem 'thin'
+gem 'eventmachine', '1.0.4'
 
 gem 'rails_12factor', group: :production
 
