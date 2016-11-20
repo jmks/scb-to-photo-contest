@@ -144,7 +144,7 @@ test:
 
 production:
   # Configure available database sessions. (required)
-  sessions:
+  clients:
     default:
       # The standard MongoDB connection URI allows for easy replica set
       # connection setup.
