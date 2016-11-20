@@ -67,7 +67,7 @@ class Photo
   scope :tagged,      ->(tag) { where(tags: tag) }
   scope :most_viewed, ->{ desc(:views) }
   scope :most_voted,  ->{ desc(:votes) }
-  scope :submitted,   ->{ where(submission_complete: true) }
+  scope :uploaded,    ->{ where(:original_url.nin => ["", nil]) }
 
   # indexes
   index({ tags: 1 })

@@ -9,7 +9,7 @@ namespace :photos do
 
     Dir.mkdir(BACKUP_DIR) unless Dir.exists?(BACKUP_DIR)
 
-    Photo.submitted.each do |photo|
+    Photo.uploaded.each do |photo|
       next if File.exists?(photo_backup_path(photo))
       `wget --output-document="#{photo_backup_path(photo)}" #{photo.original_url}`
     end
