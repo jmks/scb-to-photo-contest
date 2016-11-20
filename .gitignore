@@ -22,7 +22,8 @@
 # RubyMine
 .idea/*
 
-# database backups
+# backups
 db/backups/*
+original_photos/
 
 .env
