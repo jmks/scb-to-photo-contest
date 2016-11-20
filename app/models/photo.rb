@@ -67,6 +67,7 @@ class Photo
   scope :tagged,      ->(tag) { where(tags: tag) }
   scope :most_viewed, ->{ desc(:views) }
   scope :most_voted,  ->{ desc(:votes) }
+  scope :submitted,   ->{ where(submission_complete: true) }
 
   # indexes
   index({ tags: 1 })
@@ -122,5 +123,15 @@ class Photo
 
   def canada?
     tags.any?{ |t| t =~ /canada/i }
+  end
+
+  # returns a filename with the following format:
+  # CATEGORY_OWNERNAME_TITLE.EXT
+  def backup_filename
+    [
+      category,
+      owner.full_name,
+      title
+    ].join("_") + Pathname.new(original_filename).extname
   end
 end
